@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+
+# Ferramentas
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+
+# Segredos
+.env
+
+# Dados e artefatos (mantém a estrutura via .gitkeep)
+data/raw/*
+data/interim/*
+data/processed/*
+data/features/*
+models/*
+!**/.gitkeep
+
+# MLflow
+mlruns/
+mlartifacts/
+mlflow.db
+
+# SO / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,47 @@
+
+# ---------------- Ruff (lint + format) ----------------
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+extend-exclude = ["notebooks/"]
+force-exclude = true
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "D", "B", "SIM"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+
+# ---------------- Pytest ----------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra --strict-markers"
+markers = [
+    "slow: testes demorados",
+    "integration: testes de integração",
+]
+
+# ---------------- Coverage ----------------
+[tool.coverage.run]
+source = ["src"]
+omit = ["src/main.py"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 0  # suba para 70+ quando houver código de verdade
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+    "nbstripout>=0.9.1",
+    "pre-commit>=4.6.2",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "radon>=6.0.1",
+    "ruff>=0.16.9",
+    "xenon>=0.9.3",
+]
