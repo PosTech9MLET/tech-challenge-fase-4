@@ -1,18 +1,18 @@
 name: OpenWiki CI/CD
 
-# Gera (--init) ou atualiza (--update) o openwiki/ a cada push ou PR em main/dev.
+# Gera (--init) ou atualiza (--update) o openwiki/ a cada push ou PR em main/development.
 # - push: abre/atualiza um PR "openwiki/update-<branch>" contra a branch que recebeu o push.
 # - pull_request: commita a wiki atualizada direto na branch do PR (somente PRs do próprio repo).
 # O agendamento diário continua em openwiki-update.yml (gerado pelo OpenWiki).
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, development]
     # Evita loop: o merge de um PR que só altera a wiki não dispara nova geração.
     paths-ignore:
       - "openwiki/**"
   pull_request:
-    branches: [main, dev]
+    branches: [main, development]
     paths-ignore:
       - "openwiki/**"
   workflow_dispatch:
