@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:589efa31ec2ddcbb0a21e6dab3316d8d70f817fe4cb9bef70b1de10da1706ada",
+  "claims": [
+    {
+      "id": "claim_9ed2d05b4ddc496e81f155d4ee5a637a",
+      "statement": "Pytest configuration in pyproject.toml establishes tests/ as the test directory, adds the root path to pythonpath, enforces strict markers with extra summary reporting (-ra --strict-markers), and registers slow and integration markers.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L19-L26",
+          "version": "repo-lines-v1:sha256:4c023dd65b29e9ef2536b1b2187b2430400ae442a25d124dfa37d795c86239ae:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODY3NmU2NDE0NjVhNjU1MWU5ZTljZmZkN2ZhYTFlNmE0MmY5YjcyNDgwOTgxM2M5MDNkN2VkY2I1MmYzMDA2ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODMzMTJkNjZkZWI1N2RhMGZmYTU3ZTVkMjZlOTM3MDIxODk1NzljNTU5ZDBlMGIwNzNkZjYxZGNiYmNkOWUzYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTljMTk2YmJlNmFmMzE4ODBlMTNmOTI1YTliOWM3ODFiODFlNGNkOWNkM2U2MmY4YjU4OGMxZjljYjllMGQwMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c9c75865633a47308d7a23a77c5beeb3",
+      "statement": "Coverage configuration in pyproject.toml measures coverage for src while omitting src/main.py, displaying missing lines in test output and producing XML reports in CI.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L47-L48",
+          "version": "repo-lines-v1:sha256:3d418f508c8354ae50dd5c672602d9b2ec3aa7e55b114fce454aec4d5cc0e5f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODUxY2YzZWE1ZDcxMjU3MTI4NzE4ZjZmYTliYzNlYzRhNzQwMWI3MDBlZGNmZGU3NDhlNjg3Mzc4YTFlMzhhZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGJmNWEyMjc5OTZiMDgxNGNiMzU4YjVkNGU3MGQ5YTcyMTMwNTllNmQ2ODViNjQ0ZDZlZTExMWM5NDExZjc4NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmQ2NDgxMWI4M2YwMGIwZWU3OWEyY2IyZDhjNzU5ZjJmMGY4NjdkZGMxMmJjYmNmNDk1ZDBmZjVjMWQzY2ExNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzRlNGNlNTgyNzEwYzA2MGI2YWJkMWI0MzNhNzlhOTk0MTMzM2RlZDcyZDdmYjRiNDQyN2Q4NTRkOGY5MjcyMiJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L29-L35",
+          "version": "repo-lines-v1:sha256:87b54d3969828392996cce83a1992e6922171f63930cbdd52f5c1ed50adf20e9:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGZmODc4ODc3M2UzMWM3YTkzOTM2YzllYWUxZWIxNTMxMTY3Yzg5NTc3ZmYzM2I3ZjY1Y2Q4ZWMwOGEyYzgwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRkZGQzZmRmOGU0NzE2YjliM2Q1ZGU5MjMyOTg4YzUzNDMzMTQwMzRkMGM0ZGNmNmRkZGY0ODBlNmY4NTgxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ2ZTIxMmM2YTQzMjFlY2QxNDg4YWQwZjM2OTU0MGQ5ZDk0YWQxMDk3ZDlhZTZlYWNkMjY5NDQwMTJlNDJiNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjg0Yjg2YjYyMTI4YjZiYmQ0YTUyZDRkMzg2NjNhNmY3OTc1YzAwM2Y3YWZlNTc3MTAwNDc1OWY1OWVhYmZkNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_685b79f433ed4b699aa257c4bebaea42",
+      "statement": "The initial smoke test in tests/unit/test_smoke.py verifies configuration loading by validating default settings for random_seed and data_dir.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_smoke.py#L1-L8",
+          "version": "repo-lines-v1:sha256:73da7626f66b78734ebacb95719e40765248208c6c26c22033a7186fd85c53b9:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDViODFiMzZmY2I1ZmFiOGRiNmU0YzE1NzVmZWViNWFhZjU5ZjIzZmY2Zjc2OWI0N2FmYzNiNDFiOGYwNzJhNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWJiNDJmN2Q5OThlNjc1ZTZhYTM4OWE4MWZiNzhkYTA3Y2U0YjFjOGJjMDQ3NjQ1YzkxYjVjZGZmMTlmMmEwOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ee03da7d00bc4424a6e3109185f7e41e",
+      "statement": "The GitHub Actions CI pipeline executes three sequential jobs where test depends on quality, and docker build/push depends on test.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L36-L38",
+          "version": "repo-lines-v1:sha256:e92ff725b7ba820df81be022fa93fb3bffa1928b99335089140bf836bb139938:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjIwMDU3Nzc3NmM2NjhiNzAxZDcxNjVhOTcyY2JhYmI2ZWRlZDEyOGJiODVmYTcwYzMyNjBiNThlMGU5YjA0NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWY3MWM2MGJlZGVjMzU5MjFjMzVjMTQyZWQyN2JlYjA0ZDZjNjlkNzYxMDJiNzk5OWIzMTFmOWE5OGUzNWY1NCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDAxYTM2NzNlZDcxOWQ4MTIzM2U0ODAxMjg2MGVhNDBlODM3MmFmNzA4OTcwMmNkNGE0MmZkYTRjZDc1MDUxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzU4MmVhYjhhNTk3YTg3MDg0YzY0MTEyMTgxM2IwZGU2ZjYyODdkOGQ1ZWIxNzhmMzM0N2Y4MDBjNDk4NzllZCJ9"
+        },
+        {
+          "resource": "repo://.github/workflows/ci.yml#L54-L56",
+          "version": "repo-lines-v1:sha256:38012f75c6e0768366018caa9ac2a097a755b325262b8dc3447485663bbe352a:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOThjNWViOTQ2NjgzZjc4ZDgyMWRhZTA0Nzg5Njc2YjM4Yjc3ZTVlNzZlMGQxYTUwMzI1MGRiZDc1OTBmNjVlMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNmZmRlMWM2ODA5NWMzYmE3YTI3NzdlMDQwODk2NTY0NWNiZTQyNTY1YjY5MGZkYmUxMWFiOTk5MmY0NTQxYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTNlNWFiNjJiYzA3ZjZhZjczMjNkY2E1NmNhNGQwMWUyN2VjM2I2Y2U5MTU2YWUwZjg3NmYzOTdkYzA1MDE1NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzVkMTQ5NTg1OTZmYmRlMTNiNDNjYTNkMWQwY2NjM2QxMjMwZjgyYTNiYWRhZjM0OTY3M2MxZTgyYzEzZWEyMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_389d83e9de174f96a5f3465899565ff0",
+      "statement": "The quality CI job executes Ruff linting and formatting, verifies notebook cleanliness via scripts/check_notebooks.py, and enforces cyclomatic complexity limits using Radon and Xenon.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L15-L34",
+          "version": "repo-lines-v1:sha256:92a0addbdbe8e19243577314d7cd80e3114ec2996c196c1f812069c6da081969:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5ZTVhMTlkMGViM2U5NzdjODA5NjMzNjg3YTRjMDdiZmQ1M2QzYTYwZGVhMmM2NmJmNTljY2I0NmZjZjE1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0YTkwN2Y3MjljMDZlMWNiYzVkNWY1ODAyZGM0MDc0NzgyNjhhMjg1YzM4NWU5NDkxNjc5M2Q4MTU5MmVjYzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5YzFiNDdlNTc0MmE4Y2MwNjEwZmVlY2JlZjkwYzFmNjBiN2YzYmM4NzQ4YWZiMzNkNjI0ODlkNDEzYzI4ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxNzgyYzVhN2I4OTY0ZTBjMGM1OTJjZGY3ZTYwNzcxOGM1YjRlYzI0MTcwODc1ZTM4OWNiYmY4NTI2YjQ2ODkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_02d0b631caf9417294e3b4e27472b1d9",
+      "statement": "The docker CI job runs conditionally on push events to the main branch, building and pushing container images to GHCR with git SHA and latest tags.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L54-L84",
+          "version": "repo-lines-v1:sha256:d7f47f4e8eccb63d2a8a79c0a41926be28af86207d5279c28e76b1a70026aaf5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4YzVlYjk0NjY4M2Y3OGQ4MjFkYWUwNDc4OTY3NmIzOGI3N2U1ZTc2ZTBkMWE1MDMyNTBkYmQ3NTkwZjY1ZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNTJiZTEwNDQyNDU4MjBlOWRkNzg0ZmRiNjk2Yjk2YzZkNDgxYzAwMjY4NGYwNTVhODEyYWUzNzAxMDU0NDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzZTVhYjYyYmMwN2Y2YWY3MzIzZGNhNTZjYTRkMDFlMjdlYzNiNmNlOTE1NmFlMGY4NzZmMzk3ZGMwNTAxNTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T23:05:52.220Z"
+  }
+}

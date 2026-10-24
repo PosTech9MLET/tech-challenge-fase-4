@@ -1,0 +1,129 @@
+name: OpenWiki CI/CD
+
+# Gera (--init) ou atualiza (--update) o openwiki/ a cada push ou PR em main/dev.
+# - push: abre/atualiza um PR "openwiki/update-<branch>" contra a branch que recebeu o push.
+# - pull_request: commita a wiki atualizada direto na branch do PR (somente PRs do próprio repo).
+# O agendamento diário continua em openwiki-update.yml (gerado pelo OpenWiki).
+
+on:
+  push:
+    branches: [main, dev]
+    # Evita loop: o merge de um PR que só altera a wiki não dispara nova geração.
+    paths-ignore:
+      - "openwiki/**"
+  pull_request:
+    branches: [main, dev]
+    paths-ignore:
+      - "openwiki/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: openwiki-${{ github.head_ref || github.ref_name }}
+  # Não cancela uma execução em andamento para não descartar páginas já geradas.
+  cancel-in-progress: false
+
+jobs:
+  openwiki:
+    name: Gerar/atualizar OpenWiki
+    runs-on: ubuntu-latest
+    # PRs de forks não têm acesso aos secrets nem permissão de push.
+    if: >-
+      github.event_name != 'pull_request' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+       !startsWith(github.head_ref, 'openwiki/'))
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          # Em PRs, faz checkout da branch de origem (não do merge commit) para poder commitar nela.
+          ref: ${{ github.head_ref || github.ref }}
+          # Histórico completo para `openwiki code --update` comparar com o último commit documentado.
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "22"
+
+      - name: Install OpenWiki
+        run: npm install --global openwiki@0.7.2 mermaid@11.16.0 jsdom@29.1.1
+
+      - name: Run OpenWiki
+        id: openwiki
+        continue-on-error: true
+        run: |
+          if [ -f openwiki/.last-update.json ]; then mode=--update; else mode=--init; fi
+          echo "Executando openwiki code $mode"
+          openwiki code "$mode" --print
+        env:
+          OPENWIKI_PROVIDER: gemini
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENWIKI_MODEL_ID: "gemini-3.6-flash"
+          OPENWIKI_LANGSMITH_API_KEY: ${{ secrets.OPENWIKI_LANGSMITH_API_KEY }}
+          LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
+          LANGCHAIN_PROJECT: openwiki
+          LANGCHAIN_TRACING_V2: "true"
+
+      - name: Remove transient OpenWiki run state
+        if: ${{ !cancelled() }}
+        run: rm -f -- openwiki/.run.json
+
+      - name: List OpenWiki update paths
+        id: paths
+        if: ${{ !cancelled() }}
+        # Arquivos de workflow ficam de fora: o GITHUB_TOKEN não pode alterar .github/workflows.
+        run: |
+          paths="openwiki AGENTS.md"
+          if [ -e CLAUDE.md ]; then paths="$paths CLAUDE.md"; fi
+          echo "list=$paths" >> "$GITHUB_OUTPUT"
+          echo "csv=${paths// /,}" >> "$GITHUB_OUTPUT"
+
+      # --- push / workflow_dispatch: PR com a atualização contra a própria branch ---
+      - name: Create OpenWiki update pull request
+        id: create-pr
+        if: ${{ !cancelled() && github.event_name != 'pull_request' }}
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
+        with:
+          add-paths: ${{ steps.paths.outputs.csv }}
+          base: ${{ github.ref_name }}
+          branch: openwiki/update-${{ github.ref_name }}
+          commit-message: "docs: update OpenWiki (${{ github.ref_name }})"
+          title: "docs: update OpenWiki (${{ github.ref_name }})"
+          body: |
+            Atualização automática do OpenWiki para `${{ github.ref_name }}` a partir de ${{ github.sha }}.
+
+            Resultado do OpenWiki: `${{ steps.openwiki.outcome }}`
+
+            Se o resultado for `failure`, este PR contém apenas as páginas concluídas
+            antes da falha; fazer o merge torna esse progresso a base da próxima execução.
+
+      - name: Annotate OpenWiki update pull request
+        if: ${{ !cancelled() && steps.create-pr.outputs.pull-request-url != '' }}
+        run: echo "::notice title=OpenWiki update pull request::${{ steps.create-pr.outputs.pull-request-url }}"
+
+      # --- pull_request: commit direto na branch do PR ---
+      - name: Commit OpenWiki to PR branch
+        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+        env:
+          PATHS: ${{ steps.paths.outputs.list }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # shellcheck disable=SC2086
+          git add -A -- $PATHS
+          if git diff --cached --quiet; then
+            echo "OpenWiki já está atualizado."
+            exit 0
+          fi
+          git commit -m "docs: update OpenWiki"
+          git push origin "HEAD:$HEAD_REF"
+          echo "::notice title=OpenWiki::Wiki atualizada e commitada em $HEAD_REF"
+
+      - name: Propagate OpenWiki failure
+        if: ${{ steps.openwiki.outcome == 'failure' }}
+        run: exit 1

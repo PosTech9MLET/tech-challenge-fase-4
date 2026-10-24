@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:a5acf356e7b78519426159c610dc2844bb0878e2af98282fc27d1847bd0cb8ba",
+  "claims": [
+    {
+      "id": "claim_4166f445ff3242998bc08ad9bc2103c5",
+      "statement": "The configuration module calculates ROOT_DIR as Path(__file__).resolve().parents[2], establishing a cross-platform base path anchored to the repository root directory.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L7-L7",
+          "version": "repo-lines-v1:sha256:6aff8a9d31f36f81f0bb0a60f0e5617e67436e2601a3d9b0840e708d492ac160:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmFmZjhhOWQzMWYzNmY4MWYwYmIwYTYwZjBlNTYxN2U2NzQzNmUyNjAxYTNkOWIwODQwZTcwOGQ0OTJhYzE2MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmFmZjhhOWQzMWYzNmY4MWYwYmIwYTYwZjBlNTYxN2U2NzQzNmUyNjAxYTNkOWIwODQwZTcwOGQ0OTJhYzE2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGU0N2ZhMjhiMjczZTk5MmQ3NWE5MGY5NGZlODcxOWI4ZTY4YzBlZjRlZjc2NGViY2Y1MTk0NTdmMzg3YzI0YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzcyYzc2ZDUyZmU1OTk3YTliZTY5NDM2MjA4NmM3MDFhMWQ1NTEyZjBkYmU4ODFiNDFiOTVlYzg1ZDRkNzhmZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_688ec5786bdd46a2aebe6eb24a791aef",
+      "statement": "The Settings class uses Pydantic Settings configured with SettingsConfigDict to read environment key-value pairs from ROOT_DIR / '.env' while ignoring extra unmapped environment attributes.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L10-L13",
+          "version": "repo-lines-v1:sha256:38c405bdadc55b00207cd0a9a63bb0caf8f8dc3a89d03be5a00eb94c2654900b:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmM4NjMzMWM5MGI3OGNkYjkxN2ZkNWJkNjlmYzA3MTRkNWE1ZmU4NDYwZDg3NjI3OWUxNWZmNDJmZmM3MjM1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGJiZDc0YzljMWZjMzNjYjA1OWRhY2VjZTYyOWM2NWMzMTc5ZmQ3MTk4OGU3NTMzMTdkNjQ3NjcwOTFmMjVlNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTU5ZjRjOWE5ODU4NzBiZWU2MjczMjlkOTE4N2EzZGMwNTU2ZDE4OThlNWZiYTljNWU4MzYyODU4NmE3ZjQxMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDk0NDYzNDM4MzM5OWY2OTAzZjQ4NTQyY2I0OGY5ODk2ZjJlMDMyMWQzNjc2NzE0MzUyMjI5MmEzZTBkYzVmNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_65e89c2cbbc54b5780cb56090c9e0f6c",
+      "statement": "The Settings model defines default runtime settings including env='local', log_level='INFO', and random_seed=42.",
+      "evidence": [
+        {
+          "resource": "repo://.env.example#L2-L4",
+          "version": "repo-lines-v1:sha256:44e12fec47ec721817afe09fa62b6c929f611a90f6a4fabd345af055ec9771f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODEwMDcxNjdkYzdmODkwNjg3MWI1OTZmOWEwYTY4YTVlZjNiZDRjYmM5Yjc2YzJjNWY2MTkzMzczODI2Njk3YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYyN2I4NzJkYmMzYTYyMDgxZmM4ZGEzNDQxN2VhY2Y0MGRjMjZjZDk2NzdlMWIwOGM0NzgyNzEzYTVjNjkzYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjEsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGM3NzEyYjg2OTMzYTg5ZTViMjhjYzI1ZWE2MTU3Zjk3YTRjYWJhN2ZhNjUyNWU3MTRhZTVmYzFlMzQ2YTk1MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyJ9"
+        },
+        {
+          "resource": "repo://src/utils/config.py#L15-L17",
+          "version": "repo-lines-v1:sha256:1e86bf960082dba16b102dc72faed3ec18e694ceebad6d6227f4eb026e02cecb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjQ4ZTVkYjlkODdlYzg1MWIwNjA4OWM5NDlmMDU3OTBjYjI0ODJiNDdhMDlmNDlkYzNmMDA0NTJjNmVmMjkzZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzhmNGIzYTUwYjk2NTYxODE0YmZhZDdiMmNlN2Y0M2ZjYWY3MTUxODU5MDU1ZjY2ZjUwMjI0MDMxYzkxMGE5ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmQ5ZDRiNzgzZWM0NzM4YjQ1ZWZlNDg3YTVmYmIwYjQwNjg4YjdjYTNiYjE0YWQ5Mjc3MThiMjc2ZTVhYTAwZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjJlMDg1OWE3MzA1ZTlkODA3MzZhMzk5YmU2ZjZjNmNiZTM1NGY1YzUyNjZhZTkxMTNkMmUyN2E5YjUyMjk5ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ca9ada6867c14fc0952e1975f624abca",
+      "statement": "Directory paths for data and model artifacts and the MLflow SQLite tracking URI are dynamically resolved relative to ROOT_DIR.",
+      "evidence": [
+        {
+          "resource": "repo://.env.example#L5-L5",
+          "version": "repo-lines-v1:sha256:b2603dd3c93439b5387a01d0a6bbcfc2df0e3b8efbadae5674be8bc955a3af57:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDRlMTJmZWM0N2VjNzIxODE3YWZlMDlmYTYyYjZjOTI5ZjYxMWE5MGY2YTRmYWJkMzQ1YWYwNTVlYzk3NzFmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/utils/config.py#L18-L20",
+          "version": "repo-lines-v1:sha256:f2e0859a7305e9d80736a399be6f6c6cbe354f5c5266ae9113d2e27a9b52299f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNkMDdjYTg0YTZiMmQ0ZjY2OTQ4NjY4ZmQ4NjQzYTA5NjIxYTNiNjc0YTZiODQ3M2Q0ZTE4NzkzNjViMDY2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZkZTdmODU1ODhkNWM3Mzk1NmY5OTQzNmU1N2FmZDJkYjljNzc0NjliMTY2Yzk1YWYxZmU0YWZhMDdiZTg4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWU4NmJmOTYwMDgyZGJhMTZiMTAyZGM3MmZhZWQzZWMxOGU2OTRjZWViYWQ2ZDYyMjdmNGViMDI2ZTAyY2VjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2Y3MzZmMmJlZTAwZWRjZTkwZTIyNTczYzdmYjE2ZGU2ZmJmZmZjNDQxOGEwMGM1OGZhN2MxZDUwYThjZTk1MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e68714585399444281f319dbb9f75120",
+      "statement": "src/utils/config.py instantiates and exports a global settings singleton instance at module import time for application-wide configuration access.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L23-L23",
+          "version": "repo-lines-v1:sha256:a8f4bf18761602d3b590b37d398fa99779730a77b68138fdd14073492e3766ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmNGJmMTg3NjE2MDJkM2I1OTBiMzdkMzk4ZmE5OTc3OTczMGE3N2I2ODEzOGZkZDE0MDczNDkyZTM3NjZlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmNGJmMTg3NjE2MDJkM2I1OTBiMzdkMzk4ZmE5OTc3OTczMGE3N2I2ODEzOGZkZDE0MDczNDkyZTM3NjZlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjgxZmE2ZTlhNGM3NGRhODEzM2QxNjA2NWY2MTA5ZWM0ZjVhOTcwZTg0ZTRhYTU1YTZmYTRiMTA0ZmQyZjc4NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6445ee91a97e4eb2a754d8a0582f3d5a",
+      "statement": "The unit test suite verifies configuration loading and path resolution by asserting default random_seed and data_dir attributes in tests/unit/test_smoke.py.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_smoke.py#L3-L8",
+          "version": "repo-lines-v1:sha256:1172236e448bc91fe8c1d4956a499a148f7c88a5b0acbb584506558349222d30:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGFkMjQwZTM1NzAwOWVmNjgxN2ZlNmYyODQ2MWVlMGFjMzNhYzIwZDIyOGFlYWVhZDAxNGQzMjJmNjA3YmI3MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWJiNDJmN2Q5OThlNjc1ZTZhYTM4OWE4MWZiNzhkYTA3Y2U0YjFjOGJjMDQ3NjQ1YzkxYjVjZGZmMTlmMmEwOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGUxODgyY2QwNGJkNzczYTIxMjBkMmFlNjdkZmFmMWM2YmYyNjFjMzRkOTUwZWY4YTE0Yjk3Y2U0ZTZmZjM4MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T23:05:52.220Z"
+  }
+}

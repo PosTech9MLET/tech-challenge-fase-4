@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/overview.md": {
+      "pageVersion": "sha256:9de733d9e25b0e2fa0db9d41a30701b7f1784bd8f86383a4a47856cec430630d",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "1bb99ff0-1ba2-4744-b6c6-889367bd5b69",
+      "gitHead": "b99d7bea980eccf66c6f88b155873957f206e76b",
+      "sourceFingerprint": "sha256:49c10d3d3f01f7006e9a15624a95d5d839cf83bec3f3d261bfb369d2506cd3a4"
+    },
+    "/openwiki/concepts/configuration_and_environment.md": {
+      "pageVersion": "sha256:a5acf356e7b78519426159c610dc2844bb0878e2af98282fc27d1847bd0cb8ba",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "1bb99ff0-1ba2-4744-b6c6-889367bd5b69",
+      "gitHead": "b99d7bea980eccf66c6f88b155873957f206e76b",
+      "sourceFingerprint": "sha256:49c10d3d3f01f7006e9a15624a95d5d839cf83bec3f3d261bfb369d2506cd3a4"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:e4b78942948521e6e68d41c50397f5dc92f99a32458f65c608e8d6c963653b8b",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "1bb99ff0-1ba2-4744-b6c6-889367bd5b69",
+      "gitHead": "b99d7bea980eccf66c6f88b155873957f206e76b",
+      "sourceFingerprint": "sha256:49c10d3d3f01f7006e9a15624a95d5d839cf83bec3f3d261bfb369d2506cd3a4"
+    },
+    "/openwiki/testing/test_suite_and_ci.md": {
+      "pageVersion": "sha256:589efa31ec2ddcbb0a21e6dab3316d8d70f817fe4cb9bef70b1de10da1706ada",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "1bb99ff0-1ba2-4744-b6c6-889367bd5b69",
+      "gitHead": "b99d7bea980eccf66c6f88b155873957f206e76b",
+      "sourceFingerprint": "sha256:49c10d3d3f01f7006e9a15624a95d5d839cf83bec3f3d261bfb369d2506cd3a4"
+    },
+    "/openwiki/workflows/development_and_quality.md": {
+      "pageVersion": "sha256:8d15c0c095ab9ddd956d2de0fb74b99378950141ea7991fb9805c3b243b5e3ef",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "1bb99ff0-1ba2-4744-b6c6-889367bd5b69",
+      "gitHead": "b99d7bea980eccf66c6f88b155873957f206e76b",
+      "sourceFingerprint": "sha256:49c10d3d3f01f7006e9a15624a95d5d839cf83bec3f3d261bfb369d2506cd3a4"
+    },
+    "/openwiki/workflows/ml_pipeline_and_tracking.md": {
+      "pageVersion": "sha256:84338d2238261e4e54434bdffac35b192a77a65efd76d6b3208ae137bc8e7da9",
+      "completedBy": "openwiki/0.7.2",
+      "completedRunId": "1bb99ff0-1ba2-4744-b6c6-889367bd5b69",
+      "gitHead": "b99d7bea980eccf66c6f88b155873957f206e76b",
+      "sourceFingerprint": "sha256:49c10d3d3f01f7006e9a15624a95d5d839cf83bec3f3d261bfb369d2506cd3a4"
+    }
+  }
+}
