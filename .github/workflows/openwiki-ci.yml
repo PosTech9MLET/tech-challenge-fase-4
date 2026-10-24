@@ -36,6 +36,15 @@ jobs:
       (github.event.pull_request.head.repo.full_name == github.repository &&
        !startsWith(github.head_ref, 'openwiki/'))
     steps:
+      - name: Check OpenWiki secrets
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "::error title=OpenWiki::Secret GEMINI_API_KEY não configurado. Cadastre em Settings → Secrets and variables → Actions."
+            exit 1
+          fi
+
       - name: Check out repository
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
