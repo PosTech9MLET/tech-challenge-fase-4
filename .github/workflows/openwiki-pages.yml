@@ -1,13 +1,20 @@
 name: OpenWiki Pages
 
 # Publica o visualizer estático do OpenWiki no GitHub Pages.
-# Pré-requisito: Settings → Pages → Source: GitHub Actions.
+# O Pages tem um único site por repositório e cada deploy o substitui por inteiro,
+# então todo deploy monta as duas versões juntas:
+#   main        -> /
+#   development -> /development/
+# Pré-requisitos:
+#   - Settings → Pages → Source: GitHub Actions
+#   - Settings → Environments → github-pages: permitir deploy das branches main e development
 
 on:
   push:
-    branches: [main]
+    branches: [main, development]
     paths:
       - "openwiki/**"
+      - ".github/workflows/openwiki-pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -21,11 +28,20 @@ concurrency:
 
 jobs:
   build:
-    name: Exportar visualizer
+    name: Exportar visualizer (main + development)
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: Check out main
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: main
+          path: src-main
+
+      - name: Check out development
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: development
+          path: src-development
 
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -35,8 +51,31 @@ jobs:
       - name: Install OpenWiki
         run: npm install --global openwiki@0.7.2
 
-      - name: Export static visualizer
-        run: openwiki visualize openwiki --export _site
+      - name: Export static visualizers
+        run: |
+          mkdir -p _site
+          if [ -d src-development/openwiki ]; then
+            openwiki visualize src-development/openwiki --export _site/development
+          else
+            echo "::warning title=OpenWiki Pages::development ainda não tem openwiki/"
+          fi
+          if [ -d src-main/openwiki ]; then
+            openwiki visualize src-main/openwiki --export _site/main-export
+            # Move o export da main para a raiz sem sobrescrever _site/development.
+            cp -r _site/main-export/. _site/
+            rm -rf _site/main-export
+          else
+            echo "::warning title=OpenWiki Pages::main ainda não tem openwiki/"
+            if [ -d _site/development ]; then
+              printf '%s\n' '<!doctype html><meta charset="utf-8">' \
+                '<meta http-equiv="refresh" content="0; url=./development/">' \
+                '<a href="./development/">OpenWiki (development)</a>' > _site/index.html
+            fi
+          fi
+          if [ -z "$(ls -A _site)" ]; then
+            echo "::error title=OpenWiki Pages::Nenhuma branch tem openwiki/ para publicar"
+            exit 1
+          fi
 
       - uses: actions/configure-pages@v5
 
