@@ -5,7 +5,7 @@ description: Architecture, execution mechanisms, and pipeline stages of the test
 tags: [testing, pytest, coverage, ci-cd, github-actions, code-quality]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-24T23:05:52.220Z
+    at: 2026-10-25T02:31:36.619Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
@@ -13,7 +13,7 @@ sources:
     resource: repo://pyproject.toml
   - id: openwiki-source-154200283d94041bcf05d48f
     resource: repo://tests/unit/test_smoke.py
-generated: { by: "openwiki/0.7.2", at: "2026-10-24T23:05:52.220Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-10-25T02:31:36.619Z" }
 ---
 
 # Test Suite & CI/CD Pipelines
@@ -91,7 +91,7 @@ fail_under = 0
 
 * **Source Tracking (`source = ["src"]`)**: Restricts coverage measurement to source code within `src/`.
 * **Omissions (`omit = ["src/main.py"]`)**: Excludes top-level application entry points that are evaluated interactively or via CLI commands.
-* **Reporting Options**: `show_missing = true` outputs exact line numbers missing coverage during test execution. `fail_under = 0` sets the minimum baseline, which is configured to be scaled upward as production logic matures.
+* **Reporting Options**: `show_missing = true` outputs exact line numbers missing coverage during test execution. `fail_under = 0` sets the minimum baseline, which can be scaled upward as production logic matures.
 
 ---
 
@@ -102,8 +102,8 @@ The continuous integration and continuous delivery workflow is defined in `.gith
 ### Triggers & Concurrency
 
 The workflow executes under the following conditions:
-* **Pushes** to `main` or `dev` branches.
-* **Pull Requests** targeting `main` or `dev` branches.
+* **Pushes** to `main` or `development` branches.
+* **Pull Requests** targeting `main` or `development` branches.
 * **Manual execution** via `workflow_dispatch`.
 
 To prevent redundant execution and save CI compute resources, concurrency control cancels superseded runs on the same branch or PR ref:
@@ -115,7 +115,7 @@ concurrency:
 
 ### Stage Pipeline Flow
 
-The workflow consists of three sequential jobs: `quality` -> `test` -> `docker`.
+The workflow consists of three sequential jobs: `quality` -> `test` -> `docker`. Note that the `docker` job is currently disabled via `if: false`.
 
 ```mermaid
 flowchart TD
@@ -131,8 +131,8 @@ flowchart TD
         G --> H["Upload Coverage Artifact"]
     end
 
-    subgraph Docker["3. Docker Job"]
-        I["Check Event (Push to main?)"] --> J["Buildx & GHCR Login"]
+    subgraph Docker["3. Docker Job (Disabled)"]
+        I["Check Condition (if: false)"] --> J["Buildx & GHCR Login"]
         J --> K["Build & Push Docker Image"]
     end
 
@@ -152,13 +152,13 @@ flowchart TD
   4. **Formatting**: Checks code format with `uv run ruff format . --check`.
   5. **Notebook Validation**: Runs `uv run python scripts/check_notebooks.py` to ensure Jupyter notebooks in `notebooks/` have no executed cell outputs or `execution_count` fields stored in version control.
   6. **Complexity Analysis**: Computes cyclomatic complexity using `uv run radon cc src -a -s`.
-  7. **Complexity Quality Gate**: Enforces maintainability using `uv run xenon --max-absolute B --max-average A src`.
+  7. **Complexity Quality Gate**: Enforces maintainability using `uv run xenon --max-absolute B --max-modules A --max-average A src`.
 
 #### 2. `test` Job
 * **Prerequisite**: Depends on `needs: quality`.
 * **Purpose**: Runs unit and integration test suites and measures code coverage.
 * **Steps**:
-  1. Prepares python environment via `uv sync --frozen`.
+  1. Prepares Python environment via `uv sync --frozen`.
   2. Executes Pytest with coverage reporting:
      ```bash
      uv run pytest --cov --cov-report=xml --cov-report=term-missing
@@ -167,14 +167,15 @@ flowchart TD
 
 #### 3. `docker` Job
 * **Prerequisite**: Depends on `needs: test`.
-* **Conditional Gate**: Executes only on `push` events to `refs/heads/main` (`if: github.event_name == 'push' && github.ref == 'refs/heads/main'`).
+* **Conditional Gate**: Currently disabled with `if: false` until a `Dockerfile` exists at the root of the repository. (The workflow retains a commented restore condition `# if: github.event_name == 'push' && github.ref == 'refs/heads/main'` for future activation).
 * **Permissions**: Configured with `contents: read` and `packages: write` permissions.
-* **Purpose**: Packages the application into a container image and publishes it to GitHub Container Registry (GHCR).
+* **Purpose**: Packages the application into a container image and publishes it to GitHub Container Registry (GHCR) when enabled.
 * **Steps**:
-  1. Configures Docker Buildx (`docker/setup-buildx-action@v3`).
-  2. Logs into `ghcr.io` using GitHub actor credentials and secret `GITHUB_TOKEN`.
-  3. Generates metadata tags based on Git SHA and `latest` (`docker/metadata-action@v5`).
-  4. Builds and pushes the image (`docker/build-push-action@v6`) using GitHub Actions cache (`type=gha`).
+  1. Checks out repository (`actions/checkout@v4`).
+  2. Configures Docker Buildx (`docker/setup-buildx-action@v3`).
+  3. Logs into `ghcr.io` using GitHub actor credentials and secret `GITHUB_TOKEN` (`docker/login-action@v3`).
+  4. Generates metadata tags based on Git SHA (`type=sha`) and `latest` (`docker/metadata-action@v5`).
+  5. Builds and pushes the image (`docker/build-push-action@v6`) using GitHub Actions cache (`type=gha`).
 
 ---
 

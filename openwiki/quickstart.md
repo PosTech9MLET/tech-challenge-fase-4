@@ -5,7 +5,7 @@ description: Central onboarding guide and task-routing navigation map for develo
 tags: [quickstart, task-routing, environment-setup, commands, wiki-map]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-24T23:05:52.220Z
+    at: 2026-10-25T02:31:36.619Z
 sources:
   - id: openwiki-source-5f5b95b3d6a215fa02ceb945
     resource: repo://.env.example
@@ -25,7 +25,7 @@ sources:
     resource: repo://src/main.py
   - id: openwiki-source-f12fdb76c2f98bd11af25d76
     resource: repo://src/utils/config.py
-generated: { by: "openwiki/0.7.2", at: "2026-10-24T23:05:52.220Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-10-25T02:31:36.619Z" }
 ---
 
 # Quickstart & Task Routing
@@ -38,16 +38,15 @@ Welcome to the machine learning project repository. This guide serves as the cen
 
 When working on specific subsystems or tasks, refer to the navigation decision tree and routing table below to find the relevant technical documentation.
 
-<!-- openwiki: mermaid parse failed and this diagram was converted to a text fence so it does not break rendering. Fix the diagram source and restore the mermaid fence. Parser error: Heuristic: an unescaped angle bracket inside a label breaks rendering; rephrase the label. -->
-```text
+```mermaid
 flowchart TD
     Start["Developer / Agent Task"] --> Choice{"What are you working on?"}
 
-    Choice -->|"System Design / Directory Boundaries"| Arch["Architecture Overview<br/>(architecture/overview.md)"]
-    Choice -->|"Config, Settings, .env Parameters"| Config["Configuration & Environment<br/>(concepts/configuration_and_environment.md)"]
-    Choice -->|"Linting, Formatting, Notebook Cleanliness"| Quality["Quality Standards & Gates<br/>(workflows/development_and_quality.md)"]
-    Choice -->|"Pytest, Coverage, CI/CD Workflows"| Testing["Test Suite & CI/CD<br/>(testing/test_suite_and_ci.md)"]
-    Choice -->|"Feature Eng, Model Training, MLflow"| ML["ML Pipelines & Tracking<br/>(workflows/ml_pipeline_and_tracking.md)"]
+    Choice -->|"System Design / Directory Boundaries"| Arch["Architecture Overview (architecture/overview.md)"]
+    Choice -->|"Config, Settings, .env Parameters"| Config["Configuration & Environment (concepts/configuration_and_environment.md)"]
+    Choice -->|"Linting, Formatting, Notebook Cleanliness"| Quality["Quality Standards & Gates (workflows/development_and_quality.md)"]
+    Choice -->|"Pytest, Coverage, CI/CD Workflows"| Testing["Test Suite & CI/CD (testing/test_suite_and_ci.md)"]
+    Choice -->|"Feature Eng, Model Training, MLflow"| ML["ML Pipelines & Tracking (workflows/ml_pipeline_and_tracking.md)"]
 ```
 *Figure 1: Task-routing decision tree for navigating repository documentation.*
 
@@ -116,6 +115,28 @@ All development tasks—linting, formatting, complexity checks, notebook validat
 | **Run Unit & Integration Tests** | `uv run pytest` | Runs all tests using Pytest settings from `pyproject.toml`. |
 | **Test Coverage Report** | `uv run pytest --cov --cov-report=term-missing` | Runs tests and generates a coverage summary for `src/` (excluding `src/main.py`). |
 | **Run Application Entrypoint** | `uv run python src/main.py` | Executes the main pipeline entrypoint. |
+
+---
+
+## Continuous Integration & Automated Pipelines
+
+Automated verification is governed by GitHub Actions configured in [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml). The pipeline triggers on pushes and pull requests targeting the `main` and `development` branches, as well as on manual dispatch (`workflow_dispatch`).
+
+### Workflow Jobs
+
+1. **`quality` (Lint, format, complexity, and notebooks)**:
+   - Installs Python and syncs dependencies with `uv sync --frozen`.
+   - Runs `ruff check . --output-format=github` and `ruff format . --check`.
+   - Runs `python scripts/check_notebooks.py` to reject executed notebooks.
+   - Computes cyclomatic complexity with `radon cc src -a -s` and enforces strict gates with `xenon --max-absolute B --max-modules A --max-average A src`.
+
+2. **`test` (Pytest & Coverage)**:
+   - Depends on the successful completion of the `quality` job.
+   - Executes `pytest --cov --cov-report=xml --cov-report=term-missing`.
+   - Generates and uploads `coverage.xml` as a build artifact.
+
+3. **`docker` (Container Image Build & Push)**:
+   - Configured for GHCR (`ghcr.io`), but currently disabled via `if: false` until a root `Dockerfile` is added to the repository.
 
 ---
 

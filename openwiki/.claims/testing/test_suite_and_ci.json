@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:589efa31ec2ddcbb0a21e6dab3316d8d70f817fe4cb9bef70b1de10da1706ada",
+  "pageVersion": "sha256:5284b8b1b4dfdde4f68c93e84f6bc12fc54e70692dfb52ebc1b350805bb66534",
   "claims": [
     {
       "id": "claim_9ed2d05b4ddc496e81f155d4ee5a637a",
       "statement": "Pytest configuration in pyproject.toml establishes tests/ as the test directory, adds the root path to pythonpath, enforces strict markers with extra summary reporting (-ra --strict-markers), and registers slow and integration markers.",
       "evidence": [
         {
-          "resource": "repo://pyproject.toml#L19-L26",
+          "resource": "repo://pyproject.toml#L29-L36",
           "version": "repo-lines-v1:sha256:4c023dd65b29e9ef2536b1b2187b2430400ae442a25d124dfa37d795c86239ae:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODY3NmU2NDE0NjVhNjU1MWU5ZTljZmZkN2ZhYTFlNmE0MmY5YjcyNDgwOTgxM2M5MDNkN2VkY2I1MmYzMDA2ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODMzMTJkNjZkZWI1N2RhMGZmYTU3ZTVkMjZlOTM3MDIxODk1NzljNTU5ZDBlMGIwNzNkZjYxZGNiYmNkOWUzYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTljMTk2YmJlNmFmMzE4ODBlMTNmOTI1YTliOWM3ODFiODFlNGNkOWNkM2U2MmY4YjU4OGMxZjljYjllMGQwMyJ9"
         }
       ]
@@ -21,7 +21,7 @@
           "version": "repo-lines-v1:sha256:3d418f508c8354ae50dd5c672602d9b2ec3aa7e55b114fce454aec4d5cc0e5f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODUxY2YzZWE1ZDcxMjU3MTI4NzE4ZjZmYTliYzNlYzRhNzQwMWI3MDBlZGNmZGU3NDhlNjg3Mzc4YTFlMzhhZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGJmNWEyMjc5OTZiMDgxNGNiMzU4YjVkNGU3MGQ5YTcyMTMwNTllNmQ2ODViNjQ0ZDZlZTExMWM5NDExZjc4NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmQ2NDgxMWI4M2YwMGIwZWU3OWEyY2IyZDhjNzU5ZjJmMGY4NjdkZGMxMmJjYmNmNDk1ZDBmZjVjMWQzY2ExNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzRlNGNlNTgyNzEwYzA2MGI2YWJkMWI0MzNhNzlhOTk0MTMzM2RlZDcyZDdmYjRiNDQyN2Q4NTRkOGY5MjcyMiJ9"
         },
         {
-          "resource": "repo://pyproject.toml#L29-L35",
+          "resource": "repo://pyproject.toml#L39-L45",
           "version": "repo-lines-v1:sha256:87b54d3969828392996cce83a1992e6922171f63930cbdd52f5c1ed50adf20e9:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGZmODc4ODc3M2UzMWM3YTkzOTM2YzllYWUxZWIxNTMxMTY3Yzg5NTc3ZmYzM2I3ZjY1Y2Q4ZWMwOGEyYzgwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRkZGQzZmRmOGU0NzE2YjliM2Q1ZGU5MjMyOTg4YzUzNDMzMTQwMzRkMGM0ZGNmNmRkZGY0ODBlNmY4NTgxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ2ZTIxMmM2YTQzMjFlY2QxNDg4YWQwZjM2OTU0MGQ5ZDk0YWQxMDk3ZDlhZTZlYWNkMjY5NDQwMTJlNDJiNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjg0Yjg2YjYyMTI4YjZiYmQ0YTUyZDRkMzg2NjNhNmY3OTc1YzAwM2Y3YWZlNTc3MTAwNDc1OWY1OWVhYmZkNCJ9"
         }
       ]
@@ -62,17 +62,17 @@
     },
     {
       "id": "claim_02d0b631caf9417294e3b4e27472b1d9",
-      "statement": "The docker CI job runs conditionally on push events to the main branch, building and pushing container images to GHCR with git SHA and latest tags.",
+      "statement": "The docker CI job is defined to build and push container images to GHCR with git SHA and latest tags, but is currently disabled with if: false until a Dockerfile exists at the repository root.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L54-L84",
-          "version": "repo-lines-v1:sha256:d7f47f4e8eccb63d2a8a79c0a41926be28af86207d5279c28e76b1a70026aaf5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4YzVlYjk0NjY4M2Y3OGQ4MjFkYWUwNDc4OTY3NmIzOGI3N2U1ZTc2ZTBkMWE1MDMyNTBkYmQ3NTkwZjY1ZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNTJiZTEwNDQyNDU4MjBlOWRkNzg0ZmRiNjk2Yjk2YzZkNDgxYzAwMjY4NGYwNTVhODEyYWUzNzAxMDU0NDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzZTVhYjYyYmMwN2Y2YWY3MzIzZGNhNTZjYTRkMDFlMjdlYzNiNmNlOTE1NmFlMGY4NzZmMzk3ZGMwNTAxNTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://.github/workflows/ci.yml#L54-L86",
+          "version": "repo-lines-v1:sha256:f3bbabd97be863fa6765032e34c35bb49c793d7831c6fd8b7de6ebc2db241c54:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4YzVlYjk0NjY4M2Y3OGQ4MjFkYWUwNDc4OTY3NmIzOGI3N2U1ZTc2ZTBkMWE1MDMyNTBkYmQ3NTkwZjY1ZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNTJiZTEwNDQyNDU4MjBlOWRkNzg0ZmRiNjk2Yjk2YzZkNDgxYzAwMjY4NGYwNTVhODEyYWUzNzAxMDU0NDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzZTVhYjYyYmMwN2Y2YWY3MzIzZGNhNTZjYTRkMDFlMjdlYzNiNmNlOTE1NmFlMGY4NzZmMzk3ZGMwNTAxNTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-24T23:05:52.220Z"
+    "at": "2026-10-25T02:31:36.619Z"
   }
 }

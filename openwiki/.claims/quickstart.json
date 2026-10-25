@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:e4b78942948521e6e68d41c50397f5dc92f99a32458f65c608e8d6c963653b8b",
+  "pageVersion": "sha256:23235d31872cf542e90fdf68929a92c7ae0c643062d88993aa524eead3d7f8e4",
   "claims": [
     {
       "id": "claim_06731e76540f49dcafc7f070bcadbbfc",
@@ -45,11 +45,11 @@
           "version": "repo-lines-v1:sha256:1cd4db3032d23b85c863b8fa8d702571ca275169fe598669a1155418d808f88c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkZmVjNzBlMTkyYjk1MjcwN2U4MDFiMjRjZjdkNDg5MzJiNTRmMTBiMTFmMjRjMjM0YjkyZWM0OGJlZDBiYTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZWQwYTcxMDVkZDBjMDRhYjgzYzkxNjVhM2E3NDE3YjY1ODc1YTIyNjcxZGE1YjdkMmU4MjRhNDY0YWIzZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3OGM5NTRlMDI3MDBjYTQ4YjhmMmVjMDkxNjRjM2M3MDcyYzBiMDgxOWRhYmFkZmZkMTY3NmFlZmZmMGM3MGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://pyproject.toml#L3-L17",
+          "resource": "repo://pyproject.toml#L13-L27",
           "version": "repo-lines-v1:sha256:d1f546f06509b0e3876da7b986950bfb5826783b222f826e5df78f99bd44f125:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3NDVmYWI4NmIxMjFkYzg1YjRmNzg2NzMzOWExM2ZlZTgwNGM4YTAyZjQ3MTA2NTcyZjJiZjA2NjRkNTk1MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZmU2YzBmMTIxMWIxNTI1Y2I2MjQzYWEwNWYzM2UxM2UxN2VkYTg2ZGExMWJmYmUyOTE5MDhlMDRlZDU0ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4Nzc4YWQyNjY2MjEyNzY5ZmU3NzQyOGQ5ZjA3ZGQ0ZjU4YzA5ZDc3YmJkMGYxNjcxMDdlYmU1OTNmODAwNDkifQ"
         },
         {
-          "resource": "repo://pyproject.toml#L38-L47",
+          "resource": "repo://pyproject.toml#L48-L57",
           "version": "repo-lines-v1:sha256:8c7dc2dadaa3bfd45b5fb192a1bc82eed247910d72a7bf32cbf1f1fa0ae4a50f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4YTMzZjViNmM5Y2Y4ODc0ZGE5Mjg0NmZlM2JiZDM5Yzc3ZmRmODM5NWViNWI4NDJjYTcwNWRkNWIxNDNkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQzOTAzZTQ4MjYwNDEwZDUyY2U5ZDE3NzU0NjdhOGRjYTA5ZjA1OGQxNTQ0MTEzNjdkMGUzODM1YzZlOTVkOTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
@@ -60,11 +60,11 @@
     },
     {
       "id": "claim_6f7ae7757de34ea18b53d73508bb6386",
-      "statement": "The CI workflow configured in .github/workflows/ci.yml automates linting, formatting check, notebook cleanliness check, radon/xenon complexity verification, Pytest with coverage tracking, and Docker image publishing on main branch pushes.",
+      "statement": "The CI workflow configured in .github/workflows/ci.yml automates quality checks (Ruff linting and formatting, notebook validation, and Radon/Xenon complexity gates) and Pytest execution with coverage artifact uploads on pushes and pull requests to main and development branches, while the Docker build job is currently disabled.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L14-L84",
-          "version": "repo-lines-v1:sha256:0928f47453fa2a4384608628ba1590160b982f52e0b672f02ca999695122d34f:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5ZDgwMTU0ZWQ0MmZjNWM3NzliMTMzMTU3OGI1OGI4OWM4MDFlYWNlNzRmMjRjZDQ4ZWI0YTIzNTc5NDBhOTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNTJiZTEwNDQyNDU4MjBlOWRkNzg0ZmRiNjk2Yjk2YzZkNDgxYzAwMjY4NGYwNTVhODEyYWUzNzAxMDU0NDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIxNjdkNDFiY2IyOTQ1MmE0ZGUwODI5NTZhNjYyZGQ1ZDMyZWVjNzYwODRmZDAwZjE3MjE0MDg5ZDk1YTUzNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://.github/workflows/ci.yml#L14-L86",
+          "version": "repo-lines-v1:sha256:0799b53787539e4ab0841b615817239da623cdc34898e90d0316d03cc1045fa8:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5ZDgwMTU0ZWQ0MmZjNWM3NzliMTMzMTU3OGI1OGI4OWM4MDFlYWNlNzRmMjRjZDQ4ZWI0YTIzNTc5NDBhOTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNTJiZTEwNDQyNDU4MjBlOWRkNzg0ZmRiNjk2Yjk2YzZkNDgxYzAwMjY4NGYwNTVhODEyYWUzNzAxMDU0NDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIxNjdkNDFiY2IyOTQ1MmE0ZGUwODI5NTZhNjYyZGQ1ZDMyZWVjNzYwODRmZDAwZjE3MjE0MDg5ZDk1YTUzNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -81,6 +81,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-24T23:05:52.220Z"
+    "at": "2026-10-25T02:31:36.619Z"
   }
 }
