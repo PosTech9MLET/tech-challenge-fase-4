@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:9de733d9e25b0e2fa0db9d41a30701b7f1784bd8f86383a4a47856cec430630d",
+  "claims": [
+    {
+      "id": "claim_095ca58ded4b414a8c329754db7ddd09",
+      "statement": "The production machine learning codebase is structured into modular subdirectories under src/ (src/data, src/features, src/models, src/training, src/pipelines, src/api, and src/utils), defining explicit operational boundaries across data ingestion, feature transformations, model definitions, training loops, pipeline orchestration, API serving, and utility configurations.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L16-L18",
+          "version": "repo-lines-v1:sha256:b27641fbf93c4e1ea0165336f2dbcad41dcb68a199e8f78e0fdf33327e76dbfb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYwMzE3NDgwOTA5OWE2MmRjMDQ5OGE0MTkwNDRkNWRjNmNiZjhmNzk1MmRhMjYxODNiZThhNmExYmQ3Mzc3OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzNjOTE0ZmM5YWFjNDhjYzAwM2E1NjA2ZjZlOWYwNjM5NDMxZjEyZGYyOGM0NzY1MmM0MDA1ZDhlZDJmNDYzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjgzOGFhODY0ZjZmYWFmMmM5ODU3YzIzYmEyMDhmN2YxNGE0MDNhMzRlYjRiMmQ3YmQzMTEyZDYzZGMxYjdkYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjk0Y2Q3Yjc1NmQyMjQ4NzIzYzVmOTJjMDA3MGE1M2MyZjI0MWQzMTMwMTkzNjI5YWI5MTc4MjcwOTlmNzNmNiJ9"
+        },
+        {
+          "resource": "repo://docs/architecture.md#L3-L7",
+          "version": "repo-lines-v1:sha256:a907bb41f0057ca0d60b118a46450f03c7d3a3c3bfa84a7655f7b098892cfcbf:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTY1ZGJlYzJhZjg5NzM0MGQwYjMzOGYwNmFlZmU0NmZkZGJjOTViMDgzOGU5NGQ4NWY0ZWQ0YTM5YjYzZTkwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzMxNjhhNjZiNmEyM2UxZWE4YjQyOTE4NTRkODM2Njk0NWUyNzA2YTM1ZmNkYTE5NWRhYjhkYzliMDZhYTg2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTJiNDY4NTEwMzM4MzUzZDMzYjdjOTdiNWY0Nzk3NTFjOTQwMGViYmQ3YWU0MjA1YmE0MWUyNmE5NTRlOTc1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/main.py#L1-L10",
+          "version": "repo-lines-v1:sha256:fd2ea1f04642d1196146434b1ee614d89d566a89005da9daa99ffa71ff0f6bae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmNTg3NzVmNTA0MjI4NzRmYjNmMWIxZDA2YmNiMjRjMDBiYjBjMzU4OWE1ZWMzZDQ1YmIxN2ViZDRhOTY5OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTk5MjMyY2QzYTMwOWY1MGNiZDZmNjYyMTI3ZWVhYWZjZTFmNzM2MjkyZGVmYjExM2Q5ODFhMjBjN2Q4NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b1839e18453d4892aa9923882d886204",
+      "statement": "Data and artifacts progress sequentially through pipeline stages from data/raw to intermediate data staging (data/interim and data/processed via src/data), feature creation (data/features via src/features), model training and evaluation (src/training) logged to MLflow, and prediction serving via src/api.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L10-L12",
+          "version": "repo-lines-v1:sha256:cbc3d9283e7709eed36b7016be7c1e1fad62fbd900134fe6b3ddfee90e3995bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjA0ODc1ODdiMzE1ZDBjZmY2OGE1ZTFiNTI5OTllZmZlOTZjZWY2ODkxYzI5NDYwNWQwY2VmNzg2MDEyYmNlYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWFkNThmZTU3MjhkNTYzYTAxZTdjYmJhY2MyNTgxZDRhOGYwZmU4ZGJhNTZiODdjMWIyNGUzZTE2N2I3ODZlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmI0Y2Q3ODg2NzliYWE4MWMxYzFmNzIzZWRkOThmYTY1N2MxMmU4N2FkNWNmZmU4ZjA3ZjhkMDJmZTdhNTVkNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjgzOGFhODY0ZjZmYWFmMmM5ODU3YzIzYmEyMDhmN2YxNGE0MDNhMzRlYjRiMmQ3YmQzMTEyZDYzZGMxYjdkYyJ9"
+        },
+        {
+          "resource": "repo://docs/architecture.md#L3-L7",
+          "version": "repo-lines-v1:sha256:a907bb41f0057ca0d60b118a46450f03c7d3a3c3bfa84a7655f7b098892cfcbf:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTY1ZGJlYzJhZjg5NzM0MGQwYjMzOGYwNmFlZmU0NmZkZGJjOTViMDgzOGU5NGQ4NWY0ZWQ0YTM5YjYzZTkwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzMxNjhhNjZiNmEyM2UxZWE4YjQyOTE4NTRkODM2Njk0NWUyNzA2YTM1ZmNkYTE5NWRhYjhkYzliMDZhYTg2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTJiNDY4NTEwMzM4MzUzZDMzYjdjOTdiNWY0Nzk3NTFjOTQwMGViYmQ3YWU0MjA1YmE0MWUyNmE5NTRlOTc1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5a9b8eef5b014964a05be169a005fbec",
+      "statement": "System configuration is managed centrally by the Settings Pydantic class in src/utils/config.py, loading environment variables from .env with default values for environment mode, log level, random seed, local SQLite MLflow tracking URI, data directory, and models directory.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L10-L23",
+          "version": "repo-lines-v1:sha256:28b21fa97d82277a2898299ae66fe122ecc6fefd77763284bbf7538984a5820e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjODYzMzFjOTBiNzhjZGI5MTdmZDViZDY5ZmMwNzE0ZDVhNWZlODQ2MGQ4NzYyNzllMTVmZjQyZmZjNzIzNWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZjRiZjE4NzYxNjAyZDNiNTkwYjM3ZDM5OGZhOTk3Nzk3MzBhNzdiNjgxMzhmZGQxNDA3MzQ5MmUzNzY2ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1OWY0YzlhOTg1ODcwYmVlNjI3MzI5ZDkxODdhM2RjMDU1NmQxODk4ZTVmYmE5YzVlODM2Mjg1ODZhN2Y0MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_smoke.py#L6-L8",
+          "version": "repo-lines-v1:sha256:ae58bf9a69651acb9d34758571f293a420e006a996d77140510074494b1220b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGIwZjEzYTY2MDU2YWE1YTY2NTVmOTRkODZiYjMzYTk5ODdlMmNmNzU0MmY5MzdmN2ZhZjJlMzFiM2Q2Njc0ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWJiNDJmN2Q5OThlNjc1ZTZhYTM4OWE4MWZiNzhkYTA3Y2U0YjFjOGJjMDQ3NjQ1YzkxYjVjZGZmMTlmMmEwOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjU3YmZlMWU4OTQ4MWM4YmUzN2NjMzA2MWM1NGRmZWVhNWQwNWY3ZTg5OTE3YmE4ZjUzYWFiMTQ2ZmE0OGUyNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a28b20b4838f4fdeb7fa5dff46b1fca9",
+      "statement": "Pipeline execution is initiated via the main() entrypoint in src/main.py, which serves as the primary executable entrypoint for orchestrating machine learning pipeline stages.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.py#L1-L10",
+          "version": "repo-lines-v1:sha256:fd2ea1f04642d1196146434b1ee614d89d566a89005da9daa99ffa71ff0f6bae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmNTg3NzVmNTA0MjI4NzRmYjNmMWIxZDA2YmNiMjRjMDBiYjBjMzU4OWE1ZWMzZDQ1YmIxN2ViZDRhOTY5OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTk5MjMyY2QzYTMwOWY1MGNiZDZmNjYyMTI3ZWVhYWZjZTFmNzM2MjkyZGVmYjExM2Q5ODFhMjBjN2Q4NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4809f116f5d34895ac8b81cf2a6c38c7",
+      "statement": "Automated quality gates in CI enforce repository structural invariants using Ruff for linting and formatting, Pytest for unit testing and coverage, Radon and Xenon for cyclomatic complexity thresholds, and scripts/check_notebooks.py to ensure committed Jupyter notebooks contain no execution outputs.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L25-L35",
+          "version": "repo-lines-v1:sha256:396e955da40467080a6510eb02845f4895b816bcff5fc9e22b551ee12bc61c7d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyZjY1NTQwYWFhZDhlZDBlODQwMDBmNDhlNjk1ZmZhMGJhMTg0Mjk0Mzc3YzRiYmFmYTE2NmIyYmM3YTZlMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkNjQ4MTFiODNmMDBiMGVlNzlhMmNiMmQ4Yzc1OWYyZjBmODY3ZGRjMTJiY2JjZjQ5NWQwZmY1YzFkM2NhMTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5MmZmNzI1YjdiYTgyMGRmODFiZTAyMmZhOTNmYjNiZmZhMTkyOGI5OTMzNTA4OTE0MGJmODM2YmIxMzk5MzgifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L3-L14",
+          "version": "repo-lines-v1:sha256:0c9ae2c6bf505221f80845638ae792ec385d09c1c7a23fd8339b23a9ec0ef1d4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3NDVmYWI4NmIxMjFkYzg1YjRmNzg2NzMzOWExM2ZlZTgwNGM4YTAyZjQ3MTA2NTcyZjJiZjA2NjRkNTk1MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZmU2YzBmMTIxMWIxNTI1Y2I2MjQzYWEwNWYzM2UxM2UxN2VkYTg2ZGExMWJmYmUyOTE5MDhlMDRlZDU0ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiYmE1NzY2YjVkM2Q2Yjg1MWEyYzViNWRmZTI3N2Q3ODhiZTVkYzI5NjI4YWM1OWNlODVjMzMzZTk2NTJkMWUifQ"
+        },
+        {
+          "resource": "repo://scripts/check_notebooks.py#L8-L23",
+          "version": "repo-lines-v1:sha256:f3ba9bf60d13639ac83ee398f6f78ec97739d2f6c10c96fadaad781c3234b603:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOTAzYzdkNTcwMWFkODkyZjg5NzUyZjk2N2U4ZTFlODczNTFmODA5ZGU4MzQ1MmQ1ZGJkMmNlMGJmNDg0MGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkZDI0NDU4MmI2ZmIwM2QyM2I4NDE1YWJlY2QzNDZiMGM5ZjQ2NmI2Zjc1MmIwNjgxODljZTdlOWEyZGMzNTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MWJmM2Q5NmYxYjExOTY4OGRlZWE5YTAwNGIyYjNmZWJiMTgwYmI4ZmIyMzQ0NjI1NjE0YWRjODU5NTYzYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxZmY4YWY4MGY1N2E0ZTkyOWRiMDYxMDU1MTMzYWQ2ZjRjMGQ0NmExZDFjNjYxN2RhYTI0N2MyMzNkMTJlMTgifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T23:05:52.220Z"
+  }
+}

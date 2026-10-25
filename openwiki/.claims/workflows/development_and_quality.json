@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:8d15c0c095ab9ddd956d2de0fb74b99378950141ea7991fb9805c3b243b5e3ef",
+  "claims": [
+    {
+      "id": "claim_51c34e93d6d1416285f0ffa261529b9e",
+      "statement": "Ruff handles Python code formatting and static analysis configured in pyproject.toml with an 88-character line length, target version Python 3.12, Google docstring rules, and an explicit exclusion for notebook files.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L3-L17",
+          "version": "repo-lines-v1:sha256:d1f546f06509b0e3876da7b986950bfb5826783b222f826e5df78f99bd44f125:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3NDVmYWI4NmIxMjFkYzg1YjRmNzg2NzMzOWExM2ZlZTgwNGM4YTAyZjQ3MTA2NTcyZjJiZjA2NjRkNTk1MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZmU2YzBmMTIxMWIxNTI1Y2I2MjQzYWEwNWYzM2UxM2UxN2VkYTg2ZGExMWJmYmUyOTE5MDhlMDRlZDU0ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4Nzc4YWQyNjY2MjEyNzY5ZmU3NzQyOGQ5ZjA3ZGQ0ZjU4YzA5ZDc3YmJkMGYxNjcxMDdlYmU1OTNmODAwNDkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4cc56ba15bb5498e894e681011c238d4",
+      "statement": "Code complexity in src/ is evaluated using Radon metrics and enforced by Xenon complexity gates, which require a maximum absolute rank of B and module and repository averages of rank A.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L31-L34",
+          "version": "repo-lines-v1:sha256:ce615dbfaec589e4176ad5a264d7d1662491f2e5fe52c86202075fe7a4dfa942:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2VjMjI5N2RjZDk2ZmM0ZmY2ZTA3NDFjODRmYWQ0ZWIzMTU3OTg4YjEwZDc4Yzc3Njc4YjE4M2NjNWZiZDRmZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTRhOTA3ZjcyOWMwNmUxY2JjNWQ1ZjU4MDJkYzQwNzQ3ODI2OGEyODVjMzg1ZTk0OTE2NzkzZDgxNTkyZWNjNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWZmMTgwMDdhN2Y2MjIwYWVmZWM1MTRhMDY2MzI5NDk4ODI5NjZjMDFmMGFjYTVmOGM5MDkwODMyZDFhMzc1YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDE3ODJjNWE3Yjg5NjRlMGMwYzU5MmNkZjdlNjA3NzE4YzViNGVjMjQxNzA4NzVlMzg5Y2JiZjg1MjZiNDY4OSJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L44-L46",
+          "version": "repo-lines-v1:sha256:7f5177b229e7e961b1112d6b92fe9bc239558e6ee696657620f930398b8d52f7:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWYyNGEwYmU4MDlhZTBiMGIxNjM3ZGJkOTMzODk2ZmJhMDhjNWVmNjQ0OTZjZTliYWU4YWJjZDJhOGEzM2FmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTZjYTc1YTk1MTgyNmJkMDJjNGFjNjkxZjNlNDBkMzQyYTc4ZGQzNDU5NTMwMmM1YzVmOGVmMDU0NDQ5NzkzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTBhZGQyODAyYTQ1OGZhYWNhNjIyOTIwMDc2ZTE3MTZjMDBiZTNmYjM5NGY1YmQ1ZTA0OTJmZGNlZDlhNjdkNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_04a0d69c04834ab7b1df1f3d90ee5b30",
+      "statement": "Notebook clean state hygiene is enforced by scripts/check_notebooks.py, which inspects Jupyter notebook JSON structure and flags any code cell containing non-empty outputs or non-null execution counts.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/check_notebooks.py#L8-L46",
+          "version": "repo-lines-v1:sha256:e5bd236f3f2d4a648013ecca0d9ad96f5e0c90459d5723c7d0beb7369b7a8306:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOTAzYzdkNTcwMWFkODkyZjg5NzUyZjk2N2U4ZTFlODczNTFmODA5ZGU4MzQ1MmQ1ZGJkMmNlMGJmNDg0MGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MWJmM2Q5NmYxYjExOTY4OGRlZWE5YTAwNGIyYjNmZWJiMTgwYmI4ZmIyMzQ0NjI1NjE0YWRjODU5NTYzYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a550f58ee8534254a96935ced304db2d",
+      "statement": "The pre-commit framework configured in .pre-commit-config.yaml automates general file hygiene, Ruff linting with auto-fixes, formatting, nbstripout output stripping, and notebook clean state validation via check-notebooks.",
+      "evidence": [
+        {
+          "resource": "repo://.pre-commit-config.yaml#L1-L36",
+          "version": "repo-lines-v1:sha256:9b16fdaf6ffa0cd42b419f5d7e3f500ec14453483b076be02cc3c2f55be7d46d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTEwZGI1YTkzNTdjZGExZDc4MjE2Y2RjMGJmOGIyNTVlMzM4Y2JjMWYzMjdlMGRmMDhjZmM3NzM5MWRkZWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZWQwYTcxMDVkZDBjMDRhYjgzYzkxNjVhM2E3NDE3YjY1ODc1YTIyNjcxZGE1YjdkMmU4MjRhNDY0YWIzZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_871508410bf24953becdb2cd7232bb53",
+      "statement": "The GitHub Actions CI quality job executes non-interactive Ruff linting and format checks, notebook state auditing via scripts/check_notebooks.py, Radon complexity calculation, and Xenon complexity gate enforcement before test suites run.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L15-L38",
+          "version": "repo-lines-v1:sha256:a7795f3f13ac6ed0ae398632e72fc00e87de5de5049987e11c5ddd1bb819a414:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5ZTVhMTlkMGViM2U5NzdjODA5NjMzNjg3YTRjMDdiZmQ1M2QzYTYwZGVhMmM2NmJmNTljY2I0NmZjZjE1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmNzFjNjBiZWRlYzM1OTIxYzM1YzE0MmVkMjdiZWIwNGQ2YzY5ZDc2MTAyYjc5OTliMzExZjlhOThlMzVmNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5YzFiNDdlNTc0MmE4Y2MwNjEwZmVlY2JlZjkwYzFmNjBiN2YzYmM4NzQ4YWZiMzNkNjI0ODlkNDEzYzI4ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc1ODJlYWI4YTU5N2E4NzA4NGM2NDExMjE4MTNiMGRlNmY2Mjg3ZDhkNWViMTc4ZjMzNDdmODAwYzQ5ODc5ZWQifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T23:05:52.220Z"
+  }
+}

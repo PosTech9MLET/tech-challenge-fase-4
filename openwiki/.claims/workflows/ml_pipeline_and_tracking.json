@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:84338d2238261e4e54434bdffac35b192a77a65efd76d6b3208ae137bc8e7da9",
+  "claims": [
+    {
+      "id": "claim_bf9e15d2837c4d428af91853685b3e65",
+      "statement": "The end-to-end machine learning pipeline partitions concerns sequentially across dedicated packages, using `src/data/` for staging raw, interim, and processed data; `src/features/` for engineering feature datasets in `data/features/`; `src/models/` for model class definitions; `src/training/` for model execution and metric logging; and `src/pipelines/` for pipeline orchestration.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/__init__.py#L1-L1",
+          "version": "repo-lines-v1:sha256:46e027b3a491546a58eb574540fafbd4d3dcd642bda24451f98c7f0e6d8a79a5:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDZlMDI3YjNhNDkxNTQ2YTU4ZWI1NzQ1NDBmYWZiZDRkM2RjZDY0MmJkYTI0NDUxZjk4YzdmMGU2ZDhhNzlhNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDZlMDI3YjNhNDkxNTQ2YTU4ZWI1NzQ1NDBmYWZiZDRkM2RjZDY0MmJkYTI0NDUxZjk4YzdmMGU2ZDhhNzlhNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/features/__init__.py#L1-L1",
+          "version": "repo-lines-v1:sha256:d8f9a2760c35249c0e13b9943c7a89a848c6423ca247000318a5e5f7cda9f122:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDhmOWEyNzYwYzM1MjQ5YzBlMTNiOTk0M2M3YTg5YTg0OGM2NDIzY2EyNDcwMDAzMThhNWU1ZjdjZGE5ZjEyMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDhmOWEyNzYwYzM1MjQ5YzBlMTNiOTk0M2M3YTg5YTg0OGM2NDIzY2EyNDcwMDAzMThhNWU1ZjdjZGE5ZjEyMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/models/__init__.py#L1-L1",
+          "version": "repo-lines-v1:sha256:fbf6bfec4c2ff284728d3b4328a3e09f7df68b311af23845a899a80988699377:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmJmNmJmZWM0YzJmZjI4NDcyOGQzYjQzMjhhM2UwOWY3ZGY2OGIzMTFhZjIzODQ1YTg5OWE4MDk4ODY5OTM3NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmJmNmJmZWM0YzJmZjI4NDcyOGQzYjQzMjhhM2UwOWY3ZGY2OGIzMTFhZjIzODQ1YTg5OWE4MDk4ODY5OTM3NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/pipelines/__init__.py#L1-L1",
+          "version": "repo-lines-v1:sha256:609cf129ec24d2ae11a98447aafc83f1d395416891ae1b558c7ac9175de17168:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjA5Y2YxMjllYzI0ZDJhZTExYTk4NDQ3YWFmYzgzZjFkMzk1NDE2ODkxYWUxYjU1OGM3YWM5MTc1ZGUxNzE2OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjA5Y2YxMjllYzI0ZDJhZTExYTk4NDQ3YWFmYzgzZjFkMzk1NDE2ODkxYWUxYjU1OGM3YWM5MTc1ZGUxNzE2OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/training/__init__.py#L1-L1",
+          "version": "repo-lines-v1:sha256:6f58608b10a2b4df9c12afb20a8c4132d0693eed4ed0141786980a4120849bb4:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmY1ODYwOGIxMGEyYjRkZjljMTJhZmIyMGE4YzQxMzJkMDY5M2VlZDRlZDAxNDE3ODY5ODBhNDEyMDg0OWJiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmY1ODYwOGIxMGEyYjRkZjljMTJhZmIyMGE4YzQxMzJkMDY5M2VlZDRlZDAxNDE3ODY5ODBhNDEyMDg0OWJiNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_817d664237604034a0fd3118f9354bf6",
+      "statement": "MLflow tracking and artifact storage defaults to a local SQLite database (`sqlite:///{ROOT_DIR}/mlflow.db`) and models directory (`ROOT_DIR / \"models\"`), configured centrally through Pydantic Settings in `src/utils/config.py`.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L10-L21",
+          "version": "repo-lines-v1:sha256:efd22e6c657dde653b8bbfb814a1f1725ea686249ecc62e62390dd2e0c958a8a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjODYzMzFjOTBiNzhjZGI5MTdmZDViZDY5ZmMwNzE0ZDVhNWZlODQ2MGQ4NzYyNzllMTVmZjQyZmZjNzIzNWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1OWY0YzlhOTg1ODcwYmVlNjI3MzI5ZDkxODdhM2RjMDU1NmQxODk4ZTVmYmE5YzVlODM2Mjg1ODZhN2Y0MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5MTY5YWZhMzUxYTA4MDBjZjVlNTU0ZmMyNGM3ZjgyYjQ4NDk2OTBhN2ViYjlhMTRhYWY5NzlhMmU2MTIzMzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e9dec22913114e7eb9bc8d35a9c29f8f",
+      "statement": "Model documentation and evaluation compliance are standardized by `docs/model_card.md`, which defines nine explicit sections covering model details, intended use, factors, metrics, evaluation data, training data, quantitative and fairness analysis, ethical considerations, and limitations.",
+      "evidence": [
+        {
+          "resource": "repo://docs/model_card.md#L1-L11",
+          "version": "repo-lines-v1:sha256:f27db3514b25c9c2aa6685977bfb9e644bc0d69659c8d86c214e95f4edc725e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMDhiY2M4NzExOTNmZDM1ODQwYzVlZjcxZTg4OWZlYzJkN2JmN2Q5ZjljYWM3ZjI4YzU3NWY4ZTFkMjc4ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyOGUyNDI1NmZkOTZkZWUyNGYxYzE1ODE3N2IxZTUxMzg5Y2ZjY2RjMGUwOGNmMzkxOWQ2MmRjZmZhM2Q3NzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0c603eb85b39474595e82852253650ad",
+      "statement": "The main execution entrypoint in `src/main.py` exposes a top-level `main()` function to initialize runtime configurations and execute primary ML pipeline flows.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.py#L4-L10",
+          "version": "repo-lines-v1:sha256:347b2bcd50f719b9d9fd60767f3e2127e843a4c193007012c75579394d8de0ee:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzBiYzUxMjY1ZGEzYzQ5NGJkZDI5NDA4YzBlMTc3NjY1YmZlYWQ2ZmQyNzkzNmYwNTlkMmM1NTdiMTlhM2NlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMThlOTkyMzJjZDNhMzA5ZjUwY2JkNmY2NjIxMjdlZWFhZmNlMWY3MzYyOTJkZWZiMTEzZDk4MWEyMGM3ZDg1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzg3MGRmNDRmNTRlY2JkOTQ5ZTQ3YmJlZDJkY2JlNzFiNWJmZWMyNjk3NzA5NjZkNDAzNDRlM2E4ZDQ1NjVkMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6bfbeba0ba174daaaba99b079855a7ee",
+      "statement": "Test coverage tracking in `pyproject.toml` measures code within the `src` module while explicitly omitting top-level execution entrypoints in `src/main.py`.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L29-L32",
+          "version": "repo-lines-v1:sha256:57f9ab0ee47366a0f0b015abebd23d7e0f01d6c8b85d657ab554cac16fc726e8:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGZmODc4ODc3M2UzMWM3YTkzOTM2YzllYWUxZWIxNTMxMTY3Yzg5NTc3ZmYzM2I3ZjY1Y2Q4ZWMwOGEyYzgwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ2ZTIxMmM2YTQzMjFlY2QxNDg4YWQwZjM2OTU0MGQ5ZDk0YWQxMDk3ZDlhZTZlYWNkMjY5NDQwMTJlNDJiNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGQyM2Q5ODU4M2IyOTFiMWY5MGEzMzgxN2NjZjEzOTZhMGZlNjdkOGM5YzFlNmE0MDFkNzZlNDI1NTk2MTVjNSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-10-24T23:05:52.220Z"
+  }
+}
