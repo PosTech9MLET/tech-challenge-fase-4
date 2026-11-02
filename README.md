@@ -21,12 +21,55 @@
 
 ## Quick start
 
-~~~bash
+### Pré-requisitos
+
+- Python 3.12
+- Git
+- uv
+
+### Instalação
+
+```bash
+uv python install 3.12
+uv sync --locked
+```
+
+Copie `.env.example` para `.env`.
+
+No Git Bash:
+
+```bash
 cp .env.example .env
-make install     # uv sync + pre-commit install
-make check       # lint + testes + complexidade + notebooks
-make run
-~~~
+```
+
+No PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+### Execução
+
+```bash
+uv run python src/main.py
+```
+
+### Testes e qualidade
+
+```bash
+uv run pytest -v
+uv run ruff check .
+uv run ruff format . --check
+uv run python scripts/check_notebooks.py
+```
+
+### Pre-commit
+
+```bash
+uv run pre-commit install
+uv run pre-commit run --all-files
+```
+
 
 ## Qualidade
 
