@@ -5,6 +5,7 @@ description = "Tech Challenge - Fase 4 (FIAP)"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "pandera[pandas]>=0.35.0",
     "pydantic-settings>=2.16.1",
 ]
 
