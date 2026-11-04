@@ -5,8 +5,14 @@ description = "Tech Challenge - Fase 4 (FIAP)"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "joblib>=1.6.0",
+    "mlflow>=3.18.0",
+    "pandas>=3.1.0",
     "pandera[pandas]>=0.35.0",
+    "pyarrow>=26.0.1",
     "pydantic-settings>=2.16.1",
+    "scikit-learn>=1.9.1",
+    "xgboost>=3.4.1",
 ]
 
 
