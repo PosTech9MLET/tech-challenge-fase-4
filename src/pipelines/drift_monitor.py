@@ -66,7 +66,7 @@ def generate_drift_report(
 
     json_path = output.with_suffix(".json")
     json_path.write_text(
-        snapshot.json(),
+        snapshot.json() + "\n",
         encoding="utf-8",
     )
 

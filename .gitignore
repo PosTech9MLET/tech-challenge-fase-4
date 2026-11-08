@@ -38,3 +38,6 @@ Thumbs.db
 
 # Relatórios HTML gerados pelo Evidently
 /reports/*.html
+
+# Métricas operacionais geradas localmente
+/reports/*.prom

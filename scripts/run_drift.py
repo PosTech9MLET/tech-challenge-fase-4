@@ -49,7 +49,7 @@ def main() -> None:
 
     output = REPORT_DIR / "drift_alerts.json"
     output.write_text(
-        json.dumps(results, indent=2, ensure_ascii=False),
+        json.dumps(results, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
 

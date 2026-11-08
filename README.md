@@ -18,34 +18,48 @@ Desenvolver uma solução de sustentação e confiabilidade para modelos de Mach
 - Baseline de Credit Scoring com XGBoost e rastreamento de experimentos no MLflow.
 - Simulação e detecção de Data Drift com Evidently.
 - Análise do impacto do drift nas predições do modelo.
-- Evolução para monitoramento operacional, métricas e alertas.
-- Documentação de governança, privacidade, LGPD e limitações do modelo.
+- Observabilidade operacional com logs estruturados, métricas Prometheus e dashboard Grafana.
+- Regras automáticas de alerta para Data Drift e indisponibilidade da coleta.
+- Documentação de governança, privacidade, LGPD e limitações do modelo, com trabalhos futuros claramente identificados.
 
 O projeto utiliza o dataset **Home Credit Default Risk** como base para o desenvolvimento e as simulações.
 
 ## Estrutura do projeto
 
 ```text
-├── .github/workflows/    # Automação e verificações de CI
-├── configs/              # Arquivos de configuração
-├── data/                 # Dados raw, interim, processed e features
-├── docs/                 # Documentação técnica e governança
-├── models/               # Modelos e métricas salvos localmente
-├── notebooks/            # Análises exploratórias, sem outputs no Git
-├── reports/              # Relatórios e indicadores de monitoramento
-│   └── figures/          # Figuras geradas
-├── scripts/              # Scripts de execução e demonstração
+├── .github/workflows/             # Automação e verificações de CI
+├── compose.observability.yaml      # Stack local de observabilidade
+├── configs/                       # Configurações da aplicação
+├── data/                          # Dados raw, interim, processed e features
+├── docs/                          # Documentação técnica e governança
+├── infra/observability/
+│   ├── prometheus/
+│   │   ├── prometheus.yml          # Configuração de coleta
+│   │   └── alerts.yml              # Regras de alerta
+│   └── grafana/
+│       ├── dashboard-provider.yml  # Provisionamento dos dashboards
+│       ├── dashboards/
+│       │   └── credit-scoring-observability.json
+│       └── datasources/
+│           └── prometheus.yml      # Datasource pré-configurada
+├── models/                        # Modelo e métricas locais
+├── notebooks/                     # Exploração, sem outputs no Git
+├── reports/                       # Relatórios de drift e métricas .prom
+├── scripts/                       # Scripts operacionais e demonstrações
+│   ├── run_monitored_drift.py      # Pandera + Evidently + Prometheus
+│   └── ...
 ├── src/
-│   ├── data/             # Carga, contratos e simulação de drift
-│   ├── features/         # Engenharia de atributos
-│   ├── models/           # Pipeline e persistência do baseline
-│   ├── training/         # Treinamento e avaliação
-│   ├── pipelines/        # Preparação e monitoramento
-│   ├── api/              # Componentes de API
-│   └── utils/            # Configurações e utilitários
-├── tests/                # Testes automatizados
-├── pyproject.toml        # Dependências e configurações
-└── uv.lock               # Versões resolvidas das dependências
+│   ├── data/                      # Carga, contratos e simulação de drift
+│   ├── features/                  # Engenharia de atributos
+│   ├── models/                    # Scoring e persistência
+│   ├── training/                  # Treinamento e avaliação
+│   ├── pipelines/                 # Preparação e drift
+│   ├── monitoring/                # Métricas, logs e validação monitorada
+│   ├── api/                       # Componentes de API
+│   └── utils/                     # Configurações e utilitários
+├── tests/                         # Testes automatizados
+├── pyproject.toml                 # Dependências e ferramentas
+└── uv.lock                        # Versões resolvidas
 ```
 
 Os dados brutos, os datasets processados e os modelos treinados são artefatos locais e **não devem ser enviados ao GitHub**.
@@ -57,6 +71,8 @@ Os dados brutos, os datasets processados e os modelos treinados são artefatos l
 - Python 3.12.
 - Git.
 - [uv](https://docs.astral.sh/uv/).
+- Docker Engine / Docker Desktop com plugin Docker Compose **para a observabilidade**; dispensável para executar apenas os scripts Python.
+- Acesso ao dataset Home Credit Default Risk para gerar os artefatos locais.
 
 ### Instalação
 
@@ -113,7 +129,12 @@ uv run python -m scripts.run_drift
 
 # 6. Comparar as predições antes e depois do drift
 uv run python -m scripts.analyze_score_impact
+
+# 7. Executar validação + monitoramento + exportação para Prometheus
+uv run python -m scripts.run_monitored_drift
 ```
+
+A última etapa gera `reports/operational_metrics.prom`. Para iniciar Prometheus e Grafana, consulte a seção [Observabilidade operacional com Docker](#observabilidade-operacional-com-docker).
 
 ### Testes e qualidade
 
@@ -313,7 +334,7 @@ O pipeline extrai os resultados do Evidently e registra, para cada variável:
 - Limiar utilizado.
 - Indicador de alerta (`true` ou `false`).
 
-Os indicadores são armazenados em `reports/drift_alerts.json`. **Ainda não há envio automático de notificações nem agendamento contínuo do monitoramento.**
+Os indicadores são armazenados em `reports/drift_alerts.json`. Além desses resultados, o script monitorado exporta PSI para o Prometheus e as regras de alerta o avaliam automaticamente. **Ainda não há envio de notificações externas, agendamento contínuo do pipeline nem garantia de atualização dos dados coletados.**
 
 ### Impacto nas predições do XGBoost
 
@@ -364,7 +385,7 @@ uv run pytest tests/unit/test_drift_monitor.py -v
 uv run pytest tests/unit/test_score_impact.py -v
 ```
 
-A suíte completa apresentou **40 testes aprovados** no ambiente de desenvolvimento durante a implementação desta funcionalidade.
+Após a implementação de métricas, logs estruturados e integração com Pandera, a suíte completa apresentou **50 testes aprovados** no ambiente de desenvolvimento em 08/11/2026. Esse número reflete aquela execução de testes e pode aumentar conforme o projeto evoluir.
 
 ### Limitações do experimento de drift
 
@@ -374,26 +395,270 @@ A suíte completa apresentou **40 testes aprovados** no ambiente de desenvolvime
 - O cenário de estresse foi definido para tornar as mudanças detectáveis e não representa uma previsão de alterações reais.
 - A comparação das predições mede alteração de comportamento, não degradação comprovada de desempenho.
 
-## Observabilidade e governança: próximos passos
+## Observabilidade operacional com Docker
 
-A implementação atual já registra métricas e experimentos com MLflow e produz relatórios e alertas estruturados de Data Drift. Para completar a solução de sustentação e governança, permanecem como próximos passos:
+A solução possui instrumentação em Python e um ambiente local de monitoramento com **Prometheus, Node Exporter (Textfile Collector) e Grafana**. Foi validada em Windows 11 com Docker Desktop e pode ser reproduzida por outros integrantes do grupo em Windows, macOS ou Linux, desde que os pré-requisitos estejam presentes.
 
-- Definir e instrumentar logs operacionais e indicadores de execução dos pipelines.
-- Avaliar monitoramento recorrente, gatilhos de alerta e canais de notificação.
-- Acompanhar a qualidade preditiva em bases rotuladas independentes, quando disponíveis.
-- Documentar governança, ciclo de vida do modelo, responsabilidade por decisões e critérios de revisão.
-- Tratar privacidade e LGPD, incluindo minimização de dados, finalidade, controle de acesso e retenção.
-- Aprofundar a análise de viés e registrar limitações de representatividade.
-- Diferenciar associação estatística de causalidade e descrever o que o experimento permite ou não concluir.
-- Preparar a demonstração e o vídeo STAR solicitados no Tech Challenge.
+### Arquitetura e fluxo de dados
+
+```text
+application_train.csv
+       |
+       v
+Carregamento -> Contratos Pandera -> Evidently (drift simulado)
+       |                |                    |
+       +----------------+--------------------+
+                        |
+              Logs JSON no terminal
+                        |
+              Métricas prometheus_client
+                        |
+            reports/operational_metrics.prom
+                        |
+       Docker volume bind mount (somente leitura)
+                        |
+              Node Exporter :9100
+                        |
+              Prometheus :9090
+               |                |
+       Regras de alerta    Histórico de coletas
+                               |
+                           Grafana :3000
+```
+
+**Importante:** o Python é executado localmente via `uv`. O Docker Compose sobe somente os serviços de observabilidade; **não** treina o modelo nem agenda o script de drift automaticamente.
+
+### Componentes implementados
+
+| Componente | Arquivo ou recurso | Responsabilidade |
+|---|---|---|
+| Métricas Prometheus | `src/monitoring/metrics.py` | Contagem por resultado, duração e PSI |
+| Logs JSON | `src/monitoring/logging_config.py` | Registro estruturado sem valores individuais de clientes |
+| Validação monitorada | `src/monitoring/validation.py` | Aprovação/rejeição Pandera com log e métrica |
+| Orquestração monitorada | `scripts/run_monitored_drift.py` | Carga, validação, drift e exportação `.prom` |
+| Textfile Collector | `node-exporter` | Expõe as métricas do arquivo do projeto |
+| Prometheus | `infra/observability/prometheus/prometheus.yml` | Coleta a cada 10 segundos |
+| Alertas | `infra/observability/prometheus/alerts.yml` | PSI alto e indisponibilidade do exporter |
+| Grafana | `infra/observability/grafana/` | Datasource e dashboard provisionados pelo repositório |
+
+#### Métricas disponíveis
+
+| Métrica | Tipo | O que representa |
+|---|---|---|
+| `credit_pipeline_runs_total{pipeline,status}` | Counter | Resultado da execução **atual/exportada** por etapa; reinicia em um novo processo Python |
+| `credit_pipeline_duration_seconds_{sum,count,bucket}` | Histogram | Duração observada na execução exportada, em segundos |
+| `credit_data_drift_psi{feature}` | Gauge | PSI da variável monitorada no cenário simulado |
+
+As etapas instrumentadas são `data_loading`, `data_validation` e `drift_monitor`. Os resultados de execução registrados são `success` ou `error`. Em caso de rejeição por contrato Pandera, o log contém `status=rejected` e a métrica de execução contém `status=error`.
+
+#### Logs estruturados
+
+Exemplo de evento emitido ao validar a base real:
+
+```json
+{
+  "level": "INFO",
+  "message": "Lote aprovado",
+  "event": "data_validation",
+  "status": "approved",
+  "records": 307511,
+  "pipeline": "home_credit"
+}
+```
+
+O registro real também contém `timestamp` em UTC. Nos eventos de rejeição são usados `status=rejected` e `error_type`, preservando a exceção Pandera. A instrumentação não inclui rendas, identificadores individuais ou exemplos de registros no log estruturado. Em aplicações reais, logs de outras dependências e rastreamentos de erro também exigem revisão de privacidade.
+
+### Reproduzir a observabilidade no notebook de outro integrante
+
+Os comandos abaixo são executados **na raiz do repositório**. Em Windows, prefira Git Bash ou o terminal do VS Code; em macOS/Linux, utilize um shell compatível. O Docker Desktop deve estar iniciado no Windows e macOS. Em Linux, o Docker Engine deve estar operacional.
+
+**1. Clonar, instalar dependências e preparar o dataset**
+
+```bash
+git clone https://github.com/PosTech9MLET/tech-challenge-fase-4.git
+cd tech-challenge-fase-4
+uv python install 3.12
+uv sync --locked
+```
+
+O código de observabilidade precisa estar presente na branch utilizada (enquanto o PR não for integrado, usar `feat/operational-observability`). Coloque `application_train.csv` em `data/raw/`, conforme a seção [Dataset](#dataset), e prepare os artefatos locais:
+
+```bash
+uv run python -m src.pipelines.prepare_data
+uv run python -m src.training.train
+```
+
+O arquivo `data/raw/application_train.csv`, os Parquet processados e o modelo são locais e não são disponibilizados automaticamente pelo clone.
+
+**2. Gerar o arquivo de métricas**
+
+```bash
+uv run python -m scripts.run_monitored_drift
+```
+
+Esse comando valida os dados reais, avalia o cenário de Data Drift simulado, registra logs e grava `reports/operational_metrics.prom`. É esperado ver `307511` registros aprovados se a base e as etapas anteriores corresponderem à execução usada no projeto.
+
+**3. Configurar a senha local do Grafana**
+
+No Git Bash (Windows) ou em Bash (macOS/Linux):
+
+```bash
+read -rs -p "Senha local do Grafana: " GRAFANA_ADMIN_PASSWORD
+echo
+export GRAFANA_ADMIN_PASSWORD
+```
+
+No PowerShell, uma alternativa sem exibir a senha digitada:
+
+```powershell
+$senhaSegura = Read-Host "Senha local do Grafana" -AsSecureString
+$env:GRAFANA_ADMIN_PASSWORD = [System.Net.NetworkCredential]::new("admin", $senhaSegura).Password
+```
+
+A senha é exigida na inicialização do Compose, **não deve ser escrita no README, versionada ou compartilhada no GitHub**. O usuário inicial do Grafana é `admin`. Uma instalação que já tenha o volume do Grafana inicializado mantém a senha armazenada mesmo que a variável mude posteriormente.
+
+**4. Iniciar os serviços**
+
+```bash
+docker compose -f compose.observability.yaml config --quiet
+docker compose -f compose.observability.yaml up -d
+docker compose -f compose.observability.yaml ps
+```
+
+O Compose deve exibir `node-exporter`, `prometheus` e `grafana` em execução. Se a imagem ainda não estiver disponível, o Docker a baixará na primeira inicialização.
+
+**5. Acessar as interfaces**
+
+| Serviço | Endereço local | O que verificar |
+|---|---|---|
+| Node Exporter | http://localhost:9100/metrics | Métricas com prefixo `credit_` |
+| Prometheus | http://localhost:9090/targets | Target `credit_scoring` em `UP` |
+| Alertas | http://localhost:9090/alerts | Regras e estados dos alertas |
+| Grafana | http://localhost:3000 | Dashboard `Credit Scoring \| Observabilidade Operacional` |
+
+O Grafana provisiona o datasource `Prometheus` (UID `prometheus`) e o dashboard a partir dos arquivos em `infra/observability/grafana/`. **Os três painéis são instalados automaticamente**; não é necessário recriá-los pela interface. As portas estão vinculadas ao `127.0.0.1`, de modo que não são expostas diretamente na rede local.
+
+### Dashboard do Grafana
+
+O dashboard versionado em `infra/observability/grafana/dashboards/credit-scoring-observability.json` contém:
+
+| Painel | Consulta | Interpretação |
+|---|---|---|
+| Data Drift por variável (PSI) | `credit_data_drift_psi` | Valores mais recentes por coluna, com vermelho a partir do PSI 0,20 |
+| Tempo de execução dos pipelines | `credit_pipeline_duration_seconds_sum` | Duração, em segundos, de cada etapa na execução exportada |
+| Status dos pipelines | `credit_pipeline_runs_total` | Etapas e status da execução exportada; não é total histórico |
+
+Os painéis utilizam consultas instantâneas. O PSI exibido é do **cenário simulado**; o cenário original tem seus valores disponíveis nos relatórios Evidently, e não nesse painel. As configurações de visualização e as consultas estão versionadas em JSON, portanto as mudanças duráveis devem ser feitas no arquivo e reenviadas ao GitHub.
+
+### Regras de alerta
+
+O Prometheus avalia `infra/observability/prometheus/alerts.yml` automaticamente:
+
+| Regra | Expressão PromQL | Duração | Significado |
+|---|---|---|---|
+| `CreditScoringDataDrift` | `credit_data_drift_psi >= 0.20` | 30 s | Dispara uma instância por variável cujo PSI ultrapassou o limite |
+| `CreditScoringExporterDown` | `up{job="credit_scoring"} == 0` | 1 min | Detecta indisponibilidade do endpoint de coleta |
+
+O primeiro alerta foi demonstrado com duas instâncias em **FIRING**: `AMT_INCOME_TOTAL` (PSI aproximadamente `0,6733`) e `AMT_CREDIT` (`0,4521`). Na mesma demonstração, o alerta de indisponibilidade permaneceu **INACTIVE**.
+
+**Alerta em FIRING não significa notificação enviada.** Não há Alertmanager com canais de entrega configurados, nem integração automática com e-mail ou Microsoft Teams. As regras atuam no Prometheus e ficam visíveis em `/alerts`.
+
+Verificar sintaxe do arquivo de alertas dentro do contêiner:
+
+```bash
+# Linux / macOS:
+docker compose -f compose.observability.yaml exec -T prometheus promtool check rules /etc/prometheus/alerts.yml
+```
+
+No **Git Bash do Windows**, use `MSYS_NO_PATHCONV=1` para impedir que `/etc/prometheus/alerts.yml` seja convertido em um caminho do Windows:
+
+```bash
+MSYS_NO_PATHCONV=1 docker compose -f compose.observability.yaml exec -T prometheus promtool check rules /etc/prometheus/alerts.yml
+```
+
+### Operação e resolução de problemas
+
+Verificar saúde e logs dos serviços:
+
+```bash
+docker compose -f compose.observability.yaml ps
+docker compose -f compose.observability.yaml logs --tail=50
+```
+
+Verificar a saída do Textfile Collector no Git Bash / Linux / macOS:
+
+```bash
+curl -s http://localhost:9100/metrics | grep '^credit_'
+curl -s http://localhost:9100/metrics | grep 'node_textfile'
+```
+
+Se o target estiver `UP`, mas não houver métricas `credit_`, confirme a existência de `reports/operational_metrics.prom` e execute novamente `uv run python -m scripts.run_monitored_drift`. O diretório `reports/` é montado como somente leitura pelo Node Exporter.
+
+Para encerrar os contêineres sem perder os volumes persistentes:
+
+```bash
+docker compose -f compose.observability.yaml down
+```
+
+**Não use `down -v`** sem decidir conscientemente descartar os dados locais do Prometheus e do Grafana, pois esse comando remove os volumes da stack.
+
+Caso a senha local do Grafana seja esquecida, ela pode ser redefinida dentro do contêiner com `grafana cli admin reset-admin-password`; redefinir uma variável de ambiente não altera automaticamente a senha já armazenada no volume.
+
+Portas ocupadas (`3000`, `9090` ou `9100`) exigem liberar a porta ou alterar somente o mapeamento externo no Compose. Os endereços internos `prometheus:9090` e `node-exporter:9100` devem permanecer como estão para garantir a comunicação entre os contêineres.
+
+### Limitações da observabilidade atual
+
+1. **Pipeline batch:** o Python executa e termina; não há serviço de inferência contínua, agendamento ou job automático.
+2. **Métricas instantâneas:** `prometheus_client` reinicia os Counters e Histograms em cada execução. O `.prom` representa a execução mais recente e substitui os valores anteriores. O Prometheus guarda amostras das coletas, mas consultar `credit_pipeline_runs_total` não representa um contador acumulado entre execuções; não se deve usar `rate()` ou `increase()` nessa métrica como contagem confiável de jobs.
+3. **Dados potencialmente desatualizados:** o Textfile Collector continua expondo o último `.prom` mesmo sem nova execução Python. Assim, um alerta de PSI pode permanecer em FIRING indefinidamente. Para uso real, é necessário adicionar métrica de horário da última execução e regra de frescor/ausência de dados.
+4. **Ausência de notificação:** os alertas são avaliados pelo Prometheus, mas ainda não têm roteamento externo para Teams ou e-mail.
+5. **Dados simulados:** o drift observado foi provocado artificialmente. O dashboard não monitora novos clientes de produção nem valida a qualidade preditiva em dados novos rotulados.
+6. **Escopo operacional:** o pipeline registra resultados de carga, validação e drift; métricas de API de inferência, latência por requisição, tráfego e monitoramento de desempenho do modelo em produção ainda não foram instrumentadas.
+7. **Segurança local:** a configuração foi desenhada para demonstração em notebooks de desenvolvimento, não para implantação pública. A exposição externa exigiria autenticação, TLS, gestão de credenciais, segregação de acesso e políticas de retenção.
+
+## Governança, privacidade e evolução do projeto
+
+A instrumentação evita incluir dados individuais nos logs estruturados de validação. O dataset Home Credit e seus artefatos brutos/processados permanecem locais. A verificação exploratória de ROC-AUC por gênero e faixa etária ajuda a identificar questões para investigação, mas não comprova equidade, ausência de viés nem conformidade com a LGPD.
+
+**Implementado:** contratos Pandera para oito colunas, baseline XGBoost/MLflow, Evidently/PSI para duas variáveis, análise de impacto no score, logs estruturados, métricas, dashboard e regras de alerta.
+
+**Próximos trabalhos recomendados:**
+
+- Criar métrica `last_success_timestamp` e alertas de ausência de atualização para o pipeline batch.
+- Definir uma estratégia de contadores persistentes ou de métricas por execução, e testar múltiplos runs.
+- Automatizar execução periódica e, se necessário, usar um mecanismo de entrega de métricas para jobs curtos (por exemplo, Pushgateway com regras de ciclo de vida adequadas).
+- Configurar Alertmanager e canais de notificação, caso o escopo exija alertas enviados.
+- Registrar políticas de minimização, finalidade, bases legais, controle de acesso e retenção sob LGPD.
+- Aprofundar métricas de fairness, taxas de erro por grupo e análise da representatividade da amostra.
+- Documentar hipóteses causais e possíveis confundidores; **o experimento de drift não demonstra causalidade**.
+- Avaliar degradação efetiva de desempenho com rótulos independentes e dados de períodos posteriores.
+- Preparar o vídeo demonstrativo no formato STAR, destacando cenário, ações, evidências e limitações.
 
 ## Validação final
 
 Para reproduzir os principais testes e verificações:
 
 ```bash
+uv sync --locked
 uv run pytest -v
 uv run ruff check .
 uv run ruff format . --check
+uv run python scripts/check_notebooks.py
 uv run pre-commit run --all-files
+
+docker compose -f compose.observability.yaml config --quiet
+docker compose -f compose.observability.yaml ps
 ```
+
+Na execução registrada em 08/11/2026, **50 testes passaram** e os hooks do pre-commit foram aprovados. Os serviços Docker e a exportação de métricas foram validados separadamente com a base real. O número de testes pode variar com novos commits.
+
+Antes de abrir um PR para `development`, verifique também os arquivos adicionados e modificados:
+
+```bash
+git status --short
+git diff --check
+```
+
+**Dica:** arquivos ainda não rastreados pelo Git não aparecem em `git diff`; inclua-os com `git add` antes de validar o conteúdo staged e criar o commit.
+
+> **Nota:** dados, artefatos do modelo e relatórios gerados devem ser avaliados antes de serem enviados ao repositório. Não versione dados pessoais ou arquivos de produção sem necessidade e autorização.
