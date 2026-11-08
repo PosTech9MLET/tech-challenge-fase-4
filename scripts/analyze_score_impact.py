@@ -35,7 +35,7 @@ def main() -> None:
     output = REPORT_DIR / "score_impact.json"
 
     output.write_text(
-        json.dumps(summary, indent=2),
+        json.dumps(summary, indent=2) + "\n",
         encoding="utf-8",
     )
 
