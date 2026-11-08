@@ -1,0 +1,21 @@
+
+groups:
+  - name: credit-scoring-alerts
+    rules:
+      - alert: CreditScoringDataDrift
+        expr: credit_data_drift_psi >= 0.20
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Data Drift detectado em {{ $labels.feature }}"
+          description: "PSI de {{ $value }} no cenário simulado. Limite: 0.20."
+
+      - alert: CreditScoringExporterDown
+        expr: up{job="credit_scoring"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Monitoramento de Credit Scoring indisponível"
+          description: "Prometheus não consegue coletar as métricas do Node Exporter."
