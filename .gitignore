@@ -35,3 +35,6 @@ mlflow.db
 Thumbs.db
 .idea/
 .vscode/
+
+# Relatórios HTML gerados pelo Evidently
+/reports/*.html
