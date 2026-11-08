@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "AMT_INCOME_TOTAL": {
+      "psi": 0.0019650177265097242,
+      "threshold": 0.2,
+      "alert": false
+    },
+    "AMT_CREDIT": {
+      "psi": 0.007623614240707738,
+      "threshold": 0.2,
+      "alert": false
+    }
+  },
+  "simulated": {
+    "AMT_INCOME_TOTAL": {
+      "psi": 0.6733456148136611,
+      "threshold": 0.2,
+      "alert": true
+    },
+    "AMT_CREDIT": {
+      "psi": 0.4520753758171587,
+      "threshold": 0.2,
+      "alert": true
+    }
+  }
+}
