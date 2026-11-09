@@ -1,11 +1,19 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:23235d31872cf542e90fdf68929a92c7ae0c643062d88993aa524eead3d7f8e4",
+  "pageVersion": "sha256:c9ba63d653b56e57359021c055291d6af3c5ba2407ec871452b538d94dcba6d7",
   "claims": [
     {
       "id": "claim_06731e76540f49dcafc7f070bcadbbfc",
-      "statement": "The main application entrypoint in src/main.py defines a main() function that executes the primary pipeline.",
+      "statement": "src/main.py is only a placeholder entrypoint whose main() prints a project-initialized message, and it is omitted from coverage; the real workflow runs through src.pipelines, src.training and scripts modules.",
       "evidence": [
+        {
+          "resource": "repo://README.md#L110-L135",
+          "version": "repo-lines-v1:sha256:5637958978bf287dea50a63a5c66b91aed99b3fd8689d7cb96df589f7308e988:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3ODk1ODA4YzkwMWNhMmUyZTQ1MDgyODk3NGFhNzQwODhmYjEzYzk1NzI1ZDUxMmRmNDQxNGQ0NjA4ZmUyMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2OTdkODJjZGU4NmRjNThiZDE4NThmYjZlMzBjZDVmNjZjODgxMWNkNWNjM2U2ZjRkMzg4MmM4YmY1YTUyNTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhZDdiZWVmYTViY2EwNGQ0M2I4NGMzYTM3NDhhYWNlNTkzNTM4NjA4NmZjNjIzMjExNDI2NjY1ZjFhMmQ2MmYifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L49-L52",
+          "version": "repo-lines-v1:sha256:5cd786da2d6d94c16d26ee43148bfa71f452671cb95f004445aa47835098e631:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUzMmZlNzY2ODljNTIwMjQ0MTllOWM3Mjc1NWRmZGY2Yzg4ODY1ZTQ2ZWE1MTgyM2UwYTY1ODM2MzM2YWUxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmJmNTQ1MGFkMDJlY2Y2YjhkMjIzNDYzYjM1MWJlOWJmNzQzY2I0N2JlMTUxNzNmZDg4NWRlMzE5ODc4OWY4NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDJjNTEwZGRiYjg4NWNiOGI1NDNmNzQxYmNhNTkxOGYxMzllYjI4MGMxYWQyNjc2MmJjNzE2MGY5MzY3NjRmYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTQ4MzgyMzkzOTdkMDhhMmQ1NGMyZTFlMmZkZTJiYjlmNTc4MTVlYTY4NDMzYTNkMDhmZDFhZmM0M2U3MjY2ZCJ9"
+        },
         {
           "resource": "repo://src/main.py#L4-L10",
           "version": "repo-lines-v1:sha256:347b2bcd50f719b9d9fd60767f3e2127e843a4c193007012c75579394d8de0ee:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzBiYzUxMjY1ZGEzYzQ5NGJkZDI5NDA4YzBlMTc3NjY1YmZlYWQ2ZmQyNzkzNmYwNTlkMmM1NTdiMTlhM2NlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMThlOTkyMzJjZDNhMzA5ZjUwY2JkNmY2NjIxMjdlZWFhZmNlMWY3MzYyOTJkZWZiMTEzZDk4MWEyMGM3ZDg1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzg3MGRmNDRmNTRlY2JkOTQ5ZTQ3YmJlZDJkY2JlNzFiNWJmZWMyNjk3NzA5NjZkNDAzNDRlM2E4ZDQ1NjVkMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
@@ -24,37 +32,41 @@
     },
     {
       "id": "claim_07ce3df645644760ac6bcd755c409891",
-      "statement": "Environment setup requires creating a local .env file from .env.example and managing python dependencies and pre-commit hooks through uv.",
+      "statement": "Local setup uses uv (`uv python install 3.12`, `uv sync --locked`) and optionally copies .env.example to .env and installs pre-commit hooks; the README requires Python 3.12, uv and the Home Credit dataset, and Docker only for the observability stack.",
       "evidence": [
         {
           "resource": "repo://.env.example#L1-L5",
           "version": "repo-lines-v1:sha256:97b08c8b7dc7fe29ae9b5ddebd5337af1918cb869446d3ef80acbddb42a2d8af:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGM3NzEyYjg2OTMzYTg5ZTViMjhjYzI1ZWE2MTU3Zjk3YTRjYWJhN2ZhNjUyNWU3MTRhZTVmYzFlMzQ2YTk1MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         },
         {
-          "resource": "repo://README.md#L24-L29",
-          "version": "repo-lines-v1:sha256:9b77c1b1b1291d98a735d2f86b187d846e145aee802b98a50dce55c4f34de15c:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzNlZWE1YTA5MGZmYjRiODUxYTJlNDcxZjhmOTRjNmFmM2Y3YWQ1NzA1OWNjMDZjODEzYThjNzgxNDhjNTQ3YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzMxNjhhNjZiNmEyM2UxZWE4YjQyOTE4NTRkODM2Njk0NWUyNzA2YTM1ZmNkYTE5NWRhYjhkYzliMDZhYTg2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTIwNDk0MTA5MzJhN2I5NzhhNDBkZmU2MWIzMWI0ZjQ2MWE4MWExNjFhZTI0NzdmZWEwMjUyYTkzYzkzNzE2ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGMzN2QwMzIyMmUxMWM1OTQxZTZkNzM2OTk0MWQ4M2QwMDcxYWM5MThhYjYxNzAxZjViODU3NWVmY2NlN2MyYyJ9"
+          "resource": "repo://README.md#L148-L153",
+          "version": "repo-lines-v1:sha256:c94bb80f0d6900f0ab7c480c787ae72d83aa9fed78f70c963c7d0a6253a04551:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDFjNTM4NmEyNDU0Yjg2OGM1YzUxZGFkZjgwNmY4MDI5YWFlYTI4NDJhYTc1MjRlZjIwNDE5YjM2NjdhYmFlZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDdjMDZjNTYxZDVjMzI3MzQzNjg1MjY4YTQ2YjMzOTFmMzk5OGVlZTg5MGQyYmU1MWYwZDIxY2M0YTUzYWU2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODBmNzUwZWJmOGQ0YzhjNDczYWM1MDA3ZmJlMjRkNmU0ODQ3MWZhMmU1OTk1Y2NkNWM0MDJlN2QzMGFhZjZjYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGZhNDllOTYxNTgyYzIzZGJhZWNhNDU5NTM3OTE5NDAwNzc0YmIyMjEyZDk2NDAwZDM1MWNjY2ViYTBiNmVmNiJ9"
+        },
+        {
+          "resource": "repo://README.md#L67-L96",
+          "version": "repo-lines-v1:sha256:b64b0583ea8ccc285887ab57c0f1ad5785691e60c14a275145b4364fd098edb8:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1M2ZiMjQ5MTZhYTk5ZDZkNTdiMTI2NzM1ZDVjZDNlNGJkOWVlNmQwNGU3YTFhYzViYTE5MjNhNGQxMTJhMGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlMTE2OWMxNzYyNjdiYTZiMjcxMmY2NDM0OTg5MGE0MmE0MTEzNmMwZDY5OGRkNjVkZTY0NmE3OTA3YWM0MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3ZjIwY2ExYzQzYzIyMjVkZjg0Y2I5YmZkMmUzYmYxOTUzODQ3MzBlNjQyYzEwYzUzNTgxNGUyMDZjZmRkYmUifQ"
         }
       ]
     },
     {
       "id": "claim_5cb071e8eb1e40d7a5287ee8e95c8e47",
-      "statement": "Code quality enforcement combines Ruff for linting and formatting, Radon and Xenon for cyclomatic complexity gates, pre-commit hooks, and scripts/check_notebooks.py for blocking executed notebooks.",
+      "statement": "Code quality enforcement combines Ruff lint/format, Radon and Xenon complexity gates in CI, and pre-commit hooks that run nbstripout and then scripts/check_notebooks.py; check_notebooks.py scans the given paths (or notebooks/**/*.ipynb), reports code cells with outputs or non-null execution_count, and exits 1 if any are found.",
       "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L25-L34",
+          "version": "repo-lines-v1:sha256:8fa57cfe893724f3851d5bf1c14efe09d53bd645cb1f7f20213bf6a177f5410e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyZjY1NTQwYWFhZDhlZDBlODQwMDBmNDhlNjk1ZmZhMGJhMTg0Mjk0Mzc3YzRiYmFmYTE2NmIyYmM3YTZlMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0YTkwN2Y3MjljMDZlMWNiYzVkNWY1ODAyZGM0MDc0NzgyNjhhMjg1YzM4NWU5NDkxNjc5M2Q4MTU5MmVjYzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkNjQ4MTFiODNmMDBiMGVlNzlhMmNiMmQ4Yzc1OWYyZjBmODY3ZGRjMTJiY2JjZjQ5NWQwZmY1YzFkM2NhMTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxNzgyYzVhN2I4OTY0ZTBjMGM1OTJjZGY3ZTYwNzcxOGM1YjRlYzI0MTcwODc1ZTM4OWNiYmY4NTI2YjQ2ODkifQ"
+        },
         {
           "resource": "repo://.pre-commit-config.yaml#L15-L36",
           "version": "repo-lines-v1:sha256:1cd4db3032d23b85c863b8fa8d702571ca275169fe598669a1155418d808f88c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkZmVjNzBlMTkyYjk1MjcwN2U4MDFiMjRjZjdkNDg5MzJiNTRmMTBiMTFmMjRjMjM0YjkyZWM0OGJlZDBiYTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZWQwYTcxMDVkZDBjMDRhYjgzYzkxNjVhM2E3NDE3YjY1ODc1YTIyNjcxZGE1YjdkMmU4MjRhNDY0YWIzZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3OGM5NTRlMDI3MDBjYTQ4YjhmMmVjMDkxNjRjM2M3MDcyYzBiMDgxOWRhYmFkZmZkMTY3NmFlZmZmMGM3MGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://pyproject.toml#L13-L27",
-          "version": "repo-lines-v1:sha256:d1f546f06509b0e3876da7b986950bfb5826783b222f826e5df78f99bd44f125:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3NDVmYWI4NmIxMjFkYzg1YjRmNzg2NzMzOWExM2ZlZTgwNGM4YTAyZjQ3MTA2NTcyZjJiZjA2NjRkNTk1MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZmU2YzBmMTIxMWIxNTI1Y2I2MjQzYWEwNWYzM2UxM2UxN2VkYTg2ZGExMWJmYmUyOTE5MDhlMDRlZDU0ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4Nzc4YWQyNjY2MjEyNzY5ZmU3NzQyOGQ5ZjA3ZGQ0ZjU4YzA5ZDc3YmJkMGYxNjcxMDdlYmU1OTNmODAwNDkifQ"
+          "resource": "repo://pyproject.toml#L23-L37",
+          "version": "repo-lines-v1:sha256:1b74dd6d22fc7c7588fc5ebdaedc9aa1372af87dd213c6e8754ef849626ce3f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjZWFiMzNkN2YyYWVlNjJmNzllMjE1OTFmNTJiMzNiNDZmMTQ4NzE5NzY1ZWQ4OTNjMzZjMTgyMTVmODk0MmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOWUxZGQ5ZjQyYzZhZTYwNDhjYTg5NTZmMGFhYzM4MGY4ZmQyMjhlNTBkYTM1ZmQzOTliZWI4MTYzMzU0MTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzZDE3MWRlNzU0MzFhMDIxYTBkOTRmYTc2ZmFiZjBkNzEzOWM4OThjMWEwYjQ0YjQzY2E2MDkwM2ZhMWI4NDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyYmMxMDM3MjcyYTA5NTZkMjdlZmYyMGY4ZjM1ODhlNDkyN2ZhOTk4YmQ5YTdhMzg0MjY4OTQxMzM1MDdjMGYifQ"
         },
         {
-          "resource": "repo://pyproject.toml#L48-L57",
-          "version": "repo-lines-v1:sha256:8c7dc2dadaa3bfd45b5fb192a1bc82eed247910d72a7bf32cbf1f1fa0ae4a50f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4YTMzZjViNmM5Y2Y4ODc0ZGE5Mjg0NmZlM2JiZDM5Yzc3ZmRmODM5NWViNWI4NDJjYTcwNWRkNWIxNDNkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQzOTAzZTQ4MjYwNDEwZDUyY2U5ZDE3NzU0NjdhOGRjYTA5ZjA1OGQxNTQ0MTEzNjdkMGUzODM1YzZlOTVkOTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
-        },
-        {
-          "resource": "repo://scripts/check_notebooks.py#L26-L46",
-          "version": "repo-lines-v1:sha256:9c01d7ce527a619bd5262077297f4a3ca4124a8bed6351c02a178f652ed5d8f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFjNTZiMjhhODk3ZTczMWVmYzQ0NjI0ZDMzNGM4MTM2ODdlMGI4NWQ1YjI1YmY1NmZiN2NiYjE4ZTA4MWVkNTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlhODJlYmU5ZWQ0MDdjM2E2YmE0YjAwMzQyOTJiYWE1MmMxMWNlNWFlMjg2MTA3NDAyZGU0NzkyZWVlY2FjZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+          "resource": "repo://scripts/check_notebooks.py#L8-L46",
+          "version": "repo-lines-v1:sha256:8e0b9f4e2e3ec82b36cbf3ebd34de0f35704bb87e6bbf5586e88e6bca57cbda2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOTAzYzdkNTcwMWFkODkyZjg5NzUyZjk2N2U4ZTFlODczNTFmODA5ZGU4MzQ1MmQ1ZGJkMmNlMGJmNDg0MGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MWJmM2Q5NmYxYjExOTY4OGRlZWE5YTAwNGIyYjNmZWJiMTgwYmI4ZmIyMzQ0NjI1NjE0YWRjODU5NTYzYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
         }
       ]
     },
@@ -77,10 +89,52 @@
           "version": "repo-lines-v1:sha256:8926524de63a1266e7592d9f1256ec367b67e9fa0583f343808e3e51f19d4990:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmMTgwZjljMTI2OTAzYmNjMzMxYWE5NTQ1NmU0OTQ0NGE3ZDRkMDExZThhMmE4M2Y1ZGM4NzAyMzkxODEyZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5Zjc4NzE0ODkzYWE3Nzk0MmNlYTFjNGEyZTAyMzFkYmI3ZmEyYTQxYTcwYzgxNDYwYTNjNjc1NjJkYTNhYWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_b75c42e2ef394d7fa45ad74c3d52de1f",
+      "statement": "The project builds a reliability layer around a Home Credit credit-scoring model: Pandera contracts, an XGBoost baseline tracked in MLflow, Evidently drift detection, drift impact on predictions, Prometheus/Grafana observability with alert rules, and governance documentation.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L7-L25",
+          "version": "repo-lines-v1:sha256:a9d43bbd70e351f2d4a920c50511503f299c1d41da7ce4493b1733aae018f643:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1OWFmODEwMjgyMzU0YWZkN2I4YmRhMzU3ZDQ3MGU0NDg2NGMwODViMGViNjZlZWU0ZDI1Mjg4NDBmZTM1OGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYWQyYTQ5MGViNjQxMDI5NDIwYzg3MmZjMDI4NjczM2Y1Y2QzOGNiODA5NDdjMGEwZGJlOGU5YzQzY2ZiYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUxMWFjMDZmYzljM2VmZWM5MzI1ZGRkNThkNjgxZGY1NTRlZjNkY2QxMDdiY2ZhZjhmZjk4NDhmN2VmZDEwZDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjNzI0ZDY4MzM2ZDVjN2M2YTk4MDFhMGZlYTcyMWQ2NzJiNjFlYmMxNTA2MTE5NjYyMmQ3YWU3NzUwNGY4MTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_94bb70499b8f49bf807312f83c26ad4c",
+      "statement": "The end-to-end flow runs validate_home_credit, prepare_data, train, simulate_home_credit_drift, run_drift, analyze_score_impact, and finally run_monitored_drift, which writes reports/operational_metrics.prom.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L110-L137",
+          "version": "repo-lines-v1:sha256:afdcc8aefa9eaaad0c8f5bb5ca3fe97035001c249a41dfb01ff78843d9aaa97e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3ODk1ODA4YzkwMWNhMmUyZTQ1MDgyODk3NGFhNzQwODhmYjEzYzk1NzI1ZDUxMmRmNDQxNGQ0NjA4ZmUyMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZDBiNDc0NGIwMDcwNDcwMjBiYjg4NDI0MDc4ZDUwNDI5ODA0ODU0NzJkYzliNjlmODE4MTE1ZWQwZjZhZmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2OTdkODJjZGU4NmRjNThiZDE4NThmYjZlMzBjZDVmNjZjODgxMWNkNWNjM2U2ZjRkMzg4MmM4YmY1YTUyNTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFhNDAwMzY4NTZkZWFlZmMyODIwNzRmOTA0OGE2ZGFmNTViNjkyNmIyM2JlZTBjN2Q5YTQzNzAzNTc2MzFhODMifQ"
+        },
+        {
+          "resource": "repo://scripts/run_monitored_drift.py#L14-L44",
+          "version": "repo-lines-v1:sha256:36e0e5cd56afd65bdcd0612f2451f77480d9260f85689d374717402fcacf3853:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3NWNiNTgzNzJiMzQ1Yzg2NzJjZmZjZDU3ZWUzYjE2MDkyZDNlMDAxYWEzZTZhMTgwOTI4YTU4NzA1ZTA0ZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ZjJjYzhkYjRlMDA1YWVlNGY1NzkzOTQyOTliZmQxMzQ2YTM4MTJkZjM0OTk4M2NjYTY1NjYxYThlNzRlZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1e4bcce78a59438b929e9ba720d3dd12",
+      "statement": "Docker Compose starts only the observability services (Node Exporter, Prometheus, Grafana); Python training and drift scripts run locally via uv, are not scheduled, and alerts are evaluated by Prometheus without external notification delivery.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L400-L429",
+          "version": "repo-lines-v1:sha256:3bb8c67271b14cfa46b1d7b1bc2bc0d731202288f1a5cb562aa275b76f4f614f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmZjkzMzhkZjFiZDkxMjg1ZTBhZGNkODNjMDI0NWQ4ZDJlMWFiMGQ4OTY5OTRiYWM4OTg0MjkzZjM2YzMyMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkMzdkMzE0MDI2ZTQ0OGI5ZTg1OTI3OWVhMTc4YjliYjdjN2VmODYyNDRlZDMyMDUwZjc2MThiYWI4MTNjODgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2M2RlNDI3NTIxNmM3NTMyOGVkMzA4OGVjZjg2OWJlMWU4MWZhM2QwMWFhODI5ODY3N2I5OTBlY2VmZGZhMjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1NTM4Y2I5MDFmMzVkMjE3MmY3MTgzYmQxMzM3ZmE3ZDNjOTM1YjQ3NTQ0ZDdlYzYwNDNkNDdkNWNjZWY2YmIifQ"
+        },
+        {
+          "resource": "repo://README.md#L564-L564",
+          "version": "repo-lines-v1:sha256:e5a072af1e3a7d581347c15cf9f56dce3ef5fcbc71ea1e6c9a1f48546e1555e9:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTVhMDcyYWYxZTNhN2Q1ODEzNDdjMTVjZjlmNTZkY2UzZWY1ZmNiYzcxZWExZTZjOWExZjQ4NTQ2ZTE1NTVlOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTVhMDcyYWYxZTNhN2Q1ODEzNDdjMTVjZjlmNTZkY2UzZWY1ZmNiYzcxZWExZTZjOWExZjQ4NTQ2ZTE1NTVlOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzQyYWI0NTkwNDhjMWNhNWUyM2I1YmRjYTFkYzY2NDFmYjYzYTQ2MjRiNDFiOGFiYmI1YjllNjI5ODc1MzY4MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzlhMmRlYTUxYjg0OTZhZDE5NWY1YWYzODhhNWI4OTk5NDQ0NzdlM2NjYzdhMGQ3MDI1MDA0YThkNmEwZjFlMiJ9"
+        },
+        {
+          "resource": "repo://README.md#L609-L617",
+          "version": "repo-lines-v1:sha256:b96be50b88560d2cc7e85e80abd2e051df34d4ecfc02f2fa2e0847127f99a0de:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTBjZGJmZjU3NWYxODYwNDEyNjFjYTkyNTJmNjMxNzhkOGMxYjIxZGE1NjZiYzcwNWU1Y2NjYTJkMGVjMmRmYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRhNGViYjhjOTE0MzlkNTdjOWFjMTdkZTEzN2RhZGNlMmVjNWY4MDdjZGJhODhiYzVhZDIwOGYxNjcyNjJmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDcxZjAxZDFiZDNmMTUyNzliN2RjNzNiNDc0MzJiOGM5NGYxZDA4NzI3NTc1YmNiZGY4NDZhMmQyMjE0ZjgzOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTI1M2YzYTQ1MjkwZGJjZDE3YzBiYjY3YzBmZTI2MjI3YjQ3YzliMTZhYmEzYmEzZjdkMjg1YzhjMWNkZWQ0YyJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-25T02:31:36.619Z"
+    "at": "2026-11-09T02:01:44.977Z"
   }
 }

@@ -3,9 +3,6 @@ type: workflow
 title: Quality Standards, Quality Gates, & Notebook Hygiene
 description: Overview of repository code quality mechanisms, including Ruff linting/formatting, Radon/Xenon cyclomatic complexity gates, pre-commit hook automation, and notebook output validation.
 tags: [code-quality, pre-commit, ruff, radon, xenon, notebooks, static-analysis]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-24T23:05:52.220Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
@@ -13,9 +10,14 @@ sources:
     resource: repo://.pre-commit-config.yaml
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
+  - id: openwiki-source-23775c3de52f3ab95a13cb8b
+    resource: repo://README.md
   - id: openwiki-source-d63450a84702158a6ce7cde3
     resource: repo://scripts/check_notebooks.py
-generated: { by: "openwiki/0.7.2", at: "2026-10-24T23:05:52.220Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:01:44.977Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-09T02:01:44.977Z
 ---
 
 # Quality Standards, Quality Gates, & Notebook Hygiene
@@ -36,7 +38,7 @@ flowchart TD
         GeneralHygiene --> RuffLocal["Ruff Formatting & Fixes\n(ruff-check --fix, ruff-format)"]
         RuffLocal --> NbStripout["nbstripout\n(strips outputs from .ipynb)"]
         NbStripout --> CheckNbLocal["check-notebooks hook\n(uv run python scripts/check_notebooks.py)"]
-        CheckNbLocal -->|Outputs Found| CommitFail["Commit Rejected\n(Run make nb-clean or clean cells)"]
+        CheckNbLocal -->|Outputs Found| CommitFail["Commit Rejected\n(Run uv run nbstripout <notebook.ipynb>)"]
         CheckNbLocal -->|Clean| CommitSuccess["Commit Staged & Created"]
     end
 
@@ -55,6 +57,20 @@ flowchart TD
     CommitSuccess --> PushPR
 ```
 *Figure 1: Dual-tier quality enforcement workflow across local pre-commit hooks and GitHub Actions CI pipelines.*
+
+---
+
+## Environment Setup (uv)
+
+The project requires Python `>=3.12` (see `requires-python` in `pyproject.toml`) and uses [uv](https://docs.astral.sh/uv/) with a committed `uv.lock`. Developer tooling (`pre-commit`, `ruff`, `radon`, `xenon`, `nbstripout`, `pytest`, `pytest-cov`, `ipykernel`) lives in the `dev` dependency group.
+
+```bash
+uv python install 3.12
+uv sync --locked          # local setup, as documented in the README
+uv run pre-commit install # enable the commit hooks
+```
+
+CI uses `uv sync --frozen` instead, installing exactly what the lockfile records. See the [Quickstart](../quickstart.md) for the full onboarding flow.
 
 ---
 
@@ -194,7 +210,7 @@ def main(args: list[str]) -> int:
             failed = True
             print(f"✗ {path}: células com output -> {cells}")
     if failed:
-        print("\nLimpe antes de subir:  make nb-clean")
+        print("\nLimpe antes de subir:  uv run nbstripout <notebook.ipynb>")
         return 1
     print(f"✓ {len(paths)} notebook(s) limpo(s)")
     return 0
@@ -202,6 +218,8 @@ def main(args: list[str]) -> int:
 
 * **Target Resolution**: Operates on specific notebook paths passed as command-line arguments (e.g. staged files during pre-commit) or recursively scans all `*.ipynb` files in `notebooks/` if no arguments are provided.
 * **Exit Status**: Returns `0` if all inspected notebooks are completely clean. Returns `1` and outputs dirty cell indices if any notebook contains outputs or execution counts, halting git commit creation or failing the CI quality job.
+* **Remediation Hint**: On failure the script prints `Limpe antes de subir:  uv run nbstripout <notebook.ipynb>`. It does not modify notebooks itself, and no `make nb-clean` target exists in the repository (there is no Makefile).
+* **Scope Limits**: Only code cells are inspected (markdown cells are ignored), and a notebook that is not valid JSON raises an exception rather than being reported as dirty. When run as a script it reconfigures stdout to UTF-8 so the `✓`/`✗` markers print on Windows consoles.
 
 ---
 
@@ -272,6 +290,8 @@ repos:
 
 While local pre-commit hooks ensure day-to-day developer productivity, the GitHub Actions CI pipeline enforces non-bypassable quality gates on every push and pull request.
 
+The workflow (named `CI/CD`) runs on pushes and pull requests targeting `main` or `development`, and can be started manually with `workflow_dispatch`. A `concurrency` group keyed on workflow and ref cancels in-progress runs when a newer one starts. The `docker` job (build and push to GHCR) is currently disabled with `if: false` until a Dockerfile exists.
+
 The quality job is defined in [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml):
 
 ```yaml
@@ -322,7 +342,7 @@ The following commands are available for local quality checks and maintenance:
 | **Run Ruff Linter** | `uv run ruff check .` | Scans for lint violations. Add `--fix` to auto-repair. |
 | **Run Ruff Formatter** | `uv run ruff format .` | Formats Python code according to 88-line-length standard. |
 | **Check Notebook Cleanliness** | `uv run python scripts/check_notebooks.py` | Audits all notebooks under `notebooks/` for dirty cells. |
-| **Clean Notebook Outputs** | `make nb-clean` | Cleans notebook outputs across the repository. |
+| **Clean Notebook Outputs** | `uv run nbstripout <notebook.ipynb>` | Strips outputs and execution counts from a specific notebook (the remediation the checker prints). The repository has no Makefile, so there is no `make nb-clean` target. |
 | **Analyze Complexity** | `uv run radon cc src -a -s` | Generates cyclomatic complexity report for `src/`. |
 | **Enforce Complexity Gate** | `uv run xenon --max-absolute B --max-modules A --max-average A src` | Checks complexity threshold compliance locally. |
 

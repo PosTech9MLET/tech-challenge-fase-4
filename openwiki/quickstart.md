@@ -1,11 +1,11 @@
 ---
 type: guide
 title: Quickstart & Task Routing
-description: Central onboarding guide and task-routing navigation map for developers and AI agents working on the ML repository.
-tags: [quickstart, task-routing, environment-setup, commands, wiki-map]
+description: Entry point for the credit-scoring reliability project (Pandera contracts, XGBoost/MLflow baseline, Evidently drift, Prometheus/Grafana observability). Gives setup steps, the ordered run-through commands, and a task-routing map to the architecture, concepts, workflow, operations and testing pages.
+tags: [quickstart, task-routing, environment-setup, commands, wiki-map, credit-scoring]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-25T02:31:36.619Z
+    at: 2026-11-09T02:01:44.977Z
 sources:
   - id: openwiki-source-5f5b95b3d6a215fa02ceb945
     resource: repo://.env.example
@@ -21,161 +21,146 @@ sources:
     resource: repo://README.md
   - id: openwiki-source-d63450a84702158a6ce7cde3
     resource: repo://scripts/check_notebooks.py
+  - id: openwiki-source-1fd01080171f877c089206b9
+    resource: repo://scripts/run_monitored_drift.py
   - id: openwiki-source-11b9d806fcc6dd6e7747ed87
     resource: repo://src/main.py
   - id: openwiki-source-f12fdb76c2f98bd11af25d76
     resource: repo://src/utils/config.py
-generated: { by: "openwiki/0.7.2", at: "2026-10-25T02:31:36.619Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:01:44.977Z" }
 ---
 
 # Quickstart & Task Routing
 
-Welcome to the machine learning project repository. This guide serves as the central entry point and navigation hub for developers and AI agents. It summarizes environment setup, core operational commands, code quality standards, and provides a task-routing map to direct you to domain-specific documentation across the wiki.
+This repository is the FIAP Tech Challenge Fase 4 project (Machine Learning Engineering). It simulates a fintech that uses a credit-scoring model and builds a reliability layer around it. The README objective list covers:
 
----
+- Pandera data contracts.
+- An XGBoost baseline tracked in MLflow.
+- Evidently data-drift simulation and detection.
+- Analysis of drift impact on predictions.
+- Structured logs, Prometheus metrics and a Grafana dashboard.
+- Automatic alert rules for drift and collector downtime.
+- Governance, privacy and LGPD documentation.
+
+The dataset is Home Credit Default Risk (Kaggle). It is a local artifact and is not versioned.
+
+Use this page to set up the project, run it end to end, and find the right deeper page.
 
 ## Task Routing Map
 
-When working on specific subsystems or tasks, refer to the navigation decision tree and routing table below to find the relevant technical documentation.
-
 ```mermaid
 flowchart TD
-    Start["Developer / Agent Task"] --> Choice{"What are you working on?"}
-
-    Choice -->|"System Design / Directory Boundaries"| Arch["Architecture Overview (architecture/overview.md)"]
-    Choice -->|"Config, Settings, .env Parameters"| Config["Configuration & Environment (concepts/configuration_and_environment.md)"]
-    Choice -->|"Linting, Formatting, Notebook Cleanliness"| Quality["Quality Standards & Gates (workflows/development_and_quality.md)"]
-    Choice -->|"Pytest, Coverage, CI/CD Workflows"| Testing["Test Suite & CI/CD (testing/test_suite_and_ci.md)"]
-    Choice -->|"Feature Eng, Model Training, MLflow"| ML["ML Pipelines & Tracking (workflows/ml_pipeline_and_tracking.md)"]
-```
-*Figure 1: Task-routing decision tree for navigating repository documentation.*
-
-### Task Routing Matrix
-
-| Task Category | Focus Area | Recommended Wiki Page | Primary Source References |
-|---|---|---|---|
-| **Architecture & Structure** | High-level system design, layer boundaries, directory organization, and raw-to-serving data flow. | [System Architecture & ML Pipeline Design](architecture/overview.md) | `src/`, `configs/`, `models/`, `docs/` |
-| **Configuration & Environment** | Environment variables, `.env` loading, `pydantic-settings` management, directory path resolution, and default parameters. | [Environment Configuration & Settings Management](concepts/configuration_and_environment.md) | [`../src/utils/config.py`](../src/utils/config.py), [`../.env.example`](../.env.example) |
-| **Quality & Standards** | Ruff linting rules, formatting, Radon/Xenon cyclomatic complexity thresholds, notebook cell output checking, and pre-commit hooks. | [Quality Standards, Quality Gates, & Notebook Hygiene](workflows/development_and_quality.md) | [`../pyproject.toml`](../pyproject.toml), [`../scripts/check_notebooks.py`](../scripts/check_notebooks.py), [`../.pre-commit-config.yaml`](../.pre-commit-config.yaml) |
-| **Testing & CI/CD** | Pytest execution, test markers (`slow`, `integration`), coverage goals, and GitHub Actions workflow jobs (`quality`, `test`, `docker`). | [Test Suite & CI/CD Pipelines](testing/test_suite_and_ci.md) | [`../tests/`](../tests/), [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) |
-| **ML Workflows & Tracking** | Feature engineering, model training pipelines, experiment tracking via MLflow (`sqlite:///mlflow.db`), and artifact management. | [ML Pipeline Structure & Experiment Tracking](workflows/ml_pipeline_and_tracking.md) | [`../src/pipelines/`](../src/pipelines/), [`../src/training/`](../src/training/), [`../src/features/`](../src/features/) |
-
----
-
-## Environment Setup & Quickstart
-
-The repository uses [`uv`](https://github.com/astral-sh/uv) for fast, reproducible Python dependency management and environment synchronization.
-
-### 1. Initial Environment Configuration
-
-Copy the sample environment configuration file to create your local `.env`:
-
-```bash
-cp .env.example .env
+    Start["Task"] --> Choice{"What are you working on?"}
+    Choice -->|"System map, layers, data flow"| Arch["Architecture Overview"]
+    Choice -->|"Pandera contracts, drift, score impact"| DC["Data Contracts and Drift"]
+    Choice -->|"Features, training, MLflow"| ML["ML Pipeline and Tracking"]
+    Choice -->|"Logs, Prometheus, Grafana, alerts"| Obs["Observability Stack"]
+    Choice -->|".env, settings, paths"| Cfg["Configuration and Environment"]
+    Choice -->|"Ruff, pre-commit, notebooks, complexity"| Dev["Development and Quality"]
+    Choice -->|"Pytest, markers, CI jobs"| Test["Test Suite and CI"]
 ```
 
-The default `.env` configuration initializes key settings:
-
-```ini
-ENV=local
-LOG_LEVEL=INFO
-RANDOM_SEED=42
-MLFLOW_TRACKING_URI=sqlite:///mlflow.db
-```
-
-### 2. Dependency Installation
-
-Install the required Python version, synchronize project dependencies, and set up git pre-commit hooks:
-
-```bash
-# Install Python runtime and sync dependencies
-uv python install
-uv sync
-
-# Install pre-commit hooks for automated quality verification
-uv run pre-commit install
-```
-
----
-
-## Core Development Commands
-
-All development tasks—linting, formatting, complexity checks, notebook validation, and testing—are executed using `uv run`.
-
-### Summary of Essential Commands
-
-| Action | Command | Purpose |
+| If you need to... | Read | Domain |
 |---|---|---|
-| **Linting Check** | `uv run ruff check .` | Checks code against configured Ruff rules (`E`, `F`, `I`, `N`, `UP`, `D`, `B`, `SIM`). |
-| **Format Check** | `uv run ruff format . --check` | Ensures code formatting complies with standard 88-character line lengths. |
-| **Notebook Validation** | `uv run python scripts/check_notebooks.py` | Scans `.ipynb` files to ensure no executed outputs or cell execution counts remain. |
-| **Clean Notebook Outputs** | `uv run nbstripout notebooks/**/*.ipynb` | Cleans output cells from Jupyter notebooks prior to commit. |
-| **Complexity Summary** | `uv run radon cc src -a -s` | Analyzes cyclomatic complexity across modules in `src/`. |
-| **Complexity Gate** | `uv run xenon --max-absolute B --max-modules A --max-average A src` | Asserts cyclomatic complexity boundaries (`absolute <= B`, `modules <= A`, `average <= A`). |
-| **Run Unit & Integration Tests** | `uv run pytest` | Runs all tests using Pytest settings from `pyproject.toml`. |
-| **Test Coverage Report** | `uv run pytest --cov --cov-report=term-missing` | Runs tests and generates a coverage summary for `src/` (excluding `src/main.py`). |
-| **Run Application Entrypoint** | `uv run python src/main.py` | Executes the main pipeline entrypoint. |
+| Understand how data contracts, training, drift monitoring, score impact and observability fit together | [Architecture Overview](architecture/overview.md) | Architecture |
+| Change or understand Pandera contracts, batch validation, Home Credit loading, drift simulation, the Evidently PSI monitor, or score-impact analysis | [Data Contracts, Drift Detection and Score Impact](concepts/data_contracts_and_drift.md) | Concepts |
+| Change settings, `.env` values or directory resolution | [Environment Configuration & Settings Management](concepts/configuration_and_environment.md) | Concepts |
+| Prepare data, engineer features, train the baseline, or read MLflow results | [ML Pipeline Structure & Experiment Tracking](workflows/ml_pipeline_and_tracking.md) | Workflows |
+| Run or modify structured logging, Prometheus metrics, the Docker Compose stack, alert rules or the Grafana dashboard | [Observability Stack: Logging, Metrics, Prometheus and Grafana](operations/observability_stack.md) | Operations |
+| Work with Ruff, pre-commit, Radon/Xenon gates or notebook hygiene | [Quality Standards, Quality Gates, & Notebook Hygiene](workflows/development_and_quality.md) | Workflows |
+| Run or add tests, understand markers, coverage and the GitHub Actions jobs | [Test Suite & CI/CD Pipelines](testing/test_suite_and_ci.md) | Testing |
 
----
+## Setup
 
-## Continuous Integration & Automated Pipelines
+Prerequisites (README): Python 3.12, Git, [uv](https://docs.astral.sh/uv/), and the dataset file. Docker with the Compose plugin is needed only for the observability stack, not for running the Python scripts.
 
-Automated verification is governed by GitHub Actions configured in [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml). The pipeline triggers on pushes and pull requests targeting the `main` and `development` branches, as well as on manual dispatch (`workflow_dispatch`).
-
-### Workflow Jobs
-
-1. **`quality` (Lint, format, complexity, and notebooks)**:
-   - Installs Python and syncs dependencies with `uv sync --frozen`.
-   - Runs `ruff check . --output-format=github` and `ruff format . --check`.
-   - Runs `python scripts/check_notebooks.py` to reject executed notebooks.
-   - Computes cyclomatic complexity with `radon cc src -a -s` and enforces strict gates with `xenon --max-absolute B --max-modules A --max-average A src`.
-
-2. **`test` (Pytest & Coverage)**:
-   - Depends on the successful completion of the `quality` job.
-   - Executes `pytest --cov --cov-report=xml --cov-report=term-missing`.
-   - Generates and uploads `coverage.xml` as a build artifact.
-
-3. **`docker` (Container Image Build & Push)**:
-   - Configured for GHCR (`ghcr.io`), but currently disabled via `if: false` until a root `Dockerfile` is added to the repository.
-
----
-
-## Key Entrypoints & Directory Layout
-
-Understanding where primary logic and configurations reside helps streamline navigation:
-
-```
-├── .github/workflows/   # GitHub Actions CI/CD workflows (ci.yml)
-├── configs/             # External YAML/JSON configuration files
-├── data/                # Data storage tiers (raw, interim, processed, features)
-├── docs/                # Architecture documentation, ADRs, and model cards
-├── models/              # Saved model artifacts and metadata
-├── notebooks/           # Exploratory and report notebooks (must be output-free)
-├── reports/figures/     # Generated plots and report artifacts
-├── scripts/             # Maintenance and verification scripts (check_notebooks.py)
-├── src/                 # Main Python source package
-│   ├── api/             # Model serving and REST endpoint handlers
-│   ├── data/            # Ingestion and raw data transformation code
-│   ├── features/        # Feature extraction and engineering pipeline
-│   ├── models/          # Model architecture implementations and serialization
-│   ├── training/        # Training routines and loss functions
-│   ├── pipelines/       # End-to-end training and inference orchestration
-│   ├── utils/           # Configuration settings (config.py) and helpers
-│   └── main.py          # Application entrypoint
-└── tests/               # Test suite split into unit/ and integration/
+```bash
+uv python install 3.12
+uv sync --locked
+cp .env.example .env          # PowerShell: Copy-Item .env.example .env
+uv run pre-commit install     # optional: enable local quality hooks
 ```
 
-- **Application Entrypoint**: [`../src/main.py`](../src/main.py) provides the entry function (`main()`) to trigger execution.
-- **Central Settings**: [`../src/utils/config.py`](../src/utils/config.py) instantiates the global `settings` object via Pydantic `BaseSettings`.
-- **Project Configuration**: [`../pyproject.toml`](../pyproject.toml) configures dependency groups (`dev`), Ruff linting/formatting rules, Pytest options, Pytest markers (`slow`, `integration`), and Coverage tracking settings.
+`.env.example` sets `ENV=local`, `LOG_LEVEL=INFO`, `RANDOM_SEED=42` and `MLFLOW_TRACKING_URI=sqlite:///mlflow.db`. The README copies `.env` "when needed", because `Settings` in [`../src/utils/config.py`](../src/utils/config.py) has defaults for every field. It also provides `data_dir` and `models_dir`, and ignores unknown variables. See [Configuration](concepts/configuration_and_environment.md).
 
----
+Download `application_train.csv` from Kaggle and place it at `data/raw/application_train.csv`. Raw data, processed datasets and trained models are local and must not be pushed to GitHub.
 
-## AI Agent Guidance & Operating Principles
+## End-to-end run order
 
-AI agents operating in this repository should adhere to the guidelines set out in [`../AGENTS.md`](../AGENTS.md):
+Run these from the repository root, in order (README "Executar o fluxo completo"):
 
-1. **Authoritative Source**: Treat the source code in `src/` and tests in `tests/` as the ultimate ground truth.
-2. **Just-in-Time Context**: Use OpenWiki search and retrieval tools on demand when architectural uncertainties arise, rather than preloading the whole wiki.
-3. **Quiet Validation**: Verify code changes with minimal, focused commands (e.g., `uv run pytest tests/unit/test_smoke.py` or `uv run ruff check .`) to keep failure output clear and actionable.
-4. **Notebook Output Discipline**: Always run [`../scripts/check_notebooks.py`](../scripts/check_notebooks.py) or `nbstripout` if modifying Jupyter notebooks in `notebooks/` to prevent committing cell outputs.
+```bash
+uv run python -m scripts.validate_home_credit        # 1. validate input with Pandera
+uv run python -m src.pipelines.prepare_data          # 2. reference / production-base split
+uv run python -m src.training.train                  # 3. train + log baseline to MLflow
+uv run python -m scripts.simulate_home_credit_drift  # 4. simulate drift in production data
+uv run python -m scripts.run_drift                   # 5. Evidently PSI reports and alerts
+uv run python -m scripts.analyze_score_impact        # 6. compare scores before/after drift
+uv run python -m scripts.run_monitored_drift         # 7. validation + drift + .prom export
+```
+
+```mermaid
+flowchart LR
+    CSV["data/raw/application_train.csv"] --> V["Pandera contract"]
+    V --> P["prepare_data: reference and production base"]
+    P --> T["train: baseline.joblib + MLflow"]
+    P --> S["simulate drift"]
+    S --> D["run_drift: Evidently PSI"]
+    T --> I["score impact"]
+    S --> I
+    D --> M["run_monitored_drift"]
+    M --> PROM["reports/operational_metrics.prom"]
+    PROM --> OBS["Node Exporter, Prometheus, Grafana"]
+```
+
+Key outputs:
+
+- `data/processed/*.parquet`, `models/baseline.joblib` and `models/baseline_metrics.json`.
+- `reports/drift_*.html` and `reports/drift_*.json`, `reports/drift_alerts.json` and `reports/score_impact.json`.
+- `reports/operational_metrics.prom`, which Prometheus reads via Node Exporter's textfile collector.
+
+Details live in [Data Contracts and Drift](concepts/data_contracts_and_drift.md) and [ML Pipeline](workflows/ml_pipeline_and_tracking.md).
+
+Things to know before changing anything:
+
+- The "production" data is a random split of the historical data, not a later time period.
+- Drift is artificially simulated on two variables, `AMT_INCOME_TOTAL` and `AMT_CREDIT`.
+- Scoring does not run Pandera validation on every call.
+- `src/main.py` is only a placeholder entrypoint. Its `main()` prints a "project initialized" message, and it is excluded from coverage. The real entrypoints are the modules and scripts above.
+
+## Observability stack
+
+Python runs locally through `uv`. [`compose.observability.yaml`](../compose.observability.yaml) starts only Node Exporter, Prometheus and Grafana. It does not train the model or schedule drift runs. After step 7, set `GRAFANA_ADMIN_PASSWORD` and start the stack:
+
+```bash
+docker compose -f compose.observability.yaml up -d
+```
+
+Grafana is at `http://localhost:3000`, Prometheus at `http://localhost:9090` and Node Exporter at `http://localhost:9100`. Alerts are evaluated by Prometheus only; no Alertmanager notification channel is configured. The `.prom` file reflects the latest run only, so it can go stale. Setup, metrics, alert rules and troubleshooting are in [Observability Stack](operations/observability_stack.md).
+
+## Quality and tests
+
+```bash
+uv run pytest -v
+uv run ruff check .
+uv run ruff format . --check
+uv run python scripts/check_notebooks.py
+uv run pre-commit run --all-files
+uv run radon cc src -a -s
+uv run xenon --max-absolute B --max-modules A --max-average A src
+```
+
+- **Ruff** enforces the `E`, `F`, `I`, `N`, `UP`, `D`, `B` and `SIM` rules at 88 columns with Google-style docstrings. Notebooks are excluded.
+- **Radon/Xenon** gates run in CI over `src`.
+- **Pre-commit** runs file-hygiene hooks, Ruff check and format, and `nbstripout`. A local `check-notebooks` hook then runs `scripts/check_notebooks.py` on changed `.ipynb` files.
+- **`check_notebooks.py`** checks the notebook paths you pass, or every `notebooks/**/*.ipynb` if none are given. It lists code cells that have outputs or a non-null `execution_count`, exits with status 1 if any are found, and suggests `uv run nbstripout <notebook.ipynb>`.
+- **CI** (`.github/workflows/ci.yml`) runs on pushes and PRs to `main` and `development`, and on manual dispatch.
+  - A `quality` job runs Ruff, the notebook check and the Radon/Xenon gates.
+  - A `test` job runs pytest with coverage and uploads `coverage.xml`.
+  - The `docker` image-push job is disabled (`if: false`) until a root `Dockerfile` exists.
+
+See [Development and Quality](workflows/development_and_quality.md) and [Test Suite & CI](testing/test_suite_and_ci.md).
+
+## Agent guidance
+
+[`../AGENTS.md`](../AGENTS.md) treats source code and tests as authoritative. It also asks agents to use OpenWiki retrieval just in time, run the narrowest quiet validation, and not hand-edit generated wiki pages.

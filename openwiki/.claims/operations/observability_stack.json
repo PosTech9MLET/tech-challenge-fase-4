@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:3c0c3c9ad6c4d958ae47975d63d4b2e60e3502bed60d3c060b200272f1a9676c",
+  "claims": [
+    {
+      "id": "claim_7e5a1ba5183c4b55bb1734e8e5a2e8c9",
+      "statement": "JsonFormatter emits JSON with timestamp, level and message plus only an allow-list of extra fields (event, status, records, pipeline, error_type); configure_json_logging returns a non-propagating 'credit_scoring' INFO logger and adds its StreamHandler only if none exists.",
+      "evidence": [
+        {
+          "resource": "repo://src/monitoring/logging_config.py#L8-L45",
+          "version": "repo-lines-v1:sha256:b6231c6be0c8a50df968403240a4459049c8610f0c6c5c7fa793c398e5c7691f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5Y2NjYmViN2Y2ZWY3Mzg5ZjBiZjNkYWUyMGYwZTVkNmNiNDMyN2Y1MWIzOWM2Mjc2ODgyNzMwZmNlNjRmZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ZDlkZDgzYWRhMTVhODAxMjE0ZWJmNTY0YjRkOGZkMzU2YjM5NWNkN2U2OTZjMmQ2N2M0ZDhkM2I5M2E0YzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiNTZmNWQyNDBiZTI0ZDJiNWNiNjM3MWQ0NGFmZjk1MzViMDFkODQ4MjA5ODQ3NThiYjA2ZDZmNWE2M2M2YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_logging_config.py#L9-L37",
+          "version": "repo-lines-v1:sha256:1e268d2c2da7c333e8e290d0722e4eef992eff15a39521a899994a38d67be052:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1NWM1ZmM4M2E1ZDQyOGY2Y2UzNzc5NWViY2E5NGM5NTgwNjUxNzA2ZWY1N2M2YmZmMGIzMzk5MzBkN2NiODIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4YWVhYTljYjg4Njk2ZmJkNWNiYjg3ZjEyN2UyMTk3ZGNkNmZkZWUxMWI2ZmFjNzVlZmFkNmFlNWRiODk2NjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmNDhkODMwNjU5OGJiMmZhNTRjNTBmZmE3ZTMyMjFhYzg1ZDZhMDVhYTkzN2I0NTk1MTJmN2FlYjgwYTI0OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d1cc55fffd434e8991d49ebc41ca696f",
+      "statement": "validate_training_with_monitoring logs data_validation events without row data (approved at INFO, rejected at WARNING for Pandera SchemaError/SchemaErrors, error at ERROR otherwise), re-raises failures, and runs inside observe_pipeline('data_validation').",
+      "evidence": [
+        {
+          "resource": "repo://src/monitoring/validation.py#L17-L65",
+          "version": "repo-lines-v1:sha256:078c3c2f63ddafffb0faddc8648b29babac79b575d968d63306aeffdcc299386:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZjY2MjNjYjgxY2NkMTkzNTViYjZjM2Q1M2UwY2JkODhiMjI2YzI3M2IyYzMzZDNmYTY3ZTM1ZDEzZjI2ZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ce7e6290919d413aafabaa51a2c6b123",
+      "statement": "build_metrics defines credit_pipeline_runs_total (Counter, pipeline/status), credit_pipeline_duration_seconds (Histogram, pipeline) and credit_data_drift_psi (Gauge, feature) on a supplied or default registry; observe_pipeline always records count and duration in a finally block, marking status error and re-raising on exceptions; record_psi rejects non-finite or negative values.",
+      "evidence": [
+        {
+          "resource": "repo://src/monitoring/metrics.py#L18-L94",
+          "version": "repo-lines-v1:sha256:b334e73a6cac69c6658a128aee0d434c743f1377c3f6f0dd8b00ff0f7d0b0d52:eyJzZWxlY3RlZExpbmVDb3VudCI6NzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2OWExMzk3NWMyNTZlYzgzMjBlMjAxNjA4M2M5NmRmNjM3Y2EzZDM1YmViZGUyMzE0YmVlM2E0NzExYjU2Y2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmYWZjMmI2MDQ2MjhjYjdjY2EwZDkzNjAzMjk3NDI0M2ViZGFhOWY4MTQ0NWMwMDIyMjE1M2ViOWE2ODE1ODQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_monitoring_metrics.py#L13-L84",
+          "version": "repo-lines-v1:sha256:9ba6f35120c8315c3a15a6d2cfb2480e698453d465d7d31d1cece91b3709df90:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2NmVmYjhhNmMzMDhmYjljZmZhYWEyYzFkMWE0MzNiNjBkZjEzNmQzZDkzNTM4YTM4MWFlOTQ2ZjNkNDY4NjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0OTIwYzA4NGZlZTM2OTA4MDU0NWIzMjhiMmI3OWNhZGMxNzMwYmEwMjczNDdjMmM2NjAwYzQ4Nzk5ZGU1MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e17e74793a3d4bcc85322be9abd4b26e",
+      "statement": "scripts/run_monitored_drift.main loads data, validates it, runs drift under observe_pipeline('drift_monitor'), records PSI only for the 'simulated' scenario from drift_alerts.json, and always writes reports/operational_metrics.prom in a finally block even on failure; invalid data stops before drift runs.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/run_monitored_drift.py#L14-L48",
+          "version": "repo-lines-v1:sha256:bbc4a36e155a99c0975c510d98005d8e09ac805ed85742a60059e773657a5d1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTk5MjMyY2QzYTMwOWY1MGNiZDZmNjYyMTI3ZWVhYWZjZTFmNzM2MjkyZGVmYjExM2Q5ODFhMjBjN2Q4NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ZjJjYzhkYjRlMDA1YWVlNGY1NzkzOTQyOTliZmQxMzQ2YTM4MTJkZjM0OTk4M2NjYTY1NjYxYThlNzRlZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_run_monitored_drift.py#L9-L148",
+          "version": "repo-lines-v1:sha256:67bcab7b5b3a44955d114445242ad22172fe9cce77043f828f08474ba371482f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIwNTZjODRiMTRlZjE0NDNhMzY5ODU2ZDdiZGYzZTU3ZDU0MDE0ZjE5ZDg2OWFiOTZjOTcxNGUwMTE5ZmFjM2YxIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI5Njk5YjlmNGNjMjZiNDg0ZTIxY2MxMTBlNTQ2MmJjZmFhN2JjMjliYTI1NmUxODM5N2UzZjY1OTNjOTEwYzcyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI2Yjg2N2Y5MzFiY2MwOTc2YzdmNWRhZDRkOGUwZmI3ZjllNTY0OTRlYjc4ZDg0YjQ2MWI5NmI3Y2RlMTA1YzAxIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_188ca104686341d69e89ae9d85e3c9df",
+      "statement": "compose.observability.yaml runs node-exporter (textfile collector only, reading ./reports read-only), Prometheus (7-day retention, config and alerts mounted read-only) and Grafana, all bound to 127.0.0.1; Grafana startup requires GRAFANA_ADMIN_PASSWORD and disables sign-up.",
+      "evidence": [
+        {
+          "resource": "repo://compose.observability.yaml#L1-L52",
+          "version": "repo-lines-v1:sha256:0ff531c0ef828caca835ed3d2f09f6e8d7f442e0fa9eff2c2bbba247153e7c7e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlMDcyZDJhNWIwYTE2N2Y4NmU5YzEwYjJkNGEzNmUyYzU0ZTk5MGIxZGE2YzVkOTczNWFlMTA0MTQxY2ZhZjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c9cd62963ef2461eb2dc6314cc8b02e2",
+      "statement": "Prometheus scrapes node-exporter:9100 every 10s as job credit_scoring and evaluates two rules: CreditScoringDataDrift (credit_data_drift_psi >= 0.20 for 30s, warning) and CreditScoringExporterDown (up{job=\"credit_scoring\"} == 0 for 1m, critical); no Alertmanager is configured.",
+      "evidence": [
+        {
+          "resource": "repo://compose.observability.yaml#L17-L31",
+          "version": "repo-lines-v1:sha256:8b2a7a8257a66dc59007fada3eeca51db83e2a9b5e3ca08d416f304365bd5c81:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzMzI4MWM4MmQ0Njk3YTE4NTYzZjUzOGRjMzU0OWQ4MDA5Y2Y3MmVlYjMyNTA3ZjZlMGE1ZTdiZGE4YTY5ZTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1MzFlMjYwMzk4YWQ2MTA5MTRkZmMyOGYwNDhkMzkyNjRiYTdkNTAzMjc4ZGQyZjhiYjFjNGMxNGI0OTlkOTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUwOGVjN2ZlODYxZDU3NmZmNTZhMDFjNjg5ZTBlMDViYmEzOTU5ZTJlY2RkYTc4MTExMzliNmNiMjYzNWI4NWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMTY5N2YzODZhOTY1OTkzY2Q4ZjhhNDk0N2M3MGY0ZTE2NmI3ZDJiZmZiY2RlZDU0NWExZTdhYjhmYmI5N2MifQ"
+        },
+        {
+          "resource": "repo://infra/observability/prometheus/alerts.yml#L1-L21",
+          "version": "repo-lines-v1:sha256:1fdb795b4f78b765c1731d1e0a2e5149b92eef19fd7baf4d43599b53ca2a2172:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3OGExMjQwNTBjM2UwZWU0NjU4OWI1NTYxNDkwMDlmNjU2OWIyZGRhODMwNjNlMGIxYTM0MDhhZTZmYzBkYWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://infra/observability/prometheus/prometheus.yml#L1-L13",
+          "version": "repo-lines-v1:sha256:bd90bb20d370d576fa212d6ffc363e598c6e669079227a933844105f5a14eb63:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzZDJjMWViNjM0YjM5YjkxYzYyZDE2YzZhYjExMjYxMDQ4YjQyYzExYTJjNjhjZDhlNDY0YWVmOGU4NzQxOWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_61bbdd705e76459380db90132e35ea1c",
+      "statement": "Grafana is provisioned from files: a default non-editable Prometheus datasource with uid prometheus, a file dashboard provider scanning /var/lib/grafana/dashboards every 30s with allowUiUpdates false, and a dashboard with three instant-query panels over credit_data_drift_psi, credit_pipeline_duration_seconds_sum and credit_pipeline_runs_total.",
+      "evidence": [
+        {
+          "resource": "repo://infra/observability/grafana/dashboard-provider.yml#L1-L13",
+          "version": "repo-lines-v1:sha256:548f54d3d95eb42765efa35547731a7ed9219687cc69f3cf9cce5844a002e6c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3YmIyMWRkMzFmZWUxNmVmOGRkYzEzMTRmZDhhZTZhYjgwYjliMzY2YzY0YmQyMDgzMTMyOWQyODA5OWQwNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://infra/observability/grafana/dashboards/credit-scoring-observability.json#L22-L327",
+          "version": "repo-lines-v1:sha256:1066f68812f4e1336d41e5810815e4d9240ce9952d6c4203a0da19486c00b56a:eyJzZWxlY3RlZExpbmVDb3VudCI6MzA2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiMGQ2YzA5ODZiMjk0MTg4OWU2ZTZlODhhZDhmNGRkODFmMzc0MWE2ODE5ZDQ5NjU0ODg5YmEzYjM3YWQyM2UwIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwNWIxOGViMTU4MGMwNzIzZjBiNzdkZDgzNzgxZTk3NWI1NzhmNGMyMzUzNjRmMGQwMDkwNWE0NGRlOGEzMGY2IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJiYmI4Zjg0ZDY1ODY3M2QwMGY2ZGI1ZTcxYTRhMGI1OWNlN2ZkZjhlYTM3NjFjN2ZjMTk0OWIzNTA1ZGQxNjRkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MSwiZm9sbG93aW5nQ29udGV4dEhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIn0"
+        },
+        {
+          "resource": "repo://infra/observability/grafana/datasources/prometheus.yml#L1-L11",
+          "version": "repo-lines-v1:sha256:f313066f6dea3816fbb5fe56728ece8ae2b41f8fb54d99f7e534b5392a2972c0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzMTlhZGEyYjE5ZjM2NDllYTZiNDdjYmE5ZmQzNDRjNTliZTIwYjU0MGFkNzNlMWI4NTQ0ZDM1Mzc3NGQ3N2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc4f14a64a58418597abc503f320adef",
+      "statement": "Because metrics are rebuilt each batch run and the textfile is overwritten and kept served by Node Exporter, credit_pipeline_runs_total reflects only the latest run and stale PSI alerts can remain firing; no last-run timestamp or freshness rule exists.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L609-L617",
+          "version": "repo-lines-v1:sha256:b96be50b88560d2cc7e85e80abd2e051df34d4ecfc02f2fa2e0847127f99a0de:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTBjZGJmZjU3NWYxODYwNDEyNjFjYTkyNTJmNjMxNzhkOGMxYjIxZGE1NjZiYzcwNWU1Y2NjYTJkMGVjMmRmYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRhNGViYjhjOTE0MzlkNTdjOWFjMTdkZTEzN2RhZGNlMmVjNWY4MDdjZGJhODhiYzVhZDIwOGYxNjcyNjJmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDcxZjAxZDFiZDNmMTUyNzliN2RjNzNiNDc0MzJiOGM5NGYxZDA4NzI3NTc1YmNiZGY4NDZhMmQyMjE0ZjgzOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTI1M2YzYTQ1MjkwZGJjZDE3YzBiYjY3YzBmZTI2MjI3YjQ3YzliMTZhYmEzYmEzZjdkMjg1YzhjMWNkZWQ0YyJ9"
+        },
+        {
+          "resource": "repo://compose.observability.yaml#L5-L15",
+          "version": "repo-lines-v1:sha256:d8b0b005816eee7c03d265380e7bc3d4a419334d46d1748caebdb489d1a36877:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0YTgzMjgxMDUwNDY0YzM3YzYwMzhkZWFkNGQ2ZGU3YWM2Mzg1MTkzMmFlNmZiZGE4NzY0MGE4MmU3ZGUwOGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1MzFlMjYwMzk4YWQ2MTA5MTRkZmMyOGYwNDhkMzkyNjRiYTdkNTAzMjc4ZGQyZjhiYjFjNGMxNGI0OTlkOTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFhMDYzY2M4YWM0NDFlMjFhNjIzMzc2NWQ1NDNhMDYxMDdmNzdlODhmNWQxNjQ4ZjFkMmE2NTI1MTUyYTA0MTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI3ZTM2ZTY5NTJiMjNhNmUxMDYyNWVlNDQwOTYwYTQxNWUwYmY4OWE1NWJhNTdiYmY4MDkyYmZhZjMzMmNlMDUifQ"
+        },
+        {
+          "resource": "repo://scripts/run_monitored_drift.py#L14-L41",
+          "version": "repo-lines-v1:sha256:a368ae92c2a2f213beeb24bc08b52a4eb2599518d9e0488e9dd6cd917604f15b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ZTY4ZjdiZWQ4MWNmMjMyMjVmYzIxYzNmMGU2Zjg2YWVlM2YyN2Y1MDgxMzc4NTgwYzE5OWFlNTkzYWZmMGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ZjJjYzhkYjRlMDA1YWVlNGY1NzkzOTQyOTliZmQxMzQ2YTM4MTJkZjM0OTk4M2NjYTY1NjYxYThlNzRlZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQzNzRhNzBjYWZjMDg0YTQyODdkNDIzNWY3MmM1OWM1ODhlM2ZmY2I1NTQ5MjJlMjU3NDU3YjRkMmU2YzExYzQifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-11-09T02:01:44.977Z"
+  }
+}

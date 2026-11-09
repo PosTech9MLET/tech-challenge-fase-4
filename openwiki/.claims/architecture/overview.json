@@ -1,36 +1,40 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9de733d9e25b0e2fa0db9d41a30701b7f1784bd8f86383a4a47856cec430630d",
+  "pageVersion": "sha256:d564041b0258913d2548662362ee0ec8bae804b4acb93cb708811982fe349a58",
   "claims": [
     {
       "id": "claim_095ca58ded4b414a8c329754db7ddd09",
-      "statement": "The production machine learning codebase is structured into modular subdirectories under src/ (src/data, src/features, src/models, src/training, src/pipelines, src/api, and src/utils), defining explicit operational boundaries across data ingestion, feature transformations, model definitions, training loops, pipeline orchestration, API serving, and utility configurations.",
+      "statement": "The src/ package is split into data, features, models, training, pipelines, monitoring, api and utils subpackages; src/api contains only an empty __init__.py, so no prediction-serving API is implemented yet.",
       "evidence": [
         {
-          "resource": "repo://README.md#L16-L18",
-          "version": "repo-lines-v1:sha256:b27641fbf93c4e1ea0165336f2dbcad41dcb68a199e8f78e0fdf33327e76dbfb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYwMzE3NDgwOTA5OWE2MmRjMDQ5OGE0MTkwNDRkNWRjNmNiZjhmNzk1MmRhMjYxODNiZThhNmExYmQ3Mzc3OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzNjOTE0ZmM5YWFjNDhjYzAwM2E1NjA2ZjZlOWYwNjM5NDMxZjEyZGYyOGM0NzY1MmM0MDA1ZDhlZDJmNDYzNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjgzOGFhODY0ZjZmYWFmMmM5ODU3YzIzYmEyMDhmN2YxNGE0MDNhMzRlYjRiMmQ3YmQzMTEyZDYzZGMxYjdkYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjk0Y2Q3Yjc1NmQyMjQ4NzIzYzVmOTJjMDA3MGE1M2MyZjI0MWQzMTMwMTkzNjI5YWI5MTc4MjcwOTlmNzNmNiJ9"
+          "resource": "repo://README.md#L51-L59",
+          "version": "repo-lines-v1:sha256:7c1cc86b4601e047e9920643ef2aee56090649d0cb26f44f05857cab9a0d6711:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjUzMTg0YWU5MzA2NGMyODg5ZGRjOGZhNjA1MmNlYjIzMWE5ZWU4MTMwM2Y2NzFhNmM2YTBkZGQ5YzA2NTQxNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZDM5ZGZjZDkzNTY4NTZmNjczNTk3NGIyNTNjYjI5NWE5ODhmOGIxMGEyMjU3Yzc4Y2E3OTkzOTljNmEwM2U5NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWE4OGY2Yzc1MjU2N2MzZjAyYTdlMGUzM2E0M2UyZjc1YmE1ZjIxYmUxN2VjZWI4OGE2ZDk3YWI0NDhjYWQ3ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzI5MjFlMmM2ZTI2ZDRlYzFiM2I5N2RjY2QwYWU2NGU0ZTk3MWQwOWU1ZmNkZWM1OTMzNDRiZWNkNTQ3MWI2MiJ9"
         },
         {
-          "resource": "repo://docs/architecture.md#L3-L7",
-          "version": "repo-lines-v1:sha256:a907bb41f0057ca0d60b118a46450f03c7d3a3c3bfa84a7655f7b098892cfcbf:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTY1ZGJlYzJhZjg5NzM0MGQwYjMzOGYwNmFlZmU0NmZkZGJjOTViMDgzOGU5NGQ4NWY0ZWQ0YTM5YjYzZTkwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzMxNjhhNjZiNmEyM2UxZWE4YjQyOTE4NTRkODM2Njk0NWUyNzA2YTM1ZmNkYTE5NWRhYjhkYzliMDZhYTg2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTJiNDY4NTEwMzM4MzUzZDMzYjdjOTdiNWY0Nzk3NTFjOTQwMGViYmQ3YWU0MjA1YmE0MWUyNmE5NTRlOTc1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
-        },
-        {
-          "resource": "repo://src/main.py#L1-L10",
-          "version": "repo-lines-v1:sha256:fd2ea1f04642d1196146434b1ee614d89d566a89005da9daa99ffa71ff0f6bae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmNTg3NzVmNTA0MjI4NzRmYjNmMWIxZDA2YmNiMjRjMDBiYjBjMzU4OWE1ZWMzZDQ1YmIxN2ViZDRhOTY5OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTk5MjMyY2QzYTMwOWY1MGNiZDZmNjYyMTI3ZWVhYWZjZTFmNzM2MjkyZGVmYjExM2Q5ODFhMjBjN2Q4NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/api/__init__.py",
+          "version": "repo-file-v1:sha256:ab402d13b22fa6df3a31bd28fcd42185a1d3e9c83a586f7b66e6b09984f75c26"
         }
       ]
     },
     {
       "id": "claim_b1839e18453d4892aa9923882d886204",
-      "statement": "Data and artifacts progress sequentially through pipeline stages from data/raw to intermediate data staging (data/interim and data/processed via src/data), feature creation (data/features via src/features), model training and evaluation (src/training) logged to MLflow, and prediction serving via src/api.",
+      "statement": "Data flows from data/raw/application_train.csv through prepare_data (Pandera training contract) into a stratified 70% reference.parquet and 30% production_base.parquet in data/processed; training consumes the reference set, logging to MLflow experiment credit-scoring-baseline and saving models/baseline.joblib and baseline_metrics.json; docs/architecture.md's simplified flow ending in src/api is not what is implemented.",
       "evidence": [
-        {
-          "resource": "repo://README.md#L10-L12",
-          "version": "repo-lines-v1:sha256:cbc3d9283e7709eed36b7016be7c1e1fad62fbd900134fe6b3ddfee90e3995bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjA0ODc1ODdiMzE1ZDBjZmY2OGE1ZTFiNTI5OTllZmZlOTZjZWY2ODkxYzI5NDYwNWQwY2VmNzg2MDEyYmNlYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWFkNThmZTU3MjhkNTYzYTAxZTdjYmJhY2MyNTgxZDRhOGYwZmU4ZGJhNTZiODdjMWIyNGUzZTE2N2I3ODZlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmI0Y2Q3ODg2NzliYWE4MWMxYzFmNzIzZWRkOThmYTY1N2MxMmU4N2FkNWNmZmU4ZjA3ZjhkMDJmZTdhNTVkNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjgzOGFhODY0ZjZmYWFmMmM5ODU3YzIzYmEyMDhmN2YxNGE0MDNhMzRlYjRiMmQ3YmQzMTEyZDYzZGMxYjdkYyJ9"
-        },
         {
           "resource": "repo://docs/architecture.md#L3-L7",
           "version": "repo-lines-v1:sha256:a907bb41f0057ca0d60b118a46450f03c7d3a3c3bfa84a7655f7b098892cfcbf:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTY1ZGJlYzJhZjg5NzM0MGQwYjMzOGYwNmFlZmU0NmZkZGJjOTViMDgzOGU5NGQ4NWY0ZWQ0YTM5YjYzZTkwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzMxNjhhNjZiNmEyM2UxZWE4YjQyOTE4NTRkODM2Njk0NWUyNzA2YTM1ZmNkYTE5NWRhYjhkYzliMDZhYTg2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTJiNDY4NTEwMzM4MzUzZDMzYjdjOTdiNWY0Nzk3NTFjOTQwMGViYmQ3YWU0MjA1YmE0MWUyNmE5NTRlOTc1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/models/baseline.py#L66-L83",
+          "version": "repo-lines-v1:sha256:e96bb33cba3748224993e7292c1df6acb8a1e88c387dcdb5ccccd51c0141cee2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4YTE3ZTY2ZDljYjViNzc0MjM4NzU4NzEyZGE0NWQzOWZjZGUyNTdkMjkyZDc2N2UwMjJhOGNlYzVlODI5NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkOGJkZGY1MGUzZTM4MTgwZDQ1OWFkNDhhOTI4NGY0ZWJmZmUwNmQ5MjFkZDc1NzQ5YWEzZTA1NTI2MTcyOWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmMjdmOWI3ZWI3YmY0YjgwN2Q5MjhlNjcwODEyMWRhZGRlMmFiNTVhY2IzZGFjYzdhNmI5YTBmM2JiMDg1NTMifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L11-L40",
+          "version": "repo-lines-v1:sha256:b0bb13f1746babe7e7cfa70b22b5be613f9082f11250f9429e62305beb2319aa:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4NjdlODE3ZTE5ZDZmN2RkN2NiYjM1YjgyYWUwY2Q3MDQyZDc4MWNiNjJlZDg4OTQ3NWMxYWI5M2M3NGVhYjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1YzFjNDYyZTJhMzlkNzQ3NTlmNWUxYjEyNmY3NjgzYTJiNzMwMTE4ZTE4ZjUxMjJiMDhjZWRlZWI2NTBlMjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L116-L131",
+          "version": "repo-lines-v1:sha256:2404d030cc166d86576f59833a761e2e8fd46b77c4e44eb9a438e1b033177726:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3N2RjZjgyZjFmZjI3MTk2MjdmYzRjNGIzZWFmYjEwMTFmNzkzMDM4ZGI0YmZkNmE0ZTliYTdjMDEzY2I2NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjZGE2OTk2ZjVjNmZmNmU4MmExZGJhNjM2MDZjYjFjNTgzMDc4MzkzYWEzYzdhNzE1ZDY4MWMwNTBmODdjZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwZmUyNTc2ZTZmMmNmNWI0YWFhYTA3ZmNkOGU1NzYwMzQ4ZGI4MWRmYjFkNzEzZGJkMTY0OTZlYmIxYzk1ZDkifQ"
         }
       ]
     },
@@ -50,8 +54,12 @@
     },
     {
       "id": "claim_a28b20b4838f4fdeb7fa5dff46b1fca9",
-      "statement": "Pipeline execution is initiated via the main() entrypoint in src/main.py, which serves as the primary executable entrypoint for orchestrating machine learning pipeline stages.",
+      "statement": "src/main.py is a placeholder whose main() only prints a startup message; the real entrypoints are modules run with uv run python -m (src.pipelines.prepare_data, src.training.train, and scripts.*).",
       "evidence": [
+        {
+          "resource": "repo://README.md#L116-L134",
+          "version": "repo-lines-v1:sha256:cb74544766668100cfd65a8e46e81487b98363d2f99fe8a0f0c8ed3b61141518:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZDhiYmIzNmZhNzg4OTYyZmM3NjVhZGZjYTBmODRjNjYzZGJiYmFmODNmMjJmMWQ5N2E3OWU3YzQyYTMwYmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1Zjg5ODA4YWEyYTIwOThkNGViZTY2N2Q2MzA3OTlmZTcwMTJjM2U5NWFhZWJhNTQ2ZjNmZmJkYzE3OTNmNDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjYjRiM2NmYWI0YWZmYmE2YzNjZWQyZDVhNWZjMDIzMjQyYzVhNWM4YTk4YjUzMzJkYWYzNmU2ZWMyNWJlM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNhZWI2ZWQ1MGFmYjk5MDc5ZDczMTNhZjUzNzVjMDQyYzY4MjJmNWEwYmM2YTJjMjc0ZjdmMmE2ZTc1OThjMjMifQ"
+        },
         {
           "resource": "repo://src/main.py#L1-L10",
           "version": "repo-lines-v1:sha256:fd2ea1f04642d1196146434b1ee614d89d566a89005da9daa99ffa71ff0f6bae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmNTg3NzVmNTA0MjI4NzRmYjNmMWIxZDA2YmNiMjRjMDBiYjBjMzU4OWE1ZWMzZDQ1YmIxN2ViZDRhOTY5OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTk5MjMyY2QzYTMwOWY1MGNiZDZmNjYyMTI3ZWVhYWZjZTFmNzM2MjkyZGVmYjExM2Q5ODFhMjBjN2Q4NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
@@ -67,7 +75,7 @@
           "version": "repo-lines-v1:sha256:396e955da40467080a6510eb02845f4895b816bcff5fc9e22b551ee12bc61c7d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyZjY1NTQwYWFhZDhlZDBlODQwMDBmNDhlNjk1ZmZhMGJhMTg0Mjk0Mzc3YzRiYmFmYTE2NmIyYmM3YTZlMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkNjQ4MTFiODNmMDBiMGVlNzlhMmNiMmQ4Yzc1OWYyZjBmODY3ZGRjMTJiY2JjZjQ5NWQwZmY1YzFkM2NhMTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5MmZmNzI1YjdiYTgyMGRmODFiZTAyMmZhOTNmYjNiZmZhMTkyOGI5OTMzNTA4OTE0MGJmODM2YmIxMzk5MzgifQ"
         },
         {
-          "resource": "repo://pyproject.toml#L3-L14",
+          "resource": "repo://pyproject.toml#L24-L35",
           "version": "repo-lines-v1:sha256:0c9ae2c6bf505221f80845638ae792ec385d09c1c7a23fd8339b23a9ec0ef1d4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3NDVmYWI4NmIxMjFkYzg1YjRmNzg2NzMzOWExM2ZlZTgwNGM4YTAyZjQ3MTA2NTcyZjJiZjA2NjRkNTk1MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZmU2YzBmMTIxMWIxNTI1Y2I2MjQzYWEwNWYzM2UxM2UxN2VkYTg2ZGExMWJmYmUyOTE5MDhlMDRlZDU0ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiYmE1NzY2YjVkM2Q2Yjg1MWEyYzViNWRmZTI3N2Q3ODhiZTVkYzI5NjI4YWM1OWNlODVjMzMzZTk2NTJkMWUifQ"
         },
         {
@@ -75,10 +83,144 @@
           "version": "repo-lines-v1:sha256:f3ba9bf60d13639ac83ee398f6f78ec97739d2f6c10c96fadaad781c3234b603:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOTAzYzdkNTcwMWFkODkyZjg5NzUyZjk2N2U4ZTFlODczNTFmODA5ZGU4MzQ1MmQ1ZGJkMmNlMGJmNDg0MGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkZDI0NDU4MmI2ZmIwM2QyM2I4NDE1YWJlY2QzNDZiMGM5ZjQ2NmI2Zjc1MmIwNjgxODljZTdlOWEyZGMzNTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MWJmM2Q5NmYxYjExOTY4OGRlZWE5YTAwNGIyYjNmZWJiMTgwYmI4ZmIyMzQ0NjI1NjE0YWRjODU5NTYzYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxZmY4YWY4MGY1N2E0ZTkyOWRiMDYxMDU1MTMzYWQ2ZjRjMGQ0NmExZDFjNjYxN2RhYTI0N2MyMzNkMTJlMTgifQ"
         }
       ]
+    },
+    {
+      "id": "claim_019daa0941494b37bad5b88a6fd4bde3",
+      "statement": "The project context is a fintech Credit Scoring model whose predictions may be affected by population or economic shifts; the objective is a reliability/sustainment solution combining Pandera contracts, XGBoost with MLflow, Evidently drift detection, drift impact analysis, Prometheus/Grafana observability, automatic alerts and governance/LGPD documentation, using the Home Credit Default Risk dataset.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L7-L25",
+          "version": "repo-lines-v1:sha256:a9d43bbd70e351f2d4a920c50511503f299c1d41da7ce4493b1733aae018f643:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1OWFmODEwMjgyMzU0YWZkN2I4YmRhMzU3ZDQ3MGU0NDg2NGMwODViMGViNjZlZWU0ZDI1Mjg4NDBmZTM1OGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhYWQyYTQ5MGViNjQxMDI5NDIwYzg3MmZjMDI4NjczM2Y1Y2QzOGNiODA5NDdjMGEwZGJlOGU5YzQzY2ZiYjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUxMWFjMDZmYzljM2VmZWM5MzI1ZGRkNThkNjgxZGY1NTRlZjNkY2QxMDdiY2ZhZjhmZjk4NDhmN2VmZDEwZDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjNzI0ZDY4MzM2ZDVjN2M2YTk4MDFhMGZlYTcyMWQ2NzJiNjFlYmMxNTA2MTE5NjYyMmQ3YWU3NzUwNGY4MTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_41c803ed34e242a89e0ea6d6de86bf6b",
+      "statement": "Pandera schemas (strict=False, coerce=False, lazy validation) are defined for training (requires binary TARGET) and inference, and are enforced in prepare_data (invalid batch blocks writes), before training, and on simulated drifted data; score() does not validate per call.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L208-L210",
+          "version": "repo-lines-v1:sha256:d0d4a2cb619973e7d9362128be36ee716f7979e23ced07aaddc54a619cbd746f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWM1ODI3NmI1ZjlhNTYwNzJkNjU1ZjQzYmU2Y2U3MzFiMjc2MDY1MzZhMTBlODQwMGRhNzkyNDUxZWYxNGYzNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjY5ZjA5ZjM0OTA5NWI1NTYzNjUxNTNmMzI2MzU1OGZlMjJmYzJkZDYwZTdmNDc1YTJjMTRiN2E4NzYxOGMyMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTA3YjI1ZmJkODExYWRlODk0ZTlhNzhjNzVmMGNmZmI2NGU5Y2JlMjljNTBjM2M2ODA1NzA4ZDJhY2NjNjY1NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWQyYWZiMDQwNThkYWFhM2Q3YjUwOGU4MzY5MDJhYjM5OTI0ZDc5ZmFhZjQyMzc5NTE3N2ZlMjMzZjcwZmMwNCJ9"
+        },
+        {
+          "resource": "repo://scripts/simulate_home_credit_drift.py#L31-L33",
+          "version": "repo-lines-v1:sha256:d8b7a8886709e39fc7d04f506616dfe4e97919b55a9f98fe61147e8ba426299f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTE0NDI0ODVmMjhlNTgxNDc4Yjc1Zjg2MDVkMzQ3Yjc5YjY4NTY5ZDdjOGM2ZDcxZWVmMzA5MGRjNmJlM2Q0NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQxZmE2NTEwZDMxYmQ1OTU4MzY2MGZmMjVlOGE1NjUyNTUyZDE5YjBlN2YzZjdlZWQwZThmNDBmYTQ2YWQxNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGViYTU2M2NmNDM0ZmZmZjI2MDQ4ZGExMGQ0Nzg1MDk5MDk1Y2NhYjI0MmFmOTljY2U0NTkyMGU4NzVmOGUxYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmU4ZGFhY2YyMDQyODE3ZmQzZWU0OGExMmNmMzIzYTEzZTE5N2E2MWY5N2ZjOWM2OGMzYWUwZDA5NGE5OWE3YSJ9"
+        },
+        {
+          "resource": "repo://src/data/contracts.py#L17-L51",
+          "version": "repo-lines-v1:sha256:852f453c1c8a3598e002a608e77297724f44254bfc030833357be16d45909041:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5NmRmZjgyZTljM2VmZmQ2YjdjMGQxZjNjNjc3NjJkYjg1NWUxMTU0ZDAwMzg4MmUyMzliYTNlM2YzNGYyMmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyMDRkNGRjOWUwNWQ4M2E3NDZkZDk4MjAwY2ViZDcxNDcyOTA3ODU1NzQxYTlmMDc2NjgzNjgyYzdmODY0NmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L15-L34",
+          "version": "repo-lines-v1:sha256:ff72459d0e5a212a10f629ebf6eb7619733ffd75b122e9f13e74459de0916aaa:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMjMwYzAzMjViZGYzNTgzMWE2ZDk4ZWVlMWZkYjE0MTUwOTI2YWVkZjQ5MmJmYWE5YWY3MzBmYzQyZWM4OGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwODRkODZhYWMxYTM0NTUxNzg2NDUxMTcwZmQ1NDQ5ZThmYWY1ZDM0MjBmODhhOGY5YTg5NWJlMWE4MDIwMmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUyOTgwZmYyMjYyZjNhNTMyODRlYTVjNDU2YTRmNmI5MWViMzVmMmU1MmU4MTIzZjAyZjU5ZGM5NGUxMzJmODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlYmIxMGRlZTRlZDk5ZTMzYmJiZmZmZWRhMDQ5MjkyYTIzZTgwZTk0OTRiYjUzYzJjNjdmNWYyYTMzNWRlZTAifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L116-L121",
+          "version": "repo-lines-v1:sha256:1ef9f4a74f2633ef504fcb3d0e72c000d29bc9cbfc235c3037f3fa2c368e9297:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzBiYzUxMjY1ZGEzYzQ5NGJkZDI5NDA4YzBlMTc3NjY1YmZlYWQ2ZmQyNzkzNmYwNTlkMmM1NTdiMTlhM2NlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjcxODZjYWE3MGZkY2MyODQzMGI5YmQxNGUwM2JhZjhmNjA1Y2VmNmRmZTA3Yzg4ZWZhZDYzOGUzZDA1MmMyNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGNkYTY5OTZmNWM2ZmY2ZTgyYTFkYmE2MzYwNmNiMWM1ODMwNzgzOTNhYTNjN2E3MTVkNjgxYzA1MGY4N2NmNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTU4NWJmODNhYmI5NjY4MzliNDJhZjllZDk0MTZmNjQ3NzVmNzA3Mjg1NDMwOWIwMmU2ODFiY2ZkZTFmMDE3ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_dd959339634d4472842640c9092d7d9e",
+      "statement": "Feature engineering runs inside the scikit-learn model pipeline (build_features then ordinal encoding then XGBoost) while only raw columns are persisted, so simulated changes to raw columns such as income propagate to derived ratios; unknown categories become NaN at inference.",
+      "evidence": [
+        {
+          "resource": "repo://src/features/build.py#L61-L83",
+          "version": "repo-lines-v1:sha256:c2fe404d86eb99f625f228824894409a0e56025648cfab28c89604666a44e948:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExNWM3ODA2MTQ3MTJmY2M3MTllMGE5NTYwNGFmMTUzZjIxMGQwZGFhZTA0MWUxNzkwODg5NjM1YmRmNzJkMmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiNWZmZTY1MzkyZTNmYjNkNzE0OTk1ZTYyZTYzMWEyNjQwMWQwYjNiMzkzNzNlN2Q2NTBiZjFjNTk3MzBhZmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzZDE3MWRlNzU0MzFhMDIxYTBkOTRmYTc2ZmFiZjBkNzEzOWM4OThjMWEwYjQ0YjQzY2E2MDkwM2ZhMWI4NDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/models/baseline.py#L34-L63",
+          "version": "repo-lines-v1:sha256:2521de2167fa96294ed888d068b605db037c91ba210e5be424165adf6e137457:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyNDZhMjM1NWFhMzQ1MWQzZGViNGE5OTY4ZDhmNjU0Zjk0OTM0N2ZhM2VmYTBmOTYzMDA0MmZiZTc2NTdkMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjkzMDgzYzE5NzEyMWI5ODI3MDBiYThhZmFiZDE3MjJjZjFkM2U3NDA0NTA5ZTgwZWZhMjcyNDdmNjJmMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkNzUyMmEwNjA5YzU3ZGE2MDgzMjhkODlmZDFkYzU4YzljZjJjYzI5MDAxMThkZTE5MDVmZWEzYjhiNWMzYTEifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L15-L25",
+          "version": "repo-lines-v1:sha256:37d37d73833bd4cfc1f0cc63df02e064537bf5bc5eefa2167907e3e3105c0c81:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMjMwYzAzMjViZGYzNTgzMWE2ZDk4ZWVlMWZkYjE0MTUwOTI2YWVkZjQ5MmJmYWE5YWY3MzBmYzQyZWM4OGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2YTcxNTI1NzJlZTg0ZjEwOTA2Yzc0YjlmMmE5MjQzNGRkYWIwZTNjNDI4MTNiMDRlNTk3ZWZjZWM5NTFiMjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUyOTgwZmYyMjYyZjNhNTMyODRlYTVjNDU2YTRmNmI5MWViMzVmMmU1MmU4MTIzZjAyZjU5ZGM5NGUxMzJmODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRlNGM1YzA4NGNkNWU2MjE3Yzg2YTM4ZDk4ZWE4NzRjOTc3NzZmNGUxMTc2YjgwNTFlMGZkZWZjNTY3NjhmMmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9c02b838b44c43e6b3245dabce3e76b1",
+      "statement": "Drift detection samples up to 5,000 rows per dataset and runs Evidently PSI on AMT_INCOME_TOTAL and AMT_CREDIT; a column alerts when PSI >= 0.2, and scripts.run_drift compares reference against both the unchanged production base and the simulated drifted data, writing reports/drift_alerts.json.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/run_drift.py#L22-L56",
+          "version": "repo-lines-v1:sha256:3c2bd58d36f1d16a7e658e905063b5fa9065ab861a27fbef0a09462fca02d8ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxOWViZWRmYzdkNzllMmE2YmU0ZDljMDRlMjNiYzM1M2I1MDcyZmYyNmFkMzEwMDUyYWNkNTIzZTI0NmZjMjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNmYjE0OWYwYzQzNWM3OGI3ZmM0NmM1YzFhY2I4M2ZkZmQzNDhlODdhYmJhNmZhODkzMDNhMjlkZWZkMjQ3ZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/drift_monitor.py#L10-L100",
+          "version": "repo-lines-v1:sha256:c7bcea7d57a0e154f220184eeb6a2436c03088b67854584b33496a63cabfba75:eyJzZWxlY3RlZExpbmVDb3VudCI6OTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ZTNiOGYxY2Y3N2M2YTFjMzYzZDhlYWUxZDJjMzgwZjNjMzgwOGZmNmI0MmRkMzFhYWVjYmFjMWFhNDJkZWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwZTRmYjRkNDIzZWMzZTYwYTFkMDNkYjA4OGU1N2U4YjM1MjIxZDkxMzg0OTM2YTg4ZmQ5Mzg5NzllZDlkOTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI5NTZlZGY0MmVjN2ZmZjE4NDI3Y2M5Y2FkNmVjZjFiODRkOGE2MDNhODA0YmM4MTQ1MzVmNGIxNmI1ZDE0NjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c901eec0651a41478dac071ba9e8b7ed",
+      "statement": "Score-impact analysis requires identical unique non-null SK_ID_CURR sets in both datasets and a threshold in (0,1), scores both with the saved model, joins one-to-one by ID and summarises score change and decisions crossing the saved threshold into reports/score_impact.json.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/analyze_score_impact.py#L17-L40",
+          "version": "repo-lines-v1:sha256:98a52cdbb3ff5f53dae3db78a548ba9452f1c5f30ff3f1076491c3da668c6d8f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNmYjE0OWYwYzQzNWM3OGI3ZmM0NmM1YzFhY2I4M2ZkZmQzNDhlODdhYmJhNmZhODkzMDNhMjlkZWZkMjQ3ZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUxZjIwOWE0ZjcxNjU0Zjg2OGVlNGUxNDJhMTM4OTU3ZDA2NmJhNmYzNGM5MDM2M2I3OWYwNzVkMmE1OWVkZjkifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/score_impact.py#L10-L76",
+          "version": "repo-lines-v1:sha256:33cf96db077b957e840f2bae068f1d63f482bcf11c8b35c68642694391189bac:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkZWQwN2I1ZjUwMzNkMjZlOGFiM2U3ODQyZjY2NmRhYmFmY2FhZjUxZWJhOWE0MzRmMThjZWE4ZjQwODA1YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5NTEzY2RiMzkwY2MzMmZmNDg2YWVhYmU2MWM1ZmJmNWNjZTI1ZDg2MWVkMDRkMDEwZTY5MDliOTQxYjQyZjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY4MzQ4M2M0YzUwYTUzNzA1ODFjYTg5NGYyZjljMWNlYjY2M2Q2NmU4NjZkNzQ3Yzk3MGUzMTA2NTYwNjg1YjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9baf0436fea144189b7476d95fcab8c2",
+      "statement": "scripts.run_monitored_drift validates data, runs drift monitoring, records simulated-scenario PSI in the credit_data_drift_psi gauge and always writes reports/operational_metrics.prom (a batch textfile artifact, not a live exporter) using an isolated CollectorRegistry; observe_pipeline counts runs by status and records durations.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/run_monitored_drift.py#L14-L41",
+          "version": "repo-lines-v1:sha256:a368ae92c2a2f213beeb24bc08b52a4eb2599518d9e0488e9dd6cd917604f15b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0ZTY4ZjdiZWQ4MWNmMjMyMjVmYzIxYzNmMGU2Zjg2YWVlM2YyN2Y1MDgxMzc4NTgwYzE5OWFlNTkzYWZmMGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ZjJjYzhkYjRlMDA1YWVlNGY1NzkzOTQyOTliZmQxMzQ2YTM4MTJkZjM0OTk4M2NjYTY1NjYxYThlNzRlZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQzNzRhNzBjYWZjMDg0YTQyODdkNDIzNWY3MmM1OWM1ODhlM2ZmY2I1NTQ5MjJlMjU3NDU3YjRkMmU2YzExYzQifQ"
+        },
+        {
+          "resource": "repo://src/monitoring/metrics.py#L27-L94",
+          "version": "repo-lines-v1:sha256:f551eee5b53ab9b8599b8dbd618d9ef69014c6a5e98fc27c9608ed4be3982f45:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhZjIyNTRmYjU1MjUwZjZiMmEyOGM2ZmQzOWIwNzNhNWI2OTNkODQxOGY4MDE5ZDE0M2IxZTIwMTc0ZGE2ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmYWZjMmI2MDQ2MjhjYjdjY2EwZDkzNjAzMjk3NDI0M2ViZGFhOWY4MTQ0NWMwMDIyMjE1M2ViOWE2ODE1ODQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5OTc2MDFmMGY5MDZlMGIwODI2ZTA5ZmVlMDM0NTczNGIyYTY2Njc3MjM3MGFkY2YxZDZjZWYwNDcyYWZmYmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/monitoring/validation.py#L17-L65",
+          "version": "repo-lines-v1:sha256:078c3c2f63ddafffb0faddc8648b29babac79b575d968d63306aeffdcc299386:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZjY2MjNjYjgxY2NkMTkzNTViYjZjM2Q1M2UwY2JkODhiMjI2YzI3M2IyYzMzZDNmYTY3ZTM1ZDEzZjI2ZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_28e10b2dcf1c4dd1b53f22b85543d882",
+      "statement": "The Compose observability stack mounts reports/ read-only into Node Exporter's textfile collector, Prometheus scrapes node-exporter:9100 as job credit_scoring every 10s, Grafana is provisioned with the Prometheus datasource and dashboard and requires GRAFANA_ADMIN_PASSWORD, and all ports bind to 127.0.0.1.",
+      "evidence": [
+        {
+          "resource": "repo://compose.observability.yaml#L4-L52",
+          "version": "repo-lines-v1:sha256:1bf47c5a550d7a267a45c8c109a38e98736a958fe37412f251700ba7f8ce7247:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNzNmY2NkYzk5ZWE4MzU5NjdjN2RlZTdlZmJlZDFmM2NhODcyNjBkOTI5MzE4NTBmZGQ2NmRhOGNiMTJmMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlMDcyZDJhNWIwYTE2N2Y4NmU5YzEwYjJkNGEzNmUyYzU0ZTk5MGIxZGE2YzVkOTczNWFlMTA0MTQxY2ZhZjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwMTg3NGVhYTA1M2MzZTFiNTAwYTAwN2IzOGQ4ODJlMGUyZTA4MGVkZDA2YzI1ZmQyYjZiNzJkMDgwYTQyOTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://infra/observability/prometheus/prometheus.yml#L1-L13",
+          "version": "repo-lines-v1:sha256:bd90bb20d370d576fa212d6ffc363e598c6e669079227a933844105f5a14eb63:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzZDJjMWViNjM0YjM5YjkxYzYyZDE2YzZhYjExMjYxMDQ4YjQyYzExYTJjNjhjZDhlNDY0YWVmOGU4NzQxOWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6edbc01046f84480869defcc5a9f1486",
+      "statement": "Prometheus alert rules fire CreditScoringDataDrift when credit_data_drift_psi >= 0.20 for 30s (warning) and CreditScoringExporterDown when up{job=\"credit_scoring\"} == 0 for 1m (critical).",
+      "evidence": [
+        {
+          "resource": "repo://infra/observability/prometheus/alerts.yml#L1-L21",
+          "version": "repo-lines-v1:sha256:1fdb795b4f78b765c1731d1e0a2e5149b92eef19fd7baf4d43599b53ca2a2172:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3OGExMjQwNTBjM2UwZWU0NjU4OWI1NTYxNDkwMDlmNjU2OWIyZGRhODMwNjNlMGIxYTM0MDhhZTZmYzBkYWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_046a87ea76a243b8b85fe8fe5c3ad1cc",
+      "statement": "Training holds out a stratified 20% of the reference set, computes AUC, KS, PR-AUC and F1 at the F1-optimal threshold plus per-gender and per-age AUC (groups with fewer than 30 positives skipped; CODE_GENDER is not a model feature), and logs params, metrics and model to MLflow.",
+      "evidence": [
+        {
+          "resource": "repo://src/training/train.py#L26-L131",
+          "version": "repo-lines-v1:sha256:e5ade7049298395ac0e2ba6ad7e768912102b08e1ae7b7036056022ff5e9c975:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA2LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI2OTNiYzRkMDA2MDY3YTA4ODllZDc4NmY1MWVjN2JjZTJlNzY2OWUxNTI0YjFhZTFhYTdmNGI0MzVhMzMxM2FiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkNzdkY2Y4MmYxZmYyNzE5NjI3ZmM0YzRiM2VhZmIxMDExZjc5MzAzOGRiNGJmZDZhNGU5YmE3YzAxM2NiNjZjIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlNWMxYzQ2MmUyYTM5ZDc0NzU5ZjVlMWIxMjZmNzY4M2EyYjczMDExOGUxOGY1MTIyYjA4Y2VkZWViNjUwZTIzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI2MGZlMjU3NmU2ZjJjZjViNGFhYWEwN2ZjZDhlNTc2MDM0OGRiODFkZmIxZDcxM2RiZDE2NDk2ZWJiMWM5NWQ5In0"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-24T23:05:52.220Z"
+    "at": "2026-11-09T02:01:44.977Z"
   }
 }

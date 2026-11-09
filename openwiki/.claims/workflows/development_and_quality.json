@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:8d15c0c095ab9ddd956d2de0fb74b99378950141ea7991fb9805c3b243b5e3ef",
+  "pageVersion": "sha256:0b66bcf4ed8277d061e6f9c555bdd3f5a8dd99a9b9bfc9520e08e9ddcf5d40af",
   "claims": [
     {
       "id": "claim_51c34e93d6d1416285f0ffa261529b9e",
       "statement": "Ruff handles Python code formatting and static analysis configured in pyproject.toml with an 88-character line length, target version Python 3.12, Google docstring rules, and an explicit exclusion for notebook files.",
       "evidence": [
         {
-          "resource": "repo://pyproject.toml#L3-L17",
+          "resource": "repo://pyproject.toml#L24-L38",
           "version": "repo-lines-v1:sha256:d1f546f06509b0e3876da7b986950bfb5826783b222f826e5df78f99bd44f125:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3NDVmYWI4NmIxMjFkYzg1YjRmNzg2NzMzOWExM2ZlZTgwNGM4YTAyZjQ3MTA2NTcyZjJiZjA2NjRkNTk1MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZmU2YzBmMTIxMWIxNTI1Y2I2MjQzYWEwNWYzM2UxM2UxN2VkYTg2ZGExMWJmYmUyOTE5MDhlMDRlZDU0ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4Nzc4YWQyNjY2MjEyNzY5ZmU3NzQyOGQ5ZjA3ZGQ0ZjU4YzA5ZDc3YmJkMGYxNjcxMDdlYmU1OTNmODAwNDkifQ"
         }
       ]
@@ -21,18 +21,18 @@
           "version": "repo-lines-v1:sha256:ce615dbfaec589e4176ad5a264d7d1662491f2e5fe52c86202075fe7a4dfa942:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2VjMjI5N2RjZDk2ZmM0ZmY2ZTA3NDFjODRmYWQ0ZWIzMTU3OTg4YjEwZDc4Yzc3Njc4YjE4M2NjNWZiZDRmZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTRhOTA3ZjcyOWMwNmUxY2JjNWQ1ZjU4MDJkYzQwNzQ3ODI2OGEyODVjMzg1ZTk0OTE2NzkzZDgxNTkyZWNjNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWZmMTgwMDdhN2Y2MjIwYWVmZWM1MTRhMDY2MzI5NDk4ODI5NjZjMDFmMGFjYTVmOGM5MDkwODMyZDFhMzc1YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDE3ODJjNWE3Yjg5NjRlMGMwYzU5MmNkZjdlNjA3NzE4YzViNGVjMjQxNzA4NzVlMzg5Y2JiZjg1MjZiNDY4OSJ9"
         },
         {
-          "resource": "repo://pyproject.toml#L44-L46",
+          "resource": "repo://pyproject.toml#L65-L67",
           "version": "repo-lines-v1:sha256:7f5177b229e7e961b1112d6b92fe9bc239558e6ee696657620f930398b8d52f7:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWYyNGEwYmU4MDlhZTBiMGIxNjM3ZGJkOTMzODk2ZmJhMDhjNWVmNjQ0OTZjZTliYWU4YWJjZDJhOGEzM2FmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTZjYTc1YTk1MTgyNmJkMDJjNGFjNjkxZjNlNDBkMzQyYTc4ZGQzNDU5NTMwMmM1YzVmOGVmMDU0NDQ5NzkzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTBhZGQyODAyYTQ1OGZhYWNhNjIyOTIwMDc2ZTE3MTZjMDBiZTNmYjM5NGY1YmQ1ZTA0OTJmZGNlZDlhNjdkNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCJ9"
         }
       ]
     },
     {
       "id": "claim_04a0d69c04834ab7b1df1f3d90ee5b30",
-      "statement": "Notebook clean state hygiene is enforced by scripts/check_notebooks.py, which inspects Jupyter notebook JSON structure and flags any code cell containing non-empty outputs or non-null execution counts.",
+      "statement": "Notebook clean-state hygiene is enforced by scripts/check_notebooks.py: dirty_cells() parses each notebook's JSON and flags code cells with non-empty outputs or non-null execution_count; main() checks the notebooks passed as arguments (or all notebooks/**/*.ipynb when none are given), prints the offending cell indices, and returns 1 with the hint 'uv run nbstripout <notebook.ipynb>' (not a make target) when any are dirty, otherwise returns 0. It never modifies notebooks.",
       "evidence": [
         {
           "resource": "repo://scripts/check_notebooks.py#L8-L46",
-          "version": "repo-lines-v1:sha256:e5bd236f3f2d4a648013ecca0d9ad96f5e0c90459d5723c7d0beb7369b7a8306:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOTAzYzdkNTcwMWFkODkyZjg5NzUyZjk2N2U4ZTFlODczNTFmODA5ZGU4MzQ1MmQ1ZGJkMmNlMGJmNDg0MGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MWJmM2Q5NmYxYjExOTY4OGRlZWE5YTAwNGIyYjNmZWJiMTgwYmI4ZmIyMzQ0NjI1NjE0YWRjODU5NTYzYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+          "version": "repo-lines-v1:sha256:8e0b9f4e2e3ec82b36cbf3ebd34de0f35704bb87e6bbf5586e88e6bca57cbda2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOTAzYzdkNTcwMWFkODkyZjg5NzUyZjk2N2U4ZTFlODczNTFmODA5ZGU4MzQ1MmQ1ZGJkMmNlMGJmNDg0MGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MWJmM2Q5NmYxYjExOTY4OGRlZWE5YTAwNGIyYjNmZWJiMTgwYmI4ZmIyMzQ0NjI1NjE0YWRjODU5NTYzYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
         }
       ]
     },
@@ -55,10 +55,42 @@
           "version": "repo-lines-v1:sha256:a7795f3f13ac6ed0ae398632e72fc00e87de5de5049987e11c5ddd1bb819a414:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5ZTVhMTlkMGViM2U5NzdjODA5NjMzNjg3YTRjMDdiZmQ1M2QzYTYwZGVhMmM2NmJmNTljY2I0NmZjZjE1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmNzFjNjBiZWRlYzM1OTIxYzM1YzE0MmVkMjdiZWIwNGQ2YzY5ZDc2MTAyYjc5OTliMzExZjlhOThlMzVmNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5YzFiNDdlNTc0MmE4Y2MwNjEwZmVlY2JlZjkwYzFmNjBiN2YzYmM4NzQ4YWZiMzNkNjI0ODlkNDEzYzI4ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc1ODJlYWI4YTU5N2E4NzA4NGM2NDExMjE4MTNiMGRlNmY2Mjg3ZDhkNWViMTc4ZjMzNDdmODAwYzQ5ODc5ZWQifQ"
         }
       ]
+    },
+    {
+      "id": "claim_5cb64ce9eac744c5b22229a740a69975",
+      "statement": "Local setup uses uv with a locked environment (uv python install 3.12, uv sync --locked), while CI installs with uv sync --frozen; dev tooling (pre-commit, ruff, radon, xenon, nbstripout, pytest) is in the dev dependency group.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L19-L24",
+          "version": "repo-lines-v1:sha256:7db9f9023493cc0195c7851a1f576634d80ba591388db0d9cba839551649b635:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjA3YTk1MzlkMjk2MDY3ZDRlMjhmZTdlNmUyZGEwZmRmMGFhNzdjODQ0OTMzMzZlOTE1MjAxYmIxMDQyYmI5MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGYxNzExOThmOGZlNDg1NTYxZjU5MmJlZGVhNDE5ZTI5MzY0Y2EwZmEzODI4ZTM3YmQwMmU3OWY3YzYxOTI2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTEyNzliMmYxMTcxMjEwNGVmZGVlYzk5OGQ3MTViYjEyYzhkZTQ4Mzc2YmNjMmU0NmNkMjdlMzM5YmFmYmM0YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDljZmM2ZmEyNjZkMWJhYzJjMzg5MWE2YmM0YWIxMDUyZjVjYTMyMWY1NDJhODgwMDAwOWUwZGIxNTY0MmU2YSJ9"
+        },
+        {
+          "resource": "repo://README.md#L80-L81",
+          "version": "repo-lines-v1:sha256:26e1afc83212ec4b8459d4c4c62af52333d860d9fc94108d1d4dce71cdb7b7ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2FlOTM1NjhiZmI0NDQ4MWRjMDVhM2ZhMGU2ZmY5NTdkZTIzNjU5ZmQyODQyNzlhNmRkOTM2MjBjOTA1ZjVmNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTdlOTY0OGMzZmMwNWIzZjI2OTUyOGEyYjM1YTU4NDhlNzZiM2UyNzczZGU5MzM4YzdjNGM0MDE3NDExZjNhNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODQ0ODRiZGFkZGFhZTI3NDMxNGIxZGQwNGNlZWRhYzIxZGYxZTRjODI3NDI3ZGI5ZTZkNDUxYjFmMzQzNzZjMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDk0OGY4MjEwNjNkMTQyYjkzOThmMmI0ODljNTU4ODRmZDY1Yzk3NjdmZmFjZWRlOTFmMWIwNTZjNDdlMTRmYSJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L58-L68",
+          "version": "repo-lines-v1:sha256:a1851ef7822d2e444111dcca67893027160b0643936745ce3864338c041074e3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYjc0OTliMWNlMWM0ZjRiMjUyN2YzYTMyODRjYWM2YjZhMWUzYmY0OTg4YjU2Nzk4MmMzZGM4ZTlhMTdmMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVjMTljOTUxMzIzNjc1NTc4NTIzN2RlYjg1MTE5NGIxMmNkMTA2MDYwYzkwOWZmNzljYTc2ZDg1NmU1MTQzNzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cb4f0017bbf047ea80d756347bb34b2b",
+      "statement": "The CI workflow runs on push and pull requests to main and development plus manual dispatch, cancels superseded runs per ref, gates the test job on the quality job (needs: quality), and has its docker job disabled with if: false.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L3-L14",
+          "version": "repo-lines-v1:sha256:21775f1e1332c417ff26b93bf7daa55240b5417ee586304064f30414e75eafe4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NmRjNDgxNDlmNWE4M2QxZWQ2ZGJiMzliYmM3ZTJiOTAyYWEzZDM0ZDZiZDVhZTRiMjkxYjY4ZGYwY2E3OWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5ZDgwMTU0ZWQ0MmZjNWM3NzliMTMzMTU3OGI1OGI4OWM4MDFlYWNlNzRmMjRjZDQ4ZWI0YTIzNTc5NDBhOTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhYjI3NTJlNjI3ZmQyZDIwYjk2YzE5NjczM2UwYTBlN2VhMzVmYzdkOTM1OTUwOWU5N2QzMjlmYTM3NTQ4OTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjMGRmNTVlYjI2ZjQzY2QwOWZhOTgwNWUwMDA0YTc0OTRkNTkyMTdlMDNlMjlhZDU4Yzg4YWM4YmIwMmFhY2UifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/ci.yml#L36-L59",
+          "version": "repo-lines-v1:sha256:4ce1e2bf852577e205b91dc8f694b36cc017245e252ec85e283f61a32fe21d0d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMDA1Nzc3NzZjNjY4YjcwMWQ3MTY1YTk3MmNiYWJiNmVkZWQxMjhiYjg1ZmE3MGMzMjYwYjU4ZTBlOWIwNDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4YjJkNWYzY2RkODQwM2ZhZTY2Mjc0ZTU1NTM5MTMyMjU1OGFmNWNiMWZhNmI4N2I0ODc1NmNjODFkMzdhMzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwMWEzNjczZWQ3MTlkODEyMzNlNDgwMTI4NjBlYTQwZTgzNzJhZjcwODk3MDJjZDRhNDJmZGE0Y2Q3NTA1MTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ0MzU3MGFkNWM1M2VjMjE4ZjRkYjM1YjNhMDlmMmUyNmU4MzhkMmExMzlmNGY2ZGIwNjM5MzAzYjM5YWQ2YzAifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-24T23:05:52.220Z"
+    "at": "2026-11-09T02:01:44.977Z"
   }
 }
