@@ -38,10 +38,10 @@ jobs:
     steps:
       - name: Check OpenWiki secrets
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          if [ -z "$GEMINI_API_KEY" ]; then
-            echo "::error title=OpenWiki::Secret GEMINI_API_KEY não configurado. Cadastre em Settings → Secrets and variables → Actions."
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "::error title=OpenWiki::Secret OPENAI_API_KEY não configurado. Cadastre em Settings → Secrets and variables → Actions."
             exit 1
           fi
 
@@ -69,9 +69,9 @@ jobs:
           echo "Executando openwiki code $mode"
           openwiki code "$mode" --print
         env:
-          OPENWIKI_PROVIDER: gemini
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          OPENWIKI_MODEL_ID: "gemini-3.6-flash"
+          OPENWIKI_PROVIDER: openai
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENWIKI_MODEL_ID: "gpt-5.4-mini"
           OPENWIKI_LANGSMITH_API_KEY: ${{ secrets.OPENWIKI_LANGSMITH_API_KEY }}
           LANGSMITH_API_KEY: ${{ secrets.LANGSMITH_API_KEY }}
           LANGCHAIN_PROJECT: openwiki

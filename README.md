@@ -661,4 +661,66 @@ git diff --check
 
 **Dica:** arquivos ainda não rastreados pelo Git não aparecem em `git diff`; inclua-os com `git add` antes de validar o conteúdo staged e criar o commit.
 
+## Governança e LGPD
+
+### Escopo
+
+O cenário simula uma fintech que utiliza um modelo para apoiar nas decisões de crédito. No contexto acadêmico, o dataset é o Home Credit Defaault Risk (Kaggle), público e sem identificação direta de pessoas reais:
+`SK_ID_CURR` é um código sem vínculo com titulares identificáveis. O plano abaixo detalha como a esteira trataria dados reais.
+
+### Inventário de dados pessoais
+
+| Dado | Classificação | Uso no projeto | Tratamento |
+|---|---|---|---|
+| `SK_ID_CURR` | Identificador | Unicidade e junção | Não é feature; não aparece em logs nem métricas; em produção, seria pseudonimizado (hash com chave secreta) |
+| `CODE_GENDER` | Atributo protegido (risco de discriminação) | Somente auditoria de viés | Excluído das features do modelo (`MODEL_FEATURES`) |
+| `DAYS_BIRTH` → `AGE_YEARS` | Atributo protegido / quase-identificador | Feature do modelo e auditoria | Mantido por relevância para risco de crédito; monitorado por faixa etária (ver "Mitigação de vieses") |
+| Renda, crédito, anuidade, emprego | Dados financeiros pessoais | Features | Apenas as colunas listadas em `RAW_COLUMNS` são carregadas |
+| `EXT_SOURCE_1/2/3` | Scores de bureaus externos | Features | Origem de terceiros; em produção, exige contrato de compartilhamento |
+
+Gênero e idade não são dados sensíveis de acordo com a LGPD (**art. 5, II**), contudo o princípio da não discriminação (**art. 6º, iX**) exige monitorar seu efeito nas decisões.
+
+### Finalidade e base legal
+
+- ** Art. 7º, X - proteção do crédito:** base principal para analisar o risco de inadimplência;
+- **Art. 7º, V - execução de contrato / procedimentos:** a análise ocorre a pedido do cliente que solicita o crédito;
+- Os dados são utilizados **somente** para avaliar o risco de crédito; outros usos (ex.: marketing) exigiriam nova base legal.
+
+### Princípios aplicados (art. 6º)
+
+- **Minimização:** a esteira carrega uma lista fechada de colunas (`RAW_COLUMNS`), e não as 122 colunas do dataset original;
+- **Finalidade:** o gênero é lido apenas para auditoria e não influencia o score;
+- **Segurança (art. 6º):** dados brutos, processados e artefatos gerados ficam fora do GitHub;
+- **Transparência:** regras de validação, features e métricas documentadas neste README e no model card (`docs/model_card.md`).
+
+### Direitos do titular
+
+- **Art. 18:** acesso, correção e eliminção dos dados, via canal do encarregado.
+- **Art. 20 - decisões automatizadas:** o cliente pode pedir revisão da decisão e informações sobre os critérios usados. O modelo atual não gera explicações individuais. Em produção, cada decisão retornaria os principais fatores e as recusas teriam revisão humana.
+
+### Plano de retenção (art. 16)
+
+| Dado | Prazo | Justificativa |
+|---|---|---|
+| Dados brutos e processados do projeto | Eliminados ao fim do projeto | A finalidade acadêmica se encerra |
+| Em produção: informações negativas | Até 5 anos | CDC, art. 43, §1º |
+| Em produção: histórico de adimplemento | Até 15 anos | Lei 12.414/2011 (Cadastro Positivo) |
+| Métricas no Prometheus | 7 dias | `--storage.tsdb.retention.time=7d` em `compose.observability.yaml` |
+| Logs estruturados | Curto prazo; apenas dados agregados | Não contêm dados pessoais |
+
+### Papeis e resposta a incidentes
+
+- **Controlador:** a fintech, que decide sobre concessão de crédito;
+- **Operadores:** fornecedores de infraestrutura e bureus de crédito;
+- **Encarregado (DPO, art. 41):** canal para os titulares e também para a ANPD
+- **Registro das operações (art. 37)** e **Relatório de Impacto (RIPD, art. 38)** revisados a cada retreino de modelo;
+- **Incidentes:** comunicação à ANPD e aos titulares envolvidos quando houver risco relevante.
+
+### Mitigação de vieses
+
+- O gênero é **excluído** das features e usado somente para medir o comportamento do modelo por grupo.
+- O treinamento registra no MLflow o ROC-AUC por gênero e faixa etária. Feminino (0,7671) e masculino (0,7515) ficam próximos; maior diferença de **60 anos ou mais (0,7290)**.
+- **Limitação:** AUC por grupo não basta para afirmar equidade. Variáveis como renda e tipo de ocupação podem funcionar como *proxies* de atributos protegidos.
+
+
 > **Nota:** dados, artefatos do modelo e relatórios gerados devem ser avaliados antes de serem enviados ao repositório. Não versione dados pessoais ou arquivos de produção sem necessidade e autorização.
