@@ -1,3 +1,5 @@
 # Files
 
-- [Environment Configuration & Settings Management](configuration_and_environment.md) - Detailed guide to runtime configuration management using Pydantic Settings, environment variable overrides via .env files, and ROOT_DIR-based path resolution across environments.
+- [Environment Configuration & Settings Management](configuration_and_environment.md) - How runtime configuration is loaded (Pydantic Settings, .env, ROOT_DIR-anchored paths), which toolchain pins apply (Python 3.12, uv), the state of DVC remote configuration, and which environment variables and paths feed the observability stack.
+- [Data Contracts & Validation (Pandera)](data_contracts.md) - How the Home Credit raw data is loaded, the Pandera training and inference contracts, the monitored validation wrapper, the invalid-batch demo, and where contract failures surface in the pipeline.
+- [Governance, LGPD & Model Limitations](governance_and_lgpd.md) - Governance, privacy and LGPD inventory, retention plan, bias-mitigation approach and the documented limitations of the credit-scoring baseline. Read it before changing which columns are loaded, what is logged, which artifacts are committed, or how fairness is evaluated.

@@ -1,4 +1,5 @@
 # Files
 
 - [Quality Standards, Quality Gates, & Notebook Hygiene](development_and_quality.md) - Overview of repository code quality mechanisms, including Ruff linting/formatting, Radon/Xenon cyclomatic complexity gates, pre-commit hook automation, and notebook output validation.
-- [ML Pipeline Structure & Experiment Tracking](ml_pipeline_and_tracking.md) - Detailed guide to end-to-end machine learning workflows across src subpackages, MLflow experiment tracking integration, model artifact persistence, and model card evaluation standards.
+- [Drift Simulation, Detection & Score Impact](drift_monitoring_and_score_impact.md) - End-to-end trace of the Home Credit drift workflow. It covers controlled drift simulation, Evidently PSI detection and structured alerts, before/after XGBoost score-impact analysis, the report files produced, and the monitored run that always exports Prometheus metrics.
+- [ML Pipeline, DVC Stages & Experiment Tracking](ml_pipeline_and_tracking.md) - How the reproducible DVC pipeline (validate, prepare_data, train, simulate_drift, detect_drift, score_impact) turns the Home Credit CSV into a baseline XGBoost credit-scoring model, how features are built, what MLflow records, and which model and metrics files each stage produces.
