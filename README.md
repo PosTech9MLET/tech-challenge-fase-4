@@ -105,7 +105,20 @@ Baixe o arquivo `application_train.csv` e coloque-o em:
 data/raw/application_train.csv
 ```
 
-O dataset não é versionado neste repositório.
+O dataset não é versionado no Git: ele é rastreado pelo **DVC** (`data/raw/application_train.csv.dvc` guarda apenas o hash). Ainda não há remote configurado, então cada pessoa baixa o CSV do Kaggle; quando houver um remote, basta `uv run dvc pull`.
+
+### Pipeline reprodutível (DVC)
+
+As etapas abaixo também estão declaradas em `dvc.yaml`. Para executar só o que mudou (dados, código ou parâmetros):
+
+```bash
+uv run dvc repro          # roda as etapas desatualizadas
+uv run dvc status         # mostra o que está desatualizado
+uv run dvc metrics show   # métricas do treino, drift e impacto no score
+uv run dvc dag            # grafo das etapas
+```
+
+`dvc.lock` registra os hashes de cada execução e deve ser commitado junto com as mudanças.
 
 ### Executar o fluxo completo
 
@@ -160,6 +173,7 @@ uv run pre-commit run --all-files
 | Pytest e pytest-cov | Testes automatizados e medição de cobertura |
 | Pre-commit | Verificações antes dos commits |
 | nbstripout e check_notebooks.py | Evitar outputs de notebooks versionados |
+| DVC | Versionamento dos dados e pipeline reprodutível (`dvc.yaml`) |
 | Radon e Xenon | Apoio à análise de complexidade e manutenibilidade, quando utilizados |
 
 **Convenção de commits:** `feat`, `fix`, `docs`, `refactor`, `test` e `chore`.

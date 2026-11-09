@@ -57,6 +57,7 @@ fail_under = 0  # suba para 70+ quando houver código de verdade
 
 [dependency-groups]
 dev = [
+    "dvc>=3.67.1",
     "ipykernel>=7.4.0",
     "nbstripout>=0.9.1",
     "pre-commit>=4.6.2",
