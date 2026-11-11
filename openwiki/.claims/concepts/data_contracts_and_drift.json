@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:f58420742ef5767b4fab61233e418d110300ea8af62389379afc586270c36bd1",
+  "claims": [
+    {
+      "id": "claim_35a92414d6744a4b94ea8a73aec5a531",
+      "statement": "The Pandera contract (credit_schema) constrains seven Home Credit feature columns (unique non-null SK_ID_CURR, positive income and credit, nullable positive annuity, DAYS_BIRTH <= -6575, non-negative children, non-null income type string) and adds a TARGET in {0,1} only in training mode; it uses strict=False, coerce=False, and both validators run with lazy=True so all violations are raised together as SchemaErrors.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/contracts.py#L6-L51",
+          "version": "repo-lines-v1:sha256:1bf274762e7ec8fc5c0b5f92b9533347374989a7439bf44eeeef499712be0b66:eyJzZWxlY3RlZExpbmVDb3VudCI6NDYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4ZDM3YzYzYmRkMjNmNjNiNTY2ZjQ1YTI3MTRmMGQ2YTJmMjBlM2E1OGM0OWYzYTExNWEyY2QzNmI3ZjhmNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyMDRkNGRjOWUwNWQ4M2E3NDZkZDk4MjAwY2ViZDcxNDcyOTA3ODU1NzQxYTlmMDc2NjgzNjgyYzdmODY0NmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU1NjVjYWU1ODE4YTVkMjA2MjY5YzYzNTcyOTNiYWY1ZTM4NDQ2OTc4MmZmZGI0MzNjNTkwOWE0OTQxNjFiNjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_contracts.py#L30-L93",
+          "version": "repo-lines-v1:sha256:f39f83dce175a47e3b94f02356aa5c3526a58c1968eee7adf379ab4803cfeec5:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRlNDM4NjIwMWNiM2RmYjQ4OWIwMzAyOTBlOGNkMTE3NTNkMjdiNDUyMGY2NzhkNDM4NWQ2OTNjMTIwYjhkYmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwYmNlMmNjNzFkMGI1OTI4MzcyYmQ1MzFjNmZmMGExNmVhZmE5NWNjNDk3NmYzNGYxMzJmNjU3ZjBlNGVkMzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_73f577a902be41c4b04f4c92b3a19694",
+      "statement": "The prepare_data pipeline validates the raw application_train frame with validate_training_batch before splitting; a violation raises SchemaErrors so ingestion is blocked and no parquet is written. Otherwise it writes a 70% reference.parquet and 30% production_base.parquet containing raw columns only, so feature engineering stays in the model pipeline and simulated raw changes propagate to derived features.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/home_credit.py#L22-L47",
+          "version": "repo-lines-v1:sha256:2880b703c385d27681657859237287951f61c64f60f909219723d31ce64fe0f8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJjNzY5NWNmODAzNTNiOTRhZjllMjIwYjgzNzU2MTcyY2E5NjZkMzJjMWY5YzU4MDRkZjg0Nzg4OTA4MGRlOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyMTRmZDI0M2JiMTkxYmU2MjI1OGRhMWQ4MTkxZGYxNWY0YmUxZjFiYzY4MTE2NzBiODc4MDk3Yzc1MzlhNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgxMzA4ZDE2YmMzY2JjOTMzZDQzYmVmZjZjM2I4MmZhODg0M2I1ZWZjOWRlMWExZDk2NGYzMGVkNzFjYTRlMGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/features/build.py#L50-L83",
+          "version": "repo-lines-v1:sha256:b513056397967440c9b332aaeb69fd8703d5cca6d6935bca8c1e0149fb1cb54d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhOTM0N2E4M2MwNDNkOTQ4MGYyM2IzYzU5OGI3YjIwNTUwNDUyYTRmNDE2MWI0MDUxNTI4N2IwYjllNjNhMTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiNWZmZTY1MzkyZTNmYjNkNzE0OTk1ZTYyZTYzMWEyNjQwMWQwYjNiMzkzNzNlN2Q2NTBiZjFjNTk3MzBhZmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdkMjkxNDc3ZWQ0YWRiMGFlMmNiNzE5YWUyOThiY2VmMDU1YTc5Y2FkZWQ0NWIwNGYyNjY2NWIwYjJjMzAzMTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L11-L40",
+          "version": "repo-lines-v1:sha256:b0bb13f1746babe7e7cfa70b22b5be613f9082f11250f9429e62305beb2319aa:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4NjdlODE3ZTE5ZDZmN2RkN2NiYjM1YjgyYWUwY2Q3MDQyZDc4MWNiNjJlZDg4OTQ3NWMxYWI5M2M3NGVhYjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1YzFjNDYyZTJhMzlkNzQ3NTlmNWUxYjEyNmY3NjgzYTJiNzMwMTE4ZTE4ZjUxMjJiMDhjZWRlZWI2NTBlMjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cd3b2a4cd1e24e2aa55477a8e7d85b27",
+      "statement": "load_application_train reads only RAW_COLUMNS from data/raw/application_train.csv and raises FileNotFoundError with the Kaggle URL if the file is missing; split_reference_production uses a TARGET-stratified train_test_split and returns index-sorted halves.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/home_credit.py#L17-L47",
+          "version": "repo-lines-v1:sha256:1675114cd8a103fca8772ceec11fd62308d6fa487749e6eb8c4c182d99caf519:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhMzMwNWEzMzE3MDQwY2Q0ZmY3YmI2YjE0Yjk3ZmE1MTRiNzlhNzM4Yjg5NzQ3Y2I2YzQ1MGZiMDFmZjgyMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyMTRmZDI0M2JiMTkxYmU2MjI1OGRhMWQ4MTkxZGYxNWY0YmUxZjFiYzY4MTE2NzBiODc4MDk3Yzc1MzlhNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNhZWIwODRiN2VkMTc5NjY1ODUyNjQ3OTgwYTBlYmZhNGM2YTFiYmI4Mjg1ZTZjMGJjMmI0ZThlMGUxM2MxZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_13a705e05fec476592e7bcc086a5b473",
+      "statement": "validate_training_with_monitoring wraps validate_training_batch in observe_pipeline('data_validation'), logging structured status approved, rejected (for SchemaError/SchemaErrors, warning) or error (other exceptions, error level), and always re-raises failures.",
+      "evidence": [
+        {
+          "resource": "repo://src/monitoring/validation.py#L17-L65",
+          "version": "repo-lines-v1:sha256:078c3c2f63ddafffb0faddc8648b29babac79b575d968d63306aeffdcc299386:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZjY2MjNjYjgxY2NkMTkzNTViYjZjM2Q1M2UwY2JkODhiMjI2YzI3M2IyYzMzZDNmYTY3ZTM1ZDEzZjI2ZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dee0766e8b634697aca505ca52a25661",
+      "statement": "simulate_income_credit_drift deep-copies the data and multiplies AMT_INCOME_TOTAL and AMT_CREDIT on the same randomly selected rows (default fraction 0.60, multipliers 1.40 and 1.30, seed 42, reproducible); it rejects missing columns, empty data, fraction outside (0,1] and multipliers <= 1, never mutates input, and leaves IDs and TARGET so the result still passes the contract.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/simulate_drift.py#L7-L49",
+          "version": "repo-lines-v1:sha256:1e799ed158dca5b3c657c461e2b3c4bf1a0f8269bae07f180aecf45151a95b84:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2MmRkYmJjZWJiY2MzMTY4MjY1ZjZjNWU2ZmEwYTRlM2FlYzQ4ZDRkNzJmNmZkMDYwNzQwN2Q3OWQ1NGIyYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwZThjY2FlMjEwNTRlYjNmYjAzOWFkZWY1MDU1MDBkZTFjMTRlZGQ5ZjRhZGI3NWMxNTgxZjk3MzQ3NWFhNDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxYWJhOTg0ZjlmZDc0YTViODMxZDZlMjNmNDM2N2JjYmQwM2Q4NjA0YWQ3MTA5MmZjZjM5NTllY2MwZmMyNTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_drift.py#L11-L53",
+          "version": "repo-lines-v1:sha256:81a60cbef43900f1b1837f910ef6af3ecb68c47551bbdf2bc3916d1362807f7b:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhOGI2OGYzYjZkMDgwMjNmZDVmYTdjZGFhOTUxYzk4ZmQwNDdmZTY0YjI1YTFjOTNlMWNkNDhjY2Y1OTc3ZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NmUzNmQ5MjRjMWEzYTNlZDc1MmEwZDMyNTk5NTY4ZTMzZjAzYzAzMzhhYmU0ODRjZmM3M2I5OTg5NGQwZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlOWNiYWRhYmM3NmQ2MDY5YTBkYzQyMzQ5Mzk0MTNiOGIxNTZlNjkxNTg3ZTU0ZmM1MmU0NjcyOTlhYTM4MzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f6d252b0e49d425691bfbce5f5494a06",
+      "statement": "scripts/simulate_home_credit_drift.py generates the drifted production file with stronger settings (fraction 0.80, income x1.80, credit x1.70, seed 42), requires production_base.parquet to exist, validates the TARGET-less data with validate_inference_batch, and saves production_drift.parquet.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/simulate_home_credit_drift.py#L13-L51",
+          "version": "repo-lines-v1:sha256:31530590d7e295df4a9c75832856876c0ae440f75b819fca911b5ade0b612485:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjZDJkM2I3YzFkMmE0NzZhMWVkZjYwYTE4OWJjNWU4MGM3MzUwYzQ4NTc4OTQ2ODYwMzBkNmEyOGM0NTBjMTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmNjE4M2JiYmI2YTNhM2FmZGJhYzI5Njg2NDIxYmM2ZGY1MmJjOWM4NThlZWQxMjllNGM1YjYyNWQwZjA1OTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f51404de16414836bfc017fc1bcd7e43",
+      "statement": "generate_drift_report validates that AMT_INCOME_TOTAL and AMT_CREDIT exist and data is non-empty, samples up to 5000 rows per side with seed 42, runs an Evidently DataDriftPreset with PSI and threshold 0.2, and writes an HTML report plus a sibling JSON snapshot.",
+      "evidence": [
+        {
+          "resource": "repo://src/pipelines/drift_monitor.py#L10-L71",
+          "version": "repo-lines-v1:sha256:8e9f30745988af6cecb06bf4dee2c29c2c3805ad68352c44e4b7d0538bcc0c43:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ZTNiOGYxY2Y3N2M2YTFjMzYzZDhlYWUxZDJjMzgwZjNjMzgwOGZmNmI0MmRkMzFhYWVjYmFjMWFhNDJkZWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI5NTZlZGY0MmVjN2ZmZjE4NDI3Y2M5Y2FkNmVjZjFiODRkOGE2MDNhODA0YmM4MTQ1MzVmNGIxNmI1ZDE0NjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk2ZTcxZmYxMTQ5ODBjNTQ4NWMyNzk2YmE5MGQ2ZTRiYzMyYjE2ZDE5YmVhZjU5MzYyZDIwYzYzMzZjM2MwYmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_50184f1c411b43b29880bb2d0231d9a4",
+      "statement": "extract_psi_alerts parses the Evidently JSON, keeps only ValueDrift metrics, flags alert when psi >= threshold, and raises ValueError when no PSI metric is found rather than returning an empty result.",
+      "evidence": [
+        {
+          "resource": "repo://src/pipelines/drift_monitor.py#L74-L100",
+          "version": "repo-lines-v1:sha256:d85a05b1bc3a2101627d19b10fbe9566ae2a4793c8a7a58cea970ca86ccdc439:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2MTQ0NDE0MzMyZTYwYzIyMThkNjI0MGU4ZmE0ZGRjNGQxZmExZmIyZmI4ZTkxNDkxNTQ3OGVkYmQ0NTY3YTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwZTRmYjRkNDIzZWMzZTYwYTFkMDNkYjA4OGU1N2U4YjM1MjIxZDkxMzg0OTM2YTg4ZmQ5Mzg5NzllZDlkOTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad1adff90431449ba34a32096bdd1993",
+      "statement": "scripts/run_drift.py compares reference against untouched production (baseline) and against drifted production (simulated), writing drift_baseline/drift_simulated HTML and JSON plus a combined reports/drift_alerts.json; the committed alerts show baseline PSI near zero with no alerts and simulated PSI of about 0.67 (income) and 0.45 (credit) with alerts.",
+      "evidence": [
+        {
+          "resource": "repo://reports/drift_alerts.json#L1-L26",
+          "version": "repo-lines-v1:sha256:5a02548bfabcb70c0072e7f9fcb7bf71f6971353a2c176156488c5557536eb17:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://scripts/run_drift.py#L22-L56",
+          "version": "repo-lines-v1:sha256:3c2bd58d36f1d16a7e658e905063b5fa9065ab861a27fbef0a09462fca02d8ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxOWViZWRmYzdkNzllMmE2YmU0ZDljMDRlMjNiYzM1M2I1MDcyZmYyNmFkMzEwMDUyYWNkNTIzZTI0NmZjMjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNmYjE0OWYwYzQzNWM3OGI3ZmM0NmM1YzFhY2I4M2ZkZmQzNDhlODdhYmJhNmZhODkzMDNhMjlkZWZkMjQ3ZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_50a0f3ea3d6b48c9b58b887fac7d50ef",
+      "statement": "scripts/run_monitored_drift.py runs data loading, monitored validation and run_drift under observe_pipeline, records PSI of only the simulated scenario into the credit_data_drift_psi gauge, and always writes reports/operational_metrics.prom in a finally block; the Prometheus alert rule fires on credit_data_drift_psi >= 0.20.",
+      "evidence": [
+        {
+          "resource": "repo://infra/observability/prometheus/alerts.yml#L1-L10",
+          "version": "repo-lines-v1:sha256:c1e1b5044658b9db63f7afcd90e329bcda99f483c7e229b84fd66dbed3ae3cb9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzZTM3NTk0ODIzMWZjMDI0ODQ0ZTU2NWY4MzY5NjVjZjc1MGQ2MzY3ZmZkNDdkNDIzOGExZGU5NjgxNGM4ZTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxZTY2ZDZhYTNlNDRiZDZmYzcyZDc0NzA5MWM0ODVhODFkZDIzNjJkZWFkYWY3ZDAxZDY5ZWFmNDU4ZDdkNmIifQ"
+        },
+        {
+          "resource": "repo://scripts/run_monitored_drift.py#L14-L44",
+          "version": "repo-lines-v1:sha256:36e0e5cd56afd65bdcd0612f2451f77480d9260f85689d374717402fcacf3853:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3NWNiNTgzNzJiMzQ1Yzg2NzJjZmZjZDU3ZWUzYjE2MDkyZDNlMDAxYWEzZTZhMTgwOTI4YTU4NzA1ZTA0ZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ZjJjYzhkYjRlMDA1YWVlNGY1NzkzOTQyOTliZmQxMzQ2YTM4MTJkZjM0OTk4M2NjYTY1NjYxYThlNzRlZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/monitoring/metrics.py#L44-L50",
+          "version": "repo-lines-v1:sha256:38408e0749d7dc8734e510c7922d8b582953a93b1086d4fcdc4f78994e2a78c0:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjZmOGExMWI0NmZjODM5OTcwZGM3OWNjNzgzMTg2Njg2YzYwZjQyN2I4MTNiZGFkYTM0ZmQ0MDI4YWVkOTQ1YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjZmOGExMWI0NmZjODM5OTcwZGM3OWNjNzgzMTg2Njg2YzYwZjQyN2I4MTNiZGFkYTM0ZmQ0MDI4YWVkOTQ1YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmI0ZDk5OGU5MWNhN2NkMmYxZjdkZWIwOWM3YjhjM2MxMDRlNGI0NzE4YzU4YmQwNTc2NzE5NzVlOTUwMmFjYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDJlY2VlYWZkYjYyNzg5NWJkMGVkNjA0YzlmY2VkYjY4Njk3ODY1NjE4Y2JkMjQ0OWEwNjZjMDAzZTk0OGJmMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_04427eb3533e424190d42806835d857e",
+      "statement": "compare_prediction_scores requires a threshold strictly in (0,1), non-empty frames with unique non-null SK_ID_CURR and identical ID sets, drops TARGET before scoring, merges before/after scores one-to-one by ID (not row order), and summarizes mean scores, mean absolute change, shares above threshold and the count and percentage of decisions that crossed the threshold.",
+      "evidence": [
+        {
+          "resource": "repo://src/pipelines/score_impact.py#L10-L76",
+          "version": "repo-lines-v1:sha256:33cf96db077b957e840f2bae068f1d63f482bcf11c8b35c68642694391189bac:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkZWQwN2I1ZjUwMzNkMjZlOGFiM2U3ODQyZjY2NmRhYmFmY2FhZjUxZWJhOWE0MzRmMThjZWE4ZjQwODA1YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5NTEzY2RiMzkwY2MzMmZmNDg2YWVhYmU2MWM1ZmJmNWNjZTI1ZDg2MWVkMDRkMDEwZTY5MDliOTQxYjQyZjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY4MzQ4M2M0YzUwYTUzNzA1ODFjYTg5NGYyZjljMWNlYjY2M2Q2NmU4NjZkNzQ3Yzk3MGUzMTA2NTYwNjg1YjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_score_impact.py#L10-L82",
+          "version": "repo-lines-v1:sha256:1d0ae307761e7cd6323361a0fde8fbcea105a2bef59550e2c9693f205d9295e2:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1ZjdjZTU1MjU2ZDQwNTgzZjA3YmY1MmU1M2I3MmI3NWE2ZTg1MjlhZjYxNjNmM2JhZWJkYTI5MzQ1Zjg4YTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3ODQ3NTM3MDE5YWJjZDgxNTk1MjA2ZDZiMjY5MjU2ZDhkYmY5YzNjZjEwZDcwZjNlYWI4Yzk1MTY0NzgyMjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhmMTkwMmI4MmJiMTQ2Y2M2MjdlYTg4MzdmMjM3NGU2M2M1ZmYwYTMxMmU5YjBhNTc1MTIwZGUxOGI5YTVkZjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4f6259b7e3f34019898ddb7cc55e28c4",
+      "statement": "scripts/analyze_score_impact.py loads processed production and drifted parquet plus the saved model and threshold and writes the summary to reports/score_impact.json; the committed report shows 92,254 records with about 4.6% (4,277) changed decisions.",
+      "evidence": [
+        {
+          "resource": "repo://reports/score_impact.json#L1-L11",
+          "version": "repo-lines-v1:sha256:51394f76efeaa0b7535d3030bb337acb4ee3ff1a7ce829020ed4657847c00b53:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://scripts/analyze_score_impact.py#L17-L58",
+          "version": "repo-lines-v1:sha256:bd763255a1e67754eb35b27f8d48f88688737bcb665ec94bf5fdf82722d9671a:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmOTgzYzdlOTI4MDM4ODkzOGI2ZWY3YjQxNjlmOTVmYmRlZGMzZWE0MzVlNzExODJkN2U3YjhjZjQzYzlhMWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNmYjE0OWYwYzQzNWM3OGI3ZmM0NmM1YzFhY2I4M2ZkZmQzNDhlODdhYmJhNmZhODkzMDNhMjlkZWZkMjQ3ZjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_79b392d5950348a0ac17678c0959be1f",
+      "statement": "scripts/demo_invalid_batch.py reads five real rows, confirms they pass the training contract, injects five violations (negative income, zero credit, underage DAYS_BIRTH, TARGET=3, duplicated ID), prints the failure_cases and raises RuntimeError if the contract accepts the invalid batch.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/demo_invalid_batch.py#L18-L48",
+          "version": "repo-lines-v1:sha256:7c09b0f77ad310e2a9c684dd1c989e86bb77e1f5ed756fc661fb05696d05cea1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MTI0MjdhNzY4YWI5YWFhMDM1YWY0MzM0NzJmYjQwYmJlNjZkMDAzZjUxYjY5MjRkYTNiNmRjY2E5MmYxZDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-11-09T02:01:44.977Z"
+  }
+}
