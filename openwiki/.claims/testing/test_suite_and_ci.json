@@ -1,28 +1,28 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:5284b8b1b4dfdde4f68c93e84f6bc12fc54e70692dfb52ebc1b350805bb66534",
+  "pageVersion": "sha256:12884a9d7258e18f2a3a6b55d5133b726fd331ec45aea48ccb248165e5be7224",
   "claims": [
     {
       "id": "claim_9ed2d05b4ddc496e81f155d4ee5a637a",
-      "statement": "Pytest configuration in pyproject.toml establishes tests/ as the test directory, adds the root path to pythonpath, enforces strict markers with extra summary reporting (-ra --strict-markers), and registers slow and integration markers.",
+      "statement": "Pytest configuration in pyproject.toml establishes tests/ as the test directory, adds the repository root to pythonpath (so src.*, scripts.* and tests.unit.conftest import without installation), enforces strict markers with extra summary reporting (-ra --strict-markers), and registers slow and integration markers.",
       "evidence": [
         {
-          "resource": "repo://pyproject.toml#L29-L36",
-          "version": "repo-lines-v1:sha256:4c023dd65b29e9ef2536b1b2187b2430400ae442a25d124dfa37d795c86239ae:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODY3NmU2NDE0NjVhNjU1MWU5ZTljZmZkN2ZhYTFlNmE0MmY5YjcyNDgwOTgxM2M5MDNkN2VkY2I1MmYzMDA2ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODMzMTJkNjZkZWI1N2RhMGZmYTU3ZTVkMjZlOTM3MDIxODk1NzljNTU5ZDBlMGIwNzNkZjYxZGNiYmNkOWUzYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTljMTk2YmJlNmFmMzE4ODBlMTNmOTI1YTliOWM3ODFiODFlNGNkOWNkM2U2MmY4YjU4OGMxZjljYjllMGQwMyJ9"
+          "resource": "repo://pyproject.toml#L39-L47",
+          "version": "repo-lines-v1:sha256:4943b40ab2d9a84cc6320223572181e91d19e4951116d8a9a5878653218b049d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmUyMTczY2JkMzc2NjMzNGU3OGFjNmJhZTg5NzBjZTA1ZTcxYmYyNDM2ZmQ0Y2MwNTc2YmFmMDRjMDdhZDM1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmJiYTU3NjZiNWQzZDZiODUxYTJjNWI1ZGZlMjc3ZDc4OGJlNWRjMjk2MjhhYzU5Y2U4NWMzMzNlOTY1MmQxZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTljMTk2YmJlNmFmMzE4ODBlMTNmOTI1YTliOWM3ODFiODFlNGNkOWNkM2U2MmY4YjU4OGMxZjljYjllMGQwMyJ9"
         }
       ]
     },
     {
       "id": "claim_c9c75865633a47308d7a23a77c5beeb3",
-      "statement": "Coverage configuration in pyproject.toml measures coverage for src while omitting src/main.py, displaying missing lines in test output and producing XML reports in CI.",
+      "statement": "Coverage configuration in pyproject.toml measures coverage for src while omitting src/main.py, displaying missing lines, and setting fail_under = 0 so coverage is reported but does not gate the build; CI produces coverage.xml and uploads it as the coverage artifact.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L47-L48",
-          "version": "repo-lines-v1:sha256:3d418f508c8354ae50dd5c672602d9b2ec3aa7e55b114fce454aec4d5cc0e5f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODUxY2YzZWE1ZDcxMjU3MTI4NzE4ZjZmYTliYzNlYzRhNzQwMWI3MDBlZGNmZGU3NDhlNjg3Mzc4YTFlMzhhZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGJmNWEyMjc5OTZiMDgxNGNiMzU4YjVkNGU3MGQ5YTcyMTMwNTllNmQ2ODViNjQ0ZDZlZTExMWM5NDExZjc4NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmQ2NDgxMWI4M2YwMGIwZWU3OWEyY2IyZDhjNzU5ZjJmMGY4NjdkZGMxMmJjYmNmNDk1ZDBmZjVjMWQzY2ExNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzRlNGNlNTgyNzEwYzA2MGI2YWJkMWI0MzNhNzlhOTk0MTMzM2RlZDcyZDdmYjRiNDQyN2Q4NTRkOGY5MjcyMiJ9"
+          "resource": "repo://.github/workflows/ci.yml#L47-L52",
+          "version": "repo-lines-v1:sha256:d239f1304e058fdcb10ccec9a3411d4357d56cadab2b8416a9bd15e99f970efe:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODUxY2YzZWE1ZDcxMjU3MTI4NzE4ZjZmYTliYzNlYzRhNzQwMWI3MDBlZGNmZGU3NDhlNjg3Mzc4YTFlMzhhZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDBkY2JmNTY2ZGM4ZTk2NjI3NzdkYmVjOGM2ZGM1YTEzOGI1MWM3MTFmMWI4ZWE1ODdmMzdiM2NhZTc1NzU4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmQ2NDgxMWI4M2YwMGIwZWU3OWEyY2IyZDhjNzU5ZjJmMGY4NjdkZGMxMmJjYmNmNDk1ZDBmZjVjMWQzY2ExNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2FmMDhkMmYxYjYyYTQ3MThjNDQwNGQyOWYzZTA5ZmQxZjQyM2UyYTI5MGY2NjFkZTRlZDQ4ZmMwMWJiNmJjYyJ9"
         },
         {
-          "resource": "repo://pyproject.toml#L39-L45",
-          "version": "repo-lines-v1:sha256:87b54d3969828392996cce83a1992e6922171f63930cbdd52f5c1ed50adf20e9:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGZmODc4ODc3M2UzMWM3YTkzOTM2YzllYWUxZWIxNTMxMTY3Yzg5NTc3ZmYzM2I3ZjY1Y2Q4ZWMwOGEyYzgwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRkZGQzZmRmOGU0NzE2YjliM2Q1ZGU5MjMyOTg4YzUzNDMzMTQwMzRkMGM0ZGNmNmRkZGY0ODBlNmY4NTgxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ2ZTIxMmM2YTQzMjFlY2QxNDg4YWQwZjM2OTU0MGQ5ZDk0YWQxMDk3ZDlhZTZlYWNkMjY5NDQwMTJlNDJiNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjg0Yjg2YjYyMTI4YjZiYmQ0YTUyZDRkMzg2NjNhNmY3OTc1YzAwM2Y3YWZlNTc3MTAwNDc1OWY1OWVhYmZkNCJ9"
+          "resource": "repo://pyproject.toml#L49-L56",
+          "version": "repo-lines-v1:sha256:45314c479f65f492b389e081ee622e54359d5f407db1dd7e42d261ca16b449aa:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUzMmZlNzY2ODljNTIwMjQ0MTllOWM3Mjc1NWRmZGY2Yzg4ODY1ZTQ2ZWE1MTgyM2UwYTY1ODM2MzM2YWUxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRkZGQzZmRmOGU0NzE2YjliM2Q1ZGU5MjMyOTg4YzUzNDMzMTQwMzRkMGM0ZGNmNmRkZGY0ODBlNmY4NTgxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDJjNTEwZGRiYjg4NWNiOGI1NDNmNzQxYmNhNTkxOGYxMzllYjI4MGMxYWQyNjc2MmJjNzE2MGY5MzY3NjRmYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjg0Yjg2YjYyMTI4YjZiYmQ0YTUyZDRkMzg2NjNhNmY3OTc1YzAwM2Y3YWZlNTc3MTAwNDc1OWY1OWVhYmZkNCJ9"
         }
       ]
     },
@@ -69,10 +69,150 @@
           "version": "repo-lines-v1:sha256:f3bbabd97be863fa6765032e34c35bb49c793d7831c6fd8b7de6ebc2db241c54:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4YzVlYjk0NjY4M2Y3OGQ4MjFkYWUwNDc4OTY3NmIzOGI3N2U1ZTc2ZTBkMWE1MDMyNTBkYmQ3NTkwZjY1ZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNTJiZTEwNDQyNDU4MjBlOWRkNzg0ZmRiNjk2Yjk2YzZkNDgxYzAwMjY4NGYwNTVhODEyYWUzNzAxMDU0NDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUzZTVhYjYyYmMwN2Y2YWY3MzIzZGNhNTZjYTRkMDFlMjdlYzNiNmNlOTE1NmFlMGY4NzZmMzk3ZGMwNTAxNTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_c7c3f48aacaf4de89867250852e0a85a",
+      "statement": "tests/unit/conftest.py provides make_home_credit and the hc_df fixture, a seeded synthetic application_train-shaped dataset (including the DAYS_EMPLOYED 365243 sentinel, nulls in EXT_SOURCE_1/AMT_ANNUITY/OCCUPATION_TYPE and a rare XNA gender) that is shared by feature, model, drift and monitoring tests so no real data is required; test_prepare_data imports make_home_credit directly.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/conftest.py#L1-L60",
+          "version": "repo-lines-v1:sha256:47b992152630710d8eeb4f378e0a272ee75da9a9640595af07f2f9ef5bd6e19c:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzNGFlYTA2Yzk5MGFlZWRkMmY4ZjVmZjgwOWMxMTgwYjkyZmNjY2EwMzgxMjY5YjdjMTg2NTQwNDNiOWEzNzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwYmM1OTY1NTRkNzIxNzNiYmNmYTQwMWVhNGI4MzljYTU3NmJhMjlhOTEwNDc0Y2QxN2JlMDJlNmQyYTZhNmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_prepare_data.py#L1-L17",
+          "version": "repo-lines-v1:sha256:d410363be99c001216551d9d73da7cec5566371cfb4ba3da8c73098708245c4d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3YTExZDVlZGMwZjA2MjhiNGE4ZDY2NWE3OGRiNmRkMTA2MmQ4ODA2NWQzMTZiNDI5M2M0NTBlZGY3NjAzMGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhY2JjMjU0NDU0OWNmOTY4OGUzZjIwNjhhNmFjY2Y3YWEzMmMzOGQ2YjFkMDRhYTY1Y2IzM2ZiMTU2ZTE1N2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImExNmI3YzdkZWQxZjAzNWM0MmYxOTI5Yzg5ZjZjZDlkNzUzY2JmZTE5MjM3MmU5YWUyNmY5NWI5ZWQ1MzI1ZDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7484d51c87d24477bd4af999e770b196",
+      "statement": "The test suite lives entirely in tests/unit with roughly one test file per src module (features, baseline/training, contracts, prepare_data, drift simulation, drift_monitor, score_impact, monitoring metrics/validation/logging) plus one for scripts/run_monitored_drift.py; tests/integration is an empty package and the registered slow and integration markers are not used by any test.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L39-L47",
+          "version": "repo-lines-v1:sha256:4943b40ab2d9a84cc6320223572181e91d19e4951116d8a9a5878653218b049d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmUyMTczY2JkMzc2NjMzNGU3OGFjNmJhZTg5NzBjZTA1ZTcxYmYyNDM2ZmQ0Y2MwNTc2YmFmMDRjMDdhZDM1MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmJiYTU3NjZiNWQzZDZiODUxYTJjNWI1ZGZlMjc3ZDc4OGJlNWRjMjk2MjhhYzU5Y2U4NWMzMzNlOTY1MmQxZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTljMTk2YmJlNmFmMzE4ODBlMTNmOTI1YTliOWM3ODFiODFlNGNkOWNkM2U2MmY4YjU4OGMxZjljYjllMGQwMyJ9"
+        },
+        {
+          "resource": "repo://tests/unit/test_baseline.py#L1-L30",
+          "version": "repo-lines-v1:sha256:cb0e54d9fae095b9287bca0425869ff14dfee1522273e1ac4480bfcfb5a8d9ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzNGFlYTA2Yzk5MGFlZWRkMmY4ZjVmZjgwOWMxMTgwYjkyZmNjY2EwMzgxMjY5YjdjMTg2NTQwNDNiOWEzNzQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjNTkwOTNhMzIzN2IwOGNhNzE2MjM2YzZmNTcxYWVmODliODg1NTMxZjEwNDlkMjdiODdmYWJlNTc5ODI1ZmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNkMjQ4MDNmM2I5NDFjN2FjNjE2NzAxNDViNWYzNzM2Yjg5NjgwZTk0M2NiZTBjYjk5ZjlkM2ZlMDhkYjc4ODEifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_run_monitored_drift.py#L1-L10",
+          "version": "repo-lines-v1:sha256:1e206a8dbf2415157b2266a2d16ee4897fb92d97d33d2888765e8d72dc7a60f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwMWRhOTQwOGYyZjQxZmY3NWJiNzc4MWRkNDA5Y2I1ZjQ4NDI2OGRjZjFmMGZlODI4MGRiMGEzMTgyOWRkZGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZmI2MGZkMjVkODgzYTY2OGE0NzFkYTU4YjQ1N2E2NDRmYjNhMDQxMTk1ZWVmOTQwOTM1ZGQ0MDkyODc2YzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMyNGU1NWJkMjQ3NTZiOGRlOGM2NTYwMTBiOWM5N2JkZTJjNjk0OWVlZjUyOGJkOTIwNThhMjAyOWQ3OWMzNTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ffb627a60a2747688ea7d5136e8f236e",
+      "statement": "Monitoring tests use isolated Prometheus CollectorRegistry instances via build_metrics and assert on registry sample values; they verify that observe_pipeline records success/error counters and durations while re-raising the original exception, that validate_training_with_monitoring logs approved/rejected status and still raises SchemaErrors, and that record_psi rejects negative PSI.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_monitoring_metrics.py#L1-L84",
+          "version": "repo-lines-v1:sha256:ed1c9eca145aab2fa8f0977ab17f24465210bef163e6de4cda1591ff71c880ab:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY4MmI2YmJjZTJlY2ZhNDMxNzU2MTJjYThmOWM4NjEwYzEyZjc4NjNkYTc3M2NhZDQ4Zjc3NTc2YTAyYmQ5YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0OTIwYzA4NGZlZTM2OTA4MDU0NWIzMjhiMmI3OWNhZGMxNzMwYmEwMjczNDdjMmM2NjAwYzQ4Nzk5ZGU1MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_validation_monitoring.py#L14-L80",
+          "version": "repo-lines-v1:sha256:391e1b518f2bc1ee0084c77b9d81e3b6a105ad53c678ac9277f166e7f39c3143:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZDBmM2M5ODhiYTE0YjZjOGVkOThkZmVkYTFlNWUwMzVmNTJiNjg4N2I5MjMzZWMyYmZkYjExYjFlMDRlMWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ZjJjYzhkYjRlMDA1YWVlNGY1NzkzOTQyOTliZmQxMzQ2YTM4MTJkZjM0OTk4M2NjYTY1NjYxYThlNzRlZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f79499a5c02f41c5b9a9c58e8a7755a0",
+      "statement": "test_run_monitored_drift.py runs scripts.run_monitored_drift.main() with REPORT_DIR, load_application_train and run_drift_main monkeypatched and checks the operational_metrics.prom textfile: success exports data_loading, data_validation and drift_monitor counters plus PSI from drift_alerts.json; a drift failure re-raises, records drift_monitor error and still writes metrics; an invalid batch blocks the drift step with SchemaErrors.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_run_monitored_drift.py#L9-L130",
+          "version": "repo-lines-v1:sha256:aa18e538680c1155afb1cc008eb4831be9315b88dc05142e10dab6bbfd5074ff:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIwNTZjODRiMTRlZjE0NDNhMzY5ODU2ZDdiZGYzZTU3ZDU0MDE0ZjE5ZDg2OWFiOTZjOTcxNGUwMTE5ZmFjM2YxIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIwMWJhNDcxOWM4MGI2ZmU5MTFiMDkxYTdjMDUxMjRiNjRlZWVjZTk2NGUwOWMwNThlZjhmOTgwNWRhY2E1NDZiIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI2Yjg2N2Y5MzFiY2MwOTc2YzdmNWRhZDRkOGUwZmI3ZjllNTY0OTRlYjc4ZDg0YjQ2MWI5NmI3Y2RlMTA1YzAxIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4ZWI5Njc2Zjg5ZjcwZGUzYzk3NzNmMGRmOGRhY2YxMDk1M2Y2MDU4NTljNTkxMGQxMDQyN2UxYWJlYWE1YjUzIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_fa51e0adbeb04edaabdebc2f95785123",
+      "statement": "Domain tests pin key behaviors: contracts reject out-of-range values and duplicate SK_ID_CURR with SchemaErrors but accept null AMT_ANNUITY and inference batches without TARGET; prepare_data produces disjoint reference/production splits and writes nothing on contract failure; drift simulation changes 12 of 20 rows by x1.40 income and x1.30 credit reproducibly; extract_psi_alerts flags PSI at the 0.20 threshold; score impact aligns scores by SK_ID_CURR and rejects mismatched or duplicated IDs and invalid thresholds.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_contracts.py#L30-L93",
+          "version": "repo-lines-v1:sha256:f39f83dce175a47e3b94f02356aa5c3526a58c1968eee7adf379ab4803cfeec5:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRlNDM4NjIwMWNiM2RmYjQ4OWIwMzAyOTBlOGNkMTE3NTNkMjdiNDUyMGY2NzhkNDM4NWQ2OTNjMTIwYjhkYmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwYmNlMmNjNzFkMGI1OTI4MzcyYmQ1MzFjNmZmMGExNmVhZmE5NWNjNDk3NmYzNGYxMzJmNjU3ZjBlNGVkMzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_drift.py#L11-L53",
+          "version": "repo-lines-v1:sha256:81a60cbef43900f1b1837f910ef6af3ecb68c47551bbdf2bc3916d1362807f7b:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhOGI2OGYzYjZkMDgwMjNmZDVmYTdjZGFhOTUxYzk4ZmQwNDdmZTY0YjI1YTFjOTNlMWNkNDhjY2Y1OTc3ZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NmUzNmQ5MjRjMWEzYTNlZDc1MmEwZDMyNTk5NTY4ZTMzZjAzYzAzMzhhYmU0ODRjZmM3M2I5OTg5NGQwZWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlOWNiYWRhYmM3NmQ2MDY5YTBkYzQyMzQ5Mzk0MTNiOGIxNTZlNjkxNTg3ZTU0ZmM1MmU0NjcyOTlhYTM4MzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_drift_monitor.py#L10-L48",
+          "version": "repo-lines-v1:sha256:72a64df15f957a05c1e7fd4e8ba7dfe51149a45afc3a2c9cdc7ad5ddbd7be3d5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmMzQ1ODNhNTk4NzY3YmY1NmFlZmViNjVlMjAzM2ExNjUxY2M0YzhkN2U2ZjBhZjNlNWNmZDMyOTNmOTMzYjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiZTUwMTZlZDRjYmE3ZjYxZDFiZDQ3YmM1ZTliMTgzYzE5NmE2MGJiNDNhMGFjOTg2M2FjMThjNmUzOGExNzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhZGJlNTVhOTEwNzFhN2E2ZTgzNTI2YTk3YzNhNmRhY2M2OGQyMjcwZDdmZjQyMGMyYmM5ODNkZmFkNGE2ODgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_prepare_data.py#L20-L41",
+          "version": "repo-lines-v1:sha256:bad904d040006561128d2448a4f1693973f1205c8fbfd69acb9f9358b4023052:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIwMzc1MjllYTAwMDI1MTdjODFhMzY0MTdkNTU0NDc4MDY0OTI5ZTM5NGJlMjNlZDk2NDBmMTM4YmM4ZGI1MTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhNTZkMWVmNWQxZmEyMTgyNWE1N2ZmODRjYzk5ODI1YTMwMTJmMGUzMWVlOGJhY2U4NzJhMjhkZDlmZjAxOWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc5MjNmYTY5MmJjYmNhY2ZjMGVkOTIyYWU4OTQ5ZGI1ZmFiYjkwZGZlNzdhMjJkYzI0YTkzZjBmYTM0MDllYTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_score_impact.py#L41-L82",
+          "version": "repo-lines-v1:sha256:cabca0a3184775c7665947d0a8a73cfbd4311c5fed10dfa7f0ae6c0aa72ad711:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiYzAxNTM1ZWFiNzBmYmExZGUyNWZiNjgzNjIyMTNmYjlkOWJlOTM0ZTVlY2QxY2Q4MjUwYTM0YjliYzI1MTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3ODQ3NTM3MDE5YWJjZDgxNTk1MjA2ZDZiMjY5MjU2ZDhkYmY5YzNjZjEwZDcwZjNlYWI4Yzk1MTY0NzgyMjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5ZmE3NDM2ZDc4ODgyYWMyMTQyY2UyOTk5NmE4MjAzMDVmMzJkMjZkMDVkZDg2OGY5OTAzNjJkZWYwMjA1MjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9de554bf307a42deb7bc2075d1496dd1",
+      "statement": "Baseline model tests train on the synthetic data and assert AUC above 0.65, per-gender fairness metrics that exclude the XNA group, probability scores preserving the input index, tolerance of unseen categories, exclusion of CODE_GENDER from the XGBoost features, and a save/load round trip with models_dir monkeypatched.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_baseline.py#L16-L64",
+          "version": "repo-lines-v1:sha256:e4ed87395c48f1ef9cdb2db4b9d06365b6c7143dd5352c2303ef675293a9be51:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzZjM2NmI5YmQ5YThkMGYzNDBhMmJjMGJlMWUyMmVlYTIwNTY4ZGQ3OGE0NTI4MWI3MjFiMzBmMjJkMDg3ZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4NTdhZjI0ZWJhNzEzYTI2MmYyNDdhOTliZDk4MTkzZDJhMDBjNjgyYzczNTVjNzEzNWI0MGNjZTdkZDM0NmIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_19dbbab301874285b77449dfd0d76675",
+      "statement": "The quality CI job's xenon gate (--max-absolute B --max-modules A --max-average A over src) enforces rank limits on complexity, ruff is configured with rules E,F,I,N,UP,D,B,SIM and Google docstring convention (docstring rules ignored for tests/**), and the same lint/format/notebook checks are mirrored locally by pre-commit hooks while complexity and tests remain CI-only.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L25-L34",
+          "version": "repo-lines-v1:sha256:8fa57cfe893724f3851d5bf1c14efe09d53bd645cb1f7f20213bf6a177f5410e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyZjY1NTQwYWFhZDhlZDBlODQwMDBmNDhlNjk1ZmZhMGJhMTg0Mjk0Mzc3YzRiYmFmYTE2NmIyYmM3YTZlMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0YTkwN2Y3MjljMDZlMWNiYzVkNWY1ODAyZGM0MDc0NzgyNjhhMjg1YzM4NWU5NDkxNjc5M2Q4MTU5MmVjYzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkNjQ4MTFiODNmMDBiMGVlNzlhMmNiMmQ4Yzc1OWYyZjBmODY3ZGRjMTJiY2JjZjQ5NWQwZmY1YzFkM2NhMTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxNzgyYzVhN2I4OTY0ZTBjMGM1OTJjZGY3ZTYwNzcxOGM1YjRlYzI0MTcwODc1ZTM4OWNiYmY4NTI2YjQ2ODkifQ"
+        },
+        {
+          "resource": "repo://.pre-commit-config.yaml#L15-L36",
+          "version": "repo-lines-v1:sha256:1cd4db3032d23b85c863b8fa8d702571ca275169fe598669a1155418d808f88c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkZmVjNzBlMTkyYjk1MjcwN2U4MDFiMjRjZjdkNDg5MzJiNTRmMTBiMTFmMjRjMjM0YjkyZWM0OGJlZDBiYTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZWQwYTcxMDVkZDBjMDRhYjgzYzkxNjVhM2E3NDE3YjY1ODc1YTIyNjcxZGE1YjdkMmU4MjRhNDY0YWIzZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3OGM5NTRlMDI3MDBjYTQ4YjhmMmVjMDkxNjRjM2M3MDcyYzBiMDgxOWRhYmFkZmZkMTY3NmFlZmZmMGM3MGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L23-L37",
+          "version": "repo-lines-v1:sha256:1b74dd6d22fc7c7588fc5ebdaedc9aa1372af87dd213c6e8754ef849626ce3f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjZWFiMzNkN2YyYWVlNjJmNzllMjE1OTFmNTJiMzNiNDZmMTQ4NzE5NzY1ZWQ4OTNjMzZjMTgyMTVmODk0MmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOWUxZGQ5ZjQyYzZhZTYwNDhjYTg5NTZmMGFhYzM4MGY4ZmQyMjhlNTBkYTM1ZmQzOTliZWI4MTYzMzU0MTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzZDE3MWRlNzU0MzFhMDIxYTBkOTRmYTc2ZmFiZjBkNzEzOWM4OThjMWEwYjQ0YjQzY2E2MDkwM2ZhMWI4NDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyYmMxMDM3MjcyYTA5NTZkMjdlZmYyMGY4ZjM1ODhlNDkyN2ZhOTk4YmQ5YTdhMzg0MjY4OTQxMzM1MDdjMGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_64d6bd845220493db82a41251e857c12",
+      "statement": "openwiki-ci.yml generates or updates the wiki on pushes and PRs to main/development (ignoring openwiki/** paths, skipping fork and openwiki/* PRs, failing fast without ANTHROPIC_API_KEY), chooses --init or --update based on openwiki/.last-update.json using full git history, stages only openwiki, AGENTS.md and CLAUDE.md, and delivers either as a PR on openwiki/update-<branch> (push/dispatch) or as a direct bot commit to the PR branch, propagating OpenWiki failure after preserving partial output.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/openwiki-ci.yml#L8-L140",
+          "version": "repo-lines-v1:sha256:c043ddf189e07001b25330dfe8baaf06385b78a725b483f3ae64acc71e88ecc7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJlOTZkYzQ4MTQ5ZjVhODNkMWVkNmRiYjM5YmJjN2UyYjkwMmFhM2QzNGQ2YmQ1YWU0YjI5MWI2OGRmMGNhNzlhIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIzNjcxOGYwNjdiNWU1YzFmMDk5MWE2ZTc0NzI2ZmUyYTIzZDI2NDM0NWUwOGU0ZWFkMDRmYWY3M2MyN2VkNDQzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJmYTZiNmViMjg2N2M5NDlkMzFlZmMwMWMyZTY2YzU2MWQ1NTI5MDVlOGUxOWY5MWRlMDA5ZjgxZmEzMzEzN2M2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_ef97ae100ae44cb79743a5bb695943e7",
+      "statement": "openwiki-update.yml runs openwiki code --update --print daily at 08:00 UTC or on manual dispatch with full git history, and opens a single PR on branch openwiki/update containing openwiki, AGENTS.md, CLAUDE.md (if present) and its own workflow file, preserving partial progress and failing the job if OpenWiki failed.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/openwiki-update.yml#L1-L88",
+          "version": "repo-lines-v1:sha256:2e5d9ba25498234d1786255ba0dc5dcbdc66be6ecdae309c260081dc1f30bc7b:eyJzZWxlY3RlZExpbmVDb3VudCI6ODgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MDI3ODdhZjZkY2MwODM0ZGUxMjFjYmIxY2I5NWY5NDU5YjcyMWVhYjAzNDlmMTA1MDFiOTk2YzFjNzdmZmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NzE4ZjA2N2I1ZTVjMWYwOTkxYTZlNzQ3MjZmZTJhMjNkMjY0MzQ1ZTA4ZTRlYWQwNGZhZjczYzI3ZWQ0NDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5c74b8858325471089dac4498dc4b90a",
+      "statement": "openwiki-pages.yml exports the OpenWiki static visualizer for main (site root) and development (/development/) together on pushes touching openwiki/**, falls back to a redirect when main has no wiki, fails if neither branch has one, and deploys the _site artifact to GitHub Pages with non-cancelling serialized concurrency.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/openwiki-pages.yml#L12-L95",
+          "version": "repo-lines-v1:sha256:0d6cbabfdff40e4dff3b9b36101dc3a324ff62afd7e2eb60a1964f086317b51f:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NmRjNDgxNDlmNWE4M2QxZWQ2ZGJiMzliYmM3ZTJiOTAyYWEzZDM0ZDZiZDVhZTRiMjkxYjY4ZGYwY2E3OWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2MzQxMzJhMWI5YWUwNmQ4YjQ5YjY1ZTY0YmVhNTExZGQ2MGI5N2NkYjJhNDM1ZTQ2ZDAwYjIwYjUwODJjZGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2ODU2M2I4MzlkNGExZmQ1ZDM5MTRkMjc0MGU3MWM4N2VjMzg3YWFmOTBmOWVjNWNmMWFkYWYxZTc0Y2U4MWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-10-25T02:31:36.619Z"
+    "at": "2026-11-09T02:03:21.311Z"
   }
 }

@@ -1,12 +1,14 @@
 ---
 type: guide
 title: Quickstart & Task Routing
-description: Central onboarding guide and task-routing navigation map for developers and AI agents working on the ML repository.
-tags: [quickstart, task-routing, environment-setup, commands, wiki-map]
+description: Onboarding and task-routing guide for the Home Credit credit-scoring drift and observability project. It covers uv/DVC setup, the end-to-end run order, current quality commands including check_notebooks.py behavior, and links to every wiki page.
+tags: [quickstart, task-routing, uv, dvc, credit-scoring, drift, observability, quality-gates, wiki-map]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-25T02:31:36.619Z
+    at: 2026-11-09T02:03:21.311Z
 sources:
+  - id: openwiki-source-c28ca7ab362d7136f953793e
+    resource: repo://.dvc/config
   - id: openwiki-source-5f5b95b3d6a215fa02ceb945
     resource: repo://.env.example
   - id: openwiki-source-164e2da859b5277df81c7d94
@@ -15,6 +17,8 @@ sources:
     resource: repo://.pre-commit-config.yaml
   - id: openwiki-source-8037e2358a2c4f9b2c722a11
     resource: repo://AGENTS.md
+  - id: openwiki-source-cfa03d5d7ac7270f0bb1bf28
+    resource: repo://dvc.yaml
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
@@ -25,157 +29,132 @@ sources:
     resource: repo://src/main.py
   - id: openwiki-source-f12fdb76c2f98bd11af25d76
     resource: repo://src/utils/config.py
-generated: { by: "openwiki/0.7.2", at: "2026-10-25T02:31:36.619Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:03:21.311Z" }
 ---
 
 # Quickstart & Task Routing
 
-Welcome to the machine learning project repository. This guide serves as the central entry point and navigation hub for developers and AI agents. It summarizes environment setup, core operational commands, code quality standards, and provides a task-routing map to direct you to domain-specific documentation across the wiki.
+This repository is the FIAP "Tech Challenge Fase 4" project. It is a reliability layer around a **Home Credit Default Risk** credit-scoring model. The pieces are:
 
----
+- Pandera data contracts.
+- An XGBoost baseline tracked in MLflow.
+- Evidently PSI drift detection on simulated production data.
+- Score-impact analysis.
+- Structured logs and Prometheus metrics, shown in Grafana with alert rules.
+- Governance and LGPD documentation.
 
-## Task Routing Map
+It is a **batch** project. Python scripts run locally through `uv` and exit. Docker Compose starts only Prometheus, Node Exporter and Grafana. It does not train the model or schedule the drift run.
 
-When working on specific subsystems or tasks, refer to the navigation decision tree and routing table below to find the relevant technical documentation.
+Use this page to set up quickly and to find the wiki page for your task.
+
+## Task routing
 
 ```mermaid
 flowchart TD
-    Start["Developer / Agent Task"] --> Choice{"What are you working on?"}
-
-    Choice -->|"System Design / Directory Boundaries"| Arch["Architecture Overview (architecture/overview.md)"]
-    Choice -->|"Config, Settings, .env Parameters"| Config["Configuration & Environment (concepts/configuration_and_environment.md)"]
-    Choice -->|"Linting, Formatting, Notebook Cleanliness"| Quality["Quality Standards & Gates (workflows/development_and_quality.md)"]
-    Choice -->|"Pytest, Coverage, CI/CD Workflows"| Testing["Test Suite & CI/CD (testing/test_suite_and_ci.md)"]
-    Choice -->|"Feature Eng, Model Training, MLflow"| ML["ML Pipelines & Tracking (workflows/ml_pipeline_and_tracking.md)"]
+    Start["Task"] --> Q{"What are you changing?"}
+    Q -->|"Layout, layers, raw-to-alert flow"| Arch["architecture/overview.md"]
+    Q -->|"Settings, .env, paths, uv, DVC config"| Cfg["concepts/configuration_and_environment.md"]
+    Q -->|"Pandera schemas, invalid batches"| Contracts["concepts/data_contracts.md"]
+    Q -->|"LGPD, bias, model card, limits"| Gov["concepts/governance_and_lgpd.md"]
+    Q -->|"Features, training, DVC stages, MLflow"| ML["workflows/ml_pipeline_and_tracking.md"]
+    Q -->|"Drift simulation, PSI, score impact"| Drift["workflows/drift_monitoring_and_score_impact.md"]
+    Q -->|"Metrics, logs, Prometheus, Grafana, alerts"| Obs["operations/observability_stack.md"]
+    Q -->|"Ruff, Radon, Xenon, pre-commit, notebooks"| Quality["workflows/development_and_quality.md"]
+    Q -->|"pytest, markers, coverage, GitHub Actions"| Tests["testing/test_suite_and_ci.md"]
 ```
-*Figure 1: Task-routing decision tree for navigating repository documentation.*
+*Figure 1: Decision tree from a task to the wiki page that owns it.*
 
-### Task Routing Matrix
+| If you need to... | Read | Key places in the repo |
+|---|---|---|
+| Understand package boundaries and the raw-to-alert data flow | [System Architecture](architecture/overview.md) | `src/`, `scripts/`, `data/`, `models/`, `reports/`, `infra/` |
+| Change environment variables, paths, Python or uv setup, DVC config | [Environment Configuration](concepts/configuration_and_environment.md) | `src/utils/config.py`, `.env.example`, `.dvc/config` |
+| Edit or debug Pandera contracts and the invalid-batch demo | [Data Contracts](concepts/data_contracts.md) | `src/data/contracts.py`, `src/monitoring/validation.py` |
+| Check privacy, LGPD, fairness or limitation constraints before touching data or model handling | [Governance & LGPD](concepts/governance_and_lgpd.md) | `docs/`, README governance sections |
+| Change features, training, DVC stages or MLflow tracking | [ML Pipeline & Tracking](workflows/ml_pipeline_and_tracking.md) | `dvc.yaml`, `src/features/`, `src/training/`, `src/pipelines/prepare_data.py` |
+| Change drift simulation, Evidently/PSI alerts or score-impact analysis | [Drift & Score Impact](workflows/drift_monitoring_and_score_impact.md) | `src/data/simulate_drift.py`, `src/pipelines/drift_monitor.py`, `src/pipelines/score_impact.py` |
+| Change metrics, JSON logs, Prometheus, Grafana or alert rules | [Observability Stack](operations/observability_stack.md) | `src/monitoring/`, `compose.observability.yaml`, `infra/observability/` |
+| Understand lint, complexity and notebook gates | [Quality Standards & Gates](workflows/development_and_quality.md) | `pyproject.toml`, `.pre-commit-config.yaml`, `scripts/check_notebooks.py` |
+| Add tests or understand CI and the OpenWiki workflows | [Test Suite & CI/CD](testing/test_suite_and_ci.md) | `tests/`, `.github/workflows/` |
 
-| Task Category | Focus Area | Recommended Wiki Page | Primary Source References |
-|---|---|---|---|
-| **Architecture & Structure** | High-level system design, layer boundaries, directory organization, and raw-to-serving data flow. | [System Architecture & ML Pipeline Design](architecture/overview.md) | `src/`, `configs/`, `models/`, `docs/` |
-| **Configuration & Environment** | Environment variables, `.env` loading, `pydantic-settings` management, directory path resolution, and default parameters. | [Environment Configuration & Settings Management](concepts/configuration_and_environment.md) | [`../src/utils/config.py`](../src/utils/config.py), [`../.env.example`](../.env.example) |
-| **Quality & Standards** | Ruff linting rules, formatting, Radon/Xenon cyclomatic complexity thresholds, notebook cell output checking, and pre-commit hooks. | [Quality Standards, Quality Gates, & Notebook Hygiene](workflows/development_and_quality.md) | [`../pyproject.toml`](../pyproject.toml), [`../scripts/check_notebooks.py`](../scripts/check_notebooks.py), [`../.pre-commit-config.yaml`](../.pre-commit-config.yaml) |
-| **Testing & CI/CD** | Pytest execution, test markers (`slow`, `integration`), coverage goals, and GitHub Actions workflow jobs (`quality`, `test`, `docker`). | [Test Suite & CI/CD Pipelines](testing/test_suite_and_ci.md) | [`../tests/`](../tests/), [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml) |
-| **ML Workflows & Tracking** | Feature engineering, model training pipelines, experiment tracking via MLflow (`sqlite:///mlflow.db`), and artifact management. | [ML Pipeline Structure & Experiment Tracking](workflows/ml_pipeline_and_tracking.md) | [`../src/pipelines/`](../src/pipelines/), [`../src/training/`](../src/training/), [`../src/features/`](../src/features/) |
+## Setup
 
----
-
-## Environment Setup & Quickstart
-
-The repository uses [`uv`](https://github.com/astral-sh/uv) for fast, reproducible Python dependency management and environment synchronization.
-
-### 1. Initial Environment Configuration
-
-Copy the sample environment configuration file to create your local `.env`:
+Prerequisites: Python 3.12, Git and [uv](https://docs.astral.sh/uv/). Docker with Compose is needed only for the observability stack. `pyproject.toml` declares `requires-python = ">=3.12"`.
 
 ```bash
-cp .env.example .env
-```
-
-The default `.env` configuration initializes key settings:
-
-```ini
-ENV=local
-LOG_LEVEL=INFO
-RANDOM_SEED=42
-MLFLOW_TRACKING_URI=sqlite:///mlflow.db
-```
-
-### 2. Dependency Installation
-
-Install the required Python version, synchronize project dependencies, and set up git pre-commit hooks:
-
-```bash
-# Install Python runtime and sync dependencies
-uv python install
-uv sync
-
-# Install pre-commit hooks for automated quality verification
+uv python install 3.12
+uv sync --locked          # runtime + dev group (dvc, pytest, ruff, radon, xenon, nbstripout, pre-commit)
+cp .env.example .env      # optional; PowerShell: Copy-Item .env.example .env
 uv run pre-commit install
 ```
 
----
+- `.env.example` defines `ENV=local`, `LOG_LEVEL=INFO`, `RANDOM_SEED=42` and `MLFLOW_TRACKING_URI=sqlite:///mlflow.db`.
+- `src/utils/config.py` loads `.env` from the repository root through Pydantic `BaseSettings` and ignores unknown keys. The defaults also cover `data_dir` and `models_dir`. If `MLFLOW_TRACKING_URI` is not set, it defaults to a SQLite file at the repo root.
+- Details are in [Environment Configuration](concepts/configuration_and_environment.md).
 
-## Core Development Commands
+### Data and DVC
 
-All development tasks—linting, formatting, complexity checks, notebook validation, and testing—are executed using `uv run`.
+1. Download `application_train.csv` from the Kaggle Home Credit Default Risk competition and place it at `data/raw/application_train.csv`.
+2. DVC tracks the CSV through `data/raw/application_train.csv.dvc`, which stores only the hash.
+3. `.dvc/config` currently sets only `autostage = true`. **No DVC remote is configured**, so `dvc pull` has nothing to pull from. Each person downloads the CSV manually.
+4. Raw data, processed Parquet files and trained models are local artifacts and must not be pushed to GitHub.
 
-### Summary of Essential Commands
+## Running the pipeline
 
-| Action | Command | Purpose |
-|---|---|---|
-| **Linting Check** | `uv run ruff check .` | Checks code against configured Ruff rules (`E`, `F`, `I`, `N`, `UP`, `D`, `B`, `SIM`). |
-| **Format Check** | `uv run ruff format . --check` | Ensures code formatting complies with standard 88-character line lengths. |
-| **Notebook Validation** | `uv run python scripts/check_notebooks.py` | Scans `.ipynb` files to ensure no executed outputs or cell execution counts remain. |
-| **Clean Notebook Outputs** | `uv run nbstripout notebooks/**/*.ipynb` | Cleans output cells from Jupyter notebooks prior to commit. |
-| **Complexity Summary** | `uv run radon cc src -a -s` | Analyzes cyclomatic complexity across modules in `src/`. |
-| **Complexity Gate** | `uv run xenon --max-absolute B --max-modules A --max-average A src` | Asserts cyclomatic complexity boundaries (`absolute <= B`, `modules <= A`, `average <= A`). |
-| **Run Unit & Integration Tests** | `uv run pytest` | Runs all tests using Pytest settings from `pyproject.toml`. |
-| **Test Coverage Report** | `uv run pytest --cov --cov-report=term-missing` | Runs tests and generates a coverage summary for `src/` (excluding `src/main.py`). |
-| **Run Application Entrypoint** | `uv run python src/main.py` | Executes the main pipeline entrypoint. |
+`dvc.yaml` declares six stages in this order: `validate`, `prepare_data`, `train`, `simulate_drift`, `detect_drift`, `score_impact`. Each stage runs one module with `uv run python -m ...`. Metrics and reports are written to `models/` and `reports/`.
 
----
-
-## Continuous Integration & Automated Pipelines
-
-Automated verification is governed by GitHub Actions configured in [`../.github/workflows/ci.yml`](../.github/workflows/ci.yml). The pipeline triggers on pushes and pull requests targeting the `main` and `development` branches, as well as on manual dispatch (`workflow_dispatch`).
-
-### Workflow Jobs
-
-1. **`quality` (Lint, format, complexity, and notebooks)**:
-   - Installs Python and syncs dependencies with `uv sync --frozen`.
-   - Runs `ruff check . --output-format=github` and `ruff format . --check`.
-   - Runs `python scripts/check_notebooks.py` to reject executed notebooks.
-   - Computes cyclomatic complexity with `radon cc src -a -s` and enforces strict gates with `xenon --max-absolute B --max-modules A --max-average A src`.
-
-2. **`test` (Pytest & Coverage)**:
-   - Depends on the successful completion of the `quality` job.
-   - Executes `pytest --cov --cov-report=xml --cov-report=term-missing`.
-   - Generates and uploads `coverage.xml` as a build artifact.
-
-3. **`docker` (Container Image Build & Push)**:
-   - Configured for GHCR (`ghcr.io`), but currently disabled via `if: false` until a root `Dockerfile` is added to the repository.
-
----
-
-## Key Entrypoints & Directory Layout
-
-Understanding where primary logic and configurations reside helps streamline navigation:
-
-```
-├── .github/workflows/   # GitHub Actions CI/CD workflows (ci.yml)
-├── configs/             # External YAML/JSON configuration files
-├── data/                # Data storage tiers (raw, interim, processed, features)
-├── docs/                # Architecture documentation, ADRs, and model cards
-├── models/              # Saved model artifacts and metadata
-├── notebooks/           # Exploratory and report notebooks (must be output-free)
-├── reports/figures/     # Generated plots and report artifacts
-├── scripts/             # Maintenance and verification scripts (check_notebooks.py)
-├── src/                 # Main Python source package
-│   ├── api/             # Model serving and REST endpoint handlers
-│   ├── data/            # Ingestion and raw data transformation code
-│   ├── features/        # Feature extraction and engineering pipeline
-│   ├── models/          # Model architecture implementations and serialization
-│   ├── training/        # Training routines and loss functions
-│   ├── pipelines/       # End-to-end training and inference orchestration
-│   ├── utils/           # Configuration settings (config.py) and helpers
-│   └── main.py          # Application entrypoint
-└── tests/               # Test suite split into unit/ and integration/
+```bash
+uv run dvc repro          # run only stale stages
+uv run dvc status
+uv run dvc metrics show   # training, drift-alert and score-impact metrics
+uv run dvc dag
 ```
 
-- **Application Entrypoint**: [`../src/main.py`](../src/main.py) provides the entry function (`main()`) to trigger execution.
-- **Central Settings**: [`../src/utils/config.py`](../src/utils/config.py) instantiates the global `settings` object via Pydantic `BaseSettings`.
-- **Project Configuration**: [`../pyproject.toml`](../pyproject.toml) configures dependency groups (`dev`), Ruff linting/formatting rules, Pytest options, Pytest markers (`slow`, `integration`), and Coverage tracking settings.
+Commit `dvc.lock` together with the changes that produced it.
 
----
+The manual order, which the README also documents, is below. The last step is **not** a DVC stage.
 
-## AI Agent Guidance & Operating Principles
+```bash
+uv run python -m scripts.validate_home_credit
+uv run python -m src.pipelines.prepare_data
+uv run python -m src.training.train
+uv run python -m scripts.simulate_home_credit_drift
+uv run python -m scripts.run_drift
+uv run python -m scripts.analyze_score_impact
+uv run python -m scripts.run_monitored_drift   # validation + drift + reports/operational_metrics.prom
+```
 
-AI agents operating in this repository should adhere to the guidelines set out in [`../AGENTS.md`](../AGENTS.md):
+`scripts.demo_invalid_batch` shows Pandera rejecting a deliberately corrupted batch.
 
-1. **Authoritative Source**: Treat the source code in `src/` and tests in `tests/` as the ultimate ground truth.
-2. **Just-in-Time Context**: Use OpenWiki search and retrieval tools on demand when architectural uncertainties arise, rather than preloading the whole wiki.
-3. **Quiet Validation**: Verify code changes with minimal, focused commands (e.g., `uv run pytest tests/unit/test_smoke.py` or `uv run ruff check .`) to keep failure output clear and actionable.
-4. **Notebook Output Discipline**: Always run [`../scripts/check_notebooks.py`](../scripts/check_notebooks.py) or `nbstripout` if modifying Jupyter notebooks in `notebooks/` to prevent committing cell outputs.
+To view the metrics, set `GRAFANA_ADMIN_PASSWORD` in your shell, then run `docker compose -f compose.observability.yaml up -d`. Prometheus is at `localhost:9090` and Grafana at `localhost:3000`. See [Observability Stack](operations/observability_stack.md) for ports, rules and troubleshooting.
+
+`src/main.py` is only a placeholder entrypoint. Its `main()` prints a startup message, and coverage omits it. Real work happens in the modules and scripts above.
+
+## Quality commands
+
+```bash
+uv run pytest -v
+uv run ruff check .
+uv run ruff format . --check
+uv run python scripts/check_notebooks.py
+uv run pre-commit run --all-files
+uv run radon cc src -a -s
+uv run xenon --max-absolute B --max-modules A --max-average A src
+```
+
+- **Ruff**: configured in `pyproject.toml` with line length 88, target `py312`, rules `E F I N UP D B SIM` and Google docstring convention. Docstring rules are ignored under `tests/**`. `notebooks/` is excluded from Ruff.
+- **Radon and Xenon**: no thresholds live in `pyproject.toml`. The complexity gate is the Xenon command above, run in the `quality` CI job and available locally. It is not a pre-commit hook.
+- **Pytest**: `testpaths = ["tests"]`, `--strict-markers`, markers `slow` and `integration`. Coverage covers `src` minus `src/main.py`, with `fail_under = 0`.
+- **Notebook hygiene**:
+  - `scripts/check_notebooks.py` scans the paths you pass, or every `notebooks/**/*.ipynb` if you pass none.
+  - It flags *code* cells that have non-empty `outputs` or a non-null `execution_count`. It prints the cell indices.
+  - It exits 1 if any notebook is dirty and 0 otherwise. The fix is `uv run nbstripout <notebook.ipynb>`.
+- **Pre-commit** runs file-hygiene hooks, `ruff-check --fix`, `ruff-format`, `nbstripout` and a local `check-notebooks` hook for `.ipynb` files. The hygiene hooks include `detect-private-key` and a 1000 KB large-file limit.
+- **CI** (`ci.yml`, named CI/CD) runs on pushes and pull requests to `main` and `development`, and on manual dispatch. The `quality` job runs Ruff, `check_notebooks.py`, Radon and Xenon. The `test` job needs `quality`, runs pytest with coverage and uploads `coverage.xml`. The `docker` GHCR job is disabled (`if: false`) until a root `Dockerfile` exists.
+
+See [Quality Standards & Gates](workflows/development_and_quality.md) and [Test Suite & CI/CD](testing/test_suite_and_ci.md) for details.
+
+Commit message convention: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`.
+
+## Agent guidance
+
+`AGENTS.md` makes OpenWiki optional, just-in-time context. Do not preload the wiki. Treat source and tests as authoritative, and prefer the narrowest quiet validation that proves your change. The generated OpenWiki pages are refreshed by workflow, so do not hand-edit them unless asked.

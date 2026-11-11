@@ -24,6 +24,12 @@ data/processed/*
 data/features/*
 models/*
 !**/.gitkeep
+# Metadados do DVC (os dados ficam no cache/remote do DVC)
+!data/**/*.dvc
+!data/**/.gitignore
+!models/.gitignore
+# Métricas do treino ficam no Git para `dvc metrics diff`
+!models/baseline_metrics.json
 
 # MLflow
 mlruns/

@@ -68,7 +68,9 @@ def save_model(pipeline: Pipeline, metrics: dict[str, float]) -> Path:
     settings.models_dir.mkdir(parents=True, exist_ok=True)
     path = settings.models_dir / MODEL_FILE
     joblib.dump(pipeline, path)
-    (settings.models_dir / METRICS_FILE).write_text(json.dumps(metrics, indent=2))
+    (settings.models_dir / METRICS_FILE).write_text(
+        json.dumps(metrics, indent=2) + "\n", encoding="utf-8"
+    )
     return path
 
 

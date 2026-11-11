@@ -1,11 +1,11 @@
 {
   "records": 92254,
-  "threshold": 0.14317592978477478,
-  "mean_score_before": 0.08060396462678909,
-  "mean_score_after": 0.07461761683225632,
-  "mean_absolute_change": 0.01641419529914856,
-  "share_above_threshold_before": 0.15010731242005768,
-  "share_above_threshold_after": 0.13205931450126823,
-  "changed_decisions": 4277,
-  "changed_decisions_pct": 4.636113339259002
+  "threshold": 0.14101748168468475,
+  "mean_score_before": 0.08059574663639069,
+  "mean_score_after": 0.07549841701984406,
+  "mean_absolute_change": 0.016747603192925453,
+  "share_above_threshold_before": 0.1532291282762807,
+  "share_above_threshold_after": 0.13905088126260107,
+  "changed_decisions": 4440,
+  "changed_decisions_pct": 4.812799445010515
 }

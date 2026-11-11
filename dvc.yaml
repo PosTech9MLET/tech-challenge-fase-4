@@ -1,0 +1,72 @@
+# Pipeline reprodutível (mesma ordem do README). Execute com: uv run dvc repro
+stages:
+  validate:
+    cmd: uv run python -m scripts.validate_home_credit
+    deps:
+      - data/raw/application_train.csv
+      - scripts/validate_home_credit.py
+      - src/data
+
+  prepare_data:
+    cmd: uv run python -m src.pipelines.prepare_data
+    deps:
+      - data/raw/application_train.csv
+      - src/data
+      - src/pipelines/prepare_data.py
+    outs:
+      - data/processed/reference.parquet
+      - data/processed/production_base.parquet
+
+  train:
+    cmd: uv run python -m src.training.train
+    deps:
+      - data/processed/reference.parquet
+      - src/features
+      - src/models
+      - src/training
+    outs:
+      - models/baseline.joblib
+    metrics:
+      - models/baseline_metrics.json:
+          cache: false
+
+  simulate_drift:
+    cmd: uv run python -m scripts.simulate_home_credit_drift
+    deps:
+      - data/processed/production_base.parquet
+      - scripts/simulate_home_credit_drift.py
+      - src/data
+    outs:
+      - data/processed/production_drift.parquet
+
+  detect_drift:
+    cmd: uv run python -m scripts.run_drift
+    deps:
+      - data/processed/reference.parquet
+      - data/processed/production_base.parquet
+      - data/processed/production_drift.parquet
+      - scripts/run_drift.py
+      - src/pipelines/drift_monitor.py
+    outs:
+      - reports/drift_baseline.html
+      - reports/drift_simulated.html
+      - reports/drift_baseline.json:
+          cache: false
+      - reports/drift_simulated.json:
+          cache: false
+    metrics:
+      - reports/drift_alerts.json:
+          cache: false
+
+  score_impact:
+    cmd: uv run python -m scripts.analyze_score_impact
+    deps:
+      - data/processed/production_base.parquet
+      - data/processed/production_drift.parquet
+      - models/baseline.joblib
+      - models/baseline_metrics.json
+      - scripts/analyze_score_impact.py
+      - src/pipelines/score_impact.py
+    metrics:
+      - reports/score_impact.json:
+          cache: false

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:9cef76a20fdd235fabfeb1eec85a04facde3e8857ca66c4d9f1273bd91c4e8b2",
+  "claims": [
+    {
+      "id": "claim_f98ce98f9e514195ab782c1d30c778c5",
+      "statement": "credit_schema builds a Pandera DataFrameSchema (HomeCreditTraining or HomeCreditInference) with per-column rules: unique non-null SK_ID_CURR, positive AMT_INCOME_TOTAL and AMT_CREDIT, nullable positive AMT_ANNUITY, DAYS_BIRTH <= -6575, CNT_CHILDREN >= 0, non-null NAME_INCOME_TYPE, and a TARGET in {0,1} only for the training variant; it uses strict=False and coerce=False.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/contracts.py#L6-L41",
+          "version": "repo-lines-v1:sha256:f9b5c582f7dc33c4c8cc18cf42d35b79b3efdd58b29f7ccd57a500f380d85cfb:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4ZDM3YzYzYmRkMjNmNjNiNTY2ZjQ1YTI3MTRmMGQ2YTJmMjBlM2E1OGM0OWYzYTExNWEyY2QzNmI3ZjhmNGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU1NjVjYWU1ODE4YTVkMjA2MjY5YzYzNTcyOTNiYWY1ZTM4NDQ2OTc4MmZmZGI0MzNjNTkwOWE0OTQxNjFiNjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5OTY2MjY2ZjJkOTk5NGJlZjhlODE0Njc0ODhmMjAyZTdhNjJmYzE4MTlhMDhhMjZlNDYwMzA1YmIwNmYyNmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6fdcb6d6c28b4fd39197d59b39d4cf7d",
+      "statement": "validate_training_batch and validate_inference_batch validate with lazy=True, so all violations are collected and raised together as a single SchemaErrors rather than stopping at the first failure.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/contracts.py#L44-L51",
+          "version": "repo-lines-v1:sha256:cbfb7706214648c88b8437395d271f54c1b136263a382827262ca688590448e5:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGFjNDJmZDIxYjI5NWM5ZjUyNzJmN2JkNDM5OTQwYmY4NjlmMmRhMTA0MTJkNjBlNTgwODZiZjdhNjdjNzY0ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTIwNGQ0ZGM5ZTA1ZDgzYTc0NmRkOTgyMDBjZWJkNzE0NzI5MDc4NTU3NDFhOWYwNzY2ODM2ODJjN2Y4NjQ2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://tests/unit/test_contracts.py#L47-L59",
+          "version": "repo-lines-v1:sha256:2addc5511b134aef3c8451a33a72d19664b832e7d20ecaea7910c96346642d16:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMxMDRjYTM2N2NjZWFiZGY4MjM0ZThlZjk0NjRhMmE2N2E5MjY3NmIxNzUyZTMwNDA3NzQ5NzJkNDNlZjBlYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0YWMyYjM2MmM0Yzc5OGQ5NjVjYWY0ODViNmNlZjUyZmQ5Zjc1YzViMmU3N2Q0ODE1ZDUyNzAzMGU2MmI4NjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY4ODgzNGUxOTFkMDY4OTQ1YzRjNDAzODA3NTMxN2RhMjM4N2YxN2QwNmExYWJhYjBiMTRiMDRmYTJjNjAzMzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM5NzYxZjZjZDdkMzQ2NTQ0MzA3Y2E4OTkxMjY4MWNmZWYwZjA0OGI5NDJiYmU3Mzk1ODE5OTYwOTMzMWRmZjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cfa4d0fafea440e2be18fb50b476f91a",
+      "statement": "load_application_train reads only RAW_COLUMNS from data/raw/application_train.csv and raises FileNotFoundError with the Kaggle download URL if the file is missing; split_reference_production performs a seeded split stratified on TARGET.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/home_credit.py#L14-L47",
+          "version": "repo-lines-v1:sha256:0a0d5bf83d3e25d5d08dacbfda77dec5c9655b8dc21f0d877218c304a311581e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiNmI2Y2Q0NDFkMzIzNTFkNDI3Yjc5NmM1ZTY4N2QwMDNhMmY3MjUwMzc4NjI5ZDk3ZWRhNmZhZDRjMDUwM2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyMTRmZDI0M2JiMTkxYmU2MjI1OGRhMWQ4MTkxZGYxNWY0YmUxZjFiYzY4MTE2NzBiODc4MDk3Yzc1MzlhNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1YzFjNDYyZTJhMzlkNzQ3NTlmNWUxYjEyNmY3NjgzYTJiNzMwMTE4ZTE4ZjUxMjJiMDhjZWRlZWI2NTBlMjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/features/build.py#L50-L58",
+          "version": "repo-lines-v1:sha256:2e7e2c7a0285e2f37ccb6dec52c90159f83e3ca5aab11a99bd0df062d7db7fa5:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGE5MzQ3YTgzYzA0M2Q5NDgwZjIzYjNjNTk4YjdiMjA1NTA0NTJhNGY0MTYxYjQwNTE1Mjg3YjBiOWU2M2ExNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2QyOTE0NzdlZDRhZGIwYWUyY2I3MTlhZTI5OGJjZWYwNTVhNzljYWRlZDQ1YjA0ZjI2NjY1YjBiMmMzMDMxNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTM1NzcwZTk3ZDcyOTg1YjhlNGNhZTNlNTIxNmFhOTc0NzQzN2QxOTQ2NTlkYTc2YmE1OWEyYmJiYjMxNThiMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_eb1294b716a34b78ad6813809c9969dd",
+      "statement": "The training contract is enforced at multiple pipeline gates: prepare_data validates the raw frame before splitting and writing (a violation blocks ingestion and writes nothing), train.main re-validates reference.parquet before starting the MLflow run, the standalone validate_home_credit script is the DVC validate stage, and the drift simulation validates the TARGET-less drifted frame with the inference schema before writing it.",
+      "evidence": [
+        {
+          "resource": "repo://dvc.yaml#L1-L18",
+          "version": "repo-lines-v1:sha256:b051b47b60982a560b1e01c8906d487901a44a7a3d19c5aab8b77fbc0f8315bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3NWQ3NjAxZjRjNTE4NGUxNTc5OTUwN2Y4MWNkZDIzYTNiMzUwOGZmMTc2YzliMTQ4ZDdjNzUwZjFjMThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1NzY3NDY5NzU4M2VjODE5MGQ0NDQ2MDgzNjQ5YTU4OWY1OGM3NGU4NjRlYTY4MTg0ZDE4YWQxMWFlNDQ0OGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3YzU0YWUwMGJkMGUzOWYxYjAxZTg4Y2U5NWMwOTA5ODcyODA1YjI2NjIxZDdmMTA3YjgxNzZkZWRhMWNkZjYifQ"
+        },
+        {
+          "resource": "repo://scripts/simulate_home_credit_drift.py#L21-L36",
+          "version": "repo-lines-v1:sha256:beb98104d2638b57901eccf419e0ddbd5f2b680d83dbd731cd409c671c2f8f4d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJmM2I2NjIzNTcyMTI4ZDI3MDA1ZDQ2NzNjMmNlNmJiYTBlNDgyNzcyMDcyNWZlZTA5NDk2ODRkNGE1MDUwMWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNjRjYTBhOWUzYWFlMjI1Zjk5YjgyMjdmMGUzYzQ3ZmJmYzViZTViMjI4MzVmZGRkY2E0MjQ4MjNiZGQ4NzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhZjQ0MTY1NGMwZWExODUwNTEwZWYyYzFhM2EwZmNjM2FhMzdjN2ExZDk4NmRiMmUzNDk1NmM4ZGJhNDI4YmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhODc1MjJhMGVjYmI0NTJmMzhlZTllNTNhYmU1NTdmNWQxM2M1M2RjYmJiNTRhNjlmZDM4NDcyNjhhNmYwMjYifQ"
+        },
+        {
+          "resource": "repo://scripts/validate_home_credit.py#L14-L27",
+          "version": "repo-lines-v1:sha256:1bace25acea1791426b1bfd59ccf961c9fe9b54b0ccca1b9db3f6ab56192d0c1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4MjdmYTFiOWU5MTQ2NDczNjdkYzZiYTg4NjljNmI5YzBjZDZiNDBlODM5ZWRiZTYxM2MzMWEyNWE0ZTZhZTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L15-L40",
+          "version": "repo-lines-v1:sha256:306e91c507a1ee6c5f136d53346ee62c36e24a5c970927a4fe40ac6de0878cc5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMjMwYzAzMjViZGYzNTgzMWE2ZDk4ZWVlMWZkYjE0MTUwOTI2YWVkZjQ5MmJmYWE5YWY3MzBmYzQyZWM4OGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUyOTgwZmYyMjYyZjNhNTMyODRlYTVjNDU2YTRmNmI5MWViMzVmMmU1MmU4MTIzZjAyZjU5ZGM5NGUxMzJmODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L116-L124",
+          "version": "repo-lines-v1:sha256:b0dac03511e927cd624291a0b3154bed02f8aed0d5d3c2040508d0067c9bbc11:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzBiYzUxMjY1ZGEzYzQ5NGJkZDI5NDA4YzBlMTc3NjY1YmZlYWQ2ZmQyNzkzNmYwNTlkMmM1NTdiMTlhM2NlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmE3NTMyZDg4ODU1OWEzODNjZDYwNGQxZGNiODk3MWZlNTI0MGU4NmZmMjhmMDhiOWRmOGQwMWMyNGM3NGQ4NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGNkYTY5OTZmNWM2ZmY2ZTgyYTFkYmE2MzYwNmNiMWM1ODMwNzgzOTNhYTNjN2E3MTVkNjgxYzA1MGY4N2NmNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDdhNDZjYzVkZjllNmMxZjIwZmZlODEzNjRiOTNhMmM4MmRkYmE5ODBjNDY1NDFkNzllNzhmNTQ1ZWY0YWFhMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6181ac30312d4eb0826e91244eee3304",
+      "statement": "validate_training_with_monitoring wraps validate_training_batch inside observe_pipeline('data_validation'), logging approved (INFO), rejected for SchemaError/SchemaErrors (WARNING, re-raised) or error for other exceptions (ERROR, re-raised), with records, pipeline and error_type context; rejection is never swallowed, and the metric records status 'error' for any exception, so it does not distinguish rejection from unexpected failures.",
+      "evidence": [
+        {
+          "resource": "repo://src/monitoring/metrics.py#L58-L82",
+          "version": "repo-lines-v1:sha256:8a59a591b4d235f89c99f4da48709cece926d13324f800523b287c64322b3c9e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU2MWYzM2MxMzI1NjlhNzQ5NDZiMmZjZjU0NmNhM2M0NDI1ZGEwY2E1Y2Y2YjY4NmMyNjA5MGZhYTlkMTEyYjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiMzYwN2FjZjg1NmRkYmE1NjRjYWYwZGY4Mjk1NWFhMTNkZmU2N2EyMTI5NDFkMGUwNDVkY2UwYzE1NGQ1YmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNlYjA2MGU3MDI5ZjE3ZDBkYzkyYjg1YTExZGY3ZDU2MDg3YTBlYjU2ZjA0ZjBlNDViOWVkYmZiNjM3Zjg2MGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZkZGExZTE5ZjgzYTgxMDBjN2M3ZmZjODkzM2IyY2YzOWU4ZDBiMjRkYjUwZTRlNTM5NzNkMGRjMjRkMDFkNTIifQ"
+        },
+        {
+          "resource": "repo://src/monitoring/validation.py#L17-L65",
+          "version": "repo-lines-v1:sha256:078c3c2f63ddafffb0faddc8648b29babac79b575d968d63306aeffdcc299386:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZjY2MjNjYjgxY2NkMTkzNTViYjZjM2Q1M2UwY2JkODhiMjI2YzI3M2IyYzMzZDNmYTY3ZTM1ZDEzZjI2ZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_validation_monitoring.py#L14-L80",
+          "version": "repo-lines-v1:sha256:391e1b518f2bc1ee0084c77b9d81e3b6a105ad53c678ac9277f166e7f39c3143:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZDBmM2M5ODhiYTE0YjZjOGVkOThkZmVkYTFlNWUwMzVmNTJiNjg4N2I5MjMzZWMyYmZkYjExYjFlMDRlMWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ZjJjYzhkYjRlMDA1YWVlNGY1NzkzOTQyOTliZmQxMzQ2YTM4MTJkZjM0OTk4M2NjYTY1NjYxYThlNzRlZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_47dc879d61c548c5b6781199ea989de5",
+      "statement": "run_monitored_drift loads data under observe_pipeline('data_loading'), validates with the monitored wrapper, runs drift monitoring, and writes the Prometheus registry to operational_metrics.prom in a finally block so metrics are exported even when validation fails.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/run_monitored_drift.py#L14-L45",
+          "version": "repo-lines-v1:sha256:25229d2ecece8f0db2a689b083932cdd69e18fe3e195365ff5ab4e27171cf04f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ZjJjYzhkYjRlMDA1YWVlNGY1NzkzOTQyOTliZmQxMzQ2YTM4MTJkZjM0OTk4M2NjYTY1NjYxYThlNzRlZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzMmU2OTIyNTE4NDY1ZGVlOTg3MGU3NjAxNjU0YWVkZWI4OThiODQ5ZmJmNmMzZjA0OGM4YzE5MmY3M2JmMGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_16641943433c44cc91142d3ef51026a9",
+      "statement": "demo_invalid_batch validates five real rows, injects five violations (negative income, zero credit, DAYS_BIRTH=-3000, TARGET=3, duplicated SK_ID_CURR), prints the SchemaErrors failure_cases (column, check, failure_case), and raises RuntimeError if the invalid batch is unexpectedly accepted.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/demo_invalid_batch.py#L18-L48",
+          "version": "repo-lines-v1:sha256:7c09b0f77ad310e2a9c684dd1c989e86bb77e1f5ed756fc661fb05696d05cea1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MTI0MjdhNzY4YWI5YWFhMDM1YWY0MzM0NzJmYjQwYmJlNjZkMDAzZjUxYjY5MjRkYTNiNmRjY2E5MmYxZDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7ebcd389057c411da5e7ce724bf46971",
+      "statement": "Unit tests cover valid acceptance, parametrized rejection of per-column violations, duplicate IDs, nullable AMT_ANNUITY, and inference batches without TARGET; the drift test also validates simulated drifted data against the training contract.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_contracts.py#L30-L93",
+          "version": "repo-lines-v1:sha256:f39f83dce175a47e3b94f02356aa5c3526a58c1968eee7adf379ab4803cfeec5:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRlNDM4NjIwMWNiM2RmYjQ4OWIwMzAyOTBlOGNkMTE3NTNkMjdiNDUyMGY2NzhkNDM4NWQ2OTNjMTIwYjhkYmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwYmNlMmNjNzFkMGI1OTI4MzcyYmQ1MzFjNmZmMGExNmVhZmE5NWNjNDk3NmYzNGYxMzJmNjU3ZjBlNGVkMzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_drift.py#L30-L34",
+          "version": "repo-lines-v1:sha256:3e7f87b4cab6c8ee8c0a8e43029f70ee5e09bd8158272c4034e3e45e4efe4596:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmFiZTU5OGEyZGU3MWRmZjFiZTgxNjgzMzM2MzI4ODAyNGUxODYxMmNhOTUyYmIxNzFjZWNiZGFhYmZjYjYxMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGYyNWJhYjAxZWRhNDljNmM2MjI3MDBlNWRiOGYyNTFmNWIwZDU5YTZhNWU5MDljNDhmYWNmYmM1MTgxYTM5YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGYyZTY4NDNmMGQ0NjBkMWU2NzE5ODY4NjExMjhkMTYxMGNiNjY3NjgyNDVkM2NiMzg4MzU5NGE3MDViYzMwYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2Y4ODFkY2Q0Y2I2OTEyODFiNWU4Yjg3YTEwYjQ5NTBhZjVhNDQ2ZDE5MjY0NmEzMDljYTAwODQ5MWJmMmRmMiJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-11-09T02:03:21.311Z"
+  }
+}

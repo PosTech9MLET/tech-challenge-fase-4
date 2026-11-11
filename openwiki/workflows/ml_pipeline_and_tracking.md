@@ -1,175 +1,191 @@
 ---
 type: workflow
-title: ML Pipeline Structure & Experiment Tracking
-description: Detailed guide to end-to-end machine learning workflows across src subpackages, MLflow experiment tracking integration, model artifact persistence, and model card evaluation standards.
-tags: [ml-pipeline, mlflow, experiment-tracking, data-processing, feature-engineering, model-card, model-artifacts]
+title: ML Pipeline, DVC Stages & Experiment Tracking
+description: How the reproducible DVC pipeline (validate, prepare_data, train, simulate_drift, detect_drift, score_impact) turns the Home Credit CSV into a baseline XGBoost credit-scoring model, how features are built, what MLflow records, and which model and metrics files each stage produces.
+tags: [ml-pipeline, dvc, mlflow, experiment-tracking, feature-engineering, xgboost, model-artifacts, model-card]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-10-24T23:05:52.220Z
+    at: 2026-11-09T02:03:21.311Z
 sources:
+  - id: openwiki-source-5f5b95b3d6a215fa02ceb945
+    resource: repo://.env.example
+  - id: openwiki-source-269c1f28e5de4ed38ee00d6b
+    resource: repo://data/raw/application_train.csv.dvc
   - id: openwiki-source-45f7d2a4e749798ed3a41141
     resource: repo://docs/model_card.md
+  - id: openwiki-source-4935f5c0efb229189fbcdd99
+    resource: repo://dvc.lock
+  - id: openwiki-source-cfa03d5d7ac7270f0bb1bf28
+    resource: repo://dvc.yaml
+  - id: openwiki-source-11ba73b3ffd2cb972063e78b
+    resource: repo://models/baseline_metrics.json
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
-  - id: openwiki-source-a38d3e2c749ac893a431b6e7
-    resource: repo://src/data/__init__.py
-  - id: openwiki-source-ce799c0424bcf3f0206ac251
-    resource: repo://src/features/__init__.py
+  - id: openwiki-source-b5672e8c6fe51c1d4051fd28
+    resource: repo://scripts/analyze_score_impact.py
+  - id: openwiki-source-6d5d6449122bc859c0c552a8
+    resource: repo://src/data/contracts.py
+  - id: openwiki-source-214118d922fe1ca5c2383b44
+    resource: repo://src/data/home_credit.py
+  - id: openwiki-source-cd5f91b2d1b7100bb20e38ce
+    resource: repo://src/features/build.py
   - id: openwiki-source-11b9d806fcc6dd6e7747ed87
     resource: repo://src/main.py
-  - id: openwiki-source-c5c764c23323940f3deaed50
-    resource: repo://src/models/__init__.py
-  - id: openwiki-source-e5e6922327ed186a51d3cf3e
-    resource: repo://src/pipelines/__init__.py
-  - id: openwiki-source-69ff0ce535368c92b4317f52
-    resource: repo://src/training/__init__.py
+  - id: openwiki-source-bef30f0ca72ee4bce1ca9e59
+    resource: repo://src/models/baseline.py
+  - id: openwiki-source-0b481e6de0f6fd0862204a36
+    resource: repo://src/pipelines/prepare_data.py
+  - id: openwiki-source-fcfbfa02b8c3ddf398465b4a
+    resource: repo://src/training/train.py
   - id: openwiki-source-f12fdb76c2f98bd11af25d76
     resource: repo://src/utils/config.py
-generated: { by: "openwiki/0.7.2", at: "2026-10-24T23:05:52.220Z" }
+  - id: openwiki-source-f9ca9cdda3a0ae93b2ab0055
+    resource: repo://tests/unit/test_baseline.py
+  - id: openwiki-source-85682b837c4bbfc1b73890d0
+    resource: repo://tests/unit/test_features.py
+  - id: openwiki-source-e9644626d37bc03f84bcb73f
+    resource: repo://tests/unit/test_prepare_data.py
+generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:03:21.311Z" }
 ---
 
-# ML Pipeline Structure & Experiment Tracking
+# ML Pipeline, DVC Stages & Experiment Tracking
 
-The repository implements a structured, modular pipeline architecture for machine learning workflows. The machine learning lifecycle is organized across dedicated Python subpackages under [`src/`](../../src/), establishing clean architectural boundaries between raw data ingestion, feature engineering, model definition, training execution, experiment tracking, and pipeline orchestration.
+The project trains a baseline credit-scoring model (default probability, "PD") on the Kaggle Home Credit `application_train.csv`. The workflow is declared as a DVC pipeline in [`dvc.yaml`](../../dvc.yaml) and run with `uv run dvc repro`. Each stage shells out to a Python module through `uv run python -m ...`. The first three stages (`validate`, `prepare_data`, `train`) build the model. The last three (`simulate_drift`, `detect_drift`, `score_impact`) are covered in [Drift Monitoring & Score Impact](drift_monitoring_and_score_impact.md) and are only summarised here.
 
-Experiment tracking and model artifact persistence are integrated via [MLflow](https://mlflow.org/), while model governance and quantitative evaluation standards follow the structured Model Card framework defined in [`docs/model_card.md`](../../docs/model_card.md).
-
----
-
-## Subpackage Responsibilities & Data Progression
-
-The end-to-end machine learning workflow progresses sequentially through dedicated subpackages within [`src/`](../../src/). Each stage in the processing chain transforms input data or models and passes intermediate artifacts to subsequent stages.
+## DVC stage dependency graph
 
 ```mermaid
 flowchart TD
-    RawData["Raw Data Ingestion\n(data/raw/)"] --> DataPkg["src/data/\nData Cleaning & Staging"]
-    DataPkg --> StagedData["Interim & Processed Data\n(data/interim/, data/processed/)"]
-    StagedData --> FeaturePkg["src/features/\nFeature Engineering"]
-    FeaturePkg --> FeatureData["Feature Datasets\n(data/features/)"]
-    FeatureData --> TrainingPkg["src/training/\nTraining & Cross-Validation"]
-    ModelPkg["src/models/\nModel Architecture & Serialization"] --> TrainingPkg
-    TrainingPkg --> MLflowBackend["MLflow Tracking & Artifact Storage\n(mlflow.db, models/)"]
-    TrainingPkg --> ModelCardDoc["Model Card Documentation\n(docs/model_card.md)"]
-    PipelinePkg["src/pipelines/\nPipeline Orchestration"] --> MainEntry["src/main.py\nExecution Entrypoint"]
+    RAW["data/raw/application_train.csv (DVC-tracked)"]
+    VAL["validate"]
+    PREP["prepare_data"]
+    REF["reference.parquet"]
+    PROD["production_base.parquet"]
+    TRAIN["train"]
+    MODEL["models/baseline.joblib"]
+    METRICS["models/baseline_metrics.json"]
+    SIM["simulate_drift"]
+    DRIFTED["production_drift.parquet"]
+    DET["detect_drift"]
+    REPORTS["reports/drift_*.html and drift_*.json"]
+    ALERTS["reports/drift_alerts.json"]
+    SCORE["score_impact"]
+    IMPACT["reports/score_impact.json"]
+
+    RAW --> VAL
+    RAW --> PREP
+    PREP --> REF
+    PREP --> PROD
+    REF --> TRAIN
+    TRAIN --> MODEL
+    TRAIN --> METRICS
+    PROD --> SIM
+    SIM --> DRIFTED
+    REF --> DET
+    PROD --> DET
+    DRIFTED --> DET
+    DET --> REPORTS
+    DET --> ALERTS
+    PROD --> SCORE
+    DRIFTED --> SCORE
+    MODEL --> SCORE
+    METRICS --> SCORE
+    SCORE --> IMPACT
 ```
-*Figure 1: End-to-end machine learning data progression, package modularity, MLflow logging, and documentation workflow.*
+*Figure 1: Data and artifact dependencies between DVC stages, as declared in `dvc.yaml`.*
 
-### Stage-by-Stage Progression
-
-1. **Data Staging ([`src/data/`](../../src/data/))**:
-   - Handles raw data ingestion, schema validation, data cleaning, and partitioning.
-   - Operates across progressive directory stages: [`data/raw/`](../../data/raw/) for immutable source datasets, [`data/interim/`](../../data/interim/) for intermediate cleaned files, and [`data/processed/`](../../data/processed/) for canonical split datasets.
-
-2. **Feature Engineering ([`src/features/`](../../src/features/))**:
-   - Constructs engineered features, applies transformations (e.g., scaling, encodings, aggregations), and manages feature extraction pipelines.
-   - Persists transformed feature sets and matrices into [`data/features/`](../../data/features/).
-
-3. **Model Definitions ([`src/models/`](../../src/models/))**:
-   - Defines estimator architectures, custom model classes, neural network modules, and prediction interface wrappers.
-   - Manages model serialization and deserialization routines targeting [`models/`](../../models/).
-
-4. **Training & Evaluation ([`src/training/`](../../src/training/))**:
-   - Coordinates model training, hyperparameter tuning, cross-validation, and metric computation.
-   - Integrates directly with MLflow to log training parameters, performance metrics, and model checkpoints.
-
-5. **Pipeline Orchestration ([`src/pipelines/`](../../src/pipelines/))**:
-   - Composes modular components from `data`, `features`, `models`, and `training` into repeatable, end-to-end pipeline workflows.
-   - Executed via top-level entrypoints such as `main()` in [`src/main.py`](../../src/main.py).
-
----
-
-## Experiment Tracking with MLflow
-
-Experiment tracking is centralized through MLflow to guarantee full experiment reproducibility, hyperparameter auditing, and model lineage.
-
-### MLflow Backend Configuration
-
-MLflow configuration settings are managed via Pydantic Settings in [`src/utils/config.py`](../../src/utils/config.py):
-
-```python
-class Settings(BaseSettings):
-    """Variáveis de ambiente do projeto."""
-
-    model_config = SettingsConfigDict(env_file=ROOT_DIR / ".env", extra="ignore")
-
-    env: str = "local"
-    log_level: str = "INFO"
-    random_seed: int = 42
-    mlflow_tracking_uri: str = f"sqlite:///{ROOT_DIR / 'mlflow.db'}"
-    data_dir: Path = ROOT_DIR / "data"
-    models_dir: Path = ROOT_DIR / "models"
-```
-
-- **Tracking Database URI (`mlflow_tracking_uri`)**: Defaults to `sqlite:///{ROOT_DIR}/mlflow.db`, utilizing a local SQLite database at the repository root for offline tracking during development. This URI can be overridden in `.env` or container environments to point to a remote MLflow tracking server (e.g., PostgreSQL or HTTP server).
-- **Reproducibility Seed (`random_seed`)**: Set to `42` by default to ensure deterministic pseudo-random seed initialization across data splits, feature transformations, and model training routines.
-
-### Logged Artifacts & Metrics
-
-During training runs orchestrated by [`src/training/`](../../src/training/), MLflow records:
-- **Parameters**: Training hyperparameters, feature flags, data split ratios, and random seed initializations.
-- **Metrics**: Quantitative evaluation performance across training, validation, and test datasets (e.g., accuracy, precision, recall, F1-score, RMSE, ROC-AUC).
-- **Model Checkpoints**: Model binaries and serialized pipeline transformers logged to [`models/`](../../models/) (`settings.models_dir`).
-
----
-
-## Model Card Governance & Evaluation Standards
-
-Model governance and ethical reporting standards are governed by the Model Card specification defined in [`docs/model_card.md`](../../docs/model_card.md). Every trained model candidate intended for production deployment must include or update a Model Card covering nine required sections:
-
-| Section Number | Section Title | Description & Reporting Requirements |
+| Stage | Command module | Key outputs |
 | :--- | :--- | :--- |
-| **1** | **Detalhes do modelo** (Model Details) | Model architecture type, version, release date, core maintainers, and license information. |
-| **2** | **Uso pretendido** (Intended Use) | Target application domains, primary use cases, out-of-scope scenarios, and target user demographics. |
-| **3** | **Fatores** (Factors) | Relevant demographic, environmental, or operational factors that may influence model performance. |
-| **4** | **Métricas** (Metrics) | Primary evaluation metrics, decision thresholds, and loss functions optimized during training. |
-| **5** | **Dados de avaliação** (Evaluation Data) | Dataset sources, slice definitions, sample sizes, and preprocessing applied specifically to evaluation splits. |
-| **6** | **Dados de treino** (Training Data) | Historical dataset sources, volume, temporal scope, and filtering rules applied during model training. |
-| **7** | **Análise quantitativa** (Quantitative Analysis) | Performance disaggregation across subgroup slices, including bias and fairness evaluations. |
-| **8** | **Considerações éticas** (Ethical Considerations) | Potential ethical risks, privacy concerns, mitigation strategies, and human oversight recommendations. |
-| **9** | **Limitações e recomendações** (Limitations & Recommendations) | Known boundary conditions, performance degradation scenarios, and usage guidelines for downstream operators. |
+| `validate` | `scripts.validate_home_credit` | none (acts as a gate and has no downstream artifact edge) |
+| `prepare_data` | `src.pipelines.prepare_data` | `data/processed/reference.parquet`, `data/processed/production_base.parquet` |
+| `train` | `src.training.train` | `models/baseline.joblib`, `models/baseline_metrics.json` (metrics) |
+| `simulate_drift` | `scripts.simulate_home_credit_drift` | `data/processed/production_drift.parquet` |
+| `detect_drift` | `scripts.run_drift` | `reports/drift_baseline.html`, `reports/drift_simulated.html`, `reports/drift_baseline.json`, `reports/drift_simulated.json`, `reports/drift_alerts.json` |
+| `score_impact` | `scripts.analyze_score_impact` | `reports/score_impact.json` |
 
----
+Operational notes:
 
-## Entrypoint & Pipeline Execution
+- **Stage invalidation is dependency-driven.** `train` depends on `src/features`, `src/models` and `src/training` as whole directories, plus `reference.parquet`. Editing any file in those packages re-runs training and, transitively, `score_impact`. `validate`, `prepare_data` and `simulate_drift` all depend on `src/data`.
+- **`cache: false` outputs.** Small, human-diffable JSON files are declared with `cache: false`, so DVC leaves them out of its cache and Git can track them directly. These are `models/baseline_metrics.json` (a `metrics` entry of `train`), `reports/drift_baseline.json` and `reports/drift_simulated.json` (plain `outs` of `detect_drift`), and `reports/drift_alerts.json` and `reports/score_impact.json` (`metrics` entries). Parquet files, `baseline.joblib` and the HTML drift reports use the default cached behaviour.
+- **Raw data is pinned by hash.** [`data/raw/application_train.csv.dvc`](../../data/raw/application_train.csv.dvc) records the md5 of the raw CSV. [`dvc.lock`](../../dvc.lock) records md5 and size for every dependency and output of every stage, which makes a rerun with unchanged inputs a no-op.
+- **`score_impact` also depends on `baseline_metrics.json`.** It needs the saved decision threshold as well as the model file.
 
-Pipeline runs are initiated through [`src/main.py`](../../src/main.py), which serves as the top-level execution entrypoint.
+## Data preparation (`prepare_data`)
 
-```python
-def main() -> None:
-    """Executa o pipeline principal."""
-    print("Projeto inicializado com sucesso.")
+[`src/pipelines/prepare_data.py`](../../src/pipelines/prepare_data.py) implements `run(production_size=0.3)`:
 
+1. `load_application_train()` in `src/data/home_credit.py` reads only the `RAW_COLUMNS` from `data/raw/application_train.csv`. It raises `FileNotFoundError` with the Kaggle download URL if the file is missing.
+2. `validate_training_batch()` applies the Pandera training contract (see [Data Contracts](../concepts/data_contracts.md)). The check is lazy, so all violations are collected. A violation raises `SchemaErrors` and **nothing is written**, which a unit test asserts by checking that `data/processed` does not exist.
+3. `split_reference_production()` makes a stratified split on `TARGET` with `settings.random_seed`. 70% becomes the **reference** set (used for training and as the drift baseline) and 30% becomes the **production** set. Both keep their original row order.
+4. Both files are written as Parquet under `data/processed/`.
 
-if __name__ == "__main__":
-    main()
-```
+The persisted columns are raw. Feature engineering is deliberately not applied at this point. It lives inside the model pipeline, so simulated changes to raw production columns such as income flow into the derived ratios at scoring time.
 
-Executing `python src/main.py` initializes configuration parameters from `src.utils.config.settings` and triggers end-to-end pipeline orchestration routines defined in [`src/pipelines/`](../../src/pipelines/).
+The standalone `validate` stage runs [`scripts/validate_home_credit.py`](../../scripts/validate_home_credit.py), which loads only the contract columns and calls `validate_training_batch()`. It has no `outs`, so a validation failure fails `dvc repro`, but no later stage reads anything from it.
 
----
+## Feature engineering
 
-## Testing & Quality Assurance Integration
+[`src/features/build.py`](../../src/features/build.py) holds the column lists and `build_features()`:
 
-Machine learning pipeline components are verified through the test suite under `tests/`.
+- `CATEGORICAL` has 8 columns, such as `NAME_INCOME_TYPE` and `OCCUPATION_TYPE`. `NUMERIC_RAW` has 15 columns, including the `EXT_SOURCE_*` scores and the `AMT_*` and `DAYS_*` columns.
+- `DERIVED` has five columns: `AGE_YEARS` (from `DAYS_BIRTH`), `CREDIT_INCOME_RATIO`, `ANNUITY_INCOME_RATIO`, `CREDIT_TERM` and `EMPLOYED_RATIO`.
+- `MODEL_FEATURES = CATEGORICAL + NUMERIC` is the exact output schema of `build_features()`.
+- `build_features()` is a **pure, stateless** function. It replaces the `DAYS_EMPLOYED` sentinel `365243` with `NaN`, computes the derived columns, and converts `±inf` in the derived columns to `NaN`. This makes division by zero safe. It is therefore safe to apply identically at training and inference.
+- `CODE_GENDER` (`GENDER`), `SK_ID_CURR` and `TARGET` are not model features. Gender is kept in the raw data only for bias analysis, and a test asserts it never reaches the booster.
 
-- **Unit Testing**: Tests individual modular functions in `src/data/`, `src/features/`, and `src/models/` in isolation.
-- **Integration Testing**: Verifies multi-stage data transformations and end-to-end training runs in `tests/integration/`.
-- **Coverage Configuration**: Tracked in `pyproject.toml` with `source = ["src"]` while explicitly omitting top-level execution scripts (`omit = ["src/main.py"]`):
+## Baseline model
 
-```toml
-[tool.coverage.run]
-source = ["src"]
-omit = ["src/main.py"]
-```
+[`src/models/baseline.py`](../../src/models/baseline.py) builds one scikit-learn `Pipeline` that accepts the **raw** DataFrame:
 
-For comprehensive details on test execution, markers, and CI quality gates, consult [Test Suite & CI Pipelines](../testing/test_suite_and_ci.md).
+1. `FunctionTransformer(build_features)`.
+2. A `ColumnTransformer` with an `OrdinalEncoder` for categoricals and passthrough for numerics. Unknown or missing categories become `NaN` (`handle_unknown="use_encoded_value"`), so unseen production categories do not break scoring. XGBoost handles `NaN` natively.
+3. `XGBClassifier(**XGB_PARAMS, random_state=seed)`, with `n_estimators=400`, `max_depth=4`, `learning_rate=0.05`, `subsample=0.8`, `colsample_bytree=0.8`, `min_child_weight=5` and `eval_metric="auc"`.
 
----
+The module also owns the persistence and inference helpers used by later stages:
 
-## Related Documentation & Further Reading
+- `save_model(pipeline, metrics)` writes `models/baseline.joblib` and `models/baseline_metrics.json` under `settings.models_dir`.
+- `load_model()` and `load_threshold()` read them back. The decision threshold is the `threshold` key in the metrics file.
+- `score(raw, model=None)` returns `predict_proba[:, 1]` as a Series named `score`, indexed like the input. A `TARGET` column is ignored if present.
 
-- [System Architecture & ML Pipeline Design](../architecture/overview.md) – Architectural component overview and high-level system boundaries.
-- [Environment Configuration & Settings Management](../concepts/configuration_and_environment.md) – Pydantic Settings, `.env` loading hierarchy, and path resolution logic.
-- [Quality Standards & Notebook Hygiene](development_and_quality.md) – Ruff linting/formatting rules, Radon/Xenon complexity gates, and notebook clean state checks.
-- [Test Suite & CI Pipelines](../testing/test_suite_and_ci.md) – Pytest runner options, test markers, coverage reports, and CI pipeline setup.
-- [Model Card Specification Standard](../../docs/model_card.md) – Repository template and section requirements for model cards.
+## Training and evaluation (`train`)
+
+[`src/training/train.py`](../../src/training/train.py) `main()`:
+
+1. Reads `data/processed/reference.parquet` and re-validates it with `validate_training_batch()`.
+2. Calls `train()`, which holds out a stratified 20% validation split (seeded with `settings.random_seed`), fits the pipeline on the other 80%, and scores the held-out part.
+3. Computes `evaluate()`: `auc`, `ks` (max of TPR minus FPR), `pr_auc`, `threshold` and `f1`. The threshold is the score that maximises F1 on the precision/recall curve, chosen because the positive class is rare.
+4. Computes fairness metrics with `auc_by_group()`: AUC per gender (`F` and `M` only) and per age band (`lt30`, `30_44`, `45_59`, `60_plus`). Groups with fewer than `MIN_GROUP_POSITIVES = 30` positives, or with only one class, are skipped. Keys look like `auc_gender_F` and `auc_age_lt30`.
+
+[`models/baseline_metrics.json`](../../models/baseline_metrics.json) holds only the five overall metrics (`auc`, `ks`, `pr_auc`, `threshold`, `f1`). In the committed snapshot the AUC is about 0.766 and the threshold about 0.141. The per-group fairness metrics go to MLflow only, not to this file.
+
+## MLflow experiment tracking
+
+Inside `main()`, MLflow is configured and used like this:
+
+- `mlflow.set_tracking_uri(settings.mlflow_tracking_uri)`. The default is `sqlite:///<repo>/mlflow.db`, and `.env.example` uses `sqlite:///mlflow.db`. `mlflow.db` is git-ignored and docker-ignored.
+- `mlflow.set_experiment("credit-scoring-baseline")` and a run named `baseline-xgboost`.
+- `log_params`: all `XGB_PARAMS` plus `n_rows`.
+- `log_metrics`: the overall metrics merged with the fairness metrics.
+- `mlflow.sklearn.log_model(pipeline, name="model", serialization_format="cloudpickle")`.
+
+MLflow's copy of the model is a tracked run artifact. The file that downstream stages actually load is the separate `models/baseline.joblib` written by `save_model()` (inside the same run context). That file and the metrics JSON are the DVC-tracked outputs. MLflow is not a DVC dependency, so re-running `train` always creates a new MLflow run.
+
+Settings come from [`src/utils/config.py`](../../src/utils/config.py) (`Settings`, `.env` loading): `random_seed=42`, `data_dir=<repo>/data`, `models_dir=<repo>/models`, `mlflow_tracking_uri`, `log_level`. See [Configuration & Environment](../concepts/configuration_and_environment.md).
+
+## Model card
+
+[`docs/model_card.md`](../../docs/model_card.md) is a template that lists nine headings in Portuguese: model details, intended use, factors, metrics, evaluation data, training data, quantitative analysis (including fairness), ethical considerations, and limitations and recommendations. It has no content of its own yet. The fairness AUCs logged by `train` are the intended input for section 7.
+
+## Entrypoint note
+
+[`src/main.py`](../../src/main.py) is only a placeholder. Its `main()` prints a message and does not run the pipeline. Pipeline execution goes through `dvc repro` or the individual `python -m` modules above. Coverage is configured in `pyproject.toml` with `source = ["src"]` and `omit = ["src/main.py"]`.
+
+## Tests
+
+Unit tests under `tests/unit/` cover this workflow:
+
+- `test_features.py`: output columns equal `MODEL_FEATURES`, the sentinel becomes null, the ratios are correct, income changes propagate to the ratios, and division by zero gives `NaN`.
+- `test_prepare_data.py`: reference and production are disjoint with a matching target rate, invalid data blocks output, and a missing CSV gives a clear error.
+- `test_baseline.py`: AUC and KS sanity checks, fairness keys, unknown categories do not break scoring, gender is not a model feature, and a joblib save/load round trip preserves scores and threshold.
+
+See [Test Suite & CI](../testing/test_suite_and_ci.md) and [Architecture Overview](../architecture/overview.md) for the wider context, and [Quality Standards](development_and_quality.md) for lint and complexity gates.

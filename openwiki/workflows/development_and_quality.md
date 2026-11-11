@@ -3,9 +3,6 @@ type: workflow
 title: Quality Standards, Quality Gates, & Notebook Hygiene
 description: Overview of repository code quality mechanisms, including Ruff linting/formatting, Radon/Xenon cyclomatic complexity gates, pre-commit hook automation, and notebook output validation.
 tags: [code-quality, pre-commit, ruff, radon, xenon, notebooks, static-analysis]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-10-24T23:05:52.220Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
@@ -15,7 +12,10 @@ sources:
     resource: repo://pyproject.toml
   - id: openwiki-source-d63450a84702158a6ce7cde3
     resource: repo://scripts/check_notebooks.py
-generated: { by: "openwiki/0.7.2", at: "2026-10-24T23:05:52.220Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:03:21.311Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-09T02:03:21.311Z
 ---
 
 # Quality Standards, Quality Gates, & Notebook Hygiene
@@ -36,7 +36,7 @@ flowchart TD
         GeneralHygiene --> RuffLocal["Ruff Formatting & Fixes\n(ruff-check --fix, ruff-format)"]
         RuffLocal --> NbStripout["nbstripout\n(strips outputs from .ipynb)"]
         NbStripout --> CheckNbLocal["check-notebooks hook\n(uv run python scripts/check_notebooks.py)"]
-        CheckNbLocal -->|Outputs Found| CommitFail["Commit Rejected\n(Run make nb-clean or clean cells)"]
+        CheckNbLocal -->|Outputs Found| CommitFail["Commit Rejected\n(Hint: run uv run nbstripout on the notebook)"]
         CheckNbLocal -->|Clean| CommitSuccess["Commit Staged & Created"]
     end
 
@@ -162,46 +162,25 @@ As a safety guard, [`scripts/check_notebooks.py`](../../scripts/check_notebooks.
 
 #### Verification Logic
 
-The core logic resides in `dirty_cells()`:
+The script is read-only: it never rewrites a notebook. Its core, `dirty_cells(path)`, does the following:
 
-```python
-def dirty_cells(path: Path) -> list[int]:
-    """Retorna os índices das células de código não limpas."""
-    nb = json.loads(path.read_text(encoding="utf-8"))
-    return [
-        i
-        for i, cell in enumerate(nb.get("cells", []))
-        if cell.get("cell_type") == "code"
-        and (cell.get("outputs") or cell.get("execution_count") is not None)
-    ]
-```
+* Reads the file as UTF-8 and parses it with `json.loads` (a malformed notebook raises an exception rather than being reported as a dirty cell).
+* Walks `nb["cells"]` (missing key is treated as no cells) with `enumerate`, so reported numbers are zero-based positions within the full cell list, including markdown cells.
+* Considers only cells whose `cell_type` is `"code"`; markdown and raw cells are ignored.
+* Flags a code cell when its `outputs` list is non-empty **or** its `execution_count` is anything other than `None`/`null`. A cell with `"outputs": []` and `"execution_count": null` is clean.
 
-* Parses the notebook JSON file.
-* Iterates through cells where `cell_type` equals `"code"`.
-* Flags any cell index where `outputs` is non-empty or `execution_count` is not `None`.
+Notebook metadata (kernel info, etc.) is not inspected, and the script does not check cell sources or Ruff compliance.
 
 #### Execution & Failure Semantics
 
-When run via command line or CI:
+`main(args)` resolves targets and reports results:
 
-```python
-def main(args: list[str]) -> int:
-    paths = [Path(a) for a in args] or sorted(Path("notebooks").rglob("*.ipynb"))
-    failed = False
-    for path in paths:
-        cells = dirty_cells(path)
-        if cells:
-            failed = True
-            print(f"✗ {path}: células com output -> {cells}")
-    if failed:
-        print("\nLimpe antes de subir:  make nb-clean")
-        return 1
-    print(f"✓ {len(paths)} notebook(s) limpo(s)")
-    return 0
-```
+* **Target Resolution**: Uses the notebook paths given as command-line arguments (pre-commit passes the staged `.ipynb` files). With no arguments it falls back to `sorted(Path("notebooks").rglob("*.ipynb"))`, so it must run from the repository root for the CI invocation to find notebooks. The only notebook currently there is `notebooks/exploratory/01_eda_home_credit.ipynb`, whose code cells have `"outputs": []` and `"execution_count": null`.
+* **Failure Output**: For each dirty notebook it prints `✗ <path>: células com output -> [indices]`. If any failed it then prints the hint `Limpe antes de subir:  uv run nbstripout <notebook.ipynb>` and returns `1`.
+* **Success Output**: Otherwise it prints `✓ N notebook(s) limpo(s)` and returns `0`. With no notebooks found it reports `0 notebook(s) limpo(s)` and still succeeds.
+* **Exit Status**: The `__main__` block calls `sys.exit(main(sys.argv[1:]))`, so a non-zero status blocks the git commit or fails the CI `quality` job. It first reconfigures `sys.stdout` to UTF-8 because the Windows console (cp1252) cannot print the ✓/✗ symbols.
 
-* **Target Resolution**: Operates on specific notebook paths passed as command-line arguments (e.g. staged files during pre-commit) or recursively scans all `*.ipynb` files in `notebooks/` if no arguments are provided.
-* **Exit Status**: Returns `0` if all inspected notebooks are completely clean. Returns `1` and outputs dirty cell indices if any notebook contains outputs or execution counts, halting git commit creation or failing the CI quality job.
+The repository has no `Makefile`, so there is no `make nb-clean` target; the supported remedy is running `nbstripout` (directly, or via the pre-commit hook).
 
 ---
 
@@ -264,7 +243,7 @@ repos:
    * Executes `ruff-format` to format Python source code.
 3. **Notebook Cleaning & Validation**:
    * Runs `nbstripout` to clear cell outputs from staged `.ipynb` files.
-   * Invokes `scripts/check_notebooks.py` via `uv run python` to confirm zero remaining executed cells before allowing the commit to proceed.
+   * Invokes `scripts/check_notebooks.py` via `uv run python` (a `language: system` local hook restricted to `files: \.ipynb$`) to confirm zero remaining executed cells before allowing the commit to proceed.
 
 ---
 
@@ -272,7 +251,7 @@ repos:
 
 While local pre-commit hooks ensure day-to-day developer productivity, the GitHub Actions CI pipeline enforces non-bypassable quality gates on every push and pull request.
 
-The quality job is defined in [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml):
+The workflow triggers on pushes and pull requests to `main` and `development`, plus manual `workflow_dispatch`, with concurrency cancelling superseded runs. The quality job is defined in [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml):
 
 ```yaml
 jobs:
@@ -322,7 +301,7 @@ The following commands are available for local quality checks and maintenance:
 | **Run Ruff Linter** | `uv run ruff check .` | Scans for lint violations. Add `--fix` to auto-repair. |
 | **Run Ruff Formatter** | `uv run ruff format .` | Formats Python code according to 88-line-length standard. |
 | **Check Notebook Cleanliness** | `uv run python scripts/check_notebooks.py` | Audits all notebooks under `notebooks/` for dirty cells. |
-| **Clean Notebook Outputs** | `make nb-clean` | Cleans notebook outputs across the repository. |
+| **Clean Notebook Outputs** | `uv run nbstripout <notebook.ipynb>` | Strips outputs and execution counts from a notebook (the hint printed by `check_notebooks.py`). |
 | **Analyze Complexity** | `uv run radon cc src -a -s` | Generates cyclomatic complexity report for `src/`. |
 | **Enforce Complexity Gate** | `uv run xenon --max-absolute B --max-modules A --max-average A src` | Checks complexity threshold compliance locally. |
 
