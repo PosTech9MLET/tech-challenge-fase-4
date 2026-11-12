@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "evidently>=0.7.23",
     "joblib>=1.6.0",
+    "matplotlib>=3.10.0",
     "mlflow>=3.18.0",
     "pandas>=2.3,<3",
     "pandera[pandas]>=0.35.0",
@@ -14,7 +15,7 @@ dependencies = [
     "pyarrow>=26.0.1",
     "pydantic-settings>=2.16.1",
     "scikit-learn>=1.9.1",
-    "setuptools<81",
+    "setuptools>=83.0.0",
     "xgboost>=3.4.1",
     "ydata-profiling>=4.18.4",
 ]

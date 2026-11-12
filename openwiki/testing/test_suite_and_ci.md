@@ -3,9 +3,6 @@ type: concept
 title: Test Suite & CI/CD Pipelines
 description: Layout of the pytest unit suite (shared synthetic-data fixture, per-module tests, markers, coverage) and the four GitHub Actions workflows, covering the quality/test/docker CI pipeline and the OpenWiki generation, update and Pages publishing workflows.
 tags: [testing, pytest, coverage, ci-cd, github-actions, code-quality, openwiki]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-11-09T02:03:21.311Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
@@ -19,6 +16,8 @@ sources:
     resource: repo://.pre-commit-config.yaml
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
+  - id: openwiki-source-53f270510595195555497d76
+    resource: repo://tests/integration/__init__.py
   - id: openwiki-source-0e9f69f688794120c3b78633
     resource: repo://tests/unit/conftest.py
   - id: openwiki-source-f9ca9cdda3a0ae93b2ab0055
@@ -41,7 +40,10 @@ sources:
     resource: repo://tests/unit/test_smoke.py
   - id: openwiki-source-3462244d4d2c92a92773e36e
     resource: repo://tests/unit/test_validation_monitoring.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:03:21.311Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-12T03:28:56.331Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-12T03:28:56.331Z
 ---
 
 # Test Suite & CI/CD Pipelines
@@ -94,13 +96,26 @@ The generator deliberately includes realistic quirks that the code under test mu
 |---|---|
 | Smoke (`test_smoke.py`) | `settings.random_seed == 42` and `settings.data_dir.name == "data"` from `src.utils.config` (see [Configuration & Environment](../concepts/configuration_and_environment.md)). |
 | Features | Output has only model columns; the `DAYS_EMPLOYED` sentinel becomes null; financial ratios follow income changes; division by zero becomes null. |
-| Baseline model | AUC above 0.65 and a KS statistic and threshold within (0, 1); per-gender AUC metrics exist but exclude the `XNA` group; scores are probabilities that keep the input index; unseen categories do not break scoring; `CODE_GENDER` is not a model feature; save/load round-trips scores and threshold (with `models_dir` monkeypatched to `tmp_path`); groups too small are ignored. |
+| Baseline model and training metrics | See [Baseline tests](#baseline-tests) below. |
 | Data contracts | Valid training batch passes; negative income, zero credit, implausible `DAYS_BIRTH`, negative `CNT_CHILDREN` and out-of-range `TARGET` raise `SchemaErrors` naming the failing column; duplicate `SK_ID_CURR` is rejected; null `AMT_ANNUITY` is accepted; inference batches do not need `TARGET`. See [Data Contracts](../concepts/data_contracts.md). |
 | Data preparation | Reference and production splits are disjoint, cover all 4000 rows, and have similar `TARGET` means; invalid data raises and leaves no `processed/` directory; a missing CSV raises a `FileNotFoundError` that names `application_train.csv`. |
 | Drift simulation | Exactly 12 of 20 rows are changed, with income ×1.40 and credit ×1.30; IDs and `TARGET` are untouched; the same seed gives the same output and does not mutate the input; the result still satisfies the training contract; invalid fractions (0, -0.1, 1.5) are rejected. |
 | Drift alerts | `extract_psi_alerts` flags PSI at or above the 0.20 threshold (0.05 no, 0.20 and 0.35 yes); a report without drift metrics raises `ValueError`. |
 | Score impact | Before and after scores are aligned by `SK_ID_CURR` rather than row order (verified with a deliberately reversed frame and a `FakeModel`); changed-decision counts are computed against the threshold; mismatched IDs, duplicate IDs and out-of-range thresholds raise `ValueError`. See [Drift Monitoring & Score Impact](../workflows/drift_monitoring_and_score_impact.md). |
 | Monitoring | See below. |
+
+### Baseline tests
+
+`tests/unit/test_baseline.py` covers both `src.models.baseline` (`build_pipeline`, `score`, `save_model`, `load_model`, `load_threshold`) and the metric helpers in `src.training.train` (`train`, `evaluate`, `ks_statistic`, `best_f1_threshold`, `error_rates`, `error_rates_by_group`, `auc_by_group`). A `trained` fixture calls `train(hc_df)` on the synthetic frame and returns `(pipeline, metrics, fairness)`. Test names are in Portuguese.
+
+* **Separation power and error metrics.** `metrics["auc"] > 0.65`; `ks` and `threshold` lie in (0, 1); `fpr`, `fnr` and `recall` lie in [0, 1], and `fnr == 1 - recall`.
+* **Fairness metrics.** The `fairness` dict has `auc_gender_*` keys but never `auc_gender_XNA`, plus per-group error rates (`fpr_gender_*`, `recall_gender_*`, `fnr_age_*`).
+* **Scoring.** `score` returns probabilities in [0, 1] with the input index preserved; an unseen `NAME_INCOME_TYPE` category still yields non-null scores.
+* **No gender feature.** The XGBoost booster behind the `xgb` pipeline step does not list `CODE_GENDER` among its feature names.
+* **Persistence.** With `baseline.settings.models_dir` monkeypatched to `tmp_path`, `save_model` then `load_model` reproduces scores (`np.allclose`) and `load_threshold()` equals the trained threshold.
+* **Helper metrics on hand-made data.** `ks_statistic` is 1.0 on perfectly separated scores, `best_f1_threshold` falls within 0.4 to 0.6, and `evaluate(..., threshold=0.5)["f1"]` is 1.0.
+* **Error rates.** `error_rates` is checked against a hand-computed confusion matrix (TP=1, FP=1, FN=1, TN=2 gives recall 0.5, fpr 1/3, fnr 0.5) and a perfect classifier (recall 1, fpr 0, fnr 0). `error_rates_by_group` returns `fpr_`, `fnr_` and `recall_` keys per group label.
+* **Small groups and splits.** `auc_by_group` returns `{}` for a group with too few positives (it skips groups below a minimum positive count or with a single class), and `build_pipeline(0)` fits and returns a two-column `predict_proba` on a plain `train_test_split`.
 
 ### Monitoring tests
 

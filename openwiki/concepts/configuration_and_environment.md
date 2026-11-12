@@ -30,6 +30,8 @@ sources:
     resource: repo://README.md
   - id: openwiki-source-b5672e8c6fe51c1d4051fd28
     resource: repo://scripts/analyze_score_impact.py
+  - id: openwiki-source-35f0baf13d17ae674702bdfa
+    resource: repo://scripts/generate_fairness_plots.py
   - id: openwiki-source-209e9f2a63ebbe53784dc39e
     resource: repo://scripts/run_drift.py
   - id: openwiki-source-1fd01080171f877c089206b9
@@ -50,16 +52,18 @@ sources:
     resource: repo://src/training/train.py
   - id: openwiki-source-f12fdb76c2f98bd11af25d76
     resource: repo://src/utils/config.py
+  - id: openwiki-source-d126db8b3c7739bcbb2b8380
+    resource: repo://src/visualization/fairness_plots.py
   - id: openwiki-source-f9ca9cdda3a0ae93b2ab0055
     resource: repo://tests/unit/test_baseline.py
   - id: openwiki-source-e9644626d37bc03f84bcb73f
     resource: repo://tests/unit/test_prepare_data.py
   - id: openwiki-source-154200283d94041bcf05d48f
     resource: repo://tests/unit/test_smoke.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:03:21.311Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-12T03:28:56.331Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-09T02:03:21.311Z
+    at: 2026-11-12T03:28:56.331Z
 ---
 
 # Environment Configuration & Settings Management
@@ -122,11 +126,26 @@ Note the template sets `MLFLOW_TRACKING_URI=sqlite:///mlflow.db`, a relative SQL
 | :--- | :--- |
 | `src/data/home_credit.py` | `data_dir` (raw CSV under `data/raw/`) |
 | `src/pipelines/prepare_data.py` | `data_dir`, `random_seed`, `log_level` |
-| `src/training/train.py` | `random_seed`, `data_dir`, `mlflow_tracking_uri`, `log_level` |
-| `src/models/baseline.py` | `models_dir` (created on demand when saving) |
+| `src/training/train.py` | `random_seed` (hold-out split and `build_pipeline`), `data_dir` (reads `processed/reference.parquet`), `mlflow_tracking_uri`, `log_level` |
+| `src/models/baseline.py` | `models_dir` (created on demand when saving; also used when loading the model and metrics) |
 | `scripts/run_drift.py`, `scripts/simulate_home_credit_drift.py`, `scripts/analyze_score_impact.py` | `data_dir / "processed"` |
+| `scripts/generate_fairness_plots.py` | `data_dir / "processed"` (reference parquet) and `random_seed` (recomputes the same stratified hold-out used by `train()`) |
 
-Not everything routes through settings: the drift and score-impact scripts compute their own `REPORT_DIR` as `<repo>/reports` from `__file__`, and the JSON logger (below) hard-codes its level.
+Not everything routes through settings: the drift and score-impact scripts compute their own `REPORT_DIR` as `<repo>/reports` from `__file__`, the fairness plot script computes `FIGURES_DIR` as `<repo>/reports/figures` the same way, and the JSON logger (below) hard-codes its level.
+
+### Constants in `train.py` that are not settings
+
+The training module keeps its experiment and evaluation parameters as module-level constants and literals rather than environment-driven fields. Changing them requires a code edit, not a `.env` change:
+
+| Constant | Value | Role |
+| :--- | :--- | :--- |
+| `EXPERIMENT` | `credit-scoring-baseline` | MLflow experiment name (the run name `baseline-xgboost` is a literal in `main()`). |
+| `AGE_BINS` / `AGE_LABELS` | `[0, 30, 45, 60, 200]` / `lt30`, `30_44`, `45_59`, `60_plus` | Age bands derived from `DAYS_BIRTH` for group metrics. |
+| `MIN_GROUP_POSITIVES` | `30` | Groups with fewer positives (or a single class) are skipped in `auc_by_group`. |
+| hold-out size | `test_size=0.2`, stratified | Literal in `train()`; seeded by `settings.random_seed`. |
+| `XGB_PARAMS` | from `src/models/baseline.py` | Logged to MLflow with `n_rows`. |
+
+Gender grouping keeps only `F` and `M`. `generate_fairness_plots.py` repeats the 20% split literal, so changing the value in `train()` requires updating the script as well.
 
 ```mermaid
 flowchart TD
@@ -150,7 +169,7 @@ flowchart TD
 ## Toolchain: Python version and uv
 
 - [`.python-version`](../../.python-version) pins `3.12`; `pyproject.toml` declares `requires-python = ">=3.12"` and Ruff targets `py312`.
-- Dependencies are managed with `uv` and `uv.lock`. Runtime dependencies include `pydantic-settings`, `mlflow`, `prometheus-client`, `evidently`, `pandera`, `scikit-learn` and `xgboost`; the `dev` dependency group holds `dvc`, `pytest`, `pytest-cov`, `ruff`, `radon`, `xenon`, `pre-commit`, `nbstripout` and `ipykernel`.
+- Dependencies are managed with `uv` and `uv.lock`. Runtime dependencies are `pydantic-settings`, `mlflow`, `prometheus-client`, `evidently`, `pandera[pandas]`, `scikit-learn`, `xgboost`, `pandas` (pinned `>=2.3,<3`), `pyarrow` (parquet I/O), `joblib` (model persistence), `matplotlib`, `ydata-profiling` and `setuptools`. `matplotlib` is the plotting dependency: `src/visualization/fairness_plots.py` selects the headless `Agg` backend, so figures render without a display. `ydata-profiling` is used only by the exploratory notebook, not by pipeline code. The `dev` dependency group holds `dvc`, `pytest`, `pytest-cov`, `ruff`, `radon`, `xenon`, `pre-commit`, `nbstripout` and `ipykernel`.
 - Local setup uses `uv sync --locked` (README); CI runs `uv python install` then `uv sync --frozen` before linting and tests (see [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml)). The DVC stage commands are all written as `uv run python -m ...`, so the lockfile environment is what reproduces pipeline outputs.
 - Pytest is configured in `pyproject.toml`: `testpaths = ["tests"]`, `pythonpath = ["."]` (so `src` and `scripts` import as packages), `--strict-markers`, with registered markers `slow` and `integration`. Coverage measures `src` and omits `src/main.py`.
 
@@ -163,7 +182,7 @@ See [Quickstart](../quickstart.md) for the setup commands in sequence.
 - [`.dvc/config`](../../.dvc/config) currently contains only `[core] autostage = true`. **No DVC remote is configured**; the README states this explicitly: the raw Home Credit CSV is tracked by hash in `data/raw/application_train.csv.dvc`, each contributor downloads it from Kaggle, and `uv run dvc pull` becomes usable only once a remote is added.
 - To add one, use `dvc remote add -d <name> <url>` (this edits `.dvc/config`, which is committed); credentials belong in `.dvc/config.local` or environment variables, never in the committed file.
 - [`.dvcignore`](../../.dvcignore) excludes `__pycache__/` and `*.pyc` so bytecode generated by running code does not change dependency hashes of directories such as `src/data`.
-- [`dvc.yaml`](../../dvc.yaml) defines the stages (`validate`, `prepare_data`, `train`, `simulate_drift`, `detect_drift`, `score_impact`). Their dependencies and outputs use the same default `data/`, `models/` and `reports/` locations that `Settings` resolves, so overriding `DATA_DIR` or `MODELS_DIR` moves code reads and writes away from the paths DVC tracks. Keep the defaults when running `dvc repro`.
+- [`dvc.yaml`](../../dvc.yaml) defines the stages (`validate`, `prepare_data`, `train`, `simulate_drift`, `detect_drift`, `score_impact`, `fairness_plots`). Their dependencies and outputs use the same default `data/`, `models/` and `reports/` (including `reports/figures/*.png`, git-ignored) locations that `Settings` resolves, so overriding `DATA_DIR` or `MODELS_DIR` moves code reads and writes away from the paths DVC tracks. Keep the defaults when running `dvc repro`.
 - `.gitignore` keeps data and model artifacts out of Git (preserving structure through `.gitkeep`), but allows `.dvc` metadata and `models/baseline_metrics.json` so `dvc metrics diff` works. See [ML Pipeline & Tracking](../workflows/ml_pipeline_and_tracking.md).
 
 ---

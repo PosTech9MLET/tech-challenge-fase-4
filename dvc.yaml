@@ -70,3 +70,20 @@ stages:
     metrics:
       - reports/score_impact.json:
           cache: false
+
+  fairness_plots:
+    cmd: uv run python -m scripts.generate_fairness_plots
+    deps:
+      - data/processed/reference.parquet
+      - scripts/generate_fairness_plots.py
+      - src/training/train.py
+      - src/visualization/fairness_plots.py
+    outs:
+      - reports/figures/roc_by_gender.png:
+          cache: false
+      - reports/figures/roc_by_age.png:
+          cache: false
+      - reports/figures/error_rates_by_gender.png:
+          cache: false
+      - reports/figures/error_rates_by_age.png:
+          cache: false

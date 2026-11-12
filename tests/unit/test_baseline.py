@@ -7,6 +7,8 @@ from src.models.baseline import build_pipeline, score
 from src.training.train import (
     auc_by_group,
     best_f1_threshold,
+    error_rates,
+    error_rates_by_group,
     evaluate,
     ks_statistic,
     train,
@@ -23,12 +25,21 @@ def test_baseline_tem_poder_de_separacao(trained):
     assert metrics["auc"] > 0.65
     assert 0 < metrics["ks"] < 1
     assert 0 < metrics["threshold"] < 1
+    # Métricas de erro no limiar.
+    assert 0 <= metrics["fpr"] <= 1
+    assert 0 <= metrics["fnr"] <= 1
+    assert 0 <= metrics["recall"] <= 1
+    assert metrics["fnr"] == pytest.approx(1 - metrics["recall"])
 
 
 def test_metricas_de_vies_por_genero_e_idade(trained):
     _, _, fairness = trained
     assert any(k.startswith("auc_gender_") for k in fairness)
     assert "auc_gender_XNA" not in fairness
+    # Erro rates por grupo devem estar presentes.
+    assert any(k.startswith("fpr_gender_") for k in fairness)
+    assert any(k.startswith("fnr_age_") for k in fairness)
+    assert any(k.startswith("recall_gender_") for k in fairness)
 
 
 def test_score_retorna_probabilidades(trained, hc_df):
@@ -72,6 +83,50 @@ def test_metricas_auxiliares():
     assert ks_statistic(ys, s) == pytest.approx(1.0)
     assert 0.4 <= best_f1_threshold(ys, s) <= 0.6
     assert evaluate(ys, s, threshold=0.5)["f1"] == pytest.approx(1.0)
+
+
+def test_error_rates_calcula_fpr_fnr_recall():
+    import pandas as pd
+
+    # 2 positivos corretos, 1 falso positivo, 1 falso negativo, 1 verdadeiro negativo.
+    y_true = pd.Series([0, 0, 0, 1, 1])
+    y_pred = np.array([0, 1, 0, 1, 0])
+
+    rates = error_rates(y_true, y_pred)
+
+    # TP=1, FP=1, FN=1, TN=2
+    assert rates["recall"] == pytest.approx(0.5)  # 1/(1+1)
+    assert rates["fpr"] == pytest.approx(1 / 3)  # 1/(1+2)
+    assert rates["fnr"] == pytest.approx(0.5)  # 1/(1+1)
+
+
+def test_error_rates_perfect_classifier():
+    import pandas as pd
+
+    y_true = pd.Series([0, 0, 1, 1])
+    y_pred = np.array([0, 0, 1, 1])
+
+    rates = error_rates(y_true, y_pred)
+
+    assert rates["recall"] == pytest.approx(1.0)
+    assert rates["fpr"] == pytest.approx(0.0)
+    assert rates["fnr"] == pytest.approx(0.0)
+
+
+def test_error_rates_by_group_retorna_todas_as_metricas(hc_df):
+    import pandas as pd
+
+    y_true = hc_df["TARGET"].head(100)
+    y_pred = pd.Series(np.random.default_rng(0).integers(0, 2, 100), index=y_true.index)
+    groups = pd.Series(["F"] * 50 + ["M"] * 50, index=y_true.index)
+
+    result = error_rates_by_group(y_true, y_pred, groups, "gender")
+
+    assert "fpr_gender_F" in result
+    assert "fnr_gender_F" in result
+    assert "recall_gender_M" in result
+    assert 0 <= result["fpr_gender_F"] <= 1
+    assert 0 <= result["fnr_gender_M"] <= 1
 
 
 def test_grupos_pequenos_sao_ignorados(hc_df):
