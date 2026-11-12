@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import (
     average_precision_score,
+    confusion_matrix,
     f1_score,
     precision_recall_curve,
     roc_auc_score,
@@ -43,17 +44,42 @@ def best_f1_threshold(y_true: pd.Series, scores: np.ndarray) -> float:
     return float(thresholds[int(np.argmax(f1[:-1]))])
 
 
+def error_rates(y_true: pd.Series, y_pred: np.ndarray) -> dict[str, float]:
+    """Calcula FPR, FNR e recall a partir dos rótulos e predições binárias.
+
+    Args:
+        y_true: rótulos reais (0/1).
+        y_pred: predições binárias (0/1) já no limiar de decisão.
+
+    Returns:
+        Dicionário com ``recall``, ``fpr`` e ``fnr``.
+    """
+    tn, fp, fn, tp = confusion_matrix(y_true, y_pred, labels=[0, 1]).ravel()
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+    fpr = fp / (fp + tn) if (fp + tn) > 0 else 0.0
+    fnr = fn / (fn + tp) if (fn + tp) > 0 else 0.0
+    return {"recall": float(recall), "fpr": float(fpr), "fnr": float(fnr)}
+
+
 def evaluate(
     y_true: pd.Series, scores: np.ndarray, threshold: float | None = None
 ) -> dict[str, float]:
-    """Calcula AUC, KS, PR-AUC e F1 no limiar (ou no melhor limiar por F1)."""
+    """Calcula AUC, KS, PR-AUC, F1, FPR, FNR e recall.
+
+    Usa o limiar fornecido ou o melhor limiar por F1.
+    """
     cut = best_f1_threshold(y_true, scores) if threshold is None else threshold
+    y_pred = (scores >= cut).astype(int)
+    rates = error_rates(y_true, y_pred)
     return {
         "auc": float(roc_auc_score(y_true, scores)),
         "ks": ks_statistic(y_true, scores),
         "pr_auc": float(average_precision_score(y_true, scores)),
         "threshold": cut,
-        "f1": float(f1_score(y_true, scores >= cut)),
+        "f1": float(f1_score(y_true, y_pred)),
+        "fpr": rates["fpr"],
+        "fnr": rates["fnr"],
+        "recall": rates["recall"],
     }
 
 
@@ -79,16 +105,45 @@ def auc_by_group(
     return result
 
 
-def fairness_metrics(
-    x_val: pd.DataFrame, y_val: pd.Series, scores: np.ndarray
+def error_rates_by_group(
+    y_true: pd.Series,
+    y_pred: pd.Series,
+    groups: pd.Series,
+    prefix: str,
 ) -> dict[str, float]:
-    """AUC por gênero e por faixa etária (análise de viés, não é feature)."""
+    """FPR, FNR e recall por subgrupo.
+
+    Args:
+        y_true: target real, indexado como ``y_pred`` e ``groups``.
+        y_pred: predições binárias (0/1) no limiar de decisão.
+        groups: rótulo do grupo de cada linha (``NaN`` é ignorado).
+        prefix: prefixo do nome da métrica (ex.: ``gender``).
+
+    Returns:
+        Dicionário ``<metric>_<prefix>_<grupo>`` → valor.
+    """
+    frame = pd.concat([y_true, y_pred, groups], axis=1, keys=["y", "p", "g"])
+    result: dict[str, float] = {}
+    for name, part in frame.dropna(subset=["g"]).groupby("g", observed=True):
+        rates = error_rates(part["y"], part["p"])
+        for metric, value in rates.items():
+            result[f"{metric}_{prefix}_{name}"] = value
+    return result
+
+
+def fairness_metrics(
+    x_val: pd.DataFrame, y_val: pd.Series, scores: np.ndarray, threshold: float
+) -> dict[str, float]:
+    """AUC, FPR, FNR e recall por gênero e por faixa etária (análise de viés)."""
     proba = pd.Series(scores, index=y_val.index)
+    y_pred = (proba >= threshold).astype(int)
     ages = pd.cut(-x_val["DAYS_BIRTH"] / 365.25, AGE_BINS, labels=AGE_LABELS)
     gender = x_val[GENDER].where(x_val[GENDER].isin(["F", "M"]))
     return {
         **auc_by_group(y_val, proba, gender, "gender"),
         **auc_by_group(y_val, proba, ages, "age"),
+        **error_rates_by_group(y_val, y_pred, gender, "gender"),
+        **error_rates_by_group(y_val, y_pred, ages, "age"),
     }
 
 
@@ -110,7 +165,8 @@ def train(reference: pd.DataFrame):
     pipeline.fit(x_train, y_train)
     scores = pipeline.predict_proba(x_val)[:, 1]
     metrics = evaluate(y_val, scores)
-    return pipeline, metrics, fairness_metrics(x_val, y_val, scores)
+    fairness = fairness_metrics(x_val, y_val, scores, metrics["threshold"])
+    return pipeline, metrics, fairness
 
 
 def main() -> None:
