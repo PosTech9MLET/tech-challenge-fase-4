@@ -644,8 +644,7 @@ A instrumentação evita incluir dados individuais nos logs estruturados de vali
 - Configurar Alertmanager e canais de notificação, caso o escopo exija alertas enviados.
 - Registrar políticas de minimização, finalidade, bases legais, controle de acesso e retenção sob LGPD.
 - Aprofundar métricas de fairness, taxas de erro por grupo e análise da representatividade da amostra.
-- Documentar hipóteses causais e possíveis confundidores; **o experimento de drift não demonstra causalidade**.
-- Avaliar degradação efetiva de desempenho com rótulos independentes e dados de períodos posteriores.
+- Avaliar degradação efetiva de desempenho com rótulos independentes e dados de períodos posteriores (complementa a seção [Causalidade](#causalidade)).
 - Preparar o vídeo demonstrativo no formato STAR, destacando cenário, ações, evidências e limitações.
 
 ## Validação final
@@ -707,6 +706,22 @@ Gênero e idade não são dados sensíveis de acordo com a LGPD (**art. 5, II**)
 - **Segurança (art. 6º):** dados brutos, processados e artefatos gerados ficam fora do GitHub;
 - **Transparência:** regras de validação, features e métricas documentadas neste README e no model card (`docs/model_card.md`).
 
+### Privacy By Design e By Default
+
+A esteira adota os princípios de **Privacy By Design** (privacidade projetada desde a concepção) e **Privacy By Default** (privacidade como configuração padrão), referenciados na LGPD (art. 46) e originados nos sete fundamentos de Cavoukian. O quadro abaixo mapeia cada princípio à implementação concreta do projeto.
+
+| Princípio | O que significa | Como é aplicado no projeto |
+|---|---|---|
+| 1. Proativo, não reativo | Antecipar riscos de privacidade antes que ocorram, em vez de corrigir depois | Contratos Pandera (`src/data/contracts.py`) bloqueiam dados inválidos ou fora do domínio **antes** de entrarem no pipeline; a ingestão falha e nada é gravado se o contrato for violado |
+| 2. Privacidade como padrão (By Default) | A configuração mais protetora já vem ativa; o usuário não precisa optar por privacidade | Apenas `RAW_COLUMNS` são carregadas (minimização automática, não configurável para 122); logs estruturados não incluem dados individuais por padrão; dados e artefatos ficam fora do Git por padrão (`.gitignore`) |
+| 3. Embutido no design | Privacidade faz parte da arquitetura, não é um adendo | `CODE_GENDER` é excluído de `MODEL_FEATURES` no código (`src/features/build.py`), não é uma flag que pode ser ligada; o `SK_ID_CURR` não é feature do modelo |
+| 4. Funcionalidade completa (soma positiva) | Privacidade e funcionalidade coexistem sem sacrifício | O modelo atinge AUC 0,7657 sem usar gênero como feature — a exclusão de um atributo protegido não comprometeu a capacidade discriminativa |
+| 5. Segurança ponta a ponta | Proteção em todo o ciclo de vida do dado, da coleta ao descarte | Dados locais rastreados por DVC (só hash, nunca o CSV); `.dockerignore` exclui dados da imagem; plano de retenção (art. 16) define prazos de eliminação; Prometheus retém métricas por 7 dias |
+| 6. Visibilidade e transparência | O sistema é auditável e as práticas são verificáveis | Contratos de dados documentados e testados (`tests/unit/test_contracts.py`); métricas e fairness registrados no MLflow; dashboard Grafana e regras de alerta versionados; código-fonte aberto |
+| 7. Respeito ao usuário | Os interesses do titular dos dados são prioritários | Canal do DPO (art. 41) para acesso, correção e eliminação (art. 18); revisão humana prevista para decisões automatizadas (art. 20); gênero usado só para auditoria, nunca para pontuar |
+
+**Privacy By Default em destaque:** em cada ponto do pipeline, a privacidade é a configuração inicial, não uma escolha posterior. Se um desenvolvedor não fizer nada de especial, o sistema já carrega o mínimo de colunas, não registra dados individuais em logs, não envia dados ao Git e exclui atributos protegidos das decisões do modelo.
+
 ### Direitos do titular
 
 - **Art. 18:** acesso, correção e eliminção dos dados, via canal do encarregado.
@@ -736,5 +751,62 @@ Gênero e idade não são dados sensíveis de acordo com a LGPD (**art. 5, II**)
 - O treinamento registra no MLflow o ROC-AUC por gênero e faixa etária. Feminino (0,7671) e masculino (0,7515) ficam próximos; maior diferença de **60 anos ou mais (0,7290)**.
 - **Limitação:** AUC por grupo não basta para afirmar equidade. Variáveis como renda e tipo de ocupação podem funcionar como *proxies* de atributos protegidos.
 
+## Causalidade
+
+### Natureza preditiva do modelo
+
+O baseline de Credit Scoring é um modelo **preditivo**, não causal. O XGBoost estima `P(inadimplência | features)` — a probabilidade condicional de default dado o perfil observado do cliente — a partir de dados observacionais. Ele não estima o efeito de *manipular* uma feature sobre o resultado (ou seja, não responde a perguntas do tipo "se a renda deste cliente aumentasse em X, a probabilidade de default cairia quanto?").
+
+Essa distinção é central: o modelo foi treinado em dados nos quais as features já têm valores observados, e não em um experimento controlado onde seriam intervindas. Correlações fortes no treino não implicam que alterar uma feature mudaria a predição da mesma forma que a correlação sugere.
+
+### Hipóteses causais implícitas
+
+Ao usar o modelo para apoiar decisões de crédito, assume-se implicitamente que as features carregam sinal sobre a capacidade de pagamento. As hipóteses causais subjacentes incluem:
+
+- **Renda e crédito** afetam a capacidade de amortização — maiores valores reduzem a probabilidade de default.
+- **Tempo de emprego** (`DAYS_EMPLOYED`) reflete estabilidade financeira — mais tempo empregado diminui o risco.
+- **Scores externos** (`EXT_SOURCE_1/2/3`) resumem o histórico de crédito do solicitante — valores baixos aumentam o risco.
+- **Idade** (`AGE_YEARS`) está associada a maior estabilidade e acumulação de patrimônio.
+
+Essas hipóteses são **plausíveis, mas não testadas causalmente** neste projeto. O modelo pode estar capturando associações espúrias ou mediadas por variáveis não observadas.
+
+### Confundidores identificados
+
+| Confundidor | Variáveis afetadas | Risco causal |
+|---|---|---|
+| Renda e ocupação | Podem funcionar como *proxies* de gênero e idade | Decisões baseadas nessas features podem reproduzir desigualdades estruturais ligadas a atributos protegidos, mesmo sem o uso direto desses atributos |
+| `EXT_SOURCE_1/2/3` | Scores de bureaus externos | São derivados de dados correlacionados e podem codificar os mesmos atributos protegidos que o modelo excluiu, reintroduzindo viés por via indireta |
+| Condições macroeconômicas | Não estão no dataset, mas afetam a taxa de inadimplência | Um modelo treinado em período de expansão pode superestimar a capacidade de pagamento em recessão |
+| Viés de seleção | Quem solicita crédito não é uma amostra aleatória da população | O modelo aprende padrões do subconjunto que busca crédito, não da população geral |
+
+### Por que o experimento de drift não demonstra causalidade
+
+A simulação de Data Drift deste projeto altera artificialmente as distribuições de `AMT_INCOME_TOTAL` e `AMT_CREDIT` e mede como os scores mudam. É importante distinguir o que esse experimento demonstra do que ele **não** demonstra:
+
+| O experimento demonstra | O experimento não demonstra |
+|---|---|
+| As distribuições de renda e crédito mudaram (PSI > 0,20) | Que a mudança cause piora na qualidade preditiva do modelo |
+| Os scores do modelo mudaram para os mesmos clientes | Que os clientes teriam, de fato, inadimplido mais (não há rótulos atualizados) |
+| Uma proporção de clientes cruzou o limiar de decisão | Que o novo limiar é mais ou menos adequado que o anterior |
+
+Em resumo, o experimento mede **alteração de comportamento**, não degradação de desempenho. Os scores poderiam ter mudado de forma *correta* diante da nova distribuição — sem rótulos independentes, é impossível distinguir ajuste adequado de deterioração.
+
+### O que seria necessário para inferência causal
+
+Para transformar observações em afirmações causais, seriam necessários:
+
+- **Rótulos independentes de períodos posteriores:** comparar as predições do modelo com a inadimplência efetivamente observada após o drift, para medir degradação real de performance.
+- **Desenhos experimentais ou quase-experimentais:** testes A/B (decisões diferentes para grupos comparáveis), variáveis instrumentais ou experimentos naturais para isolar o efeito causal de features específicas.
+- **Análise contrafactual:** estimar qual teria sido a taxa de inadimplência *sem* a mudança de distribuição, para separar o efeito do drift do efeito de outros fatores.
+- **Controle de confundidores não observados:** técnicas de *deconfounding* (ex.: *backdoor adjustment*, *front-door*) para ajustar variáveis que confundem a relação entre features e target.
+
+### Implicação prática
+
+Em produção, um alerta de drift deve **disparar investigação**, não retraining automático. Entender a origem causal da mudança é o que distingue:
+
+- **Drift benigno:** a população mudou, mas o modelo continua calibrado e discriminando corretamente (ex.: mais clientes de renda alta, sem mudar a relação renda–risco).
+- **Drift prejudicial:** a relação entre features e target mudou (ex.: renda alta passou a não garantir pagamento em recessão), exigindo retraining ou recalibração.
+
+Sem rótulos atualizados, não é possível distinguir os dois casos apenas com PSI. A recomendação é combinar detecção de drift com monitoramento de performance sobre rótulos que chegam ao longo do tempo.
 
 > **Nota:** dados, artefatos do modelo e relatórios gerados devem ser avaliados antes de serem enviados ao repositório. Não versione dados pessoais ou arquivos de produção sem necessidade e autorização.
