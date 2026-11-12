@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:b7482d2851a80c22e46ee2dc897fab61d56215fe2178d484cf48625174757904",
+  "pageVersion": "sha256:a83a0a945a2b5e0a884bf6e639ac4769ac7f38713bfd0dca4ade0224693627ea",
   "claims": [
     {
       "id": "claim_06731e76540f49dcafc7f070bcadbbfc",
@@ -121,10 +121,46 @@
           "version": "repo-lines-v1:sha256:4b0783e7d6c36f7e0f1aa22fc70edccb766c8eeee62c7c2d3e84d1c83cd64455:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyNjQ1NzNjODI5NmRiNzI1YjQ3MWJkMTcyZWUyZDA0ODMyZTY2OWYwNTZiYmRjZTFkZGY5ODIzNzhjYjk0YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiM2RmYWJhOWZmNDNhNjdlMGI0ODA1NDI4YWE0NDcxNTlhMDZjMmY5NmNlMDFiZmU3NTQzNmQ2OWJmMzNlODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhMjk3Nzg1NzRlYzZjZmFhMTM4OTFlMDAyZmFiYjUwNjBiYjMxYWFhODg0N2JiZjc2MDIxMDJmNWI2N2RmZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjMTAyNTdiOWQxZTVlNDExNTM3ZjNmYzFmODdkZDAxMWEyYWRlYzA5ZjQ5ZmY2YWIzNDI0NmM3ZjdlMWRiYWUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_60e7cc7a6dbc4f4cabea05ed9be5149f",
+      "statement": "Data minimization and gender exclusion are enforced in code: load_application_train reads only the RAW_COLUMNS list via usecols, and build_features returns exactly MODEL_FEATURES, which excludes CODE_GENDER; prepare_data and train call validate_training_batch before using the data, while pseudonymization, DPO channel, human review and long retention periods remain README plans.",
+      "evidence": [
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:dbd0a8b0c6d35af132e34a77d025f2c188eff6c9b0483776c31d33cbb3c6f31e"
+        },
+        {
+          "resource": "repo://src/data/home_credit.py#L37-L37",
+          "version": "repo-lines-v1:sha256:63beebe81eeac2b7b265fb0f1284d0db0ed19115dd64ba43891c8babb2b4c5a9:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjNiZWViZTgxZWVhYzJiN2IyNjVmYjBmMTI4NGQwZGIwZWQxOTExNWRkNjRiYTQzODkxYzhiYWJiMmI0YzVhOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjNiZWViZTgxZWVhYzJiN2IyNjVmYjBmMTI4NGQwZGIwZWQxOTExNWRkNjRiYTQzODkxYzhiYWJiMmI0YzVhOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODdiOWY4MTA1MWY3MTM5ZGI4ZTA3NGM0M2ZhMjU4NzY0ZjQ2YjY2ZTIzM2Y5NDliZmZmZmNhYmRjNGI4N2I1OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzIwOGQ4MjhiZjc5NGM1MDc2NGEwZjI3N2EyNzBkNTYwYTNjZWY3YTU0YzBlMzU5ODBmMDg0YzUzNTZiNjdkYSJ9"
+        },
+        {
+          "resource": "repo://src/features/build.py#L48-L83",
+          "version": "repo-lines-v1:sha256:27c60586a61dea43dde0e34b13457f941a39f3a1433d2361636b1dd6b7c32d11:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzNjYzNGZlZTYyMGZlMDE4YWVjNGRkMWU0YTI1ZDMxZDIxM2IwY2YxZGEwNjc5ZTM5Yjk3MjU0OWIxMjE4YzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiNWZmZTY1MzkyZTNmYjNkNzE0OTk1ZTYyZTYzMWEyNjQwMWQwYjNiMzkzNzNlN2Q2NTBiZjFjNTk3MzBhZmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzNjQ5NmUxMjBkOThmMDE1ZTg2YThkMjI0YzgyOTExMDNlMTJlZTIyMzdlM2ZmZTQ3YTM3ZjNlYjRiZWExNTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L27-L27",
+          "version": "repo-lines-v1:sha256:4b79ba46f2e055ef6cee1cf906606db0c8798b0c20c4e61225fad3be10d719e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGI3OWJhNDZmMmUwNTVlZjZjZWUxY2Y5MDY2MDZkYjBjODc5OGIwYzIwYzRlNjEyMjVmYWQzYmUxMGQ3MTllNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGI3OWJhNDZmMmUwNTVlZjZjZWUxY2Y5MDY2MDZkYjBjODc5OGIwYzIwYzRlNjEyMjVmYWQzYmUxMGQ3MTllNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTQzYWIyNWZjNWE3M2JmOTBiMTk5MDA2MDVkOTFjZDUyMmQ1ZGQ0MWY0NGE1N2ZlNGFiOTI1YzI3MjI4ODk5MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzg0MTQ0NGQ0YTBlYTVkNmRjNjc0MjllZTFjZjM4NmY3OWRmYjkyMjFkOTdjNGIyMThjZjMzM2I0NzkzMTNhYSJ9"
+        },
+        {
+          "resource": "repo://src/training/train.py#L120-L120",
+          "version": "repo-lines-v1:sha256:bbd2dd66a3c1411c55856d5bca97fec8ec7cbffbef8b38d5a0376cc5715ef597:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmJkMmRkNjZhM2MxNDExYzU1ODU2ZDViY2E5N2ZlYzhlYzdjYmZmYmVmOGIzOGQ1YTAzNzZjYzU3MTVlZjU5NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmJkMmRkNjZhM2MxNDExYzU1ODU2ZDViY2E5N2ZlYzhlYzdjYmZmYmVmOGIzOGQ1YTAzNzZjYzU3MTVlZjU5NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTk4NWE5NGE2MzU0ZWY5ZDhlNTlhY2Y0MmRiODQ1YzU3NGU5NzZiOGI3OTQzODZlMzQ3Zjk4OTkzN2Y5ZjYwZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTY3ZjUyOGY2ZDNjMTQ0ZjcwZjI2ZmI3ZTkzZTc3YzkwMTk0OTg3NjE5OGE3ZmE2Njc1YzRiNDYzODYyZmE3YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_439d1332626f4fd693435c376266cd70",
+      "statement": "The Evidently PSI drift monitor uses a PSI_THRESHOLD of 0.2 to flag drift on the monitored columns.",
+      "evidence": [
+        {
+          "resource": "repo://src/pipelines/drift_monitor.py#L15-L15",
+          "version": "repo-lines-v1:sha256:60ab4b8fae76ce36b5cdf4cf9feef99d16de5e25d8331555c8597a08772bd2c0:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjBhYjRiOGZhZTc2Y2UzNmI1Y2RmNGNmOWZlZWY5OWQxNmRlNWUyNWQ4MzMxNTU1Yzg1OTdhMDg3NzJiZDJjMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjBhYjRiOGZhZTc2Y2UzNmI1Y2RmNGNmOWZlZWY5OWQxNmRlNWUyNWQ4MzMxNTU1Yzg1OTdhMDg3NzJiZDJjMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjk3ZjkxMTNmOGZhYTcyZjNhOThhMTZmYTQzYzdmN2UzMDlmY2I3NDIwOGU4ZTc5YTFkNzNkYTQyZWJkYzY3MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWM5MzU2ZDllMmE2Zjk5YjQ2ZDczZmFmNGE2OWRmMTg4ODJlMTEzMGQ2MDY1ODc1MjgyNWIwMjhhOTJiZjYwOCJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-09T02:03:21.311Z"
+    "at": "2026-11-12T01:18:41.873Z"
   }
 }

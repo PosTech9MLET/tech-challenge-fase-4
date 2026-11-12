@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a2ffc54a191a8188380e880dfe94220a7666fab873bdbabcba4eda903d231dca",
+  "pageVersion": "sha256:af9e58a641f7c29a154bec0c1ea461bfd47f933399a8ab69940812a90713b658",
   "claims": [
     {
       "id": "claim_14376f9edb5e49d2b4a655df2632d4cf",
@@ -63,7 +63,7 @@
       "statement": "The observability stack is configured for local use: ports 9100, 9090 and 3000 bind to 127.0.0.1, reports/ is mounted read-only into Node Exporter, Grafana requires GRAFANA_ADMIN_PASSWORD and disables sign-up, and Prometheus retention is 7 days, which is the one documented LGPD retention value enforced in configuration.",
       "evidence": [
         {
-          "resource": "repo://README.md#L715-L723",
+          "resource": "repo://README.md#L730-L738",
           "version": "repo-lines-v1:sha256:4501216e038233982284dc05b3f1f4cd1cc5f9fb0712fa3d2f461423ea30efb9:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjBiZmM0Yzk5MWExMTc2YjkwNWU1ZjdlNTM1ODQ4MTlkNTU5Y2Y4MWNhYzEwMDc0ZjdhYzYzODUzMWQ3NmMxYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjFjMGIzNGYzNzA1N2QyOGIwODVlNWQzMzdjZmJkNTI5NWQwMWI1OGM4NjIxMzA0ZjFjN2QyNzIxOWQyYzQ1MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGEzNGMzZTZiMzI4YTViNzI1NGQ3MTNlYjk0YmQ5MjdmYTgxMjgwZmRiZGY2OWM3YzZlM2M0NTJlOGQyZDAyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmZkNDZkOWUwM2U5YTFkOWU2OGJkOTQ2N2U1YjljOWFiNjk4NmQ0MDNlNjg3MmZlMjJkYjZhYjU5NmZiYTVhZSJ9"
         },
         {
@@ -74,15 +74,15 @@
     },
     {
       "id": "claim_6af9dae477ac467fb17808a5d97f8c78",
-      "statement": "The README documents an LGPD plan as intent rather than audited compliance: personal-data inventory, legal bases (art. 7 X and V), art. 18 and 20 data-subject rights, controller/operator/DPO roles, retention periods (project data deleted at end, 5 years negative information, 15 years repayment history), and the statement that policies for minimization, purpose, legal basis, access control and retention are still future work. Pseudonymization of SK_ID_CURR and individual explanations are production plans not implemented in code.",
+      "statement": "The README documents an LGPD plan as intent rather than audited compliance: personal-data inventory, legal bases (art. 7 X and V), art. 18 and 20 data-subject rights, controller/operator/DPO roles, and retention periods (project data deleted at end, 5 years negative information, 15 years repayment history). Its 'Próximos trabalhos recomendados' list still includes recording minimization, purpose, legal-basis, access-control and retention policies, and its governance section says the group-AUC check does not prove fairness or LGPD compliance. Pseudonymization of SK_ID_CURR, individual explanations, human review, a DPO channel and deletion workflows are production plans not implemented in code.",
       "evidence": [
         {
-          "resource": "repo://README.md#L633-L649",
-          "version": "repo-lines-v1:sha256:fb6ce626f3e3a3ffdea1abb611aa99a1d27a7650e65c0a477ce4a4df12c1558f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczMWFlYzJlNzE5YTc2NWM3YzczNDZlOGE0ZjFkNjFlOTUwZGFlMDRmNmVjM2E4ZDQ5MzY3MDk1NDJkZjE0MDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzMjk3MTE3NzUzZmQ3NjFiYTNkZjQ4NGQ1ODBlNmNmYjExNzE2MTE2YmQ3ODc5MzViOTY2Mzk3YjdmZjUxNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxZTY3ZTc3OTk3NTA2NTljNmZlMzAyOGYxNjJlNmNmMjcwZTNlYjg5N2FmMWUyZmRmMmRkMGNhNGEzOGUyYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkMjlmNWUxZTUzNDYwMzhkOTliOTIyNzAxYzk0Mzg2MTk3YTdhMmNlNTYyMmRmNjE5NWE3MTM1YjdlNDMxOTIifQ"
+          "resource": "repo://README.md#L633-L648",
+          "version": "repo-lines-v1:sha256:c581639a1ce2d2ab7f7ad8a2e301375eefd1de9701ac6f542ffddd21b3d7b7e7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczMWFlYzJlNzE5YTc2NWM3YzczNDZlOGE0ZjFkNjFlOTUwZGFlMDRmNmVjM2E4ZDQ5MzY3MDk1NDJkZjE0MDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzMjk3MTE3NzUzZmQ3NjFiYTNkZjQ4NGQ1ODBlNmNmYjExNzE2MTE2YmQ3ODc5MzViOTY2Mzk3YjdmZjUxNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxZTY3ZTc3OTk3NTA2NTljNmZlMzAyOGYxNjJlNmNmMjcwZTNlYjg5N2FmMWUyZmRmMmRkMGNhNGEzOGUyYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkMjlmNWUxZTUzNDYwMzhkOTliOTIyNzAxYzk0Mzg2MTk3YTdhMmNlNTYyMmRmNjE5NWE3MTM1YjdlNDMxOTIifQ"
         },
         {
-          "resource": "repo://README.md#L678-L731",
-          "version": "repo-lines-v1:sha256:11b46e21ccfdc8bfd66f6ff1e004cea88304ad82ba490e01a04ab78dae8f08a3:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjMGZhNmY4NGUwYzc4Y2Q5NWVhZjY1ZjJkYzk0MjU1NWI1YTZhNTc4ZTI4MGIxN2Q0M2FkNmZkZGY1ZWE4OTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1M2I5YmVmOTA2OWZjZDE5NmIwYzkxNDMyNzc2MzlmNmNlNTRkOWQ4ZTk3MWZkZDkxMzU3YjQ1YzJmNWFjNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkwYjFmYmIwNzcxNjU5OTY3YTM0ZmFiYjZkNTY4NWU2OTlmMGRjMzg3YTc5NmMzMjhlZDFhMDEzNWQwN2E1OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2NDE4OGNlY2E3NTg5OTVmMDg4ZmJhNjYzZDA4Mjc3ZDg1NTRlZWQ4Y2QyZTM0OWU5Y2EwNTRmZTIzODJlMGUifQ"
+          "resource": "repo://README.md#L677-L746",
+          "version": "repo-lines-v1:sha256:0732966e37f8627052ea39f4561583dda10d8abf4567fa900820b6262676dc93:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjMGZhNmY4NGUwYzc4Y2Q5NWVhZjY1ZjJkYzk0MjU1NWI1YTZhNTc4ZTI4MGIxN2Q0M2FkNmZkZGY1ZWE4OTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg1M2I5YmVmOTA2OWZjZDE5NmIwYzkxNDMyNzc2MzlmNmNlNTRkOWQ4ZTk3MWZkZDkxMzU3YjQ1YzJmNWFjNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkwYjFmYmIwNzcxNjU5OTY3YTM0ZmFiYjZkNTY4NWU2OTlmMGRjMzg3YTc5NmMzMjhlZDFhMDEzNWQwN2E1OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2NDE4OGNlY2E3NTg5OTVmMDg4ZmJhNjYzZDA4Mjc3ZDg1NTRlZWQ4Y2QyZTM0OWU5Y2EwNTRmZTIzODJlMGUifQ"
         }
       ]
     },
@@ -95,7 +95,7 @@
           "version": "repo-lines-v1:sha256:998611bd4b3a314fd0de935bf244dba4ae236c503846034b1fce714b4550ca29:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmNzUzMzgyODYzYmU1NDI1YzFiMWY3YTc0MzMxNGJmMWUwODk2Y2Q4OTFhYjczZWM3ZDg2ZmJmODQzZmVlMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkZjFkZDE4MDAwNDI1YTg5NDc4MGZkNTcyYTg5ODFiZWZkY2JjZDY0Nzg1NmY4YjNmYzIzNDdiMzQ3NTliNTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5MmUyYjJhZDFhMzMzNTIzZTcwZjFkNmIwNTA1OTczYTczNDZiYzllNzc1N2RhMDY3NGIxYzZjNjliZTFmZmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwMGU4YzBjYWU4MDA5M2U2NDZiODQ3ODA2MTFjMGRjMGM5Y2VkZTk3Y2RhYjQwYTA1MGMxZDRmOTI1MzdkMGMifQ"
         },
         {
-          "resource": "repo://README.md#L733-L737",
+          "resource": "repo://README.md#L748-L752",
           "version": "repo-lines-v1:sha256:397911e8a55645f19174c0ffebb0d3c211eaefb38fafe74fff9ddd60dd99e794:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWQ2ZWJiY2ZhNDg4MDE5MTE2M2Y5ODFlOTkyOTJiNzFiODljMzRhODdkZDA2Nzc4YzA4MzM2OWZhZTc5MmZkNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzA5ODdmMmNlMjdkN2M0ZGFmOTViMDE1YzNiNTY4MGY4Y2I2MjEzYTg4MTBjMTAzMGQzMTI4YzZkY2M2MTczOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTQ4NTJkMDIwMjVkZDRiOWM0Y2NkYjcxODJkODFkODQxMTU1YzM1YWIwZDNlZDc4Y2Q2ZTA2YzFkNzZkNzJhMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTY4OTRkNWE5YjhjMmZjM2UwMDI0YTMxYzY4MzQ1ZGJiYWY2NDVjZmFiZmNhMTIwZGY2NGM3NDZkMzk2ZjEyNiJ9"
         },
         {
@@ -191,10 +191,80 @@
           "version": "repo-lines-v1:sha256:f27db3514b25c9c2aa6685977bfb9e644bc0d69659c8d86c214e95f4edc725e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMDhiY2M4NzExOTNmZDM1ODQwYzVlZjcxZTg4OWZlYzJkN2JmN2Q5ZjljYWM3ZjI4YzU3NWY4ZTFkMjc4ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyOGUyNDI1NmZkOTZkZWUyNGYxYzE1ODE3N2IxZTUxMzg5Y2ZjY2RjMGUwOGNmMzkxOWQ2MmRjZmZhM2Q3NzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_71b4b5eb4d36424991f0b91866fd32d0",
+      "statement": "The README's Privacy By Design/By Default table (LGPD art. 46, Cavoukian's seven principles) mixes enforced and aspirational items: contract-before-write, RAW_COLUMNS minimization, CODE_GENDER outside MODEL_FEATURES, log whitelist and gitignore are enforced in code/config, while the DPO channel, art. 18 rights, human review under art. 20 and the retention plan are documentation only. docs/model_card.md, cited for transparency, is an empty outline.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L709-L723",
+          "version": "repo-lines-v1:sha256:4527cd36b9503718e7289bb59acf60efc1190b713cb3b0ade6cb5660b397cb0b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjdhZjQ4MmM0YTRhYjU5MjhiZTQ3NGEwNTRhNmJhYjUwOWJjNmMxNzhhZDkwMzU5MDVkZTcxMmI4ZWU1ZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MTZmNWJhY2Q1OWQ5OGMwOGMxMzZkZjZkM2EyNGIyZWE4YThjYjhkMzcyY2M5MzczNWVlMTM4MjkwMWM4NjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3OTA5MzRlMzI0YTkyZDY4Yzg3Y2Q2OTViZWE1NjIzY2FiM2EwNTI0NmRjZWEzMTlhYzFlMmE3OTdiNTRkZTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIyYzJkZGJlZDQxMDZiNWMyYTI4NWFlYTIzMTljZDIwN2VhOGJkZDIxNjU4MTdjZmNiMjI2ZjVkNzk0NDIxOTYifQ"
+        },
+        {
+          "resource": "repo://docs/model_card.md#L1-L11",
+          "version": "repo-lines-v1:sha256:f27db3514b25c9c2aa6685977bfb9e644bc0d69659c8d86c214e95f4edc725e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMDhiY2M4NzExOTNmZDM1ODQwYzVlZjcxZTg4OWZlYzJkN2JmN2Q5ZjljYWM3ZjI4YzU3NWY4ZTFkMjc4ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyOGUyNDI1NmZkOTZkZWUyNGYxYzE1ODE3N2IxZTUxMzg5Y2ZjY2RjMGUwOGNmMzkxOWQ2MmRjZmZhM2Q3NzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/features/build.py#L50-L58",
+          "version": "repo-lines-v1:sha256:2e7e2c7a0285e2f37ccb6dec52c90159f83e3ca5aab11a99bd0df062d7db7fa5:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGE5MzQ3YTgzYzA0M2Q5NDgwZjIzYjNjNTk4YjdiMjA1NTA0NTJhNGY0MTYxYjQwNTE1Mjg3YjBiOWU2M2ExNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2QyOTE0NzdlZDRhZGIwYWUyY2I3MTlhZTI5OGJjZWYwNTVhNzljYWRlZDQ1YjA0ZjI2NjY1YjBiMmMzMDMxNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTM1NzcwZTk3ZDcyOTg1YjhlNGNhZTNlNTIxNmFhOTc0NzQzN2QxOTQ2NTlkYTc2YmE1OWEyYmJiYjMxNThiMSJ9"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L15-L40",
+          "version": "repo-lines-v1:sha256:306e91c507a1ee6c5f136d53346ee62c36e24a5c970927a4fe40ac6de0878cc5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMjMwYzAzMjViZGYzNTgzMWE2ZDk4ZWVlMWZkYjE0MTUwOTI2YWVkZjQ5MmJmYWE5YWY3MzBmYzQyZWM4OGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUyOTgwZmYyMjYyZjNhNTMyODRlYTVjNDU2YTRmNmI5MWViMzVmMmU1MmU4MTIzZjAyZjU5ZGM5NGUxMzJmODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e907ef3d844f457485a379c597d7b9d2",
+      "statement": "The README's governance section lists as 'Implementado' only Pandera contracts for eight columns, the XGBoost/MLflow baseline, Evidently/PSI for two variables, score impact analysis, structured logs, metrics, dashboard and alert rules, and its 'Próximos trabalhos recomendados' covers last_success_timestamp, persistent counters, scheduling/Pushgateway, Alertmanager, LGPD policy recording, deeper fairness metrics, degradation evaluation with independent labels and the demo video.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L633-L648",
+          "version": "repo-lines-v1:sha256:c581639a1ce2d2ab7f7ad8a2e301375eefd1de9701ac6f542ffddd21b3d7b7e7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczMWFlYzJlNzE5YTc2NWM3YzczNDZlOGE0ZjFkNjFlOTUwZGFlMDRmNmVjM2E4ZDQ5MzY3MDk1NDJkZjE0MDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzMjk3MTE3NzUzZmQ3NjFiYTNkZjQ4NGQ1ODBlNmNmYjExNzE2MTE2YmQ3ODc5MzViOTY2Mzk3YjdmZjUxNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxZTY3ZTc3OTk3NTA2NTljNmZlMzAyOGYxNjJlNmNmMjcwZTNlYjg5N2FmMWUyZmRmMmRkMGNhNGEzOGUyYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkMjlmNWUxZTUzNDYwMzhkOTliOTIyNzAxYzk0Mzg2MTk3YTdhMmNlNTYyMmRmNjE5NWE3MTM1YjdlNDMxOTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4075269558c44ed295be0c452ed375b7",
+      "statement": "prepare_data validates the raw batch with validate_training_batch before splitting and writing Parquet; a contract violation raises SchemaErrors (lazy validation) and nothing is written. The contract has seven feature columns plus TARGET and is non-strict.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/contracts.py#L17-L51",
+          "version": "repo-lines-v1:sha256:852f453c1c8a3598e002a608e77297724f44254bfc030833357be16d45909041:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5NmRmZjgyZTljM2VmZmQ2YjdjMGQxZjNjNjc3NjJkYjg1NWUxMTU0ZDAwMzg4MmUyMzliYTNlM2YzNGYyMmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyMDRkNGRjOWUwNWQ4M2E3NDZkZDk4MjAwY2ViZDcxNDcyOTA3ODU1NzQxYTlmMDc2NjgzNjgyYzdmODY0NmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L15-L40",
+          "version": "repo-lines-v1:sha256:306e91c507a1ee6c5f136d53346ee62c36e24a5c970927a4fe40ac6de0878cc5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxMjMwYzAzMjViZGYzNTgzMWE2ZDk4ZWVlMWZkYjE0MTUwOTI2YWVkZjQ5MmJmYWE5YWY3MzBmYzQyZWM4OGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUyOTgwZmYyMjYyZjNhNTMyODRlYTVjNDU2YTRmNmI5MWViMzVmMmU1MmU4MTIzZjAyZjU5ZGM5NGUxMzJmODIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8d41416dab7842ab86a9e47368cf53e3",
+      "statement": ".dockerignore excludes data, mlruns, mlflow.db, .env, reports, tests, docs and notebooks from the Docker build context, keeping data out of images.",
+      "evidence": [
+        {
+          "resource": "repo://.dockerignore#L1-L15",
+          "version": "repo-lines-v1:sha256:e5a48f1360911877c380e6a7463ad48953a8438310f2c1ed7958e4469fded96f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkMDNmMTZmYzVhZDhiZTcwZDZlMDQ5MWZhMmUwMjliYzRhMzFmNWIwZGU2ZDRhZGY4ZTdkZDcwOWQyMzg0MGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIzZTVlMjNkZjQzOTU1NzQwYTI2NzQzODAxYWVkNDA3YWYxMmY1YTMxNTQ0OGE0YmQ1YjIwNDJjMmRlMmVhYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cc6e5a45c53149feaae2a014bb0f2c24",
+      "statement": "Prometheus retention is configured as 7 days (--storage.tsdb.retention.time=7d) in compose.observability.yaml, matching the README retention table. It is the only configured expiry: prometheus_data and grafana_data are persistent named volumes, and project-end deletion and the 5-year/15-year production retention periods are not automated anywhere in the repository.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L730-L738",
+          "version": "repo-lines-v1:sha256:4501216e038233982284dc05b3f1f4cd1cc5f9fb0712fa3d2f461423ea30efb9:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjBiZmM0Yzk5MWExMTc2YjkwNWU1ZjdlNTM1ODQ4MTlkNTU5Y2Y4MWNhYzEwMDc0ZjdhYzYzODUzMWQ3NmMxYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjFjMGIzNGYzNzA1N2QyOGIwODVlNWQzMzdjZmJkNTI5NWQwMWI1OGM4NjIxMzA0ZjFjN2QyNzIxOWQyYzQ1MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGEzNGMzZTZiMzI4YTViNzI1NGQ3MTNlYjk0YmQ5MjdmYTgxMjgwZmRiZGY2OWM3YzZlM2M0NTJlOGQyZDAyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmZkNDZkOWUwM2U5YTFkOWU2OGJkOTQ2N2U1YjljOWFiNjk4NmQ0MDNlNjg3MmZlMjJkYjZhYjU5NmZiYTVhZSJ9"
+        },
+        {
+          "resource": "repo://compose.observability.yaml#L17-L52",
+          "version": "repo-lines-v1:sha256:4a7dc45e13da41bd4b2b0b72b2bc4aedc5f46793c73793ddd9194b36b79f1d5c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzMzI4MWM4MmQ0Njk3YTE4NTYzZjUzOGRjMzU0OWQ4MDA5Y2Y3MmVlYjMyNTA3ZjZlMGE1ZTdiZGE4YTY5ZTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlMDcyZDJhNWIwYTE2N2Y4NmU5YzEwYjJkNGEzNmUyYzU0ZTk5MGIxZGE2YzVkOTczNWFlMTA0MTQxY2ZhZjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUwOGVjN2ZlODYxZDU3NmZmNTZhMDFjNjg5ZTBlMDViYmEzOTU5ZTJlY2RkYTc4MTExMzliNmNiMjYzNWI4NWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-09T02:03:21.311Z"
+    "at": "2026-11-12T01:18:41.873Z"
   }
 }

@@ -5,7 +5,7 @@ description: How Pandera contracts gate Home Credit batches, how a controlled in
 tags: [pandera, data-contracts, drift, evidently, psi, score-impact, home-credit, monitoring]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-09T02:01:44.977Z
+    at: 2026-11-12T01:18:41.873Z
 sources:
   - id: openwiki-source-d868871d01e97861e7cc038a
     resource: repo://infra/observability/prometheus/alerts.yml
@@ -47,7 +47,7 @@ sources:
     resource: repo://tests/unit/test_drift.py
   - id: openwiki-source-f59c6ef5424efee111693664
     resource: repo://tests/unit/test_score_impact.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:01:44.977Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-12T01:18:41.873Z" }
 ---
 
 # Data Contracts, Drift Detection and Score Impact
@@ -187,7 +187,7 @@ Mechanics:
 
 The summary contains `records`, `threshold`, `mean_score_before`, `mean_score_after`, `mean_absolute_change`, `share_above_threshold_before`, `share_above_threshold_after`, `changed_decisions` and `changed_decisions_pct`.
 
-`scripts/analyze_score_impact.py` loads the processed production and drifted parquet files, plus `load_model()` and `load_threshold()` from `src/models/baseline.py`. It writes the summary to `reports/score_impact.json`. In the committed report, 92,254 records were compared at a threshold of about 0.143. About 4.6% (4,277) of decisions changed. The share above the threshold fell from about 15.0% to 13.2%, and the mean score fell from about 0.081 to 0.075. Drift in income and credit does not simply push scores up. The effect depends on how the model uses the derived ratios.
+`scripts/analyze_score_impact.py` loads the processed production and drifted parquet files, plus `load_model()` and `load_threshold()` from `src/models/baseline.py`. It writes the summary to `reports/score_impact.json`. In the committed report, 92,254 records were compared at a threshold of about 0.141. About 4.81% (4,440) of decisions changed. The share above the threshold fell from about 15.3% to 13.9%, and the mean score fell from about 0.0806 to 0.0755 (mean absolute change about 0.0167). Drift in income and credit does not simply push scores up. The effect depends on how the model uses the derived ratios.
 
 ## Running the workflow
 
