@@ -1,11 +1,8 @@
 ---
 type: guide
 title: Quickstart & Task Routing
-description: Onboarding and task-routing guide for the Home Credit credit-scoring drift and observability project. It covers uv/DVC setup, the end-to-end run order, current quality commands including check_notebooks.py behavior, and links to every wiki page.
+description: Onboarding and task-routing guide for the Home Credit credit-scoring drift and observability project. It covers uv/DVC setup, the end-to-end run order, current quality commands including check_notebooks.py behavior, and links to every wiki page, including the combined data-contracts/drift page and the governance and LGPD page.
 tags: [quickstart, task-routing, uv, dvc, credit-scoring, drift, observability, quality-gates, wiki-map]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-11-09T02:03:21.311Z
 sources:
   - id: openwiki-source-c28ca7ab362d7136f953793e
     resource: repo://.dvc/config
@@ -25,11 +22,24 @@ sources:
     resource: repo://README.md
   - id: openwiki-source-d63450a84702158a6ce7cde3
     resource: repo://scripts/check_notebooks.py
+  - id: openwiki-source-214118d922fe1ca5c2383b44
+    resource: repo://src/data/home_credit.py
+  - id: openwiki-source-cd5f91b2d1b7100bb20e38ce
+    resource: repo://src/features/build.py
   - id: openwiki-source-11b9d806fcc6dd6e7747ed87
     resource: repo://src/main.py
+  - id: openwiki-source-7e4871dce6bce40ca584acf2
+    resource: repo://src/pipelines/drift_monitor.py
+  - id: openwiki-source-0b481e6de0f6fd0862204a36
+    resource: repo://src/pipelines/prepare_data.py
+  - id: openwiki-source-fcfbfa02b8c3ddf398465b4a
+    resource: repo://src/training/train.py
   - id: openwiki-source-f12fdb76c2f98bd11af25d76
     resource: repo://src/utils/config.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:03:21.311Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-12T01:18:41.873Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-12T01:18:41.873Z
 ---
 
 # Quickstart & Task Routing
@@ -55,9 +65,10 @@ flowchart TD
     Q -->|"Layout, layers, raw-to-alert flow"| Arch["architecture/overview.md"]
     Q -->|"Settings, .env, paths, uv, DVC config"| Cfg["concepts/configuration_and_environment.md"]
     Q -->|"Pandera schemas, invalid batches"| Contracts["concepts/data_contracts.md"]
-    Q -->|"LGPD, bias, model card, limits"| Gov["concepts/governance_and_lgpd.md"]
+    Q -->|"Contracts, drift, PSI and score impact together"| CD["concepts/data_contracts_and_drift.md"]
+    Q -->|"LGPD, bias, model card, retention, limits"| Gov["concepts/governance_and_lgpd.md"]
     Q -->|"Features, training, DVC stages, MLflow"| ML["workflows/ml_pipeline_and_tracking.md"]
-    Q -->|"Drift simulation, PSI, score impact"| Drift["workflows/drift_monitoring_and_score_impact.md"]
+    Q -->|"Drift run order, PSI alerts, score impact"| Drift["workflows/drift_monitoring_and_score_impact.md"]
     Q -->|"Metrics, logs, Prometheus, Grafana, alerts"| Obs["operations/observability_stack.md"]
     Q -->|"Ruff, Radon, Xenon, pre-commit, notebooks"| Quality["workflows/development_and_quality.md"]
     Q -->|"pytest, markers, coverage, GitHub Actions"| Tests["testing/test_suite_and_ci.md"]
@@ -69,9 +80,10 @@ flowchart TD
 | Understand package boundaries and the raw-to-alert data flow | [System Architecture](architecture/overview.md) | `src/`, `scripts/`, `data/`, `models/`, `reports/`, `infra/` |
 | Change environment variables, paths, Python or uv setup, DVC config | [Environment Configuration](concepts/configuration_and_environment.md) | `src/utils/config.py`, `.env.example`, `.dvc/config` |
 | Edit or debug Pandera contracts and the invalid-batch demo | [Data Contracts](concepts/data_contracts.md) | `src/data/contracts.py`, `src/monitoring/validation.py` |
-| Check privacy, LGPD, fairness or limitation constraints before touching data or model handling | [Governance & LGPD](concepts/governance_and_lgpd.md) | `docs/`, README governance sections |
+| See how contracts, the drift simulation, the Evidently PSI monitor and score impact fit together, with committed report numbers | [Data Contracts, Drift and Score Impact](concepts/data_contracts_and_drift.md) | `src/data/contracts.py`, `src/data/simulate_drift.py`, `src/pipelines/`, `reports/drift_alerts.json`, `reports/score_impact.json` |
+| Check privacy, LGPD, fairness, retention or limitation constraints before touching data, logs, artifacts or model handling. The page separates what the code enforces from what the README only plans | [Governance & LGPD](concepts/governance_and_lgpd.md) | `src/features/build.py` (`RAW_COLUMNS`, `MODEL_FEATURES`), `src/monitoring/logging_config.py`, `.gitignore`, `docs/model_card.md`, README governance sections |
 | Change features, training, DVC stages or MLflow tracking | [ML Pipeline & Tracking](workflows/ml_pipeline_and_tracking.md) | `dvc.yaml`, `src/features/`, `src/training/`, `src/pipelines/prepare_data.py` |
-| Change drift simulation, Evidently/PSI alerts or score-impact analysis | [Drift & Score Impact](workflows/drift_monitoring_and_score_impact.md) | `src/data/simulate_drift.py`, `src/pipelines/drift_monitor.py`, `src/pipelines/score_impact.py` |
+| Change the drift run order, Evidently/PSI alerts or score-impact scripts | [Drift & Score Impact](workflows/drift_monitoring_and_score_impact.md) | `src/data/simulate_drift.py`, `src/pipelines/drift_monitor.py`, `src/pipelines/score_impact.py` |
 | Change metrics, JSON logs, Prometheus, Grafana or alert rules | [Observability Stack](operations/observability_stack.md) | `src/monitoring/`, `compose.observability.yaml`, `infra/observability/` |
 | Understand lint, complexity and notebook gates | [Quality Standards & Gates](workflows/development_and_quality.md) | `pyproject.toml`, `.pre-commit-config.yaml`, `scripts/check_notebooks.py` |
 | Add tests or understand CI and the OpenWiki workflows | [Test Suite & CI/CD](testing/test_suite_and_ci.md) | `tests/`, `.github/workflows/` |
@@ -123,7 +135,17 @@ uv run python -m scripts.analyze_score_impact
 uv run python -m scripts.run_monitored_drift   # validation + drift + reports/operational_metrics.prom
 ```
 
-`scripts.demo_invalid_batch` shows Pandera rejecting a deliberately corrupted batch.
+`scripts.demo_invalid_batch` shows Pandera rejecting a deliberately corrupted batch. The drift and score-impact steps are explained in [Data Contracts, Drift and Score Impact](concepts/data_contracts_and_drift.md).
+
+### Before touching data or model handling
+
+Read [Governance & LGPD](concepts/governance_and_lgpd.md) first. The code enforces only part of the README's privacy plan:
+
+- `load_application_train` reads only the `RAW_COLUMNS` list, and `CODE_GENDER` is outside `MODEL_FEATURES`.
+- `prepare_data` and `train` run `validate_training_batch` before the data is used.
+- Pseudonymization, the DPO channel, human review and the long retention periods are planned in the README but not implemented.
+
+The PSI alert threshold is `0.2` (`PSI_THRESHOLD`). Both the drift page and the governance page describe it as a demonstration value.
 
 To view the metrics, set `GRAFANA_ADMIN_PASSWORD` in your shell, then run `docker compose -f compose.observability.yaml up -d`. Prometheus is at `localhost:9090` and Grafana at `localhost:3000`. See [Observability Stack](operations/observability_stack.md) for ports, rules and troubleshooting.
 

@@ -3,10 +3,9 @@ type: governance concept
 title: Governance, LGPD & Model Limitations
 description: Governance, privacy and LGPD inventory, retention plan, bias-mitigation approach and the documented limitations of the credit-scoring baseline. Read it before changing which columns are loaded, what is logged, which artifacts are committed, or how fairness is evaluated.
 tags: [governance, lgpd, privacy, fairness, model-card, retention, limitations]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-11-09T02:03:21.311Z
 sources:
+  - id: openwiki-source-715dace563ef484b6e8bd1e2
+    resource: repo://.dockerignore
   - id: openwiki-source-ea70eb6c045047448e446296
     resource: repo://.gitignore
   - id: openwiki-source-8ac5cffae9fbbde8b9042955
@@ -35,14 +34,27 @@ sources:
     resource: repo://src/pipelines/prepare_data.py
   - id: openwiki-source-fcfbfa02b8c3ddf398465b4a
     resource: repo://src/training/train.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:03:21.311Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-12T01:18:41.873Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-12T01:18:41.873Z
 ---
 
 # Governance, LGPD & Model Limitations
 
 This page covers the constraints that governance and privacy place on data and model handling in the Home Credit credit-scoring project. Most of the prose lives in the project `README.md` (sections "Governança, privacidade e evolução do projeto" and "Governança e LGPD"). The repository code enforces only part of it. The rest is a plan for how a fintech would run the pipeline on real customer data.
 
-Related pages: [Architecture Overview](../architecture/overview.md), [ML pipeline and tracking](../workflows/ml_pipeline_and_tracking.md), [Drift monitoring and score impact](../workflows/drift_monitoring_and_score_impact.md), [Data contracts](data_contracts.md).
+Related pages: [Architecture Overview](../architecture/overview.md), [ML pipeline and tracking](../workflows/ml_pipeline_and_tracking.md), [Drift monitoring and score impact](../workflows/drift_monitoring_and_score_impact.md), [Data contracts](data_contracts.md), [Data contracts and drift](data_contracts_and_drift.md), [Configuration and environment](configuration_and_environment.md), [Observability stack](../operations/observability_stack.md).
+
+## What is enforced and what is only intent
+
+| Layer | Status | Examples |
+|---|---|---|
+| Enforced by code or configuration | Active whenever the pipeline runs | `RAW_COLUMNS` with `usecols`, `CODE_GENDER` outside `MODEL_FEATURES`, the Pandera contract blocking ingestion, the log whitelist, `.gitignore` and `.dockerignore`, loopback port bindings, Prometheus 7-day retention |
+| Documented practice, checked by hand | Depends on people | Not committing data or reports, running DVC without a remote, reviewing README tables when columns change |
+| Plan only (README) | Not implemented | Pseudonymization of `SK_ID_CURR` with a keyed hash, individual explanations and human review (art. 20), the DPO channel (art. 41), the record of operations (art. 37) and RIPD (art. 38), incident reporting, deletion of data at the end of the project, the 5-year and 15-year production retention periods |
+
+The README itself says the exploratory ROC-AUC by gender and age band "does not prove fairness, absence of bias or LGPD compliance" and lists "record minimization, purpose, legal-basis, access-control and retention policies under LGPD" as recommended future work.
 
 ## Scope and framing
 
@@ -58,7 +70,9 @@ Related pages: [Architecture Overview](../architecture/overview.md), [ML pipelin
 | Protected attribute kept out of the model | `CODE_GENDER` (`GENDER`) is in `RAW_COLUMNS` but not in `MODEL_FEATURES`. `build_features` returns exactly `MODEL_FEATURES`, so gender never reaches the XGBoost pipeline. It is read only for the fairness audit. |
 | Identifier not a feature | `SK_ID_CURR` is in `RAW_COLUMNS` for uniqueness and joins (for example aligning scores before and after drift). It is not in `MODEL_FEATURES`. The README says it is not logged or exported as a metric. |
 | Log hygiene | `JsonFormatter` in `src/monitoring/logging_config.py` emits only `timestamp`, `level`, `message` and the whitelisted extras `event`, `status`, `records`, `pipeline` and `error_type`. Validation logs carry the batch size and status, never income, identifiers or sample rows. The `credit_scoring` logger has `propagate = False`. |
+| Contract gate before persistence | `prepare_data.run` calls `validate_training_batch` before splitting and writing Parquet. A contract violation raises `SchemaErrors` (lazy validation), so nothing is written. |
 | Local-only artifacts | `.gitignore` excludes `data/raw|interim|processed|features/*`, `models/*`, `mlruns/`, `mlartifacts/`, `mlflow.db`, `.env`, `reports/*.html` and `reports/*.prom`. `.dvc` metadata and `models/baseline_metrics.json` are explicit exceptions. |
+| Data kept out of the image | `.dockerignore` excludes `data`, `mlruns`, `mlflow.db`, `.env`, `reports`, `tests`, `docs` and `notebooks` from the Docker build context. |
 | Local-only observability | In `compose.observability.yaml`, ports 9100, 9090 and 3000 bind to `127.0.0.1`. `reports/` is mounted read-only into Node Exporter. Grafana requires `GRAFANA_ADMIN_PASSWORD` at startup and disables sign-up. |
 
 Note the gap in the identifier control. `SK_ID_CURR` is persisted in the local Parquet files (`reference`, `production_base`), because it is part of `RAW_COLUMNS`. The README describes pseudonymization with a keyed hash as a production plan. The code does not implement it.
@@ -90,11 +104,44 @@ The README states that gender and age are not sensitive data under LGPD art. 5, 
 ## Purpose, legal basis and data-subject rights (planned)
 
 - Legal bases cited: art. 7, X (credit protection) as the main basis, and art. 7, V (contract execution or preliminary procedures) because analysis happens at the customer's request. Data is used only for credit-risk assessment. Other uses, such as marketing, would need a new legal basis.
-- Principles cited: minimization (closed column list), purpose (gender only for audit), security (data and artifacts kept out of GitHub) and transparency (README and model card).
-- Art. 18 rights (access, correction, deletion) would go through the DPO channel. Under art. 20 (automated decisions), customers can ask for review and for the criteria used. **The current model produces no individual explanations.** The plan for production is to return top factors per decision and send refusals to human review.
+- Principles cited (art. 6): minimization (closed column list), purpose (gender only for audit), security (data and artifacts kept out of GitHub) and transparency (README and model card).
+- Data subject rights: art. 18 rights (access, correction, deletion) would go through the DPO channel. Under art. 20 (automated decisions), customers can ask for review and for the criteria used. **The current model produces no individual explanations.** The plan for production is to return top factors per decision and send refusals to human review.
 - Roles: the fintech is the controller. Infrastructure providers and credit bureaus are operators. The DPO (art. 41) is the channel for data subjects and the ANPD. The record of operations (art. 37) and the impact report RIPD (art. 38) are to be reviewed at every model retrain. Incidents with relevant risk are reported to the ANPD and to the data subjects.
 
-The README's "Próximos trabalhos" list still includes recording minimization, purpose, legal-basis, access-control and retention policies. Treat the LGPD section as intent and documentation, not as an audited compliance state.
+No code implements a DPO channel, a deletion or access workflow, review of refusals or incident handling. Treat the LGPD section as intent and documentation, not as an audited compliance state.
+
+## Privacy By Design and By Default (art. 46)
+
+The README maps Cavoukian's seven principles to the project (cited under LGPD art. 46). The last column below separates what the repository actually enforces from what is only stated.
+
+| Principle | README claim | Status |
+|---|---|---|
+| 1. Proactive, not reactive | Pandera contracts block invalid data before it enters the pipeline. | Enforced: `prepare_data` validates before writing. The contract covers 8 columns and is not called at inference. |
+| 2. Privacy by default | Only `RAW_COLUMNS` are loaded, logs carry no individual data, data stays out of Git. | Enforced by `usecols`, the log whitelist and `.gitignore`. |
+| 3. Embedded in design | `CODE_GENDER` is excluded from `MODEL_FEATURES` in code, not through a flag. `SK_ID_CURR` is not a feature. | Enforced in `src/features/build.py`. |
+| 4. Full functionality (positive-sum) | AUC 0.7657 without gender as a feature. | Evidence is the reported baseline metric. |
+| 5. End-to-end security | DVC tracks the hash only, `.dockerignore` keeps data out of the image, a retention plan sets deletion periods, Prometheus keeps metrics for 7 days. | Partly enforced: `.gitignore`/DVC, `.dockerignore` and the Prometheus flag. The retention plan is documentation, and no DVC remote exists. |
+| 6. Visibility and transparency | Documented and tested contracts (`tests/unit/test_contracts.py`), metrics and fairness in MLflow, versioned dashboard and alert rules, open source. | Mostly present in the repository. `docs/model_card.md` is an empty outline. |
+| 7. Respect for the user | DPO channel (art. 41), art. 18 rights, human review (art. 20), gender used only for audit. | Only the "gender used only for audit" part is enforced. The rest is plan only. |
+
+The README adds that, with no special action, a developer gets minimal columns, no individual data in logs, nothing sent to Git and protected attributes excluded from decisions. That holds for gender and the logging whitelist. Age stays a feature, and `SK_ID_CURR` is stored in local Parquet files.
+
+## What the README lists as implemented and as next steps
+
+The section "Governança, privacidade e evolução do projeto" currently says:
+
+- **Implemented:** Pandera contracts for eight columns, the XGBoost baseline with MLflow, Evidently/PSI for two variables, score impact analysis, structured logs, metrics, a dashboard and alert rules. It lists no privacy mechanism as a separate deliverable.
+- **Recommended next work:**
+  - a `last_success_timestamp` metric and alerts on missing updates;
+  - a strategy for persistent counters or per-run metrics, tested across multiple runs;
+  - periodic automated execution, possibly with a Pushgateway;
+  - Alertmanager and notification channels, if the scope requires alerts;
+  - recording minimization, purpose, legal-basis, access-control and retention policies under LGPD;
+  - deeper fairness metrics, error rates by group and sample representativeness;
+  - evaluating real performance degradation with independent labels from later periods;
+  - preparing the STAR demo video.
+
+The same section states that logs avoid individual data, that the Home Credit data and raw/processed artifacts stay local, and that the group AUC check does not prove fairness or LGPD compliance. The observability limitations list adds that exposing the stack externally would also need retention policies.
 
 ## Retention plan (art. 16)
 
@@ -103,10 +150,10 @@ The README's "Próximos trabalhos" list still includes recording minimization, p
 | Project raw and processed data | Deleted at project end | The academic purpose ends. |
 | Production, negative information | Up to 5 years | CDC art. 43, §1 |
 | Production, repayment history | Up to 15 years | Lei 12.414/2011 (Cadastro Positivo) |
-| Prometheus metrics | 7 days | `--storage.tsdb.retention.time=7d` in `compose.observability.yaml`. This is the one retention value enforced in configuration. |
-| Structured logs | Short term, aggregates only | They contain no personal data. |
+| Prometheus metrics | 7 days | `--storage.tsdb.retention.time=7d` in `compose.observability.yaml`. This is the one retention value enforced in configuration, and it matches the README. |
+| Structured logs | Short term, aggregates only | They contain no personal data. No rotation or expiry setting exists in the repository. |
 
-Changing the Prometheus retention flag changes a documented LGPD retention commitment, so update the README table with it. `docker compose down -v` deletes the Prometheus and Grafana volumes and should be run only deliberately.
+Only the Prometheus TSDB has a configured expiry. The `prometheus_data` and `grafana_data` volumes persist across restarts, and the `reports/*.prom` file is simply overwritten by each run. The project-end deletion and the 5-year and 15-year production periods are not automated anywhere. Changing the Prometheus retention flag changes a documented retention commitment, so update the README table with it. `docker compose down -v` deletes the Prometheus and Grafana volumes and should be run only deliberately.
 
 ## Bias mitigation and fairness evidence
 
