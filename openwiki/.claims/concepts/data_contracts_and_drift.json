@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:f58420742ef5767b4fab61233e418d110300ea8af62389379afc586270c36bd1",
+  "pageVersion": "sha256:4584ec8434a5dabc6c52335a94966b719183c28826ddea8fabe319c1841c76fd",
   "claims": [
     {
       "id": "claim_35a92414d6744a4b94ea8a73aec5a531",
@@ -146,11 +146,11 @@
     },
     {
       "id": "claim_4f6259b7e3f34019898ddb7cc55e28c4",
-      "statement": "scripts/analyze_score_impact.py loads processed production and drifted parquet plus the saved model and threshold and writes the summary to reports/score_impact.json; the committed report shows 92,254 records with about 4.6% (4,277) changed decisions.",
+      "statement": "scripts/analyze_score_impact.py loads processed production and drifted parquet plus the saved model and threshold and writes the summary to reports/score_impact.json; the committed report shows 92,254 records, threshold about 0.141, and about 4.8% (4,440) changed decisions, with the share above threshold falling from about 15.3% to 13.9%.",
       "evidence": [
         {
           "resource": "repo://reports/score_impact.json#L1-L11",
-          "version": "repo-lines-v1:sha256:51394f76efeaa0b7535d3030bb337acb4ee3ff1a7ce829020ed4657847c00b53:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:e6e6d723131736c82602d252e351cb5eeabc42ba0d038af2bd6e227ce0356dc8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2ZmIwOGZkYTFhY2I5NTdiNjExNmJkMzc4MTFhMWZlNDFhMDE2MTFjMDYzMWVkYmY3ODZkNjg4OWEyN2E1NWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://scripts/analyze_score_impact.py#L17-L58",
@@ -167,10 +167,20 @@
           "version": "repo-lines-v1:sha256:7c09b0f77ad310e2a9c684dd1c989e86bb77e1f5ed756fc661fb05696d05cea1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MTI0MjdhNzY4YWI5YWFhMDM1YWY0MzM0NzJmYjQwYmJlNjZkMDAzZjUxYjY5MjRkYTNiNmRjY2E5MmYxZDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
         }
       ]
+    },
+    {
+      "id": "claim_3ebdf61524dd47caab4f040c132b7ad6",
+      "statement": "The dvc.yaml score_impact stage depends on production_base and production_drift parquet, models/baseline.joblib, models/baseline_metrics.json and the analysis scripts, and tracks reports/score_impact.json as an uncached metric.",
+      "evidence": [
+        {
+          "resource": "repo://dvc.yaml#L61-L72",
+          "version": "repo-lines-v1:sha256:cde4050a15f336d6a7883d0fd8e5fb01801747c607ed6dc3931fe666d551c483:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlYmZjMGExMWY1NmE2ZDM4MGVlZGMxYWRhZTVjNWYwMjczNDZlYTMzZTY3Y2Y4N2U5MTQ4OTVjYjk3MWFkMTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwZTRiZTU5ZmVlZmYxMzU3NDcyMjI0NDY1ZDVmYWY4NTUwNjJiODgzZmQ2ZjNjMjJjNDMyOWJkZDNjYzY3NzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRiNzkwYmQ3ZGFiNjY0ZmEyYmVlNjllMWM2YzcxNGYyN2EzNTY1NThlYzBkMTI5NzI3OGNhMmFiMTBlY2QzN2EifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-09T02:01:44.977Z"
+    "at": "2026-11-12T03:28:56.331Z"
   }
 }

@@ -5,7 +5,7 @@ description: Architecture of the Home Credit credit-scoring reliability project 
 tags: [architecture, ml-pipeline, data-drift, observability, dvc, data-flow]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-09T02:03:21.311Z
+    at: 2026-11-12T03:28:56.331Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
@@ -27,6 +27,8 @@ sources:
     resource: repo://scripts/analyze_score_impact.py
   - id: openwiki-source-d63450a84702158a6ce7cde3
     resource: repo://scripts/check_notebooks.py
+  - id: openwiki-source-35f0baf13d17ae674702bdfa
+    resource: repo://scripts/generate_fairness_plots.py
   - id: openwiki-source-209e9f2a63ebbe53784dc39e
     resource: repo://scripts/run_drift.py
   - id: openwiki-source-1fd01080171f877c089206b9
@@ -61,9 +63,13 @@ sources:
     resource: repo://src/training/train.py
   - id: openwiki-source-f12fdb76c2f98bd11af25d76
     resource: repo://src/utils/config.py
+  - id: openwiki-source-d126db8b3c7739bcbb2b8380
+    resource: repo://src/visualization/fairness_plots.py
+  - id: openwiki-source-f9ca9cdda3a0ae93b2ab0055
+    resource: repo://tests/unit/test_baseline.py
   - id: openwiki-source-154200283d94041bcf05d48f
     resource: repo://tests/unit/test_smoke.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:03:21.311Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-12T03:28:56.331Z" }
 ---
 
 # System Architecture & Data/Model/Monitoring Flow
@@ -82,7 +88,8 @@ The objectives listed in the README, and where each lives in the code, are:
 | Impact of drift on model predictions | `src/pipelines/score_impact.py` |
 | Structured logs, Prometheus metrics, Grafana dashboard | `src/monitoring/`, `infra/observability/`, `compose.observability.yaml` |
 | Automatic alert rules for data drift and collector downtime | `infra/observability/prometheus/alerts.yml` |
-| Governance, privacy/LGPD and model limitations documentation | README sections and `docs/` (documentation only) |
+| Fairness (group-level) analysis of the baseline | `src/training/train.py` (group metrics), `src/visualization/fairness_plots.py`, `scripts/generate_fairness_plots.py` |
+| Governance, privacy/LGPD and model limitations documentation | README sections and `docs/` (documentation only); see [Governance and LGPD](../concepts/governance_and_lgpd.md) |
 
 The dataset is **Home Credit Default Risk** (`application_train.csv` from Kaggle). Raw data, processed datasets and trained models are local artifacts and are intentionally not pushed to GitHub; the raw CSV is tracked by DVC by hash only, and no DVC remote is configured yet.
 
@@ -95,7 +102,8 @@ All production code lives under [`src/`](../../src/). Modules communicate throug
 | [`src/data/`](../../src/data/) | `home_credit.py` loads only `RAW_COLUMNS` from the raw CSV and does a stratified reference/production split. `contracts.py` holds the Pandera schemas. `simulate_drift.py` creates controlled drift. | `load_application_train()` raises `FileNotFoundError` with the Kaggle URL if `data/raw/application_train.csv` is absent. |
 | [`src/features/`](../../src/features/) | `build.py` defines column groups (`CATEGORICAL`, `NUMERIC_RAW`, `DERIVED`, `MODEL_FEATURES`, `RAW_COLUMNS`) and the stateless `build_features()` transform. | `CODE_GENDER` is read only for bias analysis and is not a model feature. |
 | [`src/models/`](../../src/models/) | `baseline.py` builds the scikit-learn pipeline (features, ordinal encoding, `XGBClassifier`) and handles persistence and scoring. | Persists `models/baseline.joblib` and `models/baseline_metrics.json`. |
-| [`src/training/`](../../src/training/) | `train.py` validates the reference set, trains with a stratified 20% hold-out, evaluates, and logs to MLflow. | Experiment name `credit-scoring-baseline`. |
+| [`src/training/`](../../src/training/) | `train.py` validates the reference set, trains with a stratified 20% hold-out, evaluates overall and per-group (gender, age band) metrics, and logs to MLflow. | Experiment name `credit-scoring-baseline`. Its `train()` function and the `AGE_BINS`, `AGE_LABELS` and `error_rates` helpers are reused by the visualization layer. |
+| [`src/visualization/`](../../src/visualization/) | `fairness_plots.py` draws ROC curves and FPR/FNR/recall bar charts per group as PNG files with matplotlib's headless `Agg` backend. | Functions only; invoked by `scripts/generate_fairness_plots.py`. |
 | [`src/pipelines/`](../../src/pipelines/) | `prepare_data.py` (raw to contract to reference/production), `drift_monitor.py` (Evidently PSI report and alert extraction), `score_impact.py` (before/after score comparison). | Reusable logic that the `scripts/` entrypoints call. |
 | [`src/monitoring/`](../../src/monitoring/) | `metrics.py` (Prometheus metrics), `logging_config.py` (JSON logs), `validation.py` (Pandera validation wrapped with logs and metrics). | See [Observability Stack](../operations/observability_stack.md). |
 | [`src/utils/`](../../src/utils/) | `config.py` exposes the `settings` singleton. | See [Configuration and Environment](../concepts/configuration_and_environment.md). |
@@ -112,6 +120,7 @@ All production code lives under [`src/`](../../src/). Modules communicate throug
 - `run_drift.py` produces the baseline and simulated drift reports and `reports/drift_alerts.json`.
 - `analyze_score_impact.py` writes `reports/score_impact.json`.
 - `run_monitored_drift.py` combines loading, monitored validation, drift detection and Prometheus export.
+- `generate_fairness_plots.py` re-runs `train()` on `reference.parquet` (it does **not** load the saved model and does not log to MLflow), recomputes the same stratified 20% hold-out, and writes four PNGs to `reports/figures/`: `roc_by_gender.png`, `roc_by_age.png`, `error_rates_by_gender.png` and `error_rates_by_age.png`. It raises `FileNotFoundError` if the reference parquet has not been prepared.
 - `demo_invalid_batch.py`, `inspect_home_credit.py` and `check_notebooks.py` are demonstration, exploration and CI-hygiene helpers.
 
 ## End-to-end flow: raw data to alert
@@ -124,6 +133,8 @@ flowchart TD
     PREP --> PROD["data/processed/production_base.parquet"]
     REF --> TRAIN["train - XGBoost pipeline and MLflow run"]
     TRAIN --> MODEL["models/baseline.joblib and baseline_metrics.json"]
+    REF --> FAIR["generate_fairness_plots - retrains and plots per group"]
+    FAIR --> FIGS["reports/figures/*.png"]
     PROD --> SIM["simulate_drift - income and credit shift"]
     SIM --> DRIFTED["data/processed/production_drift.parquet"]
     REF --> DRIFT["run_drift - Evidently PSI on income and credit"]
@@ -145,7 +156,7 @@ flowchart TD
 
 1. **Contracts.** `validate_training_batch` runs a lazy Pandera validation (`lazy=True`, so all violations are collected) on a deliberately small subset of columns; `strict=False` means other columns pass unchecked. See [Data Contracts](../concepts/data_contracts.md).
 2. **Prepare.** `prepare_data.run()` validates the raw frame first, so a violation raises `SchemaErrors` and **nothing is written**. It then splits 70% reference and 30% production, stratified on `TARGET` with `settings.random_seed`, and writes both as **raw columns** (no engineered features) to `data/processed/`. Keeping raw columns is deliberate: feature engineering lives inside the model pipeline, so simulated changes to income or credit propagate into derived ratios such as `CREDIT_INCOME_RATIO`.
-3. **Train.** `src/training/train.py` re-validates the reference set, trains `build_pipeline()` (unknown categories become `NaN`, which XGBoost handles natively), computes AUC, KS, PR-AUC and F1 at the best-F1 threshold, adds AUC per gender and age band (groups below 30 positives are skipped), and logs params, metrics and the model to MLflow (default SQLite `mlflow.db`). It also saves the joblib model and a metrics JSON that carries the decision `threshold` later used by score impact. See [ML Pipeline and Tracking](../workflows/ml_pipeline_and_tracking.md).
+3. **Train.** `main()` in `src/training/train.py` reads `reference.parquet`, re-validates it with `validate_training_batch`, sets the MLflow tracking URI (default SQLite `mlflow.db`) and experiment `credit-scoring-baseline`, and opens the run `baseline-xgboost`. Inside the run, `train()` splits off a stratified 20% hold-out (`settings.random_seed`), fits `build_pipeline()` (unknown categories become `NaN`, which XGBoost handles natively) and scores the hold-out. `evaluate()` picks the best-F1 threshold (`best_f1_threshold`) and returns AUC, KS, PR-AUC, `threshold`, F1, and overall FPR, FNR and recall. `fairness_metrics()` then reuses that same threshold to compute, per gender (only `F` and `M`; other codes such as `XNA` are dropped) and per age band (`lt30`, `30_44`, `45_59`, `60_plus`, derived from `DAYS_BIRTH`), the AUC (skipped for groups with fewer than 30 positives or a single class) plus FPR, FNR and recall (`error_rates_by_group`), named `<metric>_<gender|age>_<group>`. The run logs `XGB_PARAMS` and `n_rows`, all overall and group metrics, and the model (cloudpickle format) to MLflow, and `save_model` writes the joblib model plus a metrics JSON of the **overall** metrics (including the decision `threshold` later used by score impact); group metrics live only in MLflow and the logs. See [ML Pipeline and Tracking](../workflows/ml_pipeline_and_tracking.md).
 4. **Drift.** `generate_drift_report` samples up to 5,000 rows from each side (seed 42) and runs Evidently's `DataDriftPreset` with `method="psi"` and `threshold=0.2` on only `AMT_INCOME_TOTAL` and `AMT_CREDIT`, writing HTML plus JSON. `extract_psi_alerts` turns each `ValueDrift` metric into `{psi, threshold, alert}` with `alert = psi >= threshold` and fails if no PSI metric is found. `run_drift.py` compares reference against both the unchanged production base (`baseline`) and the drifted base (`simulated`).
 5. **Score impact.** `compare_prediction_scores` requires non-empty frames, unique non-null `SK_ID_CURR` values and the same set of customers in both bases, scores both with the saved model, and joins one-to-one by ID. The summary reports mean scores, mean absolute change, share above threshold and how many decisions crossed the threshold. It measures behavioural change, not proven performance degradation. See [Drift Monitoring and Score Impact](../workflows/drift_monitoring_and_score_impact.md).
 6. **Metrics export.** `run_monitored_drift.py` creates an isolated `CollectorRegistry`, wraps loading (`data_loading`), validation (`data_validation`) and drift (`drift_monitor`) in `observe_pipeline`, records the **simulated** PSI per feature into the `credit_data_drift_psi` gauge, and in a `finally` block always writes `reports/operational_metrics.prom` - even when a stage failed, in which case `credit_pipeline_runs_total{status="error"}` is exported.
@@ -166,7 +177,7 @@ Because metrics are written by a short-lived Python process, counters describe t
 
 ## DVC pipeline and artifacts
 
-[`dvc.yaml`](../../dvc.yaml) declares six stages in README order: `validate`, `prepare_data`, `train`, `simulate_drift`, `detect_drift`, `score_impact`. Dependencies mirror the data flow (for example `train` depends on `reference.parquet`, `src/features`, `src/models`, `src/training`). `run_monitored_drift.py` is **not** a DVC stage, so `operational_metrics.prom` is produced manually. Metrics files (`baseline_metrics.json`, `drift_alerts.json`, `score_impact.json`) are declared with `cache: false` so `dvc metrics show` reads them directly, and `dvc.lock` should be committed with changes.
+[`dvc.yaml`](../../dvc.yaml) declares seven stages: `validate`, `prepare_data`, `train`, `simulate_drift`, `detect_drift`, `score_impact` (README order) and the newer `fairness_plots`. Dependencies mirror the data flow (for example `train` depends on `reference.parquet`, `src/features`, `src/models`, `src/training`). `fairness_plots` depends on `reference.parquet`, `scripts/generate_fairness_plots.py`, `src/training/train.py` and `src/visualization/fairness_plots.py`, so a change to training code invalidates the figures; it declares the four PNGs as `cache: false` outputs. `run_monitored_drift.py` is **not** a DVC stage, so `operational_metrics.prom` is produced manually. Metrics files (`baseline_metrics.json`, `drift_alerts.json`, `score_impact.json`) are declared with `cache: false` so `dvc metrics show` reads them directly, and `dvc.lock` should be committed with changes.
 
 | Location | Contents |
 | :--- | :--- |
@@ -174,6 +185,7 @@ Because metrics are written by a short-lived Python process, counters describe t
 | `data/processed/` | `reference.parquet`, `production_base.parquet`, `production_drift.parquet` |
 | `models/` | `baseline.joblib`, `baseline_metrics.json` |
 | `reports/` | Evidently HTML/JSON, `drift_alerts.json`, `score_impact.json`, `operational_metrics.prom` |
+| `reports/figures/` | Fairness PNGs (ROC and error rates by gender and age) |
 | `mlflow.db` | Default local MLflow tracking store |
 
 ## Infrastructure
@@ -190,7 +202,7 @@ The PSI threshold exists in two places that must be kept in sync: `PSI_THRESHOLD
 
 - Production logic lives only in `src/`; notebooks under `notebooks/` are exploratory and must be committed without outputs, enforced by `scripts/check_notebooks.py` in pre-commit and CI.
 - CI (`.github/workflows/ci.yml`) runs Ruff lint and format checks, the notebook check, Radon and a Xenon complexity gate on `src` (`--max-absolute B --max-modules A --max-average A`), then Pytest with coverage. The Docker image job is disabled (`if: false`) until a Dockerfile exists.
-- Unit tests in `tests/unit/` cover the contracts, features, baseline, prepare step, drift monitor, score impact, metrics, logging and monitored-drift script; `tests/integration/` is empty apart from `__init__.py`.
+- Unit tests in `tests/unit/` cover the contracts, features, baseline, prepare step, drift monitor, score impact, metrics, logging and monitored-drift script; `tests/unit/test_baseline.py` also asserts that group AUC, FPR, FNR and recall keys are produced and that the `XNA` gender is excluded. No test targets `src/visualization/` or the plot script. `tests/integration/` is empty apart from `__init__.py`.
 - Reproducibility depends on `random_seed` for the split, hold-out and XGBoost, plus the fixed seed 42 in drift sampling and simulation.
 
 ## Known limits
@@ -204,6 +216,8 @@ The PSI threshold exists in two places that must be kept in sync: `PSI_THRESHOLD
 
 - [Configuration and Environment](../concepts/configuration_and_environment.md)
 - [Data Contracts](../concepts/data_contracts.md)
+- [Data Contracts and Drift](../concepts/data_contracts_and_drift.md)
+- [Governance and LGPD](../concepts/governance_and_lgpd.md)
 - [ML Pipeline and Tracking](../workflows/ml_pipeline_and_tracking.md)
 - [Drift Monitoring and Score Impact](../workflows/drift_monitoring_and_score_impact.md)
 - [Observability Stack](../operations/observability_stack.md)
