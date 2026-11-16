@@ -36,16 +36,17 @@ mlruns/
 mlartifacts/
 mlflow.db
 
-# Figuras geradas (regeneráveis via scripts/generate_fairness_plots.py)
-reports/figures/*.png
-
 # SO / IDE
 .DS_Store
 Thumbs.db
 .idea/
 .vscode/
 
-# Relatórios HTML gerados pelo Evidently
+
+# Métricas operacionais geradas localmente
+/reports/*.prom
+
+# Relatórios HTML gerados (Evidently e ydata-profiling)
 /reports/*.html
 
 # Métricas operacionais geradas localmente
