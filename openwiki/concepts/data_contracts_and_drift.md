@@ -3,10 +3,9 @@ type: concept
 title: Data Contracts, Drift Detection and Score Impact
 description: How Pandera contracts gate Home Credit batches, how a controlled income/credit drift is simulated, how the Evidently PSI monitor raises alerts, and how score-impact analysis measures changed credit decisions, including report outputs and invariants.
 tags: [pandera, data-contracts, drift, evidently, psi, score-impact, home-credit, monitoring]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-11-09T02:01:44.977Z
 sources:
+  - id: openwiki-source-cfa03d5d7ac7270f0bb1bf28
+    resource: repo://dvc.yaml
   - id: openwiki-source-d868871d01e97861e7cc038a
     resource: repo://infra/observability/prometheus/alerts.yml
   - id: openwiki-source-c96106f041709e159588ffe8
@@ -47,7 +46,10 @@ sources:
     resource: repo://tests/unit/test_drift.py
   - id: openwiki-source-f59c6ef5424efee111693664
     resource: repo://tests/unit/test_score_impact.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:01:44.977Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-12T03:28:56.331Z" }
+verified:
+  - by: openwiki/0.7.2
+    at: 2026-11-12T03:28:56.331Z
 ---
 
 # Data Contracts, Drift Detection and Score Impact
@@ -187,7 +189,7 @@ Mechanics:
 
 The summary contains `records`, `threshold`, `mean_score_before`, `mean_score_after`, `mean_absolute_change`, `share_above_threshold_before`, `share_above_threshold_after`, `changed_decisions` and `changed_decisions_pct`.
 
-`scripts/analyze_score_impact.py` loads the processed production and drifted parquet files, plus `load_model()` and `load_threshold()` from `src/models/baseline.py`. It writes the summary to `reports/score_impact.json`. In the committed report, 92,254 records were compared at a threshold of about 0.143. About 4.6% (4,277) of decisions changed. The share above the threshold fell from about 15.0% to 13.2%, and the mean score fell from about 0.081 to 0.075. Drift in income and credit does not simply push scores up. The effect depends on how the model uses the derived ratios.
+`scripts/analyze_score_impact.py` loads the processed production and drifted parquet files, plus `load_model()` and `load_threshold()` from `src/models/baseline.py`. It writes the summary to `reports/score_impact.json`. In the committed report, 92,254 records were compared at a threshold of about 0.141. About 4.8% (4,440) of decisions changed. The share above the threshold fell from about 15.3% to 13.9%, the mean score fell from about 0.0806 to 0.0755, and the mean absolute score change was about 0.0167. Drift in income and credit does not simply push scores up. In `dvc.yaml`, the `score_impact` stage depends on both production parquet files, `models/baseline.joblib` and `models/baseline_metrics.json`, and tracks `reports/score_impact.json` as an uncached metric. The effect depends on how the model uses the derived ratios.
 
 ## Running the workflow
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:7cb5426b71412fd8d25c250b4b483a992452bb7e00d51e79528fbb3e0f3e743f",
+  "pageVersion": "sha256:5294c91f268e52b6bb9af5542846bb42c2a4e10a586291d278939499e224be02",
   "claims": [
     {
       "id": "claim_e9dec22913114e7eb9bc8d35a9c29f8f",
@@ -17,22 +17,22 @@
       "statement": "Test coverage tracking in `pyproject.toml` measures code within the `src` module while explicitly omitting top-level execution entrypoints in `src/main.py`.",
       "evidence": [
         {
-          "resource": "repo://pyproject.toml#L50-L53",
+          "resource": "repo://pyproject.toml#L51-L54",
           "version": "repo-lines-v1:sha256:57f9ab0ee47366a0f0b015abebd23d7e0f01d6c8b85d657ab554cac16fc726e8:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGZmODc4ODc3M2UzMWM3YTkzOTM2YzllYWUxZWIxNTMxMTY3Yzg5NTc3ZmYzM2I3ZjY1Y2Q4ZWMwOGEyYzgwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQ2ZTIxMmM2YTQzMjFlY2QxNDg4YWQwZjM2OTU0MGQ5ZDk0YWQxMDk3ZDlhZTZlYWNkMjY5NDQwMTJlNDJiNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGQyM2Q5ODU4M2IyOTFiMWY5MGEzMzgxN2NjZjEzOTZhMGZlNjdkOGM5YzFlNmE0MDFkNzZlNDI1NTk2MTVjNSJ9"
         }
       ]
     },
     {
       "id": "claim_1b8b4972520345a5a718166acec4f6b5",
-      "statement": "The DVC pipeline declares six stages (validate, prepare_data, train, simulate_drift, detect_drift, score_impact), each run via `uv run python -m ...`. Artifact dependencies are: prepare_data produces reference.parquet and production_base.parquet; train consumes reference.parquet and produces baseline.joblib plus baseline_metrics.json; simulate_drift produces production_drift.parquet from production_base.parquet; detect_drift consumes all three parquet files; score_impact consumes production, drifted data, the model and the metrics file. The validate stage has no outputs.",
+      "statement": "The DVC pipeline declares seven stages (validate, prepare_data, train, simulate_drift, detect_drift, score_impact, fairness_plots), each run via `uv run python -m ...`. Artifact dependencies are: prepare_data produces reference.parquet and production_base.parquet; train consumes reference.parquet and produces baseline.joblib plus baseline_metrics.json; simulate_drift produces production_drift.parquet from production_base.parquet; detect_drift consumes all three parquet files; score_impact consumes production, drifted data, the model and the metrics file; fairness_plots consumes reference.parquet and produces figures that no other stage reads. The validate stage has no outputs.",
       "evidence": [
         {
           "resource": "repo://dvc.lock#L1-L171",
           "version": "repo-lines-v1:sha256:8e42027ce821604796db6abb78e8e6e5c222fb4a1ece832c179e3501b3dee969:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJjYjkyYzBhNWEzODEzMGExN2ZkMjM5NmM2NGQzOGZlYjdhZTQyMTZjYzg4MWFhOTg4MzAwMzgwNTdmYTU0MTQ1IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkZmU5YzlkYzE0MjllMjEzYjA1ODI4MDg1NGRjMDU2YjM0ZGNiZDdkN2ZkNzY2YzQ3OTkxNzBiM2Y3OTMxZTNhIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         },
         {
-          "resource": "repo://dvc.yaml#L1-L72",
-          "version": "repo-lines-v1:sha256:8b116b88e4916576f209b1269418ecc7459978421e99781b45e39e955ddbfdd1:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3NWQ3NjAxZjRjNTE4NGUxNTc5OTUwN2Y4MWNkZDIzYTNiMzUwOGZmMTc2YzliMTQ4ZDdjNzUwZjFjMThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://dvc.yaml#L1-L89",
+          "version": "repo-lines-v1:sha256:7ca4a583a96bafda486ff5bc6728b5b1430c8b8d8b9aa4f9f27e80fff2bec012:eyJzZWxlY3RlZExpbmVDb3VudCI6ODksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3NWQ3NjAxZjRjNTE4NGUxNTc5OTUwN2Y4MWNkZDIzYTNiMzUwOGZmMTc2YzliMTQ4ZDdjNzUwZjFjMThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -109,7 +109,7 @@
           "version": "repo-lines-v1:sha256:701bc33956eef4e8af0415b7087f5f3aa6497262db3ad5f52d81d13db6256ea9:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5Nzc1OGJmOGFjODIyYzRkYmEzY2NjYTJhMjQ3ZDdlNWY2YTNkYWZjZGExNjI2NDYwYzUxODIxZGQ4NTIzYmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM2NGY2YTUzMjM2NGFhMjhhMTQxMTE0NmJiZGM4NWRkZTBhMTk0YTI5ZjA0NzhiODJmMWU4NGNmYmE0NDBmMDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkNzUyMmEwNjA5YzU3ZGE2MDgzMjhkODlmZDFkYzU4YzljZjJjYzI5MDAxMThkZTE5MDVmZWEzYjhiNWMzYTEifQ"
         },
         {
-          "resource": "repo://tests/unit/test_baseline.py#L42-L52",
+          "resource": "repo://tests/unit/test_baseline.py#L53-L63",
           "version": "repo-lines-v1:sha256:9663eae9d5c88adf99df3965c3a796746d3e426a405863c782372335203e7e78:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiZjA4NjNjOWI3MGI5MTRjNjRmZDQwOWZlOGE5MWJiZTNjNDI3YTY2NTY0NzAxZDY1NmViNWU0MmFiYzI0YTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNhNzc1ZGEzZDA4NTU1N2Y0NTNmOThlZDlmYzBlZWExYTU1Y2VmOTU2MTQ1Mzg3ZWFiYWJkNzI0MTY4ODUwZTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZiYjQ0M2RhZjczZGM3ZDdiN2E5NThkY2YyOWRiZjQ0YzEwMDRlNDdmMzEyODk0ZDU0NDc5OGMzNzBmMzhiYmYifQ"
         }
       ]
@@ -127,24 +127,40 @@
           "version": "repo-lines-v1:sha256:f8622cf3de82f5535c5a51021e705b241f895dfc3dff6c74c9a0d0fd948f1e39:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4YTE3ZTY2ZDljYjViNzc0MjM4NzU4NzEyZGE0NWQzOWZjZGUyNTdkMjkyZDc2N2UwMjJhOGNlYzVlODI5NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5NzRmYmYzNzA0MWQ4ZWEwZjI1Mjg4ZTQ3ZGYxZWI2MTI5OWE3MGU4ZjhlYWE1MDAzYjBjNjVjZmVlZTlkZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhjYzRhN2QxY2M3OTZhYmEzZTQ2NzIzMzI3ZjUxN2U5ZjgxMTk4MmQyNTBmMDcwMjk4NmU0YjU3NjRhZDk1ODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhiOTFkYTIyYjY3YmYzZWJlMzlmZTc2NTU1N2Y3ZjhhNjI4YWIxZTI4NzhhYzkwODNhMGE1MmQyZWY0N2I4OGUifQ"
         },
         {
-          "resource": "repo://tests/unit/test_baseline.py#L54-L63",
+          "resource": "repo://tests/unit/test_baseline.py#L65-L74",
           "version": "repo-lines-v1:sha256:bca760b38415f56d4676e072eaa4b1a5f3822ce958cee33119c3ff6ed60b9eab:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdiYTViNDdmOTkzZWYzNDc2MWRmM2QxYjUyN2Q1YmEwMjFkMTE5MWE1NmRjNzAwNWU5NjVjMTU2YjhjYTg5YzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3YTNkY2FjZjg2ODRiNGM5MGMxM2Q0MWI2NjhjYmYyOWQ2NTQyNDBjNzUzNGI3NjY3NTQwOWE5MzkzMzY5NTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJjNjkzYWQ3NGY0NDBhNzhmYTliNWUxN2ExZjhmOTY4Y2NmMzQ1OGViOGI2NTFiMTczYmU0MWFjYTZjZDhhZjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMwMGZlMWUzMjJmNTc1ZDkzODAwZjc2NzJlOGZkMDJjMDJhMzJmNmY1NzIwNjA4ODhhZTUzNDE1MWRlYWM3NjkifQ"
         }
       ]
     },
     {
       "id": "claim_0e2a51de8a524643a529401c92ec7236",
-      "statement": "train() fits the baseline on an 80% stratified split of the reference data and evaluates on the 20% hold-out, computing auc, ks, pr_auc, f1 and a decision threshold chosen to maximise F1, plus per-gender and per-age-band AUC fairness metrics that skip groups with fewer than 30 positives or a single class.",
+      "statement": "train() fits the baseline on an 80% stratified split of the reference data (seeded by settings.random_seed) and scores the 20% hold-out. evaluate() computes auc, ks, pr_auc, an F1-maximising decision threshold, f1 and, at that threshold, fpr, fnr and recall; fairness_metrics() then applies the same threshold to return per-gender (F/M only) and per-age-band AUC (skipping groups with fewer than 30 positives or a single class) plus fpr, fnr and recall per group. train() returns (pipeline, metrics, fairness) without touching MLflow or disk.",
       "evidence": [
         {
-          "resource": "repo://src/training/train.py#L26-L113",
-          "version": "repo-lines-v1:sha256:52184c523aea8da837d7ba4195f322b531a69de207ff9698a7db5d7a07fa031d:eyJzZWxlY3RlZExpbmVDb3VudCI6ODgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5M2JjNGQwMDYwNjdhMDg4OWVkNzg2ZjUxZWM3YmNlMmU3NjY5ZTE1MjRiMWFlMWFhN2Y0YjQzNWEzMzEzYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkxMWE2ZDRiMzgwZTlhNTcwOGYxYzFmZDEzODViNWRmZGU3ODc1ODczZTZkMGRiMzE4OWI5MmY5ZmNhZmM4OTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1YzFjNDYyZTJhMzlkNzQ3NTlmNWUxYjEyNmY3NjgzYTJiNzMwMTE4ZTE4ZjUxMjJiMDhjZWRlZWI2NTBlMjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4NzhlYjQyOTc4MDFjZTFlY2I0OGJmNmIxYzk3YTZmNDQ5ZTI4M2Y5ODQxYTUxZTJlMjNjMmQ0NjEyODY5NjEifQ"
+          "resource": "repo://src/training/train.py#L150-L169",
+          "version": "repo-lines-v1:sha256:bd11a6dfca77d477de18cb2bb7a85da54ccadbee9dbb05fd849c3587499d7137:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZmQ5NWMwYzRlOWJkNTgzODBkYzk2NmJkMmNjZDZlYjJiNjA1M2MyMzQ0MGFkY2ZiNzBjMDc5ODU5MjAzNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjYThhM2JiNWUxM2UyYTRiNjhmNDE2MTM0NzhkZWE2MWIxZTgwYjI5MzA4MDIxNDk5NjQxNTZkMjQ5ZmM3MGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4NzhlYjQyOTc4MDFjZTFlY2I0OGJmNmIxYzk3YTZmNDQ5ZTI4M2Y5ODQxYTUxZTJlMjNjMmQ0NjEyODY5NjEifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L27-L30",
+          "version": "repo-lines-v1:sha256:a64f2851999806c56b29a9b61b2bc67d4349adb62b7638984ab196a011de61c7:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjkzYmM0ZDAwNjA2N2EwODg5ZWQ3ODZmNTFlYzdiY2UyZTc2NjllMTUyNGIxYWUxYWE3ZjRiNDM1YTMzMTNhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGRjM2MxOTE2NjczZGI1ZGZkODNiN2QyODc1MWFjOWNjMzc1MWZhNTI4NTlkMjUxZmVjMGMwMzc2NTllOTAyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTVjMWM0NjJlMmEzOWQ3NDc1OWY1ZTFiMTI2Zjc2ODNhMmI3MzAxMThlMThmNTEyMmIwOGNlZGVlYjY1MGUyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWY5NWE2NzJhNTJmOTNjZjE5OTJmOGM3NDVlMGE0NzA2ZjEyZDNlNzlmMWNjMmUzYTNmNzI5YWY5OTZkNzYxZiJ9"
+        },
+        {
+          "resource": "repo://src/training/train.py#L47-L83",
+          "version": "repo-lines-v1:sha256:358a8e91b354befc372bf1a2e85b7a5b0a3fea639dde2acd34a845293b72f4ba:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZDk4NGNlMjZlYjIwMGI2YTg0NzAwZjZiZmE4NjE3YmM3NTgyMzJmMzUyYzZjOGNjZmFhNTcyYTQ0ZDc1YTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkZGQyOGRlMTU5M2FkMWZmMTIxM2FmMmMxZjM4NDE4MDFkZjBmZTQ0NTVhNTdiMDI5ZjRlNGY5MjBiYjczZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRjZWJlYTVhZjgzZjQ1MjBmNDBiYjU1MDQ1ZTZjNjhlNzI0MTE2Njg3MDJjM2MxNjgxNTUzOGE1YWRlYWNjMjQifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L86-L147",
+          "version": "repo-lines-v1:sha256:7992265d89187c3829f05994d19818cf6640408cd2d3cf35fdf4760eb1df5c2f:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxNDM1Njg1Y2MzN2I5NGY4NWY2NDhmMjA2NmU5NzZhNjJkNTU2MjVkY2MwZWYyMGYyODZmZDA0NDNkMjdjYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhODBmNWU5ZDA0NGQ3YjRkNTUzNDkxZjQ5MDQ1YTNmYzUxMjczNmZiN2QwNDQxNWYxNzA0ZWJjMGQ1YmZlM2UifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_baseline.py#L35-L42",
+          "version": "repo-lines-v1:sha256:9409c02dea4a91ff7949ac2ffa09dd79789b5119c1a8bbc7ca6d70134767b743:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGY4MGEzYTA0N2RhYzZlYzcwYzQ2NDQ2YjkxOTFiYWEyNzQwZjBhN2ZlNDQxYTllMzAwYmRhNDgyNDBkNjllYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTliMTU2OWFiZTExMDhiZTExMzhjNzEyZTg3MDU0NGFlNzc0ODVlNjNkNTIyZTRjMTdjYTg2OGM2NWU4Mjg3NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDFlOGYyNjczMDVjMjJjMWJiZWYxZGFkNGNiNDdmZGJlMWM2NzE3Zjc5NjVhMDNjZTkwZGYxM2Q1MGNhYjI2ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDYxZGFlOGJlOWU4ZTY2MWMyN2VjMDQ5ZjQ0YWNhOWExOThiMWY4ZjY2YzZhYWE4MWU4NjI3ZDkxOGYxOTc0MCJ9"
         }
       ]
     },
     {
       "id": "claim_d5b9a01a8d5e4b6b95f244cbfb6d39f0",
-      "statement": "train.main re-validates reference.parquet, then within an MLflow run named baseline-xgboost under experiment credit-scoring-baseline (tracking URI from settings.mlflow_tracking_uri) logs XGB_PARAMS and n_rows as params, overall and fairness metrics, and the pipeline via mlflow.sklearn.log_model with cloudpickle; it also calls save_model so the joblib model and metrics JSON consumed by DVC are written. baseline_metrics.json holds only the five overall metrics, not the fairness metrics.",
+      "statement": "train.main re-validates reference.parquet, then within an MLflow run named baseline-xgboost under experiment credit-scoring-baseline (tracking URI from settings.mlflow_tracking_uri) logs XGB_PARAMS and n_rows as params, the overall plus per-group fairness metrics, and the pipeline via mlflow.sklearn.log_model with cloudpickle; it also calls save_model so the joblib model and metrics JSON consumed by DVC are written. save_model dumps only the overall metrics dict (auc, ks, pr_auc, threshold, f1, fpr, fnr, recall) to baseline_metrics.json, not the per-group fairness metrics; the committed snapshot still has only the first five keys.",
       "evidence": [
         {
           "resource": "repo://dvc.yaml#L20-L31",
@@ -155,8 +171,12 @@
           "version": "repo-lines-v1:sha256:0fbed08fe03632e8f0cf7823bf530bbdf463a7b411b8ad63f05094a482dd2995:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTZmYjA4ZmRhMWFjYjk1N2I2MTE2YmQzNzgxMWExZmU0MWEwMTYxMWMwNjMxZWRiZjc4NmQ2ODg5YTI3YTU1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         },
         {
-          "resource": "repo://src/training/train.py#L116-L131",
-          "version": "repo-lines-v1:sha256:2404d030cc166d86576f59833a761e2e8fd46b77c4e44eb9a438e1b033177726:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3N2RjZjgyZjFmZjI3MTk2MjdmYzRjNGIzZWFmYjEwMTFmNzkzMDM4ZGI0YmZkNmE0ZTliYTdjMDEzY2I2NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjZGE2OTk2ZjVjNmZmNmU4MmExZGJhNjM2MDZjYjFjNTgzMDc4MzkzYWEzYzdhNzE1ZDY4MWMwNTBmODdjZjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwZmUyNTc2ZTZmMmNmNWI0YWFhYTA3ZmNkOGU1NzYwMzQ4ZGI4MWRmYjFkNzEzZGJkMTY0OTZlYmIxYzk1ZDkifQ"
+          "resource": "repo://src/models/baseline.py#L66-L74",
+          "version": "repo-lines-v1:sha256:afb13c08d0f74d245fe1e6bcc556471e209e7d3be9c39631a4d163b3fde68ce9:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNThhMTdlNjZkOWNiNWI3NzQyMzg3NTg3MTJkYTQ1ZDM5ZmNkZTI1N2QyOTJkNzY3ZTAyMmE4Y2VjNWU4Mjk0YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWFjYmMyNTQ0NTQ5Y2Y5Njg4ZTNmMjA2OGE2YWNjZjdhYTMyYzM4ZDZiMWQwNGFhNjVjYjMzZmIxNTZlMTU3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTJlNTczYjdiNDU0NGQ1Zjg2MzUyN2I1ZTJkMTEyZDRiZTMwZmRlMTdlNTk4OTlmNDg3YjQwYjFiNWY4MDMwNSJ9"
+        },
+        {
+          "resource": "repo://src/training/train.py#L172-L188",
+          "version": "repo-lines-v1:sha256:12936136f632d1cab69f482f3b52b6aec3a00e32334c6ae00261ce93d0327a96:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4NTliNGZhZmNkMzk0OGJhMzVmMjVjMGM2ZGI5MjRlOTAwYTZiNDIxNzE2ZjYyOTgzNWFiMmFmNjhhN2NmNzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3MDAyYTEyYjY3MjQ3NGZjY2NjZWQ2M2MwMTYwMDU3ODYwODZjMzkxNTc4NTM5ZmYyNmYzYWE0YThiYzdlYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
         }
       ]
     },
@@ -187,10 +207,48 @@
           "version": "repo-lines-v1:sha256:fd2ea1f04642d1196146434b1ee614d89d566a89005da9daa99ffa71ff0f6bae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBmNTg3NzVmNTA0MjI4NzRmYjNmMWIxZDA2YmNiMjRjMDBiYjBjMzU4OWE1ZWMzZDQ1YmIxN2ViZDRhOTY5OTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTk5MjMyY2QzYTMwOWY1MGNiZDZmNjYyMTI3ZWVhYWZjZTFmNzM2MjkyZGVmYjExM2Q5ODFhMjBjN2Q4NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_21faea44853d42aea0118ddd8c53867b",
+      "statement": "fairness_plots is a DVC stage (and a standalone `python -m scripts.generate_fairness_plots` command) that depends on reference.parquet, its script, src/training/train.py and src/visualization/fairness_plots.py, and declares four cache:false PNG outputs in reports/figures/ (roc_by_gender, roc_by_age, error_rates_by_gender, error_rates_by_age). Editing train.py or the plotting module therefore invalidates the figures; the stage does not depend on baseline.joblib and no other stage consumes its outputs.",
+      "evidence": [
+        {
+          "resource": "repo://dvc.yaml#L74-L89",
+          "version": "repo-lines-v1:sha256:513a80e535592e4bd502b54da32b8053c3cd0a63c7115fcdd9b7da310e0294a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyOTRjNjAzYTlmZjJiNjUzOWYzZmY3ZjhiNmU5NzA0NWY4Nzg0Y2MzNTdhNDk0NjE5OWRlN2JiNTk5Y2I2NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkOTFiOTgwYmZiNzM4ZjEzYjM5NWNiNTBmYjFlMTZiNTQxNWYxZTMzZWE4Y2YzODk3ZWNlZTkyMTIzZjNiZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://scripts/generate_fairness_plots.py#L1-L30",
+          "version": "repo-lines-v1:sha256:5af557bb1be98065b2f2db5621cc2b061591060a05c9c08f509413ffdcd965dd:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYxOWFjY2IxYWIyZmU3OTBjNDFjNGU2ZDk4NjBhMTM4NDYzOTE5NTA5MmYyYTk3MjVlOTFmZDkwMjJmZDY2MDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVmNmYwMDdkZjM2NjQwYTgzNWZiZTM0ZjU1OTEzOGNlMTljNDkxNDUwZTVmOGY2YTZlNjI5YzZjYmVhZWQyYmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3045b83424274679b239b007b3cb581b",
+      "statement": "generate_fairness_plots.main raises FileNotFoundError if reference.parquet is absent, retrains the model in memory by calling train() (it neither loads models/baseline.joblib, calls save_model, nor logs to MLflow), recreates the same stratified 20% hold-out with an inline duplicate of the split arguments, and uses metrics['threshold'] to draw ROC-by-group and FPR/FNR/recall-by-group figures for gender and age. The duplicated split must be kept in sync with train().",
+      "evidence": [
+        {
+          "resource": "repo://scripts/generate_fairness_plots.py#L31-L101",
+          "version": "repo-lines-v1:sha256:2895952bfce56b3eec42b2abd7c0cf492a9026b7cf680c6053cfb448ae2bff04:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYjBkMTU4NGZiZjQ3ZTFlMjgzNzllNDA3ZmJkY2RkMGJkMDlkYmRiOThmMTVmYWY4ZTE3MWM4NzU1NTAzOTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3ODFhYzc5ZmNlMWYzZWFmM2RkZjY5MTI0YjRiZjQ4NWY5ZTMxYTk1MjM1YTM0NWIwYmVlMGI3YjJkNGQ2MzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L150-L169",
+          "version": "repo-lines-v1:sha256:bd11a6dfca77d477de18cb2bb7a85da54ccadbee9dbb05fd849c3587499d7137:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZmQ5NWMwYzRlOWJkNTgzODBkYzk2NmJkMmNjZDZlYjJiNjA1M2MyMzQ0MGFkY2ZiNzBjMDc5ODU5MjAzNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjYThhM2JiNWUxM2UyYTRiNjhmNDE2MTM0NzhkZWE2MWIxZTgwYjI5MzA4MDIxNDk5NjQxNTZkMjQ5ZmM3MGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY4NzhlYjQyOTc4MDFjZTFlY2I0OGJmNmIxYzk3YTZmNDQ5ZTI4M2Y5ODQxYTUxZTJlMjNjMmQ0NjEyODY5NjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fc270391f43042b28b4c0c42ddf28c62",
+      "statement": "src/visualization/fairness_plots.py renders figures headlessly (matplotlib Agg backend), reusing AGE_BINS, AGE_LABELS and error_rates from train.py so plots and logged metrics share grouping and threshold semantics: plot_roc_by_group draws an overall dashed ROC plus a ROC per group (gender restricted to F/M, age binned from DAYS_BIRTH, single-class groups skipped), and plot_error_rates_by_group draws grouped FPR/FNR/recall bars; both create the output directory and save PNGs at 150 dpi.",
+      "evidence": [
+        {
+          "resource": "repo://src/visualization/fairness_plots.py#L1-L185",
+          "version": "repo-lines-v1:sha256:205f0d118de41552f47d85b15657a594a0e7e0906935ca5826bb173121cd2937:eyJzZWxlY3RlZExpbmVDb3VudCI6MTg1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJhNGRiOWU4MTk4YTllMmU0MmE2YjQ0ZGM1YzAwYWFiN2ZhZGRmMTc3Y2M2ZTU5OTk4ZTllZWNiZWYwNDVmZTRlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJhMTQzYjQzOWJmMGE0OTExZGI1ZWFhYzc3MDUwYzA2MDBiMjA4MDQwMDRjNDhjYzcyZmQyMDQ2YTMyYmU4MjE3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-09T02:03:21.311Z"
+    "at": "2026-11-12T03:28:56.331Z"
   }
 }

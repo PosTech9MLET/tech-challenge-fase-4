@@ -36,6 +36,9 @@ mlruns/
 mlartifacts/
 mlflow.db
 
+# Figuras geradas (regeneráveis via scripts/generate_fairness_plots.py)
+reports/figures/*.png
+
 # SO / IDE
 .DS_Store
 Thumbs.db

@@ -298,6 +298,33 @@ O treinamento calcula ROC-AUC por gênero e faixa etária, como verificação ex
 
 Diferenças entre os grupos **não comprovam, isoladamente, discriminação**. Uma investigação mais completa requer análise das taxas de erro, tamanhos amostrais, representatividade e possíveis variáveis correlacionadas com atributos sensíveis.
 
+### Métricas de erro por grupo (FPR, FNR e Recall)
+
+Além do ROC-AUC, o treinamento agora calcula **FPR** (taxa de falsos positivos), **FNR** (taxa de falsos negativos) e **Recall** (sensibilidade) por gênero e faixa etária, no mesmo limiar de decisão usado para as métricas gerais (~0,1432). Essas taxas permitem identificar disparidades que o AUC sozinho não revela:
+
+- **FPR alto** em um grupo indica que clientes adimplentes desse grupo são mais frequentemente classificados como inadimplentes (falsos positivos);
+- **FNR alto** (ou Recall baixo) indica que inadimplentes reais desse grupo passam despercebidos pelo modelo;
+- Diferenças de FPR ou FNR entre grupos são mais diretamente acionáveis que diferenças de AUC, pois correspondem a taxas de erro concretas nas decisões de crédito.
+
+Os valores são registrados no MLflow junto com as métricas de AUC por grupo e incluídos no relatório de fairness.
+
+### Gráficos de fairness
+
+O script `scripts/generate_fairness_plots.py` treina o baseline na referência, computa as predições no hold-out e gera quatro figuras em `reports/figures/`:
+
+| Arquivo | Conteúdo |
+|---|---|
+| `roc_by_gender.png` | Curvas ROC por gênero (F, M) vs. curva geral |
+| `roc_by_age.png` | Curvas ROC por faixa etária vs. curva geral |
+| `error_rates_by_gender.png` | FPR, FNR e Recall por gênero em barras agrupadas |
+| `error_rates_by_age.png` | FPR, FNR e Recall por faixa etária em barras agrupadas |
+
+```bash
+uv run python -m scripts.generate_fairness_plots
+```
+
+As figuras são artefatos regeneráveis e não são versionadas no Git (`.gitignore` exclui `reports/figures/*.png`). Para reproduzi-las, é necessário que `data/processed/reference.parquet` exista (execute o pipeline de preparação primeiro).
+
 ## Monitoramento de Data Drift com Evidently
 
 O monitoramento utiliza **Evidently** para comparar distribuições de dados e identificar mudanças em duas variáveis financeiras, além de analisar seus efeitos nas predições do XGBoost.
@@ -634,7 +661,7 @@ Portas ocupadas (`3000`, `9090` ou `9100`) exigem liberar a porta ou alterar som
 
 A instrumentação evita incluir dados individuais nos logs estruturados de validação. O dataset Home Credit e seus artefatos brutos/processados permanecem locais. A verificação exploratória de ROC-AUC por gênero e faixa etária ajuda a identificar questões para investigação, mas não comprova equidade, ausência de viés nem conformidade com a LGPD.
 
-**Implementado:** contratos Pandera para oito colunas, baseline XGBoost/MLflow, Evidently/PSI para duas variáveis, análise de impacto no score, logs estruturados, métricas, dashboard e regras de alerta.
+**Implementado:** contratos Pandera para oito colunas, baseline XGBoost/MLflow, Evidently/PSI para duas variáveis, análise de impacto no score, logs estruturados, métricas, dashboard e regras de alerta, FPR/FNR/recall por grupo, gráficos de fairness, matriz de riscos e controles, DAG causal, Privacy By Design e By Default, revisão consolidada de logs/relatórios/armazenamento.
 
 **Próximos trabalhos recomendados:**
 
@@ -643,7 +670,7 @@ A instrumentação evita incluir dados individuais nos logs estruturados de vali
 - Automatizar execução periódica e, se necessário, usar um mecanismo de entrega de métricas para jobs curtos (por exemplo, Pushgateway com regras de ciclo de vida adequadas).
 - Configurar Alertmanager e canais de notificação, caso o escopo exija alertas enviados.
 - Registrar políticas de minimização, finalidade, bases legais, controle de acesso e retenção sob LGPD.
-- Aprofundar métricas de fairness, taxas de erro por grupo e análise da representatividade da amostra.
+- Aprofundar análise da representatividade da amostra e investigar taxas de erro por grupo em dados de produção.
 - Avaliar degradação efetiva de desempenho com rótulos independentes e dados de períodos posteriores (complementa a seção [Causalidade](#causalidade)).
 - Preparar o vídeo demonstrativo no formato STAR, destacando cenário, ações, evidências e limitações.
 
@@ -737,6 +764,67 @@ A esteira adota os princípios de **Privacy By Design** (privacidade projetada d
 | Métricas no Prometheus | 7 dias | `--storage.tsdb.retention.time=7d` em `compose.observability.yaml` |
 | Logs estruturados | Curto prazo; apenas dados agregados | Não contêm dados pessoais |
 
+### Revisão de logs, relatórios e armazenamento
+
+Esta seção consolida onde cada tipo de dado é gerado, onde é armazenado, o que contém e como a privacidade é preservada em cada camada.
+
+#### Logs estruturados
+
+| Aspecto | Detalhe |
+|---|---|
+| Gerador | `src/monitoring/logging_config.py` → `JsonFormatter` |
+| Destino | Saída padrão (stdout) do processo Python; não persistido em arquivo por padrão |
+| Formato | JSON com `timestamp`, `level`, `message`, `event`, `status`, `records`, `pipeline`, `error_type` |
+| O que **não** contém | Renda, crédito, `SK_ID_CURR`, registros individuais, stack traces completos |
+| Revisão de privacidade | `records` informa a contagem do lote, nunca os dados; `error_type` informa a classe da exceção, nunca os valores que a causaram |
+| Retenção | Curto prazo; em produção, aplicar política de retenção e criptografia em trânsito |
+
+#### Relatórios de Data Drift (Evidently)
+
+| Aspecto | Detalhe |
+|---|---|
+| Gerador | `src/pipelines/drift_monitor.py` → `generate_drift_report()` |
+| Destino | `reports/drift_baseline.html`, `reports/drift_simulated.html`, `.json` homônimos e `reports/drift_alerts.json` |
+| Formato | HTML interativo (Evidently) + JSON estruturado com PSI por variável |
+| O que contém | Estatísticas agregadas de distribuição (histogramas de renda e crédito), PSI e alertas; **não** contém registros individuais |
+| Versionamento | JSONs de alertas e métricas podem ser versionados no Git como evidências; HTMLs (3–4 MB cada) devem ficar fora do Git |
+| Retenção | Regeneráveis via `uv run dvc repro detect_drift`; manter apenas a versão mais recente em produção |
+
+#### Relatórios de impacto no score
+
+| Aspecto | Detalhe |
+|---|---|
+| Gerador | `src/pipelines/score_impact.py` → `compare_prediction_scores()` |
+| Destino | `reports/score_impact.json` |
+| Formato | JSON com estatísticas agregadas (médias, percentuais, contagem de decisões alteradas) |
+| O que contém | Resumo do impacto nas predições; **não** contém scores individuais por cliente |
+| Versionamento | Versionado no Git como métrica DVC (`cache: false`) |
+
+#### Métricas operacionais (Prometheus)
+
+| Aspecto | Detalhe |
+|---|---|
+| Gerador | `src/monitoring/metrics.py` → `build_metrics()` + `scripts/run_monitored_drift.py` |
+| Destino | `reports/operational_metrics.prom` (Textfile Collector) → Node Exporter → Prometheus |
+| Formato | Texto Prometheus (`# HELP`, `# TYPE`, linhas de métrica) |
+| O que contém | Contadores de execução por pipeline/status, histograma de duração, gauge de PSI por feature |
+| O que **não** contém | Dados individuais, PII, stack traces |
+| Retenção | 7 dias no Prometheus (`--storage.tsdb.retention.time=7d`); o arquivo `.prom` é sobrescrito a cada execução |
+
+#### Armazenamento de dados e modelos
+
+| Artefato | Local | Fora do Git | Rastreado por |
+|---|---|---|---|
+| `application_train.csv` (166 MB) | `data/raw/` | Sim (`.gitignore`) | DVC (hash md5) |
+| `reference.parquet` e `production_base.parquet` | `data/processed/` | Sim (`.gitignore`) | DVC |
+| `production_drift.parquet` | `data/processed/` | Sim (`.gitignore`) | DVC |
+| `baseline.joblib` | `models/` | Sim (`.gitignore`) | DVC |
+| `baseline_metrics.json` | `models/` | Sim (`.gitignore`) | DVC (métrica `cache: false`) |
+| Figuras de fairness (`*.png`) | `reports/figures/` | Sim (`.gitignore`) | Regeneráveis via DVC |
+| Imagem Docker | GHCR | — | CI (desabilitado; sem Dockerfile) |
+
+**Resumo de conformidade de armazenamento:** nenhum dado pessoal real, modelo treinado ou relatório individual é enviado ao repositório Git. O DVC mantém os hashes para reprodutibilidade. Os dados locais são eliminados ao fim do projeto, conforme o plano de retenção (art. 16).
+
 ### Papeis e resposta a incidentes
 
 - **Controlador:** a fintech, que decide sobre concessão de crédito;
@@ -744,6 +832,35 @@ A esteira adota os princípios de **Privacy By Design** (privacidade projetada d
 - **Encarregado (DPO, art. 41):** canal para os titulares e também para a ANPD
 - **Registro das operações (art. 37)** e **Relatório de Impacto (RIPD, art. 38)** revisados a cada retreino de modelo;
 - **Incidentes:** comunicação à ANPD e aos titulares envolvidos quando houver risco relevante.
+
+### Matriz de riscos e controles
+
+A matriz abaixo identifica os riscos de privacidade, viés, operação e conformidade do projeto, os controles já implementados na esteira e o risco residual após os controles. As classificações de probabilidade e impacto consideram o contexto acadêmico (dataset público do Kaggle, `SK_ID_CURR` sem vínculo com pessoas reais); em produção, os mesmos riscos teriam classificações mais altas.
+
+| ID | Risco | Categoria | Prob. | Impacto | Controles implementados | Risco residual |
+|---|---|---|---|---|---|---|
+| R1 | Exposição de dados pessoais no versionamento (Git) | Privacidade | Baixa | Alto | `.gitignore` exclui `data/`, `models/`, `.env`; DVC rastreia só hash md5 do CSV; `.dockerignore` exclui dados da imagem | Baixo |
+| R2 | Vazamento de PII em logs estruturados | Privacidade | Baixa | Alto | `JsonFormatter` registra apenas campos agregados (event, status, records, pipeline); nenhum dado individual é logado; logs não contêm renda, ID ou registros | Baixo |
+| R3 | PII em métricas do Prometheus | Privacidade | Baixa | Médio | Métricas são agregadas: contador de runs, histograma de duração e gauge de PSI por feature; nenhum dado individual é exportado | Baixo |
+| R4 | Discriminação por gênero nas decisões de crédito | Viés | Média | Alto | `CODE_GENDER` excluído de `MODEL_FEATURES` (embutido no código, não configurável); AUC por gênero registrada no MLflow; princípio da não discriminação (art. 6º, IX) documentado | Médio |
+| R5 | Discriminação indireta via proxies (renda/ocupação como substitutos de gênero ou idade) | Viés | Média | Alto | Análise de fairness por grupo documentada; limitação explicitamente reconhecida no README; confundidores mapeados na seção [Causalidade](#causalidade) | Médio |
+| R6 | Degradação do modelo não detectada | Performance | Média | Alto | Evidently calcula PSI (limiar 0,20) em amostras reproduzíveis; regra de alerta `CreditScoringDataDrift` no Prometheus; dashboard Grafana com painel de PSI por variável | Médio |
+| R7 | Dados desatualizados mascarando-se como frescos (alerta de PSI persistindo indefinidamente) | Operação | Alta | Médio | Limitação documentada no README; `run_monitored_drift.py` regenera o `.prom` a cada execução; recomendado `last_success_timestamp` como trabalho futuro | Médio |
+| R8 | Dados de qualidade insatisfatória entrando no pipeline | Qualidade | Média | Médio | Contratos Pandera bloqueiam lotes inválidos antes do processamento; a ingestão falha e nada é gravado se o contrato for violado; `demo_invalid_batch.py` demonstra a rejeição | Baixo |
+| R9 | Falha de pipeline sem registro | Operação | Média | Médio | `observe_pipeline` registra sucesso/erro e duração por etapa; métricas exportadas para Prometheus mesmo em caso de falha (`finally`); logs JSON com `error_type` | Baixo |
+| R10 | Acesso não autorizado aos serviços de observabilidade | Segurança | Baixa | Alto | Portas vinculadas a `127.0.0.1` (não expostas na rede); senha do Grafana via variável de ambiente obrigatória; sign-up desabilitado | Baixo |
+| R11 | Não conformidade com prazos de retenção da LGPD | Compliance | Baixa | Médio | Plano de retenção documentado (art. 16) com prazos por tipo de dado; Prometheus retém métricas por 7 dias; dados do projeto eliminados ao fim | Baixo |
+| R12 | Falta de transparência em decisões automatizadas | Compliance | Média | Médio | Direitos do titular documentados (art. 18 e 20); model card e features documentados; revisão humana prevista para recusas em produção | Médio |
+| R13 | Modelo treinado em dados não representativos | Performance | Média | Médio | Split estratificado por target; separação referência/produção sem sobreposição; fairness por grupo; limitação de representatividade reconhecida | Médio |
+| R14 | Uso de dados fora da finalidade autorada | Compliance | Baixa | Alto | Base legal documentada (art. 7º, X e V); dados usados só para risco de crédito; princípio da finalidade (art. 6º) aplicado | Baixo |
+
+**Legenda:** Prob. e Impacto classificados em Baixa/Média/Alta. Risco residual = risco remanescente após a aplicação dos controles. Riscos residuais Médios indicam que existem controles, mas não eliminam completamente o risco — exigem monitoramento contínuo.
+
+**Riscos residuais médios a observar:**
+
+- **R4/R5 (viés):** a exclusão do gênero das features e o monitoramento de AUC por grupo reduzem o risco direto, mas não eliminam a discriminação indireta via proxies. O aprofundamento com taxas de erro por grupo (FPR/FNR) é trabalho futuro.
+- **R6/R7 (drift e frescor):** a detecção de drift funciona, mas o pipeline batch não tem métrica de última execução nem alerta de ausência de atualização, permitindo que dados desatualizados permaneçam visíveis.
+- **R12/R13 (transparência e representatividade):** a documentação cobre os direitos do titular e as limitações, mas o modelo não gera explicações individuais e a representatividade da amostra não foi aprofundada.
 
 ### Mitigação de vieses
 
@@ -769,6 +886,71 @@ Ao usar o modelo para apoiar decisões de crédito, assume-se implicitamente que
 - **Idade** (`AGE_YEARS`) está associada a maior estabilidade e acumulação de patrimônio.
 
 Essas hipóteses são **plausíveis, mas não testadas causalmente** neste projeto. O modelo pode estar capturando associações espúrias ou mediadas por variáveis não observadas.
+
+### DAG causal
+
+O diagrama abaixo representa as hipóteses causais e os caminhos de confundimento. Setas sólidas indicam caminhos causais diretos; setas tracejadas indicam caminhos indiretos de confundimento. Nodos laranja são atributos protegidos **excluídos** das features do modelo; nodos cinza são variáveis não observadas.
+
+```mermaid
+flowchart TD
+    DEFAULT["Default (TARGET)"]
+
+    INCOME["Renda\nAMT_INCOME_TOTAL"]
+    CREDIT["Credito\nAMT_CREDIT"]
+    EMPLOYMENT["Tempo de Emprego\nDAYS_EMPLOYED"]
+    EXTSRC["Scores Externos\nEXT_SOURCE 1/2/3"]
+    AGE["Idade\nAGE_YEARS"]
+
+    GENDER["Genero\nexcluido do modelo"]
+    OCCUPATION["Ocupacao\nexcluido do modelo"]
+
+    MACRO["Condicoes Macroeconomicas\nnao observado"]
+    SELECTION["Vies de Selecao\nnao observado"]
+
+    INCOME --> DEFAULT
+    CREDIT --> DEFAULT
+    EMPLOYMENT --> DEFAULT
+    EXTSRC --> DEFAULT
+    AGE --> DEFAULT
+
+    GENDER -.->|gap salarial| INCOME
+    GENDER -.->|segregacao| OCCUPATION
+    OCCUPATION --> INCOME
+    AGE --> EMPLOYMENT
+    AGE --> INCOME
+    GENDER -.->|historico de credito| EXTSRC
+    AGE -.-> EXTSRC
+
+    MACRO -.-> INCOME
+    MACRO -.-> CREDIT
+    MACRO -.-> DEFAULT
+    SELECTION -.-> INCOME
+    SELECTION -.-> CREDIT
+
+    classDef feature fill:#1565c0,stroke:#0d47a1,color:#ffffff
+    classDef protected fill:#e65100,stroke:#bf360c,color:#ffffff,stroke-dasharray: 5 5
+    classDef unobserved fill:#616161,stroke:#424242,color:#ffffff,stroke-dasharray: 3 3
+    classDef target fill:#c62828,stroke:#b71c1c,color:#ffffff
+
+    class INCOME,CREDIT,EMPLOYMENT,EXTSRC,AGE feature
+    class GENDER,OCCUPATION protected
+    class MACRO,SELECTION unobserved
+    class DEFAULT target
+```
+
+**Leitura do DAG:**
+
+- **Caminhos diretos ao target:** renda, credito, emprego, scores externos e idade tem setas solidas para Default — sao as features que o modelo usa.
+- **Backdoor via genero:** genero -> renda (gap salarial) -> Default e genero -> ocupacao -> renda -> Default. Como o modelo usa renda, mas nao genero, o efeito do genero "vaza" pela renda. Este e o caminho de discriminacao indireta por *proxy*.
+- **Backdoor via idade:** idade -> emprego e idade -> renda. Idade e feature do modelo, entao parte do efeito e direto, mas parte e mediado por emprego e renda.
+- **Scores externos como proxy:** genero e idade influenciam o historico de credito, que alimenta `EXT_SOURCE`. O modelo exclui genero, mas `EXT_SOURCE` pode codifica-lo indiretamente.
+- **Confounders nao observados:** condicoes macroeconomicas afetam renda, credito e default simultaneamente. O vies de selecao (quem solicita credito) distorce todas as features observadas. Nenhum dos dois e medido no dataset.
+
+**O que o DAG implica para o modelo:**
+
+- A exclusao de `CODE_GENDER` das features **quebra o caminho direto** genero -> Default, mas **nao quebra os caminhos indiretos** via renda, ocupacao e scores externos.
+- Para fechar todos os *backdoors* de genero, seria necessario ajustar (controlar) por renda, ocupacao e historico de credito — mas renda ja e feature, e ocupacao e historico nao estao disponiveis separadamente.
+- O DAG e uma **hipotese**, nao uma comprovacao. A estrutura causal real pode incluir arestas nao representadas (ex.: interacoes nao lineares, mediadores nao modelados).
 
 ### Confundidores identificados
 

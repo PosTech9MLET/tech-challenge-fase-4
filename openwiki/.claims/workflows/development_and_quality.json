@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2302d7d7ab4fe43847cf545d4c6f69bf81775aa4a83cb8d1a4496187a72fc20e",
+  "pageVersion": "sha256:b26f7538f4a72c77fc3e6de2163a2ebd10e96cf07e8cdd27e5a48122454a5d32",
   "claims": [
     {
       "id": "claim_51c34e93d6d1416285f0ffa261529b9e",
       "statement": "Ruff handles Python code formatting and static analysis configured in pyproject.toml with an 88-character line length, target version Python 3.12, Google docstring rules, and an explicit exclusion for notebook files.",
       "evidence": [
         {
-          "resource": "repo://pyproject.toml#L24-L38",
+          "resource": "repo://pyproject.toml#L25-L39",
           "version": "repo-lines-v1:sha256:d1f546f06509b0e3876da7b986950bfb5826783b222f826e5df78f99bd44f125:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3NDVmYWI4NmIxMjFkYzg1YjRmNzg2NzMzOWExM2ZlZTgwNGM4YTAyZjQ3MTA2NTcyZjJiZjA2NjRkNTk1MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0ZmU2YzBmMTIxMWIxNTI1Y2I2MjQzYWEwNWYzM2UxM2UxN2VkYTg2ZGExMWJmYmUyOTE5MDhlMDRlZDU0ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ4Nzc4YWQyNjY2MjEyNzY5ZmU3NzQyOGQ5ZjA3ZGQ0ZjU4YzA5ZDc3YmJkMGYxNjcxMDdlYmU1OTNmODAwNDkifQ"
         }
       ]
@@ -21,7 +21,7 @@
           "version": "repo-lines-v1:sha256:ce615dbfaec589e4176ad5a264d7d1662491f2e5fe52c86202075fe7a4dfa942:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2VjMjI5N2RjZDk2ZmM0ZmY2ZTA3NDFjODRmYWQ0ZWIzMTU3OTg4YjEwZDc4Yzc3Njc4YjE4M2NjNWZiZDRmZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTRhOTA3ZjcyOWMwNmUxY2JjNWQ1ZjU4MDJkYzQwNzQ3ODI2OGEyODVjMzg1ZTk0OTE2NzkzZDgxNTkyZWNjNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWZmMTgwMDdhN2Y2MjIwYWVmZWM1MTRhMDY2MzI5NDk4ODI5NjZjMDFmMGFjYTVmOGM5MDkwODMyZDFhMzc1YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDE3ODJjNWE3Yjg5NjRlMGMwYzU5MmNkZjdlNjA3NzE4YzViNGVjMjQxNzA4NzVlMzg5Y2JiZjg1MjZiNDY4OSJ9"
         },
         {
-          "resource": "repo://pyproject.toml#L66-L68",
+          "resource": "repo://pyproject.toml#L67-L69",
           "version": "repo-lines-v1:sha256:7f5177b229e7e961b1112d6b92fe9bc239558e6ee696657620f930398b8d52f7:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWYyNGEwYmU4MDlhZTBiMGIxNjM3ZGJkOTMzODk2ZmJhMDhjNWVmNjQ0OTZjZTliYWU4YWJjZDJhOGEzM2FmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTZjYTc1YTk1MTgyNmJkMDJjNGFjNjkxZjNlNDBkMzQyYTc4ZGQzNDU5NTMwMmM1YzVmOGVmMDU0NDQ5NzkzMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTBhZGQyODAyYTQ1OGZhYWNhNjIyOTIwMDc2ZTE3MTZjMDBiZTNmYjM5NGY1YmQ1ZTA0OTJmZGNlZDlhNjdkNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCJ9"
         }
       ]
@@ -55,10 +55,74 @@
           "version": "repo-lines-v1:sha256:a7795f3f13ac6ed0ae398632e72fc00e87de5de5049987e11c5ddd1bb819a414:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5ZTVhMTlkMGViM2U5NzdjODA5NjMzNjg3YTRjMDdiZmQ1M2QzYTYwZGVhMmM2NmJmNTljY2I0NmZjZjE1ODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFmNzFjNjBiZWRlYzM1OTIxYzM1YzE0MmVkMjdiZWIwNGQ2YzY5ZDc2MTAyYjc5OTliMzExZjlhOThlMzVmNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5YzFiNDdlNTc0MmE4Y2MwNjEwZmVlY2JlZjkwYzFmNjBiN2YzYmM4NzQ4YWZiMzNkNjI0ODlkNDEzYzI4ZWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc1ODJlYWI4YTU5N2E4NzA4NGM2NDExMjE4MTNiMGRlNmY2Mjg3ZDhkNWViMTc4ZjMzNDdmODAwYzQ5ODc5ZWQifQ"
         }
       ]
+    },
+    {
+      "id": "claim_a6f152fdb65f458eb1ed6ea26ac4c097",
+      "statement": "Dependencies are managed with uv: pyproject.toml declares runtime dependencies and a dev dependency group (dvc, nbstripout, pre-commit, pytest, pytest-cov, radon, ruff, xenon, ipykernel) that backs the quality tooling, the README installs with `uv sync --locked`, and CI installs with `uv sync --frozen` from the lock file.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L23-L24",
+          "version": "repo-lines-v1:sha256:38a91ec8c1a63dfc55684b49a6fb20ce4e0c34fc593a28cfdad1993d6e5840e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGY5ZTc3ZTUyYzNiYWJlMTExNjIzMDlhMzQ3YTQ1ZTJjNTMyZTQwNmE2Zjk1OGM2M2I4ODkyMzU1ODVkNmE1NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGYxNzExOThmOGZlNDg1NTYxZjU5MmJlZGVhNDE5ZTI5MzY0Y2EwZmEzODI4ZTM3YmQwMmU3OWY3YzYxOTI2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjcwNjJjMjg5MjA0ODhkM2M2ODIwNzMwYzhkODhmMGM5Yzk5MzExMjBkNDJlM2RkMTQyNTljZmFlOTcwZmVkNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDljZmM2ZmEyNjZkMWJhYzJjMzg5MWE2YmM0YWIxMDUyZjVjYTMyMWY1NDJhODgwMDAwOWUwZGIxNTY0MmU2YSJ9"
+        },
+        {
+          "resource": "repo://README.md#L77-L82",
+          "version": "repo-lines-v1:sha256:9fa7e3de3ca8885a9428e77e2f2921895ea2507c6d4fb58784f2980f7de070fe:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGY5NmRjMDZmNTRkZWZiMjk4NmZmNzhhNDZkNTAyNzA4NTQwZGQ0MTgzYThkYjIxMjZkZmUyZmRlOTNhZWM2OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDdjMDZjNTYxZDVjMzI3MzQzNjg1MjY4YTQ2YjMzOTFmMzk5OGVlZTg5MGQyYmU1MWYwZDIxY2M0YTUzYWU2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmEyMjdiZjZhZTEwYWRkYjU5OGM0NGE4ZmQwMDAxMDBiNDQzMzAxYWQ5MzE3MDU0MzI2NjE0ODg2OWZmZGQxNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjVmNzgyNWIyOGY1YWZhNjA0ZjhmYjBhMDY4M2FhMjEzYjY4ZDExODM1ZjYzM2FlOWRlNjQ3ZjhiNGM0ZTU3NCJ9"
+        },
+        {
+          "resource": "repo://pyproject.toml#L1-L21",
+          "version": "repo-lines-v1:sha256:2a20ab6dd2b1faa8e27a3d2245c5f1f965ac4dd1ac4554aa23d7450815837957:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwMmE4MWMzODM2ZWRlZjJkMGJhMTFkMjM1M2ZiNmRhYmM3NzcxNTBhN2NhODNlYTBkOWU5YTcwMzEzZmVhYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjM2MzZDBmMDFiZjc4NjA2NTIzMjc1ZGU2ZGViNWJkYjE2OTQ4ZWUzNzFkOTMwNWI2YTM3MjU1NGRmMWU4NjQifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L59-L70",
+          "version": "repo-lines-v1:sha256:e9a59cb1fceff9eed686a1a31cb38d7f05fd40e4ffd4a5c2fadf3e83c5847ab9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYjc0OTliMWNlMWM0ZjRiMjUyN2YzYTMyODRjYWM2YjZhMWUzYmY0OTg4YjU2Nzk4MmMzZGM4ZTlhMTdmMjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVjMTljOTUxMzIzNjc1NTc4NTIzN2RlYjg1MTE5NGIxMmNkMTA2MDYwYzkwOWZmNzljYTc2ZDg1NmU1MTQzNzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_414631b4ddd54908aacec1bff5656bc8",
+      "statement": "Ruff and nbstripout versions are pinned both in the pyproject dev dependency group and as pre-commit hook revisions (ruff v0.16.9, nbstripout 0.9.1), so the pins must be bumped together to keep local hooks and CI consistent.",
+      "evidence": [
+        {
+          "resource": "repo://.pre-commit-config.yaml#L15-L27",
+          "version": "repo-lines-v1:sha256:9576f8a2bafb81a182f1729d36e9a194599792725397f16eaa2a7267de057a80:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkZmVjNzBlMTkyYjk1MjcwN2U4MDFiMjRjZjdkNDg5MzJiNTRmMTBiMTFmMjRjMjM0YjkyZWM0OGJlZDBiYTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxMTA3MjM1YWQxMmM2NGEwYmU0ZWMzNDAwNmFmMjE4MzUwYzc0ODFlM2IxNDdjY2FjYTU3ZmI4ZjBkYmNmNzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3OGM5NTRlMDI3MDBjYTQ4YjhmMmVjMDkxNjRjM2M3MDcyYzBiMDgxOWRhYmFkZmZkMTY3NmFlZmZmMGM3MGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiMTQ3MDc2NmQyNTkxNmFjZDhlODQxMmVjYTk0MzRmYTc1YmRkZTcxYjllNmQ0ODhkMzgxYjBkYTQ2NTk5OGMifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L62-L68",
+          "version": "repo-lines-v1:sha256:33dde3aa949a99d185e3cdc10d0decc4e16282f5014fd4a369c003b6b4edbb00:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGZiZjVjYjkwMmI1ZGE2MDc5YjczMDVjMGU2OTNjOTc1MGY2MWJiMDMwZTA2NGZiYzE0ZDcwYmZkMWJhMWY1OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWFmZWUwZTlmM2NiM2JhYmE1YTNlMjg2ZDQ4ZmQyMTU2MzE4NTcyZGRiODk2OTQ4ODEzNmU5NGE4MDg2MzE3YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTE2YTFmOWIyN2U2NTVmOGVlNDljNDA0MTQ4YTJjYjVlMzRlMGM3MjQ0MTJhM2Q1ZDBkZmEyYTRlNWQ1ZDc3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjE3OTQxZWRiY2RhNmY4OWMwNTkyNTM1MTIxNGQ0ZGVjNWFmZGMyMzFlYTFiOTQ3MThmMTg1NDZiZDVlMTM3YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f763f04694b34e7f82902b0fb72d6222",
+      "statement": "Pytest is configured in pyproject.toml with testpaths tests, pythonpath '.', strict markers (slow, integration), and coverage over src omitting src/main.py with fail_under = 0, so coverage is reported but not enforced.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L40-L57",
+          "version": "repo-lines-v1:sha256:411d815ba439b4a89e12d46ef9d0bcec633791b0856fd7fcc8e2eb16b2846b77:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlMjE3M2NiZDM3NjYzMzRlNzhhYzZiYWU4OTcwY2UwNWU3MWJmMjQzNmZkNGNjMDU3NmJhZjA0YzA3YWQzNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkZGRkM2ZkZjhlNDcxNmI5YjNkNWRlOTIzMjk4OGM1MzQzMzE0MDM0ZDBjNGRjZjZkZGRmNDgwZTZmODU4MWYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiYmE1NzY2YjVkM2Q2Yjg1MWEyYzViNWRmZTI3N2Q3ODhiZTVkYzI5NjI4YWM1OWNlODVjMzMzZTk2NTJkMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4NGI4NmI2MjEyOGI2YmJkNGE1MmQ0ZDM4NjYzYTZmNzk3NWMwMDNmN2FmZTU3NzEwMDQ3NTlmNTllYWJmZDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ea49dc00b5fc419984e4d1da65af748c",
+      "statement": "scripts/generate_fairness_plots.py is run as `uv run python -m scripts.generate_fairness_plots` (also the fairness_plots stage in dvc.yaml); it requires data/processed/reference.parquet (raising FileNotFoundError otherwise), retrains the baseline via train(), recomputes the stratified 20% hold-out with settings.random_seed, and writes four ROC and error-rate PNGs to reports/figures/.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L311-L326",
+          "version": "repo-lines-v1:sha256:4839b98245d3d726eeaa434f44c8766d9d16acb9ce8592c133276c90d572ba6a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3YWIzZjk4NmQ5NmM2ODhhZjEyYTEzMDA0YjllYjY0MmQxOTlkNzg1NWZlNmM2MGJlYzFmMDJmYmE5MTY0OGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlNDdlOTM1ZjgyN2Q2OWM4ODZiNjRhZTJkOGFmNjU1NjRlMjAwNzFiM2Q0MzE2OTIzNmEwNjc3NTY2OTE3Y2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmOGJmMmI1MjdjYmY0YzhjOTI2YjAxNzcyNzlmZWQyZDJlNDg2ODJkOTI5OTE1YjcyY2ZhNGJhY2Y1MWExODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwMGU4YzBjYWU4MDA5M2U2NDZiODQ3ODA2MTFjMGRjMGM5Y2VkZTk3Y2RhYjQwYTA1MGMxZDRmOTI1MzdkMGMifQ"
+        },
+        {
+          "resource": "repo://dvc.yaml#L74-L89",
+          "version": "repo-lines-v1:sha256:513a80e535592e4bd502b54da32b8053c3cd0a63c7115fcdd9b7da310e0294a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyOTRjNjAzYTlmZjJiNjUzOWYzZmY3ZjhiNmU5NzA0NWY4Nzg0Y2MzNTdhNDk0NjE5OWRlN2JiNTk5Y2I2NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkOTFiOTgwYmZiNzM4ZjEzYjM5NWNiNTBmYjFlMTZiNTQxNWYxZTMzZWE4Y2YzODk3ZWNlZTkyMTIzZjNiZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://scripts/generate_fairness_plots.py#L15-L101",
+          "version": "repo-lines-v1:sha256:c636e4ffcbd4f4b10e0a6c591bf25ddf3f37317f45b911cdcaf3d81effc4337c:eyJzZWxlY3RlZExpbmVDb3VudCI6ODcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjYjlmZmNjYmE1MTQ2YjJkZDE3N2EzMGMzMDU3YTQzOTVlYmQ1Yzc0NWQwNzg5ZDJlZDk1ZDBjZjRhZmUyNzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmYjBkMTU4NGZiZjQ3ZTFlMjgzNzllNDA3ZmJkY2RkMGJkMDlkYmRiOThmMTVmYWY4ZTE3MWM4NzU1NTAzOTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2ZDMyOWE0ODUzNGZiZTRhMjcxNGEzMDVkNjA2MzRmNGU2MzNlMzQxMWFhMGMxODgyM2NjYWIxZjYzYmFjYTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-09T02:03:21.311Z"
+    "at": "2026-11-12T03:28:56.331Z"
   }
 }

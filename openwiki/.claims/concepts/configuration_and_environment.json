@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:0542afe4cf09f1dd5e15670cb470edf848e4980993707a988609c9fae29f627b",
+  "pageVersion": "sha256:541bf4b5ba74f4a7f0f5a08a61f2b968510aa9ffb79cb068c0d4ac2e40cb2de1",
   "claims": [
     {
       "id": "claim_4166f445ff3242998bc08ad9bc2103c5",
@@ -148,11 +148,15 @@
     },
     {
       "id": "claim_f0969eaeef4f4a92931d584fee32a1d7",
-      "statement": "Settings consumers include data loading, data preparation, training (random_seed, MLflow tracking URI, log_level), model persistence (models_dir) and drift/score-impact scripts (data_dir/processed), while report output directories (REPORT_DIR) are computed independently from __file__ and not from settings.",
+      "statement": "Settings consumers include data loading, data preparation, training (random_seed for split and pipeline, data_dir for reference.parquet, MLflow tracking URI, log_level), model persistence (models_dir), drift/score-impact scripts and the fairness plot script (data_dir/processed, random_seed), while report output directories (REPORT_DIR, FIGURES_DIR) are computed independently from __file__ and not from settings.",
       "evidence": [
         {
           "resource": "repo://scripts/analyze_score_impact.py#L11-L19",
           "version": "repo-lines-v1:sha256:a3361595496aba20895944d3024d19c2d4d8c604b0714478d66257253d99e20e:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGFkMjQwZTM1NzAwOWVmNjgxN2ZlNmYyODQ2MWVlMGFjMzNhYzIwZDIyOGFlYWVhZDAxNGQzMjJmNjA3YmI3MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjgxMzdmYzExOTY1YjhlY2M5ZGRlODE2MmRhMzcwNDAwYWMxN2RkYmFiZmMzZDkxNzk1ZWM2YjE1YmIxYTg5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTQ0NWQ2YjUwMjE3Y2U4M2U5MmVlNTU3ZjExZTUzMjhkYzczNjkwMThlNGUyNjY2NmVjNTdlZTZlNzQyYmYwMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmJlZmI4MjExZDdkOGNlMmIzOWIyNzhkNGQ4ODZhNTQyMjAxMGFhMjZjMWNmNDgyYzZmOTE0YjZhYjQ1YjM3NCJ9"
+        },
+        {
+          "resource": "repo://scripts/generate_fairness_plots.py#L22-L48",
+          "version": "repo-lines-v1:sha256:9bfbc871285494096035f38019e1a2007c8fc02849da4dff43b56db68bc919c1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhZDI0MGUzNTcwMDllZjY4MTdmZTZmMjg0NjFlZTBhYzMzYWMyMGQyMjhhZWFlYWQwMTRkMzIyZjYwN2JiNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmYjg2ZTAwMWY2YjQ1ODVkMzBhZTM2MGI4Yjk2MThmZWI5NDM3NDExZDlhZjBhMTQyMzQ2NjQwMmU1MTYxZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3ZDkyNTk4MzQyYjIzNGVjMmZkNjI0OWI0ZWVhMTgyOTFjMTE3NzQzODZkYmVjNTYwNWZhOWFhMzAyOThmZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkYTgwMGE1MjExYjk3YzhhYTQ4MjY5Y2JjODQ0Nzc3MTE4YTkyOTFhYmIzMGU2ZmQxZWFjMjIyOTVmNWFhODYifQ"
         },
         {
           "resource": "repo://scripts/run_drift.py#L16-L24",
@@ -171,8 +175,8 @@
           "version": "repo-lines-v1:sha256:079b663be916340cfbb3618b54a4f69e0fc82b87413fd419f60b16b11a0b7ebc:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhZDI0MGUzNTcwMDllZjY4MTdmZTZmMjg0NjFlZTBhYzMzYWMyMGQyMjhhZWFlYWQwMTRkMzIyZjYwN2JiNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkNDE2MTcxMDNiYmU2MDEyODNiMDM0MzUwNTBhNDc5NGEwNzk5Yzg0YTdlOGZlYWI5YjEwOWYzNjMzMjcyMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjMWUzMTMzN2ZjN2FlMWZkN2Q0MTU3MjJhOWExZTUxOGY0YWI5NTRlZmE3MGYwYzZlMTVjOTMxYzUyMzMwODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhYTgzNmE3NmMxOTZjNjg2ZmRhMjZjNzIyZGQ0ZDFkMTRjYzA1ZmMyOGRlZjVkZGM5YWE0NWRhMDg1MTcyMDIifQ"
         },
         {
-          "resource": "repo://src/training/train.py#L107-L136",
-          "version": "repo-lines-v1:sha256:c3272968eaf09e36e134863359fb88ca57a5979f7ceefc628e83037fdf841695:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmYjg2ZTAwMWY2YjQ1ODVkMzBhZTM2MGI4Yjk2MThmZWI5NDM3NDExZDlhZjBhMTQyMzQ2NjQwMmU1MTYxZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkNDE2MTcxMDNiYmU2MDEyODNiMDM0MzUwNTBhNDc5NGEwNzk5Yzg0YTdlOGZlYWI5YjEwOWYzNjMzMjcyMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0OGFjYTUzYzRhYTc2MjMyN2EzYzM0MzAwZjg1MDI3YzY3MGY1NzJhZTcyYjNiY2MyY2QxNjgwNjNjMDIxNjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4ZTk5MjMyY2QzYTMwOWY1MGNiZDZmNjYyMTI3ZWVhYWZjZTFmNzM2MjkyZGVmYjExM2Q5ODFhMjBjN2Q4NTIifQ"
+          "resource": "repo://src/training/train.py#L150-L193",
+          "version": "repo-lines-v1:sha256:f6f011ea840bd99b8d816e83d4d6dbab2b9611a348ee2a93568a1a5fb56f7272:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZmQ5NWMwYzRlOWJkNTgzODBkYzk2NmJkMmNjZDZlYjJiNjA1M2MyMzQ0MGFkY2ZiNzBjMDc5ODU5MjAzNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTk5MjMyY2QzYTMwOWY1MGNiZDZmNjYyMTI3ZWVhYWZjZTFmNzM2MjkyZGVmYjExM2Q5ODFhMjBjN2Q4NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -185,7 +189,7 @@
           "version": "repo-lines-v1:sha256:a8f4bf18761602d3b590b37d398fa99779730a77b68138fdd14073492e3766ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmNGJmMTg3NjE2MDJkM2I1OTBiMzdkMzk4ZmE5OTc3OTczMGE3N2I2ODEzOGZkZDE0MDczNDkyZTM3NjZlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmNGJmMTg3NjE2MDJkM2I1OTBiMzdkMzk4ZmE5OTc3OTczMGE3N2I2ODEzOGZkZDE0MDczNDkyZTM3NjZlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjgxZmE2ZTlhNGM3NGRhODEzM2QxNjA2NWY2MTA5ZWM0ZjVhOTcwZTg0ZTRhYTU1YTZmYTRiMTA0ZmQyZjc4NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         },
         {
-          "resource": "repo://tests/unit/test_baseline.py#L56-L56",
+          "resource": "repo://tests/unit/test_baseline.py#L67-L67",
           "version": "repo-lines-v1:sha256:f56d6b65a44cb47ceaf2f3f86edeabed33d2ef4002384da4794a811e8313b1a0:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjU2ZDZiNjVhNDRjYjQ3Y2VhZjJmM2Y4NmVkZWFiZWQzM2QyZWY0MDAyMzg0ZGE0Nzk0YTgxMWU4MzEzYjFhMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjU2ZDZiNjVhNDRjYjQ3Y2VhZjJmM2Y4NmVkZWFiZWQzM2QyZWY0MDAyMzg0ZGE0Nzk0YTgxMWU4MzEzYjFhMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmJiNDQzZGFmNzNkYzdkN2I3YTk1OGRjZjI5ZGJmNDRjMTAwNGU0N2YzMTI4OTRkNTQ0Nzk4YzM3MGYzOGJiZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjIwMTZiOWRkN2U4NzlkNTA4OGFjNjVjZjcyNTQ1MDI5Mzg0MDFjNjlkOGY2NDYyMGUxYzg1NzFjODU0YWNlZiJ9"
         },
         {
@@ -239,10 +243,56 @@
           "version": "repo-lines-v1:sha256:bd90bb20d370d576fa212d6ffc363e598c6e669079227a933844105f5a14eb63:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzZDJjMWViNjM0YjM5YjkxYzYyZDE2YzZhYjExMjYxMDQ4YjQyYzExYTJjNjhjZDhlNDY0YWVmOGU4NzQxOWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_161b2a00060d43a69293ca4e495eb3b0",
+      "statement": "Training evaluation parameters in train.py are module constants or literals, not Settings fields: EXPERIMENT 'credit-scoring-baseline', AGE_BINS/AGE_LABELS, MIN_GROUP_POSITIVES=30, a stratified test_size=0.2 hold-out seeded by settings.random_seed, and run name 'baseline-xgboost'; changing them requires a code edit, and generate_fairness_plots.py duplicates the 0.2 split literal.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/generate_fairness_plots.py#L45-L50",
+          "version": "repo-lines-v1:sha256:47bb3bcd86aa542ed90ed646a374d2fbcf7f675d86941035537941c29e6d44f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODVlYzlmMzY5ODNhMDMxZTk5Mzk1NjRmNjdhYmY0YWJlZTU4YzNjNmYxNjc1YTQyMTJmNTAzYzk4YzA4OTQ3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTExYzA0MTJjMWY5MjM1Mjk0OGU1NTk0MWZmNDc2NDg0MDAyYjZjOWNmNjYwNjVlZjE2YTY2ZjIwOWRkM2VjNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTc1NDBjZjg2ZGFlYzVlMTFmMzE3NGFmYTdhYzY2NzhlNmMzZmEzYWI3NjNmNjhjODFmYTcwYjcyZWY0N2M0MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDZjZTM5YjAwMTU5ZDEyNTA4NTllMTY5NWUzOTA1NGMxYTViMWQzNDFkMzljYzQwNDhmOTBhMWZjNTQ3OWNlZSJ9"
+        },
+        {
+          "resource": "repo://src/training/train.py#L150-L188",
+          "version": "repo-lines-v1:sha256:691095c4e457efe21169413cef0d013e4e64319d05bd9d3ec48819a66d0ea97d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZmQ5NWMwYzRlOWJkNTgzODBkYzk2NmJkMmNjZDZlYjJiNjA1M2MyMzQ0MGFkY2ZiNzBjMDc5ODU5MjAzNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4NTliNGZhZmNkMzk0OGJhMzVmMjVjMGM2ZGI5MjRlOTAwYTZiNDIxNzE2ZjYyOTgzNWFiMmFmNjhhN2NmNzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L27-L30",
+          "version": "repo-lines-v1:sha256:a64f2851999806c56b29a9b61b2bc67d4349adb62b7638984ab196a011de61c7:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjkzYmM0ZDAwNjA2N2EwODg5ZWQ3ODZmNTFlYzdiY2UyZTc2NjllMTUyNGIxYWUxYWE3ZjRiNDM1YTMzMTNhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGRjM2MxOTE2NjczZGI1ZGZkODNiN2QyODc1MWFjOWNjMzc1MWZhNTI4NTlkMjUxZmVjMGMwMzc2NTllOTAyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTVjMWM0NjJlMmEzOWQ3NDc1OWY1ZTFiMTI2Zjc2ODNhMmI3MzAxMThlMThmNTEyMmIwOGNlZGVlYjY1MGUyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWY5NWE2NzJhNTJmOTNjZjE5OTJmOGM3NDVlMGE0NzA2ZjEyZDNlNzlmMWNjMmUzYTNmNzI5YWY5OTZkNzYxZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_228fa38774ad49f7b28c87172a37ad2a",
+      "statement": "pyproject.toml runtime dependencies include matplotlib (used with the headless Agg backend in src/visualization/fairness_plots.py), pyarrow, joblib, pandas pinned <3, and ydata-profiling (used only in an exploratory notebook), in addition to pydantic-settings, mlflow, evidently, pandera, prometheus-client, scikit-learn and xgboost.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L7-L21",
+          "version": "repo-lines-v1:sha256:68113e44fe1787ec9e406b3b1bda97367e680a2a6bbf10d8417791d6b86fb7e8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOTVmNWU5ZWRlMDE4MTYwNDNjMDc5N2FjZThkYTJhYzRlOTlhOGE2YTYxMGZhOTg1NzBlZjM0YjkzNTYxMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhMjQzM2UwNjdmMTRiOTQ1Mzk1YTgwOWYxNTc2OWY2MGU4NzdhMWQyZDUzODcyZjhhNTk5NTAyOTg0YWYwMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjM2MzZDBmMDFiZjc4NjA2NTIzMjc1ZGU2ZGViNWJkYjE2OTQ4ZWUzNzFkOTMwNWI2YTM3MjU1NGRmMWU4NjQifQ"
+        },
+        {
+          "resource": "repo://src/visualization/fairness_plots.py#L5-L8",
+          "version": "repo-lines-v1:sha256:65d1091133cbb6de4eef735ffed6d73ca3f05a854f3d894ea4760f509cb4fb58:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNmMDNjYjQ3Yjg5YjkxZTU5NTU1NGFkOWIyZjcxMDc1NDMxNDczOWY3YmM2Mjc4YWRjNGNlNzFkMGYxZTkwMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTY4NmIzNzUyMTVlYWUyNGYyOGQ1ZTljZDE1ZmQ3MTY3ZWM4MmNmOGVjODViY2RmZWVhYzQyNzY3MWIwZmRlYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTJjY2M1ZjE3ZmMxMzczYWNiNThiMzNhNWJjZjk4MzlkOTA2ZDQ1ZWNiMDJmYzFjYjI3OWI1YzA1Mzg3ZmU4NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDkxMjBkMDgxZDJjMTdiODkwMWUxZjYwZmIzMjA3YjYwM2M4NGZhN2IwOTVmODMwZDdjZmU2MDk5Njc3OWMzMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_17f2d70007f1457ca9f5f0da764ecb7d",
+      "statement": "dvc.yaml includes a fairness_plots stage running scripts.generate_fairness_plots, depending on reference.parquet and training/visualization code and producing four reports/figures PNGs with cache disabled; the PNGs are git-ignored.",
+      "evidence": [
+        {
+          "resource": "repo://.gitignore#L40-L40",
+          "version": "repo-lines-v1:sha256:f412c90d0430471e98b537896ab86b7a6714b814281ee97b9ade46003c7320b4:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjQxMmM5MGQwNDMwNDcxZTk4YjUzNzg5NmFiODZiN2E2NzE0YjgxNDI4MWVlOTdiOWFkZTQ2MDAzYzczMjBiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjQxMmM5MGQwNDMwNDcxZTk4YjUzNzg5NmFiODZiN2E2NzE0YjgxNDI4MWVlOTdiOWFkZTQ2MDAzYzczMjBiNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGZjOWQ4YTk2ZDZhYWNhMTlhNGRhMWIxMTA1MjU0MmI5NTZmMWM3ODZkMzc5ZmUyNWI4MDg0ZTRiMjgxODBlNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTVjZGYzMjYwODljOGQ0ODBjZDYzZGRmYTMzMmIxZTY0OWIwNjFmZmQyNWMxNTNiMjVmNTk0MDZmZjgzY2Y1MyJ9"
+        },
+        {
+          "resource": "repo://dvc.yaml#L74-L89",
+          "version": "repo-lines-v1:sha256:513a80e535592e4bd502b54da32b8053c3cd0a63c7115fcdd9b7da310e0294a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyOTRjNjAzYTlmZjJiNjUzOWYzZmY3ZjhiNmU5NzA0NWY4Nzg0Y2MzNTdhNDk0NjE5OWRlN2JiNTk5Y2I2NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkOTFiOTgwYmZiNzM4ZjEzYjM5NWNiNTBmYjFlMTZiNTQxNWYxZTMzZWE4Y2YzODk3ZWNlZTkyMTIzZjNiZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-09T02:03:21.311Z"
+    "at": "2026-11-12T03:28:56.331Z"
   }
 }

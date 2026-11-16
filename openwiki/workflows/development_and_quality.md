@@ -1,21 +1,27 @@
 ---
 type: workflow
 title: Quality Standards, Quality Gates, & Notebook Hygiene
-description: Overview of repository code quality mechanisms, including Ruff linting/formatting, Radon/Xenon cyclomatic complexity gates, pre-commit hook automation, and notebook output validation.
+description: Developer commands and quality gates, including uv dependency management (pyproject.toml/uv.lock), Ruff linting/formatting, Radon/Xenon complexity gates, pre-commit hooks, notebook output validation, and running project scripts such as generate_fairness_plots.
 tags: [code-quality, pre-commit, ruff, radon, xenon, notebooks, static-analysis]
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
   - id: openwiki-source-4d1645cb6317345817452838
     resource: repo://.pre-commit-config.yaml
+  - id: openwiki-source-cfa03d5d7ac7270f0bb1bf28
+    resource: repo://dvc.yaml
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
+  - id: openwiki-source-23775c3de52f3ab95a13cb8b
+    resource: repo://README.md
   - id: openwiki-source-d63450a84702158a6ce7cde3
     resource: repo://scripts/check_notebooks.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-09T02:03:21.311Z" }
+  - id: openwiki-source-35f0baf13d17ae674702bdfa
+    resource: repo://scripts/generate_fairness_plots.py
+generated: { by: "openwiki/0.7.2", at: "2026-11-12T03:28:56.331Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-09T02:03:21.311Z
+    at: 2026-11-12T03:28:56.331Z
 ---
 
 # Quality Standards, Quality Gates, & Notebook Hygiene
@@ -304,6 +310,31 @@ The following commands are available for local quality checks and maintenance:
 | **Clean Notebook Outputs** | `uv run nbstripout <notebook.ipynb>` | Strips outputs and execution counts from a notebook (the hint printed by `check_notebooks.py`). |
 | **Analyze Complexity** | `uv run radon cc src -a -s` | Generates cyclomatic complexity report for `src/`. |
 | **Enforce Complexity Gate** | `uv run xenon --max-absolute B --max-modules A --max-average A src` | Checks complexity threshold compliance locally. |
+| **Run Tests** | `uv run pytest -v` | Runs the suite under `tests/` (see [Test Suite & CI/CD](../testing/test_suite_and_ci.md)). |
+| **Generate Fairness Plots** | `uv run python -m scripts.generate_fairness_plots` | Regenerates the four fairness PNGs in `reports/figures/`. |
+
+---
+
+## Dependency Management (uv)
+
+Dependencies and tool configuration live in [`pyproject.toml`](../../pyproject.toml), and `uv.lock` holds the resolved versions. The project requires Python `>=3.12`.
+
+* **Runtime dependencies** (`[project].dependencies`) include `evidently`, `mlflow`, `pandera[pandas]`, `prometheus-client`, `scikit-learn`, `xgboost`, `pandas` (`>=2.3,<3`), `pyarrow`, `joblib`, `pydantic-settings`, `matplotlib` and `ydata-profiling`. Their roles are described in [Configuration & Environment](../concepts/configuration_and_environment.md).
+* **Developer tooling** lives in the `[dependency-groups] dev` group: `dvc`, `ipykernel`, `nbstripout`, `pre-commit`, `pytest`, `pytest-cov`, `radon`, `ruff` and `xenon`. `uv sync` installs this group by default, which is why every quality command above is invoked through `uv run`.
+* **Installing**: the README bootstrap is `uv python install 3.12` followed by `uv sync --locked`. CI runs `uv sync --frozen`. Both install from `uv.lock` rather than re-resolving; `--locked` additionally fails if the lock is out of date relative to `pyproject.toml`, so after editing dependencies run `uv lock` (or `uv add`) and commit `uv.lock` together with `pyproject.toml`.
+* **Version pins in two places**: `ruff` is pinned in the dev group (`>=0.16.9`) and again as the `ruff-pre-commit` hook revision (`v0.16.9`); likewise `nbstripout` (`>=0.9.1` and hook `0.9.1`). Bump them together so local hooks and CI agree.
+* **Pytest and coverage settings** are also in `pyproject.toml`: `testpaths = ["tests"]`, `pythonpath = ["."]` (so `src` and `scripts` import as packages), `--strict-markers` with `slow` and `integration` markers, and coverage over `src` (omitting `src/main.py`) with `fail_under = 0`, i.e. coverage is reported but not yet enforced.
+
+## Running Project Scripts
+
+Scripts under `scripts/` import the `src` package, so they are run from the repository root as modules through uv, for example `uv run python -m scripts.generate_fairness_plots`. Running them as a file path (as `scripts/check_notebooks.py` is) works only for scripts that do not import `src`.
+
+[`scripts/generate_fairness_plots.py`](../../scripts/generate_fairness_plots.py) is the fairness-figure generator and is also the `fairness_plots` stage of `dvc.yaml` (`uv run dvc repro` re-runs it when `reference.parquet`, the script, `src/training/train.py` or `src/visualization/fairness_plots.py` change). Operationally:
+
+* **Prerequisite**: `data/processed/reference.parquet` must exist (run `uv run python -m src.pipelines.prepare_data` first); otherwise the script raises `FileNotFoundError` naming the expected path.
+* **Behavior**: it retrains the baseline with `train()` on the reference data, recomputes a stratified 20% hold-out using `settings.random_seed`, and writes `roc_by_gender.png`, `roc_by_age.png`, `error_rates_by_gender.png` and `error_rates_by_age.png` to `reports/figures/`, then prints the decision threshold, overall AUC/FPR/FNR/recall and per-group metrics.
+* **Coupling**: the 20% split is repeated as a literal in the script, so changing the split in `train()` requires updating the script too.
+* **Artifacts**: the PNGs are regenerable and git-ignored (`reports/figures/*.png`), so they are never committed.
 
 ---
 
