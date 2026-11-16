@@ -3,9 +3,6 @@ type: guide
 title: Quickstart & Task Routing
 description: Onboarding and task-routing guide for the Home Credit credit-scoring drift and observability project. It covers uv/DVC setup, the end-to-end run order, current quality commands including check_notebooks.py behavior, and links to every wiki page.
 tags: [quickstart, task-routing, uv, dvc, credit-scoring, drift, observability, quality-gates, wiki-map]
-verified:
-  - by: openwiki/0.7.2
-    at: 2026-11-09T02:03:21.311Z
 sources:
   - id: openwiki-source-c28ca7ab362d7136f953793e
     resource: repo://.dvc/config

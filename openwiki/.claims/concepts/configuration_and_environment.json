@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:541bf4b5ba74f4a7f0f5a08a61f2b968510aa9ffb79cb068c0d4ac2e40cb2de1",
+  "pageVersion": "sha256:269485d889a4128b61171e7a09a029d713896b0b4eab4a2158cc9d514b56d259",
   "claims": [
     {
       "id": "claim_4166f445ff3242998bc08ad9bc2103c5",
@@ -264,11 +264,15 @@
     },
     {
       "id": "claim_228fa38774ad49f7b28c87172a37ad2a",
-      "statement": "pyproject.toml runtime dependencies include matplotlib (used with the headless Agg backend in src/visualization/fairness_plots.py), pyarrow, joblib, pandas pinned <3, and ydata-profiling (used only in an exploratory notebook), in addition to pydantic-settings, mlflow, evidently, pandera, prometheus-client, scikit-learn and xgboost.",
+      "statement": "pyproject.toml's runtime dependency list includes matplotlib (used with the headless Agg backend in src/visualization/fairness_plots.py), pyarrow, joblib, pandas pinned <3, setuptools<81 and ydata-profiling (used only in an exploratory notebook), in addition to pydantic-settings, mlflow, evidently, pandera, prometheus-client, scikit-learn and xgboost.",
       "evidence": [
         {
+          "resource": "repo://notebooks/exploratory/01_eda_home_credit.ipynb",
+          "version": "repo-file-v1:sha256:1436c89f425acefc9c4054f890ea3c6d5642b872ad7f869ae12a340f16c7df18"
+        },
+        {
           "resource": "repo://pyproject.toml#L7-L21",
-          "version": "repo-lines-v1:sha256:68113e44fe1787ec9e406b3b1bda97367e680a2a6bbf10d8417791d6b86fb7e8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOTVmNWU5ZWRlMDE4MTYwNDNjMDc5N2FjZThkYTJhYzRlOTlhOGE2YTYxMGZhOTg1NzBlZjM0YjkzNTYxMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhMjQzM2UwNjdmMTRiOTQ1Mzk1YTgwOWYxNTc2OWY2MGU4NzdhMWQyZDUzODcyZjhhNTk5NTAyOTg0YWYwMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjM2MzZDBmMDFiZjc4NjA2NTIzMjc1ZGU2ZGViNWJkYjE2OTQ4ZWUzNzFkOTMwNWI2YTM3MjU1NGRmMWU4NjQifQ"
+          "version": "repo-lines-v1:sha256:59089cfd1a60b4bb9160fcef9d45b5744468c73b9e99639aa7baaac9d834642a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOTVmNWU5ZWRlMDE4MTYwNDNjMDc5N2FjZThkYTJhYzRlOTlhOGE2YTYxMGZhOTg1NzBlZjM0YjkzNTYxMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhMjQzM2UwNjdmMTRiOTQ1Mzk1YTgwOWYxNTc2OWY2MGU4NzdhMWQyZDUzODcyZjhhNTk5NTAyOTg0YWYwMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjM2MzZDBmMDFiZjc4NjA2NTIzMjc1ZGU2ZGViNWJkYjE2OTQ4ZWUzNzFkOTMwNWI2YTM3MjU1NGRmMWU4NjQifQ"
         },
         {
           "resource": "repo://src/visualization/fairness_plots.py#L5-L8",
@@ -278,11 +282,11 @@
     },
     {
       "id": "claim_17f2d70007f1457ca9f5f0da764ecb7d",
-      "statement": "dvc.yaml includes a fairness_plots stage running scripts.generate_fairness_plots, depending on reference.parquet and training/visualization code and producing four reports/figures PNGs with cache disabled; the PNGs are git-ignored.",
+      "statement": "dvc.yaml includes a fairness_plots stage running scripts.generate_fairness_plots, depending on reference.parquet and training/visualization code and producing four reports/figures PNGs with cache disabled; the current .gitignore has no reports/figures/*.png pattern (only /reports/*.prom and /reports/*.html are ignored under reports), contrary to the README.",
       "evidence": [
         {
-          "resource": "repo://.gitignore#L40-L40",
-          "version": "repo-lines-v1:sha256:f412c90d0430471e98b537896ab86b7a6714b814281ee97b9ade46003c7320b4:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjQxMmM5MGQwNDMwNDcxZTk4YjUzNzg5NmFiODZiN2E2NzE0YjgxNDI4MWVlOTdiOWFkZTQ2MDAzYzczMjBiNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjQxMmM5MGQwNDMwNDcxZTk4YjUzNzg5NmFiODZiN2E2NzE0YjgxNDI4MWVlOTdiOWFkZTQ2MDAzYzczMjBiNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGZjOWQ4YTk2ZDZhYWNhMTlhNGRhMWIxMTA1MjU0MmI5NTZmMWM3ODZkMzc5ZmUyNWI4MDg0ZTRiMjgxODBlNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTVjZGYzMjYwODljOGQ0ODBjZDYzZGRmYTMzMmIxZTY0OWIwNjFmZmQyNWMxNTNiMjVmNTk0MDZmZjgzY2Y1MyJ9"
+          "resource": "repo://.gitignore#L46-L53",
+          "version": "repo-lines-v1:sha256:8297d67718a2bc51e053d9d9d51c096914458c273d538e53d2174ba04b77239f:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWYyOGEyM2E4ZjFmMTlkZDBhYTU2NTgwZmFhMDVlY2MyZWFmMDQwZDk4MzI2Y2ZlNWU0YmU4NzMyMTFlZWJkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjY5MTlmN2NmYmRmNjE1MjRkODkxMDkzNWVlNDg0NDM3ZjVjYzU1NjczOGM4MGEyNTY0YTcwMzY4N2FjNWI0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2IxMjViODkzZGMyMjBmNDY5NzRhYmFkNGY5ZmE2ZjBlYTc3YjQzY2YxNjYwYWFlMDNiNTM3NWQ4ZjM5NmQ5OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         },
         {
           "resource": "repo://dvc.yaml#L74-L89",
@@ -293,6 +297,6 @@
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-12T03:28:56.331Z"
+    "at": "2026-11-16T02:54:12.827Z"
   }
 }

@@ -40,15 +40,15 @@ sources:
     resource: repo://src/visualization/fairness_plots.py
   - id: openwiki-source-f9ca9cdda3a0ae93b2ab0055
     resource: repo://tests/unit/test_baseline.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-12T03:28:56.331Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-16T02:54:12.827Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-12T03:28:56.331Z
+    at: 2026-11-16T02:54:12.827Z
 ---
 
 # Governance, LGPD & Model Limitations
 
-This page covers the constraints that governance and privacy place on data and model handling in the Home Credit credit-scoring project. Most of the prose lives in the project `README.md` (sections "Governança, privacidade e evolução do projeto", "Governança e LGPD" with its Privacy By Design table, storage review and risk matrix, and the fairness sections "Análise inicial por grupos", "Métricas de erro por grupo" and "Gráficos de fairness"). The repository code enforces only part of it. The rest is a plan for how a fintech would run the pipeline on real customer data.
+This page covers the constraints that governance and privacy place on data and model handling in the Home Credit credit-scoring project. Most of the prose lives in the project `README.md` (the "Governança e LGPD" section at L688-L856 with its Privacy By Design table, storage review and risk matrix; the fairness sections "Análise inicial por grupos" L301, "Métricas de erro por grupo" L316 and "Gráficos de fairness" L326; and "Limitações e próximos trabalhos" L981). The repository code enforces only part of it. The rest is a plan for how a fintech would run the pipeline on real customer data.
 
 Related pages: [Architecture Overview](../architecture/overview.md), [ML pipeline and tracking](../workflows/ml_pipeline_and_tracking.md), [Drift monitoring and score impact](../workflows/drift_monitoring_and_score_impact.md), [Data contracts](data_contracts.md).
 
@@ -66,7 +66,7 @@ Related pages: [Architecture Overview](../architecture/overview.md), [ML pipelin
 | Protected attribute kept out of the model | `CODE_GENDER` (`GENDER`) is in `RAW_COLUMNS` but not in `MODEL_FEATURES`. `build_features` returns exactly `MODEL_FEATURES`, so gender never reaches the XGBoost pipeline. It is read only for the fairness audit. |
 | Identifier not a feature | `SK_ID_CURR` is in `RAW_COLUMNS` for uniqueness and joins (for example aligning scores before and after drift). It is not in `MODEL_FEATURES`. The README says it is not logged or exported as a metric. |
 | Log hygiene | `JsonFormatter` in `src/monitoring/logging_config.py` emits only `timestamp`, `level`, `message` and the whitelisted extras `event`, `status`, `records`, `pipeline` and `error_type`. Validation logs carry the batch size and status, never income, identifiers or sample rows. The `credit_scoring` logger has `propagate = False`. |
-| Local-only artifacts | `.gitignore` excludes `data/raw|interim|processed|features/*`, `models/*`, `mlruns/`, `mlartifacts/`, `mlflow.db`, `.env`, `reports/figures/*.png` (generated fairness figures, regenerable with `scripts/generate_fairness_plots.py`), `/reports/*.html` and `/reports/*.prom`. `.gitkeep`, `data/**/*.dvc`, `data/**/.gitignore`, `models/.gitignore` and `models/baseline_metrics.json` (kept in Git for `dvc metrics diff`) are explicit exceptions. |
+| Local-only artifacts | `.gitignore` (lines 17-53) excludes `.env` (L18), `data/raw|interim|processed|features/*` and `models/*` (L21-L25), `mlruns/`, `mlartifacts/`, `mlflow.db` (L35-L37), `/reports/*.prom` (L47, repeated at L53) and `/reports/*.html` (L50). `!**/.gitkeep`, `!data/**/*.dvc`, `!data/**/.gitignore`, `!models/.gitignore` and `!models/baseline_metrics.json` (kept in Git for `dvc metrics diff`, L26-L32) are explicit exceptions. **There is no rule for `reports/figures/*.png`**, so the generated fairness figures are not ignored (see [Fairness plots](#fairness-plots)). |
 | Local-only observability | In `compose.observability.yaml`, ports 9100, 9090 and 3000 bind to `127.0.0.1`. `reports/` is mounted read-only into Node Exporter. Grafana requires `GRAFANA_ADMIN_PASSWORD` at startup and disables sign-up. |
 
 Note the gap in the identifier control. `SK_ID_CURR` is persisted in the local Parquet files (`reference`, `production_base`), because it is part of `RAW_COLUMNS`. The README describes pseudonymization with a keyed hash as a production plan. The code does not implement it.
@@ -78,13 +78,18 @@ flowchart LR
     C --> D["build_features returns MODEL_FEATURES"]
     D --> E["XGBoost baseline"]
     C -->|"CODE_GENDER and DAYS_BIRTH"| F["Group AUC, FPR, FNR, recall in MLflow"]
-    C -->|"same hold-out, retrained"| H["Fairness PNGs in reports/figures - git-ignored"]
+    C -->|"same hold-out, retrained"| H["Fairness PNGs in reports/figures - aggregate only, not git-ignored"]
     B --> G["JSON logs - counts and status only"]
 ```
 
-The diagram shows where data is minimized, where gender is diverted to audit only, what reaches logs, and that the fairness figures stay local.
+The diagram shows where data is minimized, where gender is diverted to audit only, what reaches logs, and that the fairness figures contain only aggregates.
 
-The README's storage review table also lists where each artifact lives. Raw CSV, `reference.parquet`, `production_base.parquet`, `production_drift.parquet`, `baseline.joblib` and `baseline_metrics.json` are tracked by DVC rather than Git. The Evidently HTML reports are kept out of Git, while the JSON alert and score-impact summaries are aggregate-only and may be versioned. One README table row says `baseline_metrics.json` is outside Git, which disagrees with the `.gitignore` exception above. The `.gitignore` rule is what Git applies.
+The README's storage review table ("Armazenamento de dados e modelos", `README.md` L798-L810) lists where each artifact lives. Raw CSV, `reference.parquet`, `production_base.parquet`, `production_drift.parquet` and `baseline.joblib` are outside Git and tracked by DVC. The Evidently HTML reports are kept out of Git, while the JSON alert and score-impact summaries are aggregate-only and may be versioned. Two rows of that table disagree with `.gitignore`, which is what Git applies:
+
+- `baseline_metrics.json` is marked "Sim (`.gitignore`)" (outside Git, L806), but `.gitignore` L31-L32 explicitly un-ignores `models/baseline_metrics.json`.
+- Fairness figures (`*.png`) are marked "Sim (`.gitignore`)" (L807), and README L341 says `.gitignore` excludes `reports/figures/*.png`, but `.gitignore` has no such pattern. The four PNGs are present in the repository index alongside `reports/figures/.gitkeep`, and the README embeds two of them (L855-L856).
+
+The README's risk R1 and the "resumo de conformidade" sentence (no model or individual report reaches Git) hold for data and model binaries. They do not hold literally for the figures, although those are aggregate plots, not records.
 
 ## Personal data inventory (README)
 
@@ -152,7 +157,20 @@ Run it with `uv run python -m scripts.generate_fairness_plots`, or as the `fairn
 - The script raises `FileNotFoundError` unless `data/processed/reference.parquet` exists. It then calls `train()` again and recomputes the same stratified split to get `x_val`, `y_val` and the scores. It does not load `models/baseline.joblib` and does not log to MLflow. It prints the overall metrics and group metrics to stdout.
 - The plotting functions in `src/visualization/fairness_plots.py` reuse `AGE_BINS`, `AGE_LABELS` and `error_rates` from `train.py`, so the plots and the MLflow metrics share the same grouping and threshold. The module selects matplotlib's headless `Agg` backend.
 - The plots have no `MIN_GROUP_POSITIVES` guard. The ROC plot only skips groups that have a single class, and the error-rate bars include every non-null group.
-- The PNGs are regenerable artifacts and are **not committed**. `.gitignore` excludes `reports/figures/*.png`, and the DVC stage declares them with `cache: false`. They contain only aggregate rates and curves, never records. No test in `tests/` imports the plotting module. The group metrics themselves are covered by `tests/unit/test_baseline.py`, which checks the `auc_gender_`, `fpr_gender_`, `fnr_age_` and `recall_gender_` keys and that `auc_gender_XNA` is absent.
+- The PNGs are regenerable artifacts, declared as DVC outputs with `cache: false` (`dvc.yaml` L74-L89), so DVC does not store them. The README (L341) claims they are not versioned in Git and that `.gitignore` excludes `reports/figures/*.png`, but the current `.gitignore` has no such rule and the four PNGs are in the repository index. They are effectively committed. They contain only aggregate rates and curves, never records, so this is a documentation inconsistency rather than a privacy leak. Decide deliberately: either add the ignore rule (and update the README storage table) or keep committing them as evidence and correct the README. No test in `tests/` imports the plotting module. The group metrics themselves are covered by `tests/unit/test_baseline.py`, which checks the `auc_gender_`, `fpr_gender_`, `fnr_age_` and `recall_gender_` keys and that `auc_gender_XNA` is absent.
+
+Values in the committed error-rate figures (hold-out at the F1-optimal threshold; read from the PNG labels, so they go stale when the model or split changes):
+
+| Group | FPR | FNR | Recall |
+|---|---|---|---|
+| F | 0.107 | 0.587 | 0.413 |
+| M | 0.168 | 0.502 | 0.498 |
+| lt30 | 0.243 | 0.397 | 0.603 |
+| 30_44 | 0.152 | 0.504 | 0.496 |
+| 45_59 | 0.085 | 0.644 | 0.356 |
+| 60_plus | 0.028 | 0.875 | 0.125 |
+
+The pattern is that the model refuses young and male applicants more often (higher FPR), and misses more defaulters among women and older applicants, especially 60+ (FNR 0.875). This is exploratory evidence of rate gaps, not a fairness verdict. The README text itself does not tabulate these numbers.
 
 ## Known model and process limitations
 
@@ -174,6 +192,6 @@ Drift and monitoring (see [Drift monitoring and score impact](../workflows/drift
 - Adding a column to `RAW_COLUMNS` widens the personal data loaded. Update the inventory table and check that the column is not protected or a proxy. Adding it to the features also changes `MODEL_FEATURES`.
 - Never add `CODE_GENDER` to `MODEL_FEATURES`. Keep any new protected-attribute audit outside the feature list.
 - Do not add values from records (identifiers, income, row samples) to log `extra` fields. The formatter whitelist is the guardrail, so extend it carefully.
-- Keep raw data, processed data, model binaries and generated reports out of git. Decide explicitly before committing any new artifact type. Fairness figures are regenerable, so regenerate them rather than committing them.
+- Keep raw data, processed data, model binaries and Evidently/Prometheus reports out of git (the `.gitignore` rules above). Decide explicitly before committing any new artifact type. Fairness figures are not covered by an ignore rule today. They are regenerable aggregates, so regenerate them after model changes and keep the README and `.gitignore` consistent about whether they are versioned.
 - If you change the split, `AGE_BINS`, `AGE_LABELS` or the threshold logic in `train.py`, re-run the plots. The script repeats the 20% split literal, so keep it in sync.
 - Record changes to retention, fairness metrics or limitations in the README governance sections. Fill `docs/model_card.md` and `docs/adr/` when decisions need a formal record.
