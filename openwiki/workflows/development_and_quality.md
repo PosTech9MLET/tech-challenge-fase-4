@@ -18,10 +18,10 @@ sources:
     resource: repo://scripts/check_notebooks.py
   - id: openwiki-source-35f0baf13d17ae674702bdfa
     resource: repo://scripts/generate_fairness_plots.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-12T03:28:56.331Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-16T02:54:12.827Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-12T03:28:56.331Z
+    at: 2026-11-16T02:54:12.827Z
 ---
 
 # Quality Standards, Quality Gates, & Notebook Hygiene
@@ -319,7 +319,7 @@ The following commands are available for local quality checks and maintenance:
 
 Dependencies and tool configuration live in [`pyproject.toml`](../../pyproject.toml), and `uv.lock` holds the resolved versions. The project requires Python `>=3.12`.
 
-* **Runtime dependencies** (`[project].dependencies`) include `evidently`, `mlflow`, `pandera[pandas]`, `prometheus-client`, `scikit-learn`, `xgboost`, `pandas` (`>=2.3,<3`), `pyarrow`, `joblib`, `pydantic-settings`, `matplotlib` and `ydata-profiling`. Their roles are described in [Configuration & Environment](../concepts/configuration_and_environment.md).
+* **Runtime dependencies** (`[project].dependencies`) include `evidently`, `mlflow`, `pandera[pandas]`, `prometheus-client`, `scikit-learn`, `xgboost`, `pandas` (`>=2.3,<3`), `pyarrow`, `joblib`, `pydantic-settings`, `matplotlib` and `ydata-profiling`, plus a `setuptools<81` upper bound. Their roles are described in [Configuration & Environment](../concepts/configuration_and_environment.md).
 * **Developer tooling** lives in the `[dependency-groups] dev` group: `dvc`, `ipykernel`, `nbstripout`, `pre-commit`, `pytest`, `pytest-cov`, `radon`, `ruff` and `xenon`. `uv sync` installs this group by default, which is why every quality command above is invoked through `uv run`.
 * **Installing**: the README bootstrap is `uv python install 3.12` followed by `uv sync --locked`. CI runs `uv sync --frozen`. Both install from `uv.lock` rather than re-resolving; `--locked` additionally fails if the lock is out of date relative to `pyproject.toml`, so after editing dependencies run `uv lock` (or `uv add`) and commit `uv.lock` together with `pyproject.toml`.
 * **Version pins in two places**: `ruff` is pinned in the dev group (`>=0.16.9`) and again as the `ruff-pre-commit` hook revision (`v0.16.9`); likewise `nbstripout` (`>=0.9.1` and hook `0.9.1`). Bump them together so local hooks and CI agree.

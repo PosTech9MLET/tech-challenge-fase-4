@@ -1,11 +1,11 @@
 ---
 type: architecture
 title: System Architecture & Data/Model/Monitoring Flow
-description: Architecture of the Home Credit credit-scoring reliability project - its purpose, src package boundaries, scripts, DVC pipeline, local artifacts, observability infrastructure, and the end-to-end flow from raw CSV to Prometheus alerts.
+description: Architecture of the Home Credit credit-scoring reliability project - its purpose, src package boundaries (including the src/visualization fairness plotting layer), scripts, DVC pipeline, local artifacts such as reports/figures, observability infrastructure, and the end-to-end flow from raw CSV to Prometheus alerts.
 tags: [architecture, ml-pipeline, data-drift, observability, dvc, data-flow]
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-12T03:28:56.331Z
+    at: 2026-11-16T02:54:12.827Z
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
@@ -69,7 +69,7 @@ sources:
     resource: repo://tests/unit/test_baseline.py
   - id: openwiki-source-154200283d94041bcf05d48f
     resource: repo://tests/unit/test_smoke.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-12T03:28:56.331Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-16T02:54:12.827Z" }
 ---
 
 # System Architecture & Data/Model/Monitoring Flow
@@ -216,7 +216,6 @@ The PSI threshold exists in two places that must be kept in sync: `PSI_THRESHOLD
 
 - [Configuration and Environment](../concepts/configuration_and_environment.md)
 - [Data Contracts](../concepts/data_contracts.md)
-- [Data Contracts and Drift](../concepts/data_contracts_and_drift.md)
 - [Governance and LGPD](../concepts/governance_and_lgpd.md)
 - [ML Pipeline and Tracking](../workflows/ml_pipeline_and_tracking.md)
 - [Drift Monitoring and Score Impact](../workflows/drift_monitoring_and_score_impact.md)

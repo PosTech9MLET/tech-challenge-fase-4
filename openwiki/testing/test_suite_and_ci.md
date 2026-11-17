@@ -1,7 +1,7 @@
 ---
 type: concept
 title: Test Suite & CI/CD Pipelines
-description: Layout of the pytest unit suite (shared synthetic-data fixture, per-module tests, markers, coverage) and the four GitHub Actions workflows, covering the quality/test/docker CI pipeline and the OpenWiki generation, update and Pages publishing workflows.
+description: Layout of the pytest unit suite (shared synthetic-data fixture, per-module tests, baseline and fairness-metric tests, the fairness-plotting coverage gap, markers, coverage) and the four GitHub Actions workflows, covering the quality/test/docker CI pipeline and the OpenWiki generation, update and Pages publishing workflows.
 tags: [testing, pytest, coverage, ci-cd, github-actions, code-quality, openwiki]
 sources:
   - id: openwiki-source-164e2da859b5277df81c7d94
@@ -16,6 +16,12 @@ sources:
     resource: repo://.pre-commit-config.yaml
   - id: openwiki-source-05ccef8d4cf1698187f20464
     resource: repo://pyproject.toml
+  - id: openwiki-source-35f0baf13d17ae674702bdfa
+    resource: repo://scripts/generate_fairness_plots.py
+  - id: openwiki-source-fcfbfa02b8c3ddf398465b4a
+    resource: repo://src/training/train.py
+  - id: openwiki-source-d126db8b3c7739bcbb2b8380
+    resource: repo://src/visualization/fairness_plots.py
   - id: openwiki-source-53f270510595195555497d76
     resource: repo://tests/integration/__init__.py
   - id: openwiki-source-0e9f69f688794120c3b78633
@@ -40,10 +46,10 @@ sources:
     resource: repo://tests/unit/test_smoke.py
   - id: openwiki-source-3462244d4d2c92a92773e36e
     resource: repo://tests/unit/test_validation_monitoring.py
-generated: { by: "openwiki/0.7.2", at: "2026-11-12T03:28:56.331Z" }
+generated: { by: "openwiki/0.7.2", at: "2026-11-16T02:54:12.827Z" }
 verified:
   - by: openwiki/0.7.2
-    at: 2026-11-12T03:28:56.331Z
+    at: 2026-11-16T02:54:12.827Z
 ---
 
 # Test Suite & CI/CD Pipelines
@@ -116,6 +122,19 @@ The generator deliberately includes realistic quirks that the code under test mu
 * **Helper metrics on hand-made data.** `ks_statistic` is 1.0 on perfectly separated scores, `best_f1_threshold` falls within 0.4 to 0.6, and `evaluate(..., threshold=0.5)["f1"]` is 1.0.
 * **Error rates.** `error_rates` is checked against a hand-computed confusion matrix (TP=1, FP=1, FN=1, TN=2 gives recall 0.5, fpr 1/3, fnr 0.5) and a perfect classifier (recall 1, fpr 0, fnr 0). `error_rates_by_group` returns `fpr_`, `fnr_` and `recall_` keys per group label.
 * **Small groups and splits.** `auc_by_group` returns `{}` for a group with too few positives (it skips groups below a minimum positive count or with a single class), and `build_pipeline(0)` fits and returns a two-column `predict_proba` on a plain `train_test_split`.
+
+`fairness_metrics` (the function in `src.training.train` that builds the per-group dict) is not imported by the test module. It is exercised only through `train`, so the `fairness` assertions above are the contract for it. It restricts gender to `F`/`M`, bins age from `DAYS_BIRTH` using `AGE_BINS`/`AGE_LABELS`, and combines `auc_by_group` with `error_rates_by_group` at the F1-optimal threshold. The `MIN_GROUP_POSITIVES = 30` cutoff applies only to AUC; error rates are emitted for every non-null group.
+
+### Fairness plotting: no automated tests
+
+No test touches fairness plotting. A search of `tests/` finds no reference to `src.visualization` or `scripts/generate_fairness_plots.py`.
+
+* `src/visualization/fairness_plots.py` provides `plot_roc_by_group` and `plot_error_rates_by_group`. They use the headless `Agg` matplotlib backend, so they could run in CI, but nothing calls them under pytest.
+* `scripts/generate_fairness_plots.py` retrains with `train`, recomputes the same stratified 20% hold-out split (`random_state=settings.random_seed`) and writes four PNGs to `reports/figures/`. It needs `data/processed/reference.parquet`, and raises `FileNotFoundError` otherwise. See [ML Pipeline & Tracking](../workflows/ml_pipeline_and_tracking.md).
+* The plot functions reuse `AGE_BINS`, `AGE_LABELS` and `error_rates` from `src.training.train`. The `test_baseline.py` tests of `error_rates`, `error_rates_by_group` and the age and gender keys therefore indirectly protect the plotted values. The rendering itself (labels, bar layout, file output) is unverified.
+* Because coverage measures all of `src/`, `src/visualization/` is reported with no covered lines. `fail_under = 0` keeps this from failing CI.
+
+A natural extension is a `tests/unit/test_fairness_plots.py` that feeds the `hc_df`-based `train` output to the plot functions with `tmp_path` outputs and asserts that the PNG files exist.
 
 ### Monitoring tests
 

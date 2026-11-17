@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:c5db6af531caa155bd7517578fc87daccc5deea08ad64f140e079aab0d485c11",
+  "pageVersion": "sha256:10dac90d85376d622bf564e711d1c522d1c3d55ad5241a73b08036aae3c1c048",
   "claims": [
     {
       "id": "claim_9ed2d05b4ddc496e81f155d4ee5a637a",
@@ -213,10 +213,46 @@
           "version": "repo-lines-v1:sha256:0d6cbabfdff40e4dff3b9b36101dc3a324ff62afd7e2eb60a1964f086317b51f:eyJzZWxlY3RlZExpbmVDb3VudCI6ODQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5NmRjNDgxNDlmNWE4M2QxZWQ2ZGJiMzliYmM3ZTJiOTAyYWEzZDM0ZDZiZDVhZTRiMjkxYjY4ZGYwY2E3OWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2MzQxMzJhMWI5YWUwNmQ4YjQ5YjY1ZTY0YmVhNTExZGQ2MGI5N2NkYjJhNDM1ZTQ2ZDAwYjIwYjUwODJjZGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU2ODU2M2I4MzlkNGExZmQ1ZDM5MTRkMjc0MGU3MWM4N2VjMzg3YWFmOTBmOWVjNWNmMWFkYWYxZTc0Y2U4MWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
+    },
+    {
+      "id": "claim_e213d24f703246f087933ad348425e9b",
+      "statement": "Fairness metrics in src.training.train (fairness_metrics) restrict gender to F/M, bin age from DAYS_BIRTH, and combine AUC-by-group (only for groups with at least MIN_GROUP_POSITIVES=30 positives and two classes) with FPR/FNR/recall per group at the F1-optimal threshold; the function is tested only indirectly through train() in test_baseline.py.",
+      "evidence": [
+        {
+          "resource": "repo://src/training/train.py#L28-L147",
+          "version": "repo-lines-v1:sha256:f02289ce0272fba1b697cf1180212c7fa49103e38db4d95b9fb7dce8fa712c40:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJhMDI3MDgzY2UwY2VmNjMyY2FmOWFmNDZlNzVkNjcyOGYxZDM2OTJlZTU5MzM4OTJlMDI5ZGZjOGI1NDdmNjI5IiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0ODkzZjQwZTM3ODFlYjg5NmM4MmQwNDZhMDgwNjdhMTFlMzVjZGYyZjFkZmFmMjZmZWE5MGI4ZGI2Njc2NDEzIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5N2NhNDI2MDIzMDNmYmI5YWM3MTU0ZjAyMTQxOTE2MGI5MWQ0NjJlMmRjOTllYjNiMWMzZDAzN2IxOTE0MGI3IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJkYTgwZjVlOWQwNDRkN2I0ZDU1MzQ5MWY0OTA0NWEzZmM1MTI3MzZmYjdkMDQ0MTVmMTcwNGViYzBkNWJmZTNlIn0"
+        },
+        {
+          "resource": "repo://tests/unit/test_baseline.py#L35-L42",
+          "version": "repo-lines-v1:sha256:9409c02dea4a91ff7949ac2ffa09dd79789b5119c1a8bbc7ca6d70134767b743:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGY4MGEzYTA0N2RhYzZlYzcwYzQ2NDQ2YjkxOTFiYWEyNzQwZjBhN2ZlNDQxYTllMzAwYmRhNDgyNDBkNjllYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTliMTU2OWFiZTExMDhiZTExMzhjNzEyZTg3MDU0NGFlNzc0ODVlNjNkNTIyZTRjMTdjYTg2OGM2NWU4Mjg3NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDFlOGYyNjczMDVjMjJjMWJiZWYxZGFkNGNiNDdmZGJlMWM2NzE3Zjc5NjVhMDNjZTkwZGYxM2Q1MGNhYjI2ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDYxZGFlOGJlOWU4ZTY2MWMyN2VjMDQ5ZjQ0YWNhOWExOThiMWY4ZjY2YzZhYWE4MWU4NjI3ZDkxOGYxOTc0MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0a08d184bd49459ca173fa8c55a85b5b",
+      "statement": "No test exercises fairness plotting: src/visualization/fairness_plots.py (plot_roc_by_group, plot_error_rates_by_group, headless Agg backend) and scripts/generate_fairness_plots.py (retrains via train, recomputes the stratified 20% hold-out, writes four PNGs to reports/figures, requires data/processed/reference.parquet) are not referenced under tests/, so src/visualization is uncovered yet fail_under=0 does not gate CI; only reused helpers like error_rates are protected indirectly by test_baseline.py.",
+      "evidence": [
+        {
+          "resource": "repo://pyproject.toml#L50-L57",
+          "version": "repo-lines-v1:sha256:45314c479f65f492b389e081ee622e54359d5f407db1dd7e42d261ca16b449aa:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUzMmZlNzY2ODljNTIwMjQ0MTllOWM3Mjc1NWRmZGY2Yzg4ODY1ZTQ2ZWE1MTgyM2UwYTY1ODM2MzM2YWUxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRkZGQzZmRmOGU0NzE2YjliM2Q1ZGU5MjMyOTg4YzUzNDMzMTQwMzRkMGM0ZGNmNmRkZGY0ODBlNmY4NTgxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDJjNTEwZGRiYjg4NWNiOGI1NDNmNzQxYmNhNTkxOGYxMzllYjI4MGMxYWQyNjc2MmJjNzE2MGY5MzY3NjRmYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjg0Yjg2YjYyMTI4YjZiYmQ0YTUyZDRkMzg2NjNhNmY3OTc1YzAwM2Y3YWZlNTc3MTAwNDc1OWY1OWVhYmZkNCJ9"
+        },
+        {
+          "resource": "repo://scripts/generate_fairness_plots.py#L1-L105",
+          "version": "repo-lines-v1:sha256:437f52b7b7fd92bd284eb746e27c4a28b14264c36690945ad90778dd80e7453b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmMTlhY2NiMWFiMmZlNzkwYzQxYzRlNmQ5ODYwYTEzODQ2MzkxOTUwOTJmMmE5NzI1ZTkxZmQ5MDIyZmQ2NjAzIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIxOGU5OTIzMmNkM2EzMDlmNTBjYmQ2ZjY2MjEyN2VlYWFmY2UxZjczNjI5MmRlZmIxMTNkOTgxYTIwYzdkODUyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://src/visualization/fairness_plots.py#L1-L185",
+          "version": "repo-lines-v1:sha256:205f0d118de41552f47d85b15657a594a0e7e0906935ca5826bb173121cd2937:eyJzZWxlY3RlZExpbmVDb3VudCI6MTg1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJhNGRiOWU4MTk4YTllMmU0MmE2YjQ0ZGM1YzAwYWFiN2ZhZGRmMTc3Y2M2ZTU5OTk4ZTllZWNiZWYwNDVmZTRlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJhMTQzYjQzOWJmMGE0OTExZGI1ZWFhYzc3MDUwYzA2MDBiMjA4MDQwMDRjNDhjYzcyZmQyMDQ2YTMyYmU4MjE3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://tests/unit/test_baseline.py#L88-L138",
+          "version": "repo-lines-v1:sha256:3d908af5c920018cbb55e8141dc278d0127813525683d43a4af552a7eadc0509:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4ZDdhZWJiNjI0Y2M3YmQ0OGU2NjM1NDM1ZDNiODVjOTcxZjQ2NDhjOGIyN2RmNDkyMzcwYzE2NzY4MWY0OWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzMGFmOThhMGUyZjJkYmE4M2RmMGQzMzM2M2JiZmUyNWNjOGQ5M2U2NjRjYTA3OTViMjE3YWQwNDhiNjg4ODUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRmZDVjN2FiYTRlM2Q3ZmFjNGNhN2VlNGUwYzc2ODY3YzIyZmIyOGU0MjQ2Yzg2YjZlMGYwZDZiMWNjNzcxY2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIxMTdiYmUyNWRjMDVmYjE2ZTA3YTMyNzY0MDQ3NTdmYjgwNDE5YzQ5ZjQ2ZGY5MTIxNDBmZDg4ZWE3ZDJlZWEifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.7.2",
-    "at": "2026-11-12T03:28:56.331Z"
+    "at": "2026-11-16T02:54:12.827Z"
   }
 }

@@ -178,6 +178,21 @@ uv run pre-commit run --all-files
 
 **Convenção de commits:** `feat`, `fix`, `docs`, `refactor`, `test` e `chore`.
 
+## Análise exploratória (EDA)
+
+O notebook [`notebooks/exploratory/01_eda_home_credit.ipynb`](notebooks/exploratory/01_eda_home_credit.ipynb) usa **ydata-profiling** sobre as colunas do pipeline (`RAW_COLUMNS`) e gera dois relatórios locais:
+
+- `reports/01_eda_home_credit.html`: perfil da base bruta (amostra de 50 mil registros).
+- `reports/01_eda_home_credit_comparison.html`: Referência × Produção antes da simulação de drift.
+
+Principais achados (base completa: 307.511 registros):
+
+- **Desbalanceamento:** 8,07% de inadimplentes (`TARGET = 1`), o que justifica métricas como ROC-AUC e PR-AUC em vez de acurácia.
+- **Nulos:** maiores em `EXT_SOURCE_1` (56,38%), `OCCUPATION_TYPE` (31,35%) e `EXT_SOURCE_3` (19,83%); as demais colunas têm menos de 0,3% de nulos.
+- **Sentinela:** `DAYS_EMPLOYED = 365243` em 55.374 registros (18,01%), um código para aposentados/sem vínculo, convertido em nulo em `build_features`.
+- **Assimetria:** a renda (`AMT_INCOME_TOTAL`) tem cauda longa extrema (assimetria de 391,6; mediana de 147.150 e máximo de 117.000.000), e o crédito (`AMT_CREDIT`) tem assimetria moderada (1,23). Por isso o drift é medido com PSI, que compara a distribuição por faixas e é pouco sensível a outliers isolados.
+- **Referência × Produção:** antes da simulação, o PSI é de 0,002 para renda e 0,008 para crédito, muito abaixo do limiar de 0,20. As bases são equivalentes, o que confirma que o drift posterior (PSI de 0,67 e 0,45) é efeito da simulação.
+
 ## Data Contracts - Home Credit
 
 A validação é realizada com **Pandera**, utilizando colunas selecionadas do Home Credit Default Risk.
@@ -418,6 +433,19 @@ reports/score_impact.json
 
 Os arquivos HTML permitem inspecionar visualmente as distribuições e devem ser gerados localmente. Os JSONs registram os resultados de forma estruturada. Recomenda-se manter os relatórios HTML gerados fora do controle de versão, por seu tamanho, e versionar apenas os JSONs necessários como evidências.
 
+### Evidências do monitoramento
+
+O relatório interativo completo é gerado localmente em `reports/drift_simulated.html` (`uv run python -m scripts.run_drift`); abaixo, os prints das evidências.
+
+Relatório completo do Evidently: [`reports/drift_simulated.html`](reports/drift_simulated.html) (baixe e abra no navegador).
+
+![Relatório de drift do Evidently](reports/figures/evidently_drift_simulated.png)
+
+![Dashboard do Grafana](reports/figures/grafana_dashboard.png)
+
+![Alertas no Prometheus](reports/figures/prometheus_alerts.png)
+
+
 ### Testes do monitoramento
 
 ```bash
@@ -657,50 +685,6 @@ Portas ocupadas (`3000`, `9090` ou `9100`) exigem liberar a porta ou alterar som
 6. **Escopo operacional:** o pipeline registra resultados de carga, validação e drift; métricas de API de inferência, latência por requisição, tráfego e monitoramento de desempenho do modelo em produção ainda não foram instrumentadas.
 7. **Segurança local:** a configuração foi desenhada para demonstração em notebooks de desenvolvimento, não para implantação pública. A exposição externa exigiria autenticação, TLS, gestão de credenciais, segregação de acesso e políticas de retenção.
 
-## Governança, privacidade e evolução do projeto
-
-A instrumentação evita incluir dados individuais nos logs estruturados de validação. O dataset Home Credit e seus artefatos brutos/processados permanecem locais. A verificação exploratória de ROC-AUC por gênero e faixa etária ajuda a identificar questões para investigação, mas não comprova equidade, ausência de viés nem conformidade com a LGPD.
-
-**Implementado:** contratos Pandera para oito colunas, baseline XGBoost/MLflow, Evidently/PSI para duas variáveis, análise de impacto no score, logs estruturados, métricas, dashboard e regras de alerta, FPR/FNR/recall por grupo, gráficos de fairness, matriz de riscos e controles, DAG causal, Privacy By Design e By Default, revisão consolidada de logs/relatórios/armazenamento.
-
-**Próximos trabalhos recomendados:**
-
-- Criar métrica `last_success_timestamp` e alertas de ausência de atualização para o pipeline batch.
-- Definir uma estratégia de contadores persistentes ou de métricas por execução, e testar múltiplos runs.
-- Automatizar execução periódica e, se necessário, usar um mecanismo de entrega de métricas para jobs curtos (por exemplo, Pushgateway com regras de ciclo de vida adequadas).
-- Configurar Alertmanager e canais de notificação, caso o escopo exija alertas enviados.
-- Registrar políticas de minimização, finalidade, bases legais, controle de acesso e retenção sob LGPD.
-- Aprofundar análise da representatividade da amostra e investigar taxas de erro por grupo em dados de produção.
-- Avaliar degradação efetiva de desempenho com rótulos independentes e dados de períodos posteriores (complementa a seção [Causalidade](#causalidade)).
-- Preparar o vídeo demonstrativo no formato STAR, destacando cenário, ações, evidências e limitações.
-
-## Validação final
-
-Para reproduzir os principais testes e verificações:
-
-```bash
-uv sync --locked
-uv run pytest -v
-uv run ruff check .
-uv run ruff format . --check
-uv run python scripts/check_notebooks.py
-uv run pre-commit run --all-files
-
-docker compose -f compose.observability.yaml config --quiet
-docker compose -f compose.observability.yaml ps
-```
-
-Na execução registrada em 08/11/2026, **50 testes passaram** e os hooks do pre-commit foram aprovados. Os serviços Docker e a exportação de métricas foram validados separadamente com a base real. O número de testes pode variar com novos commits.
-
-Antes de abrir um PR para `development`, verifique também os arquivos adicionados e modificados:
-
-```bash
-git status --short
-git diff --check
-```
-
-**Dica:** arquivos ainda não rastreados pelo Git não aparecem em `git diff`; inclua-os com `git add` antes de validar o conteúdo staged e criar o commit.
-
 ## Governança e LGPD
 
 ### Escopo
@@ -868,6 +852,9 @@ A matriz abaixo identifica os riscos de privacidade, viés, operação e conform
 - O treinamento registra no MLflow o ROC-AUC por gênero e faixa etária. Feminino (0,7671) e masculino (0,7515) ficam próximos; maior diferença de **60 anos ou mais (0,7290)**.
 - **Limitação:** AUC por grupo não basta para afirmar equidade. Variáveis como renda e tipo de ocupação podem funcionar como *proxies* de atributos protegidos.
 
+![Taxas de erro por gênero](reports/figures/error_rates_by_gender.png)
+![Taxas de erro por faixa etária](reports/figures/error_rates_by_age.png)
+
 ## Causalidade
 
 ### Natureza preditiva do modelo
@@ -990,5 +977,49 @@ Em produção, um alerta de drift deve **disparar investigação**, não retrain
 - **Drift prejudicial:** a relação entre features e target mudou (ex.: renda alta passou a não garantir pagamento em recessão), exigindo retraining ou recalibração.
 
 Sem rótulos atualizados, não é possível distinguir os dois casos apenas com PSI. A recomendação é combinar detecção de drift com monitoramento de performance sobre rótulos que chegam ao longo do tempo.
+
+## Limitações e próximos trabalhos
+
+A instrumentação evita incluir dados individuais nos logs estruturados de validação. O dataset Home Credit e seus artefatos brutos/processados permanecem locais. A verificação exploratória de ROC-AUC por gênero e faixa etária ajuda a identificar questões para investigação, mas não comprova equidade, ausência de viés nem conformidade com a LGPD.
+
+**Implementado:** contratos Pandera para oito colunas, baseline XGBoost/MLflow, Evidently/PSI para duas variáveis, análise de impacto no score, logs estruturados, métricas, dashboard e regras de alerta, FPR/FNR/recall por grupo, gráficos de fairness, matriz de riscos e controles, DAG causal, Privacy By Design e By Default, revisão consolidada de logs/relatórios/armazenamento.
+
+**Próximos trabalhos recomendados:**
+
+- Criar métrica `last_success_timestamp` e alertas de ausência de atualização para o pipeline batch.
+- Definir uma estratégia de contadores persistentes ou de métricas por execução, e testar múltiplos runs.
+- Automatizar execução periódica e, se necessário, usar um mecanismo de entrega de métricas para jobs curtos (por exemplo, Pushgateway com regras de ciclo de vida adequadas).
+- Configurar Alertmanager e canais de notificação, caso o escopo exija alertas enviados.
+- Aprofundar análise da representatividade da amostra e investigar taxas de erro por grupo em dados de produção.
+- Avaliar degradação efetiva de desempenho com rótulos independentes e dados de períodos posteriores (complementa a seção [Causalidade](#causalidade)).
+- Preparar o vídeo demonstrativo no formato STAR, destacando cenário, ações, evidências e limitações.
+
+## Validação final
+
+Para reproduzir os principais testes e verificações:
+
+```bash
+uv sync --locked
+uv run pytest -v
+uv run ruff check .
+uv run ruff format . --check
+uv run python scripts/check_notebooks.py
+uv run pre-commit run --all-files
+
+docker compose -f compose.observability.yaml config --quiet
+docker compose -f compose.observability.yaml ps
+```
+
+Na execução registrada em 15/11/2026, **53 testes passaram** e os hooks do pre-commit foram aprovados. Os serviços Docker e a exportação de métricas foram validados separadamente com a base real. O número de testes pode variar com novos commits.
+
+Antes de abrir um PR para `development`, verifique também os arquivos adicionados e modificados:
+
+```bash
+git status --short
+git diff --check
+```
+
+**Dica:** arquivos ainda não rastreados pelo Git não aparecem em `git diff`; inclua-os com `git add` antes de validar o conteúdo staged e criar o commit.
+
 
 > **Nota:** dados, artefatos do modelo e relatórios gerados devem ser avaliados antes de serem enviados ao repositório. Não versione dados pessoais ou arquivos de produção sem necessidade e autorização.
