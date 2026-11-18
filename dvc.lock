@@ -1,0 +1,171 @@
+schema: '2.0'
+stages:
+  validate:
+    cmd: uv run python -m scripts.validate_home_credit
+    deps:
+    - path: data/raw/application_train.csv
+      hash: md5
+      md5: 793a017f41fbac1dc28176b26dbab30e
+      size: 166133370
+    - path: scripts/validate_home_credit.py
+      hash: md5
+      md5: 0b86a3723ebae2f4dede42d258d3c1aa
+      size: 802
+    - path: src/data
+      hash: md5
+      md5: 2ccb8372f54c2cbb5079ff1511ec0982.dir
+      size: 4631
+      nfiles: 4
+  prepare_data:
+    cmd: uv run python -m src.pipelines.prepare_data
+    deps:
+    - path: data/raw/application_train.csv
+      hash: md5
+      md5: 793a017f41fbac1dc28176b26dbab30e
+      size: 166133370
+    - path: src/data
+      hash: md5
+      md5: 2ccb8372f54c2cbb5079ff1511ec0982.dir
+      size: 4631
+      nfiles: 4
+    - path: src/pipelines/prepare_data.py
+      hash: md5
+      md5: 390bfa896c82d9182bc95f5bc7496380
+      size: 1533
+    outs:
+    - path: data/processed/production_base.parquet
+      hash: md5
+      md5: 54de9ee33775b9e97da66ee8c2269f9a
+      size: 4332538
+    - path: data/processed/reference.parquet
+      hash: md5
+      md5: 8e2360ce3b0127d379fd5719b43890f5
+      size: 9099984
+  train:
+    cmd: uv run python -m src.training.train
+    deps:
+    - path: data/processed/reference.parquet
+      hash: md5
+      md5: 8e2360ce3b0127d379fd5719b43890f5
+      size: 9099984
+    - path: src/features
+      hash: md5
+      md5: 76ef61e4058a319a44aabe2f90d47f1a.dir
+      size: 2478
+      nfiles: 2
+    - path: src/models
+      hash: md5
+      md5: 5d8fa8f9402368b541bcc2ca8fafa456.dir
+      size: 3333
+      nfiles: 2
+    - path: src/training
+      hash: md5
+      md5: e6ea81f1449abf362eae597e52f45b1a.dir
+      size: 5136
+      nfiles: 2
+    outs:
+    - path: models/baseline.joblib
+      hash: md5
+      md5: f7f68e6347b9cb7f0eb1c130d9d50928
+      size: 677792
+    - path: models/baseline_metrics.json
+      hash: md5
+      md5: 561a546e93c48503e64b0943b909c681
+      size: 164
+  simulate_drift:
+    cmd: uv run python -m scripts.simulate_home_credit_drift
+    deps:
+    - path: data/processed/production_base.parquet
+      hash: md5
+      md5: 54de9ee33775b9e97da66ee8c2269f9a
+      size: 4332538
+    - path: scripts/simulate_home_credit_drift.py
+      hash: md5
+      md5: efe45d9e3208b8e2953a7c7feecbfc65
+      size: 1688
+    - path: src/data
+      hash: md5
+      md5: 2ccb8372f54c2cbb5079ff1511ec0982.dir
+      size: 4631
+      nfiles: 4
+    outs:
+    - path: data/processed/production_drift.parquet
+      hash: md5
+      md5: 08cc33b188e7a0dedea21ab6a986466b
+      size: 3804806
+  detect_drift:
+    cmd: uv run python -m scripts.run_drift
+    deps:
+    - path: data/processed/production_base.parquet
+      hash: md5
+      md5: 54de9ee33775b9e97da66ee8c2269f9a
+      size: 4332538
+    - path: data/processed/production_drift.parquet
+      hash: md5
+      md5: 08cc33b188e7a0dedea21ab6a986466b
+      size: 3804806
+    - path: data/processed/reference.parquet
+      hash: md5
+      md5: 8e2360ce3b0127d379fd5719b43890f5
+      size: 9099984
+    - path: scripts/run_drift.py
+      hash: md5
+      md5: aa869330a7055febde44fc5442280d09
+      size: 1834
+    - path: src/pipelines/drift_monitor.py
+      hash: md5
+      md5: ebe3cbdf2b0805ff9c96150b7bed4b7b
+      size: 2501
+    outs:
+    - path: reports/drift_alerts.json
+      hash: md5
+      md5: 10d8d8ca514774f437bddff7fd1ae820
+      size: 505
+    - path: reports/drift_baseline.html
+      hash: md5
+      md5: 2a7ef93cf86286044e4ab8ca61550a48
+      size: 3788697
+    - path: reports/drift_baseline.json
+      hash: md5
+      md5: 0632d86af0dc9fe9d12cd9a254d96e52
+      size: 927
+    - path: reports/drift_simulated.html
+      hash: md5
+      md5: 94581249262cee2c1fe282dc1dd820cb
+      size: 3791202
+    - path: reports/drift_simulated.json
+      hash: md5
+      md5: 3cfbe1028a21055897e160083032ba93
+      size: 922
+  score_impact:
+    cmd: uv run python -m scripts.analyze_score_impact
+    deps:
+    - path: data/processed/production_base.parquet
+      hash: md5
+      md5: 54de9ee33775b9e97da66ee8c2269f9a
+      size: 4332538
+    - path: data/processed/production_drift.parquet
+      hash: md5
+      md5: 08cc33b188e7a0dedea21ab6a986466b
+      size: 3804806
+    - path: models/baseline.joblib
+      hash: md5
+      md5: f7f68e6347b9cb7f0eb1c130d9d50928
+      size: 677792
+    - path: models/baseline_metrics.json
+      hash: md5
+      md5: 561a546e93c48503e64b0943b909c681
+      size: 164
+    - path: scripts/analyze_score_impact.py
+      hash: md5
+      md5: 1ed9375e6fcd867e28799e0b98c81ff9
+      size: 2004
+    - path: src/pipelines/score_impact.py
+      hash: md5
+      md5: d7eb40253d26ee2902e3716bf515e0a3
+      size: 2711
+    outs:
+    - path: reports/score_impact.json
+      hash: md5
+      md5: b502dc54c91209363484832368e6e142
+      size: 388

@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:d729a2b556c015c58316b3c0328355e4ee5e3adcc4350dca79a19d70b5866e8b",
+  "claims": [
+    {
+      "id": "claim_14376f9edb5e49d2b4a655df2632d4cf",
+      "statement": "Data minimization is enforced in code: RAW_COLUMNS is a closed column list and the Home Credit loader reads the CSV with usecols=RAW_COLUMNS, so only those columns of the 122 in application_train.csv are loaded.",
+      "evidence": [
+        {
+          "resource": "repo://src/data/home_credit.py#L37-L37",
+          "version": "repo-lines-v1:sha256:63beebe81eeac2b7b265fb0f1284d0db0ed19115dd64ba43891c8babb2b4c5a9:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjNiZWViZTgxZWVhYzJiN2IyNjVmYjBmMTI4NGQwZGIwZWQxOTExNWRkNjRiYTQzODkxYzhiYWJiMmI0YzVhOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjNiZWViZTgxZWVhYzJiN2IyNjVmYjBmMTI4NGQwZGIwZWQxOTExNWRkNjRiYTQzODkxYzhiYWJiMmI0YzVhOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODdiOWY4MTA1MWY3MTM5ZGI4ZTA3NGM0M2ZhMjU4NzY0ZjQ2YjY2ZTIzM2Y5NDliZmZmZmNhYmRjNGI4N2I1OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzIwOGQ4MjhiZjc5NGM1MDc2NGEwZjI3N2EyNzBkNTYwYTNjZWY3YTU0YzBlMzU5ODBmMDg0YzUzNTZiNjdkYSJ9"
+        },
+        {
+          "resource": "repo://src/features/build.py#L50-L58",
+          "version": "repo-lines-v1:sha256:2e7e2c7a0285e2f37ccb6dec52c90159f83e3ca5aab11a99bd0df062d7db7fa5:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGE5MzQ3YTgzYzA0M2Q5NDgwZjIzYjNjNTk4YjdiMjA1NTA0NTJhNGY0MTYxYjQwNTE1Mjg3YjBiOWU2M2ExNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjk0MTZlMDlmNzhiYTMxNmMwMzI1NjgyMTNiODU1ZWU3NTZlNDE1NjVkOTE4ZjA5NTE5YzgxZmQ2MjBmNDA2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2QyOTE0NzdlZDRhZGIwYWUyY2I3MTlhZTI5OGJjZWYwNTVhNzljYWRlZDQ1YjA0ZjI2NjY1YjBiMmMzMDMxNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTM1NzcwZTk3ZDcyOTg1YjhlNGNhZTNlNTIxNmFhOTc0NzQzN2QxOTQ2NTlkYTc2YmE1OWEyYmJiYjMxNThiMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4d26f950fce747f784e54ca8eee9b8e7",
+      "statement": "CODE_GENDER is loaded (it is in RAW_COLUMNS) but excluded from MODEL_FEATURES, and build_features returns exactly MODEL_FEATURES, so gender is only available for the fairness audit and never reaches the XGBoost pipeline. SK_ID_CURR is likewise in RAW_COLUMNS but not a feature, and is persisted in local Parquet files.",
+      "evidence": [
+        {
+          "resource": "repo://src/features/build.py#L6-L83",
+          "version": "repo-lines-v1:sha256:022933cf2e197d3ee630c0c890f1bcf52eac26980f6a871609625191c3919219:eyJzZWxlY3RlZExpbmVDb3VudCI6NzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlMDVjNmNmY2Q5ZGQxMTkxODhjMWRhMTIzZWJjZTk1NDZlMDhhNGVmNWIwODE1NDA3Njc1YmIzODZhZTkyNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiNWZmZTY1MzkyZTNmYjNkNzE0OTk1ZTYyZTYzMWEyNjQwMWQwYjNiMzkzNzNlN2Q2NTBiZjFjNTk3MzBhZmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmZWUwYmExNmY1OGE5Y2RlZmM0NTM4NGMwNDQ0MzhmNWM2ZDNiNDcwNDc2ZjQzYTU0Yzk4N2M1NzJkODllZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/models/baseline.py#L47-L63",
+          "version": "repo-lines-v1:sha256:e2ef00870e9b7df3a97da75aac451e0a8cc18dd09bfba7927fda06bf5fd6e016:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3ZWI2MjIzMjY0ZWE1ZDdiMDkyZmIxNGY2ODIxMGFjYWQ5MmM0MmFiMTAwOTRmNTNmNDA2Mjc4MzY2ZDQ0MDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0ZGY4OGRkZmNhNTVhNjVhMmU5ZmJiZTJhYzdjN2FhNGQ1ZDRiZTY1YTQ2Mjg3ZjU0ZjIyODI5MDhjYzE1NTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZkNzUyMmEwNjA5YzU3ZGE2MDgzMjhkODlmZDFkYzU4YzljZjJjYzI5MDAxMThkZTE5MDVmZWEzYjhiNWMzYTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b90a283552c54341a30dd639011a3175",
+      "statement": "Structured JSON logs are restricted by a formatter whitelist: only timestamp, level, message and the extras event, status, records, pipeline and error_type are emitted, and the logger does not propagate. Validation logging records batch size and approved/rejected/error status, never individual values.",
+      "evidence": [
+        {
+          "resource": "repo://src/monitoring/logging_config.py#L8-L45",
+          "version": "repo-lines-v1:sha256:b6231c6be0c8a50df968403240a4459049c8610f0c6c5c7fa793c398e5c7691f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5Y2NjYmViN2Y2ZWY3Mzg5ZjBiZjNkYWUyMGYwZTVkNmNiNDMyN2Y1MWIzOWM2Mjc2ODgyNzMwZmNlNjRmZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ZDlkZDgzYWRhMTVhODAxMjE0ZWJmNTY0YjRkOGZkMzU2YjM5NWNkN2U2OTZjMmQ2N2M0ZDhkM2I5M2E0YzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiNTZmNWQyNDBiZTI0ZDJiNWNiNjM3MWQ0NGFmZjk1MzViMDFkODQ4MjA5ODQ3NThiYjA2ZDZmNWE2M2M2YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/monitoring/validation.py#L17-L65",
+          "version": "repo-lines-v1:sha256:078c3c2f63ddafffb0faddc8648b29babac79b575d968d63306aeffdcc299386:eyJzZWxlY3RlZExpbmVDb3VudCI6NDksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlZjY2MjNjYjgxY2NkMTkzNTViYjZjM2Q1M2UwY2JkODhiMjI2YzI3M2IyYzMzZDNmYTY3ZTM1ZDEzZjI2ZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MDMyZTk2NGQwOTMyMzUxZTVkMTg1MjY5MjgxYjE3MWEzYTA5YjA4YjI4NmU2NjFlYTQ3MDMyM2M4MmViNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5OGIwNjNkOWI0N2U2NTM3OTYyNTU3MmNjZTE5NzY2OWQ1NzY3ZTEyYzE4YmUwNzU2NTJiOGNkOTgxY2U4ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e7b98407f2c84214a5438e557191f296",
+      "statement": "Raw, interim, processed and feature data, model binaries, MLflow stores, .env, Evidently HTML reports and .prom metrics are git-ignored, with exceptions for .gitkeep, DVC metadata and models/baseline_metrics.json (kept in Git for dvc metrics diff). The .gitignore has no rule for reports/figures/*.png. DVC tracks the raw CSV by hash but no remote is configured.",
+      "evidence": [
+        {
+          "resource": "repo://.gitignore#L17-L53",
+          "version": "repo-lines-v1:sha256:87974c25ebd4992d609ac5783daaecb9ac12d3d2f0ed4986769f8f13dd37dff5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwYTk0NzM0NzNkNzA0YjA0YmVhZGNmY2EyYTA0N2M5MzBlZjc0YzdiYjJmMGU3MzEyNjM2NjRiZTExNzhmNjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2OTE5ZjdjZmJkZjYxNTI0ZDg5MTA5MzVlZTQ4NDQzN2Y1Y2M1NTY3MzhjODBhMjU2NGE3MDM2ODdhYzViNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlNGYyYThkMjg5OWY1N2M4YjMwOGM4NGYzMmY2NmYxYWMxN2MxMmY0MjQ4OTljMzkyOWQ5OGFkN2M5NmZkOTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://README.md#L798-L810",
+          "version": "repo-lines-v1:sha256:556ed88f05a0b8a65ae69f1a465d284ba1ca36ad793a7cf942db0d58aac7e953:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4YmU5NzZjMzIzYmQzN2I5M2U5YTU1ZjBiYTFmZWQ3ZTNkODg1MmE3NTYzOTMzYjcyNWJiZDBjOWVhMDIyNzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxZWFmNTk4NjRhODY2MjRjN2E2YmIyNTAzZjE2ZmFhMWNlMGZjYmMzMGJkODE1Njg5OGIwMDU3YWFlODRmNjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0MjA1MDM3ZGIyMmM0NWNlNzViNzAwNzI5MGQxMDg2MjkyYWU4ODdlMDI3MzAyMzFmNDYzODM5OTZkZTNlZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmZDQ2ZDllMDNlOWExZDllNjhiZDk0NjdlNWI5YzlhYjY5ODZkNDAzZTY4NzJmZTIyZGI2YWI1OTZmYmE1YWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e3c32d9d4f7e4b4c9f8215d45a199d35",
+      "statement": "The observability stack is configured for local use: ports 9100, 9090 and 3000 bind to 127.0.0.1, reports/ is mounted read-only into Node Exporter, Grafana requires GRAFANA_ADMIN_PASSWORD and disables sign-up, and Prometheus retention is 7 days, which is the one documented LGPD retention value enforced in configuration.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L741-L749",
+          "version": "repo-lines-v1:sha256:4501216e038233982284dc05b3f1f4cd1cc5f9fb0712fa3d2f461423ea30efb9:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjBiZmM0Yzk5MWExMTc2YjkwNWU1ZjdlNTM1ODQ4MTlkNTU5Y2Y4MWNhYzEwMDc0ZjdhYzYzODUzMWQ3NmMxYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjFjMGIzNGYzNzA1N2QyOGIwODVlNWQzMzdjZmJkNTI5NWQwMWI1OGM4NjIxMzA0ZjFjN2QyNzIxOWQyYzQ1MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGEzNGMzZTZiMzI4YTViNzI1NGQ3MTNlYjk0YmQ5MjdmYTgxMjgwZmRiZGY2OWM3YzZlM2M0NTJlOGQyZDAyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmZkNDZkOWUwM2U5YTFkOWU2OGJkOTQ2N2U1YjljOWFiNjk4NmQ0MDNlNjg3MmZlMjJkYjZhYjU5NmZiYTVhZSJ9"
+        },
+        {
+          "resource": "repo://compose.observability.yaml#L1-L52",
+          "version": "repo-lines-v1:sha256:0ff531c0ef828caca835ed3d2f09f6e8d7f442e0fa9eff2c2bbba247153e7c7e:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlMDcyZDJhNWIwYTE2N2Y4NmU5YzEwYjJkNGEzNmUyYzU0ZTk5MGIxZGE2YzVkOTczNWFlMTA0MTQxY2ZhZjYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6af9dae477ac467fb17808a5d97f8c78",
+      "statement": "The README documents an LGPD plan as intent rather than audited compliance: personal-data inventory, legal bases (art. 7 X and V), art. 18 and 20 data-subject rights, controller/operator/DPO roles, retention periods (project data deleted at end, 5 years negative information, 15 years repayment history), and a future-work list that still includes recording minimization, purpose, legal-basis, access-control and retention policies. Pseudonymization of SK_ID_CURR and individual explanations are production plans not implemented in code.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L688-L749",
+          "version": "repo-lines-v1:sha256:ee279d4093075fd690464959c8f9d01cb7e8b0d88d4907622c946ece558b8d91:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjMGZhNmY4NGUwYzc4Y2Q5NWVhZjY1ZjJkYzk0MjU1NWI1YTZhNTc4ZTI4MGIxN2Q0M2FkNmZkZGY1ZWE4OTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxYzBiMzRmMzcwNTdkMjhiMDg1ZTVkMzM3Y2ZiZDUyOTVkMDFiNThjODYyMTMwNGYxYzdkMjcyMTlkMmM0NTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxZTY3ZTc3OTk3NTA2NTljNmZlMzAyOGYxNjJlNmNmMjcwZTNlYjg5N2FmMWUyZmRmMmRkMGNhNGEzOGUyYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZmODkyMTZkMzE2Njc3MTkyNzNiOTZjN2QwNWJiODI3Yjg1NmM0YWVlNWRhNzEyMjRmZjM2Y2YyMzM4MzhhZWIifQ"
+        },
+        {
+          "resource": "repo://README.md#L812-L818",
+          "version": "repo-lines-v1:sha256:49d4cc109565555c99ee2a17a66ebe74012022725217955e1243e1e0a5cd9b7e:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDFiZTM3MTY5NWEyY2FjOTVjMTNlMDU2ZDI5OTY3MjRkZDFjZjc3NmM2MGUzYzVhZDYyMzY4ZWQ1YjA0MmIyZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODUzYjliZWY5MDY5ZmNkMTk2YjBjOTE0MzI3NzYzOWY2Y2U1NGQ5ZDhlOTcxZmRkOTEzNTdiNDVjMmY1YWM0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWIwMzRkZmQ2NWI1MDIwM2MwNGZmNmMwN2ZlZWNiNGU3MGQ0Mjk2MDE2NmJiMDBhYTM4NzJhODFlNjYxOTExNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjZkZmJjOGY5YjA1ZDFiYTRlMWVlYjJjOTAwYmExYTU4MTI5MzZkNWU1NmMxZGMyN2Q5ODg4YWJiMWIyYTlmYyJ9"
+        },
+        {
+          "resource": "repo://README.md#L981-L995",
+          "version": "repo-lines-v1:sha256:078a6daaeb2cf744799fb621c9edd5aac0a5b624bf63fb8e194b8292bf80a6b4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhMjQ3NTI2MGZhYjE5ZjlkMzU1N2VlMzY2ZjVlZTljZDZjZDNlZDJhZTM2ZmNhNmQwYjRiYWMyOGRjNzc5ZjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQzMjk3MTE3NzUzZmQ3NjFiYTNkZjQ4NGQ1ODBlNmNmYjExNzE2MTE2YmQ3ODc5MzViOTY2Mzk3YjdmZjUxNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjlkMzhlMmQ5ODlhYWI5OWE1N2NlZjZmOWQ1YjdlZjM4MGEyMGIzYzA2MzJlNTNlZTc3ZjI1Y2ZiMjBmOWFhZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkMjlmNWUxZTUzNDYwMzhkOTliOTIyNzAxYzk0Mzg2MTk3YTdhMmNlNTYyMmRmNjE5NWE3MTM1YjdlNDMxOTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a269dd3fc25d448dba4ca4b744e9c2ba",
+      "statement": "Fairness checking is exploratory: train.py computes ROC-AUC by gender (F/M only) and age band (lt30, 30_44, 45_59, 60_plus) on the validation hold-out, skipping groups with fewer than 30 positives or a single class, and logs them to MLflow. Reported AUCs show the largest gap for the 60+ group (0.7290), and the README states this does not prove fairness and that proxies such as income or occupation may exist. AGE_YEARS remains a model feature.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L301-L314",
+          "version": "repo-lines-v1:sha256:998611bd4b3a314fd0de935bf244dba4ae236c503846034b1fce714b4550ca29:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmNzUzMzgyODYzYmU1NDI1YzFiMWY3YTc0MzMxNGJmMWUwODk2Y2Q4OTFhYjczZWM3ZDg2ZmJmODQzZmVlMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkZjFkZDE4MDAwNDI1YTg5NDc4MGZkNTcyYTg5ODFiZWZkY2JjZDY0Nzg1NmY4YjNmYzIzNDdiMzQ3NTliNTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5MmUyYjJhZDFhMzMzNTIzZTcwZjFkNmIwNTA1OTczYTczNDZiYzllNzc1N2RhMDY3NGIxYzZjNjliZTFmZmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ5ZTNmMzNiMmJmOTUyNTE4MDBlZjE1YjMyYTJhNDdjODAzOTEzMzU0YjQ4OWQ3NGFjNjAwMGIxYmQ2NWI5YTAifQ"
+        },
+        {
+          "resource": "repo://README.md#L849-L853",
+          "version": "repo-lines-v1:sha256:397911e8a55645f19174c0ffebb0d3c211eaefb38fafe74fff9ddd60dd99e794:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWQ2ZWJiY2ZhNDg4MDE5MTE2M2Y5ODFlOTkyOTJiNzFiODljMzRhODdkZDA2Nzc4YzA4MzM2OWZhZTc5MmZkNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzA5ODdmMmNlMjdkN2M0ZGFmOTViMDE1YzNiNTY4MGY4Y2I2MjEzYTg4MTBjMTAzMGQzMTI4YzZkY2M2MTczOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzAyNDIwMGE5ODg0NjY0N2NjNTA4YWU2OTcyOTVkOWNmNDliZTk5ZDMzOWEyNzdhYjlmYWI5ZGEzY2QzOGNjYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzlkMjM3NzA4MzkzN2Q1M2Y3OGJkMWVjYjUxNDc0MzRlYWU4MGFiMTg4OGRkMGY3ODIxMTIzOWMxNWViMGU1MCJ9"
+        },
+        {
+          "resource": "repo://src/training/train.py#L134-L147",
+          "version": "repo-lines-v1:sha256:cf58c768db4f8ac4600617e3ddab9ddaaac9bc42d1b1410c125c0669af5ea2e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY1NzMzMmZjZTNiNThkM2RmOGMzMjk0ZDczYTA4ZjlmMjU5ZmY3ZjI0MjcxZWNmZWJlZjNkNzliZTY4Y2RkNWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3MjIzMTA2ZmQ4NzQyYjcwZWEyMzNmOWRjMzU5ZjRiMDJiYmIwNjliNzI4M2VlZjc2MjQ5OTUxNmJkN2I5YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhODBmNWU5ZDA0NGQ3YjRkNTUzNDkxZjQ5MDQ1YTNmYzUxMjczNmZiN2QwNDQxNWYxNzA0ZWJjMGQ1YmZlM2UifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L172-L188",
+          "version": "repo-lines-v1:sha256:12936136f632d1cab69f482f3b52b6aec3a00e32334c6ae00261ce93d0327a96:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4NTliNGZhZmNkMzk0OGJhMzVmMjVjMGM2ZGI5MjRlOTAwYTZiNDIxNzE2ZjYyOTgzNWFiMmFmNjhhN2NmNzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3MDAyYTEyYjY3MjQ3NGZjY2NjZWQ2M2MwMTYwMDU3ODYwODZjMzkxNTc4NTM5ZmYyNmYzYWE0YThiYzdlYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L27-L30",
+          "version": "repo-lines-v1:sha256:a64f2851999806c56b29a9b61b2bc67d4349adb62b7638984ab196a011de61c7:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjkzYmM0ZDAwNjA2N2EwODg5ZWQ3ODZmNTFlYzdiY2UyZTc2NjllMTUyNGIxYWUxYWE3ZjRiNDM1YTMzMTNhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGRjM2MxOTE2NjczZGI1ZGZkODNiN2QyODc1MWFjOWNjMzc1MWZhNTI4NTlkMjUxZmVjMGMwMzc2NTllOTAyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTVjMWM0NjJlMmEzOWQ3NDc1OWY1ZTFiMTI2Zjc2ODNhMmI3MzAxMThlMThmNTEyMmIwOGNlZGVlYjY1MGUyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWY5NWE2NzJhNTJmOTNjZjE5OTJmOGM3NDVlMGE0NzA2ZjEyZDNlNzlmMWNjMmUzYTNmNzI5YWY5OTZkNzYxZiJ9"
+        },
+        {
+          "resource": "repo://src/training/train.py#L86-L105",
+          "version": "repo-lines-v1:sha256:9833e8fdc1900cbfd681af9b461858e6676e90cd6dee0b91974f4acc1abfe4bd:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxNDM1Njg1Y2MzN2I5NGY4NWY2NDhmMjA2NmU5NzZhNjJkNTU2MjVkY2MwZWYyMGYyODZmZDA0NDNkMjdjYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhMTFjMDU2N2QwYTVmOWU5YjEzNWY2NWNkMjUzNzJkZmQ2Mjg3NzVmN2MxZWQyNTNmOGJhZDQyZGQyZDY2NjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM3ZjY5ZWUxNTUwZTcxNDk0YzAxMzM4NjhlODM3ZDY3NjVkNmMzNmUxMjNjOTMzNWNmMjc4MDQwOTgzY2E2MWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_caa3ca1bab804ca89ef3b13297e507b9",
+      "statement": "Inference-time validation is not wired in: validate_training_batch is called by prepare_data, train and the monitored validation, but score() does not call validate_inference_batch. The Pandera contract covers 8 of 122 columns, and unknown categories at inference become NaN in the encoder rather than failing.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L211-L241",
+          "version": "repo-lines-v1:sha256:01d4ee95c3e5f17c53489c6f177bf5e75a9b95dd29122ba7034712c9d0c35ef2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZiODA0YWYwMTRlMDEwYWQ4YWEzNTZjYjQ2ZmQzNzcxNzk2MDcwNTUzYmU2ZDY4YWQ4NjhkYjY0MjgyODk5MjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0MDM0ODE0N2M2MDg5MDVjNDk2ZWVkNDcxOGUxZDE1NTQ5MGY0Y2Q1ZjBmNmNmNmFkZGUxNDQ1MzM1YTA1ZTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4MWY4MTkzMDUzMTYyYTA5N2Q4Y2ExNjk2NDZlODIyMTdjYzM2NjMxNDUxZmQzMTk0MzA0NjU4MmM1ZjgxYzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5ZjNiYjk1NjJjMjA0OGNiNDM0NTJhZmYwMmViODlkYTZlODdiMjVlNWFlOTU5NjQ1YTViNTM5ZDc3NWM0OWQifQ"
+        },
+        {
+          "resource": "repo://src/data/contracts.py#L44-L49",
+          "version": "repo-lines-v1:sha256:18dc618d295c6c7e54b93ac1486e964e57fd248df7a6704b5da87bc3aa26141b:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGFjNDJmZDIxYjI5NWM5ZjUyNzJmN2JkNDM5OTQwYmY4NjlmMmRhMTA0MTJkNjBlNTgwODZiZjdhNjdjNzY0ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODA3ZThiYzhlNmUxY2FhY2RiNzUyMTdlYjljN2Q3NDEyMmZiODg4NDZmNmFjNDhkMTM2Y2Q0YTI4YzNmY2YzZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGNjNGE3ZDFjYzc5NmFiYTNlNDY3MjMzMjdmNTE3ZTlmODExOTgyZDI1MGYwNzAyOTg2ZTRiNTc2NGFkOTU4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmY4NTNkNWZjOGQ1Y2I5MGQ3MGEzMTg0MjY5NDM4NDc0M2I5MGE1MmYzYWNmY2U5MjMwYTA4NjIzNTVlZjJlYyJ9"
+        },
+        {
+          "resource": "repo://src/models/baseline.py#L34-L100",
+          "version": "repo-lines-v1:sha256:e46a3cbee1b303af2a55c5c08db9dccaaf5dc907aa11ae13e203e1e2e3616d44:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyNDZhMjM1NWFhMzQ1MWQzZGViNGE5OTY4ZDhmNjU0Zjk0OTM0N2ZhM2VmYTBmOTYzMDA0MmZiZTc2NTdkMGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5NzRmYmYzNzA0MWQ4ZWEwZjI1Mjg4ZTQ3ZGYxZWI2MTI5OWE3MGU4ZjhlYWE1MDAzYjBjNjVjZmVlZTlkZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjkzMDgzYzE5NzEyMWI5ODI3MDBiYThhZmFiZDE3MjJjZjFkM2U3NDA0NTA5ZTgwZWZhMjcyNDdmNjJmMDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhiOTFkYTIyYjY3YmYzZWJlMzlmZTc2NTU1N2Y3ZjhhNjI4YWIxZTI4NzhhYzkwODNhMGE1MmQyZWY0N2I4OGUifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L27-L27",
+          "version": "repo-lines-v1:sha256:4b79ba46f2e055ef6cee1cf906606db0c8798b0c20c4e61225fad3be10d719e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGI3OWJhNDZmMmUwNTVlZjZjZWUxY2Y5MDY2MDZkYjBjODc5OGIwYzIwYzRlNjEyMjVmYWQzYmUxMGQ3MTllNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGI3OWJhNDZmMmUwNTVlZjZjZWUxY2Y5MDY2MDZkYjBjODc5OGIwYzIwYzRlNjEyMjVmYWQzYmUxMGQ3MTllNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTQzYWIyNWZjNWE3M2JmOTBiMTk5MDA2MDVkOTFjZDUyMmQ1ZGQ0MWY0NGE1N2ZlNGFiOTI1YzI3MjI4ODk5MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzg0MTQ0NGQ0YTBlYTVkNmRjNjc0MjllZTFjZjM4NmY3OWRmYjkyMjFkOTdjNGIyMThjZjMzM2I0NzkzMTNhYSJ9"
+        },
+        {
+          "resource": "repo://src/training/train.py#L176-L176",
+          "version": "repo-lines-v1:sha256:bbd2dd66a3c1411c55856d5bca97fec8ec7cbffbef8b38d5a0376cc5715ef597:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmJkMmRkNjZhM2MxNDExYzU1ODU2ZDViY2E5N2ZlYzhlYzdjYmZmYmVmOGIzOGQ1YTAzNzZjYzU3MTVlZjU5NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmJkMmRkNjZhM2MxNDExYzU1ODU2ZDViY2E5N2ZlYzhlYzdjYmZmYmVmOGIzOGQ1YTAzNzZjYzU3MTVlZjU5NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTk4NWE5NGE2MzU0ZWY5ZDhlNTlhY2Y0MmRiODQ1YzU3NGU5NzZiOGI3OTQzODZlMzQ3Zjk4OTkzN2Y5ZjYwZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTY3ZjUyOGY2ZDNjMTQ0ZjcwZjI2ZmI3ZTkzZTc3YzkwMTk0OTg3NjE5OGE3ZmE2Njc1YzRiNDYzODYyZmE3YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b642aa04c7da42f0b7ba8078c0678c8d",
+      "statement": "Documented limitations of the baseline and drift experiment: the F1 threshold (0.1432) is chosen on the same validation set used to report F1; the production base is a random split rather than a later period; drift is a synthetic stress scenario on two columns with 5,000-row samples and a demonstrative PSI threshold of 0.20; score-impact results do not prove degradation or causality.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L285-L300",
+          "version": "repo-lines-v1:sha256:7272a6410ce826eb9acfcf225790c0a49c1596c1597a201215f0a4e88c4bf7f8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU1ZWU3OTUyMjNhMmEzM2Y4ZmI4NGJhYjY2MDg1YTZhMWJlM2M2MWE2ODQ0NmRmNjQ0YTQ5Yzk5ZjExNWVkZDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwODk3NGU4YzUxMjRmNzMzZjFmNjA0YzA5OTdiMGI0YmY1ZGE4MzIzYzBhZmIxNWVkNGNhOTY5MDk1YjBjNGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZlMGMwODg0Y2I4MTdkMTk4YzAxMTE2MjIxMTJmMWQwNDBmZTlkNzc2YjNhYTRiYmI3MDg5NThiOTA0OTY2MDgifQ"
+        },
+        {
+          "resource": "repo://README.md#L347-L383",
+          "version": "repo-lines-v1:sha256:8966060565b46917b1901561145469663bf9183943ed4a966a8edf8f507623cc:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZlODNkNmIzNTY4MGMyMTYxYWQyNjI1OTgxODBmMzljMDdiYzBiNmI4MzcwNmQ0ZWVhY2VmYTVjZDI1NDNhYTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4OTdiMWM3NTA5NTM4MjliZGRhZTMyMWIwYTkwOGExYzk2ODM3YmJiNDU4NGI3YTc4ZTI1MzBkMDIwZDFhYWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM0Nzg3YWU4YjM5OWNmMGRjMDZjYzU5ZjZjZmUxYmI3OTY3ZTRiMWFlNzZkZjI1YzlkMTE0ZTk4MjY5MWIxZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM5YjExMzA2Y2U4YThmNWY0ZTJmZTlhNDAyN2ZlN2M3NGFkYTEwODZjNDM5OTg3M2I4NzUxNmQ3NzU2NjJkNGUifQ"
+        },
+        {
+          "resource": "repo://README.md#L395-L410",
+          "version": "repo-lines-v1:sha256:ecee231a7a1a6858b8e9293c58092ba1476a298f236a883679c1ab0cd68176c1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwMjFlYjMzMzRhN2Q0MTQ5MjM2ODFiMGEzMTFjYWZhNDBkYjBiN2M3ZWYwMjA4ZjhhYmEyZjZjMGU2NmMzZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3YTcxNTg4MWY1MjJmY2VkYjM3NGNiNDg0MDVlMmUzYTYxNjA4MDU2OTg1NTBhZWIyNjI4YTI2NzFlMzA4ZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhYzBlYTVlMmFlYzNkYjNjZDgyZjkyMWI4ZjlkZTQyMTQ1NjZlOTY5ODEzMTliMTA3OTczYmUxZGU5MjFiMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmN2UyZDJkMjgwMGMxNTQwOTVmZTRiNjZiM2FiOGQ1YjcwOTg1Yzg5YmIyNzFjZTE2NDliNDY3OWMwYjE4ZGIifQ"
+        },
+        {
+          "resource": "repo://README.md#L459-L465",
+          "version": "repo-lines-v1:sha256:5a2d5bd0fd755931c480645515a94c9ba6a2f142dcf38a5df13950a7bdee30b6:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzJkMzBjNWJjYzIzMGM1NDIwOWZiNDVlODc4MjkzODJhNjA0NjQwZGY5NDIwMmIxYjVhZDdkZGRiZTMzYjU4OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDNiZTcxNTU5NTVlNjY5ZGNkZTBmZjViMjg4Njg3NmVhOTc1NzY2ZDQ5NjFiMTEyODA1YjkwNGE0N2M5ZTM3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmQ2MzI1YzM2ZjFjNmRkNDhjMDg2YjM3M2U4NjAyNDM2OTIzYmJlY2YwZWM1ZDk5Y2Q3NGVhMGEwOWViN2MyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzYzZGU0Mjc1MjE2Yzc1MzI4ZWQzMDg4ZWNmODY5YmUxZTgxZmEzZDAxYWE4Mjk4Njc3Yjk5MGVjZWZkZmEyOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad5085334d9f45cfb0a1a602ee41399d",
+      "statement": "Operational limitations of the monitoring stack: metrics are per-run snapshots exposed from the last .prom file so alerts can stay FIRING on stale data, there is no Alertmanager, notification routing, scheduling or API/latency metrics, and the setup is not hardened for public deployment (no authentication, TLS or credential management).",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L631-L633",
+          "version": "repo-lines-v1:sha256:d745020d6e2d14dc9c5c9e1a61a9a82d3ad58a896175f2dea2cb1cc0800f0d45:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWI1Yzc5OWJhYTIxZWNjMThlZTVkNDAyZDk4ZTQzODQ1MGZmNTlkMmQ4ZTllYmRkZTJlOWFiMWQ3NmRlYjRiYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTVhMDcyYWYxZTNhN2Q1ODEzNDdjMTVjZjlmNTZkY2UzZWY1ZmNiYzcxZWExZTZjOWExZjQ4NTQ2ZTE1NTVlOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTQ5Zjc2ZWIyZDE5ZWE5ZDI4YWJmMzQ3ZTJjNzhjNDdkYTMzZWZhN2UwODE3ODdiYTE5ZDcyNGFlMDM5NGIyZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzlhMmRlYTUxYjg0OTZhZDE5NWY1YWYzODhhNWI4OTk5NDQ0NzdlM2NjYzdhMGQ3MDI1MDA0YThkNmEwZjFlMiJ9"
+        },
+        {
+          "resource": "repo://README.md#L678-L686",
+          "version": "repo-lines-v1:sha256:b96be50b88560d2cc7e85e80abd2e051df34d4ecfc02f2fa2e0847127f99a0de:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTBjZGJmZjU3NWYxODYwNDEyNjFjYTkyNTJmNjMxNzhkOGMxYjIxZGE1NjZiYzcwNWU1Y2NjYTJkMGVjMmRmYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRhNGViYjhjOTE0MzlkNTdjOWFjMTdkZTEzN2RhZGNlMmVjNWY4MDdjZGJhODhiYzVhZDIwOGYxNjcyNjJmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDcxZjAxZDFiZDNmMTUyNzliN2RjNzNiNDc0MzJiOGM5NGYxZDA4NzI3NTc1YmNiZGY4NDZhMmQyMjE0ZjgzOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTI1M2YzYTQ1MjkwZGJjZDE3YzBiYjY3YzBmZTI2MjI3YjQ3YzliMTZhYmEzYmEzZjdkMjg1YzhjMWNkZWQ0YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c022894d40ee4d9d834c5e34908df79f",
+      "statement": "docs/model_card.md is only an outline of nine headings without content, docs/adr/0001-template.md is a template with no recorded decisions, and docs/architecture.md contains a single flowchart; the effective model-card content (metrics, group AUCs, limitations) lives in the README.",
+      "evidence": [
+        {
+          "resource": "repo://docs/adr/0001-template.md#L1-L6",
+          "version": "repo-lines-v1:sha256:1a01e12b91232bb7ba0e0f1c756b46f69086c766eab8ce1bdf3b7559f2305589:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTc3M2Q3NGU1ZWJlZjVhMDU3ZWFiMTE4OWQ4ODZlMzgwMDZlZjdlMDliM2YyODQyZGU3NTYyMzRlNDUxZjUwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTFhYmFjMTM4MDkyNjg3NjJhMjYyZGVmMGIzMGZhM2EwMWI5YjI2MTcxZGI5Y2JiMmYwZTFlMzViMzdiOGQyMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://docs/architecture.md#L1-L7",
+          "version": "repo-lines-v1:sha256:f3c04914526de4fe2196514cc221268191759a1346058362855ad46eacb85092:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzYxMDNkMTY3NzY5OWVjZjQ4NWI4MWJmY2YyMTg0N2M4OWJiYTVlNDE3ZjI2MWJhODU0MGM0MGYxYjdlNWI4NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzMxNjhhNjZiNmEyM2UxZWE4YjQyOTE4NTRkODM2Njk0NWUyNzA2YTM1ZmNkYTE5NWRhYjhkYzliMDZhYTg2NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://docs/model_card.md#L1-L11",
+          "version": "repo-lines-v1:sha256:f27db3514b25c9c2aa6685977bfb9e644bc0d69659c8d86c214e95f4edc725e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMDhiY2M4NzExOTNmZDM1ODQwYzVlZjcxZTg4OWZlYzJkN2JmN2Q5ZjljYWM3ZjI4YzU3NWY4ZTFkMjc4ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjEyOGUyNDI1NmZkOTZkZWUyNGYxYzE1ODE3N2IxZTUxMzg5Y2ZjY2RjMGUwOGNmMzkxOWQ2MmRjZmZhM2Q3NzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_43bd7130f59d4c32bda15e4fc5eed78e",
+      "statement": "train.py also computes FPR, FNR and recall per gender and age band (error_rates_by_group, via error_rates on the confusion matrix) at the same F1-optimal threshold as the overall metrics, without the minimum-positives guard, and logs them to MLflow together with group AUCs; group metrics are not written to baseline_metrics.json. Tests check the fpr_/fnr_/recall_ keys and that auc_gender_XNA is absent.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L316-L324",
+          "version": "repo-lines-v1:sha256:aa635d50917d87e1736841b47d75d48131d5728f91c2dc10043bf278ee63d55c:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzY3MmYwYjNjMDA5ZjUzNzBlZDczYWRmYzhmODUzNTNiNDViNDJmYTdmZWE0NWEzNTIyYjQxYTMxNWE2MGZkNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjljZTE5MTlmYmE3Y2ZlOWQ2NGQ0NTNiNDIwODQxYTZhNTc1MjgwNWJjYjA4M2QwNTFhZDA3ZDg4ZTYzMjRjZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjE0M2I3MWJlYzRmYjQ5MDBkOTIyOWYwYzBkYWE4YzJjNWQ1NTY5ZDNhODVmNzgxOWE3MzFjZDkzMDY1NDQyOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGUwOTVkM2U2MjIyNmMxNGUzNmY0MDg5ODVmNzRjZTc2NzFlZjk1YWI3ZDVkNTlhMDYzZDM0YWU3YzNiODliMiJ9"
+        },
+        {
+          "resource": "repo://src/training/train.py#L108-L147",
+          "version": "repo-lines-v1:sha256:45b47d285eee2a5ac496c2aaf4a02fafc6382b8cd04ae58de98d0bb395fe5058:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NTlkYThmZTIxMGFiMjNiOGQwNjIxYzlmZWU3ZTI3NTU0ZWYxMWUwZTVkNDQ1YTdjYWJlOWIxOGUxNjIyZTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3MjIzMTA2ZmQ4NzQyYjcwZWEyMzNmOWRjMzU5ZjRiMDJiYmIwNjliNzI4M2VlZjc2MjQ5OTUxNmJkN2I5YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRhODBmNWU5ZDA0NGQ3YjRkNTUzNDkxZjQ5MDQ1YTNmYzUxMjczNmZiN2QwNDQxNWYxNzA0ZWJjMGQ1YmZlM2UifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L172-L188",
+          "version": "repo-lines-v1:sha256:12936136f632d1cab69f482f3b52b6aec3a00e32334c6ae00261ce93d0327a96:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4NTliNGZhZmNkMzk0OGJhMzVmMjVjMGM2ZGI5MjRlOTAwYTZiNDIxNzE2ZjYyOTgzNWFiMmFmNjhhN2NmNzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3MDAyYTEyYjY3MjQ3NGZjY2NjZWQ2M2MwMTYwMDU3ODYwODZjMzkxNTc4NTM5ZmYyNmYzYWE0YThiYzdlYWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L47-L61",
+          "version": "repo-lines-v1:sha256:6361291f2aaab4f44980c2ae32c148e8b90150c8b71be853aa406e45e9ea9955:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhZDk4NGNlMjZlYjIwMGI2YTg0NzAwZjZiZmE4NjE3YmM3NTgyMzJmMzUyYzZjOGNjZmFhNTcyYTQ0ZDc1YTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkyYzRmODg2OWFkODZmYzJiOTVlNzFkMzA1ZTZkYWY3NmZjOTg2OTkyZmNhMjJmOWQyYjcxZGE0YmUzYjgxMmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkZGQyOGRlMTU5M2FkMWZmMTIxM2FmMmMxZjM4NDE4MDFkZjBmZTQ0NTVhNTdiMDI5ZjRlNGY5MjBiYjczZGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImEyNmM5MmY2ZWU1ZDgyNjYwNzcxZmJhYjQ3YzFjZWI4ZDcyN2Y4NDY5NThiYTc1NzQ3NTg5MGQyNDVjNzUxN2EifQ"
+        },
+        {
+          "resource": "repo://tests/unit/test_baseline.py#L36-L42",
+          "version": "repo-lines-v1:sha256:eb84fe0857fdf394eb3ddf14caee6d9b9c0c4ebbcf8578783fd43c8ba53dd3d2:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmNhNjBjMmYwZThlNDVjNGQwMDBiY2FkNDJmNGU2Yjk3ODE0OWRmODhhNjhiMTM1NjM4YWI3NzJhYTM4ZGU3MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTliMTU2OWFiZTExMDhiZTExMzhjNzEyZTg3MDU0NGFlNzc0ODVlNjNkNTIyZTRjMTdjYTg2OGM2NWU4Mjg3NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2E2YmZlYjI2NGNmMzU1ZGI4Nzk2MDk0YjE2ZGIyM2MyZDdhOGJkNzU2OWE2ODE3NmM2YmU2OGIwMWM4MTdmNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDYxZGFlOGJlOWU4ZTY2MWMyN2VjMDQ5ZjQ0YWNhOWExOThiMWY4ZjY2YzZhYWE4MWU4NjI3ZDkxOGYxOTc0MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8f29ec6ab69e4137944f076817b7e644",
+      "statement": "scripts/generate_fairness_plots.py retrains the baseline on data/processed/reference.parquet (raising FileNotFoundError if missing), recomputes the same stratified 20% hold-out, and uses src/visualization/fairness_plots.py to write four PNGs to reports/figures/ (roc_by_gender, roc_by_age, error_rates_by_gender, error_rates_by_age). It does not load the saved model or log to MLflow, reuses AGE_BINS/AGE_LABELS/error_rates from train.py, and the plots lack the minimum-positives guard. It is also a dvc.yaml stage with cache: false outputs.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L326-L341",
+          "version": "repo-lines-v1:sha256:4839b98245d3d726eeaa434f44c8766d9d16acb9ce8592c133276c90d572ba6a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI3YWIzZjk4NmQ5NmM2ODhhZjEyYTEzMDA0YjllYjY0MmQxOTlkNzg1NWZlNmM2MGJlYzFmMDJmYmE5MTY0OGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRlNDdlOTM1ZjgyN2Q2OWM4ODZiNjRhZTJkOGFmNjU1NjRlMjAwNzFiM2Q0MzE2OTIzNmEwNjc3NTY2OTE3Y2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmOGJmMmI1MjdjYmY0YzhjOTI2YjAxNzcyNzlmZWQyZDJlNDg2ODJkOTI5OTE1YjcyY2ZhNGJhY2Y1MWExODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwMGU4YzBjYWU4MDA5M2U2NDZiODQ3ODA2MTFjMGRjMGM5Y2VkZTk3Y2RhYjQwYTA1MGMxZDRmOTI1MzdkMGMifQ"
+        },
+        {
+          "resource": "repo://dvc.yaml#L74-L89",
+          "version": "repo-lines-v1:sha256:513a80e535592e4bd502b54da32b8053c3cd0a63c7115fcdd9b7da310e0294a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyOTRjNjAzYTlmZjJiNjUzOWYzZmY3ZjhiNmU5NzA0NWY4Nzg0Y2MzNTdhNDk0NjE5OWRlN2JiNTk5Y2I2NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkOTFiOTgwYmZiNzM4ZjEzYjM5NWNiNTBmYjFlMTZiNTQxNWYxZTMzZWE4Y2YzODk3ZWNlZTkyMTIzZjNiZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://scripts/generate_fairness_plots.py#L1-L105",
+          "version": "repo-lines-v1:sha256:437f52b7b7fd92bd284eb746e27c4a28b14264c36690945ad90778dd80e7453b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJmMTlhY2NiMWFiMmZlNzkwYzQxYzRlNmQ5ODYwYTEzODQ2MzkxOTUwOTJmMmE5NzI1ZTkxZmQ5MDIyZmQ2NjAzIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIxOGU5OTIzMmNkM2EzMDlmNTBjYmQ2ZjY2MjEyN2VlYWFmY2UxZjczNjI5MmRlZmIxMTNkOTgxYTIwYzdkODUyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        },
+        {
+          "resource": "repo://src/visualization/fairness_plots.py#L1-L185",
+          "version": "repo-lines-v1:sha256:205f0d118de41552f47d85b15657a594a0e7e0906935ca5826bb173121cd2937:eyJzZWxlY3RlZExpbmVDb3VudCI6MTg1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJhNGRiOWU4MTk4YTllMmU0MmE2YjQ0ZGM1YzAwYWFiN2ZhZGRmMTc3Y2M2ZTU5OTk4ZTllZWNiZWYwNDVmZTRlIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJhMTQzYjQzOWJmMGE0OTExZGI1ZWFhYzc3MDUwYzA2MDBiMjA4MDQwMDRjNDhjYzcyZmQyMDQ2YTMyYmU4MjE3IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MCwicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_5fa85136923845f0a17bfb0cf6620d34",
+      "statement": "The fairness figures are regenerable DVC outputs (cache: false) but are effectively committed: the README says .gitignore excludes reports/figures/*.png and its storage table marks the figures (and baseline_metrics.json) as outside Git, yet .gitignore has no figures rule, explicitly un-ignores models/baseline_metrics.json, and the four PNGs sit in reports/figures/ and are embedded in the README.",
+      "evidence": [
+        {
+          "resource": "repo://.gitignore#L17-L53",
+          "version": "repo-lines-v1:sha256:87974c25ebd4992d609ac5783daaecb9ac12d3d2f0ed4986769f8f13dd37dff5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwYTk0NzM0NzNkNzA0YjA0YmVhZGNmY2EyYTA0N2M5MzBlZjc0YzdiYjJmMGU3MzEyNjM2NjRiZTExNzhmNjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY2OTE5ZjdjZmJkZjYxNTI0ZDg5MTA5MzVlZTQ4NDQzN2Y1Y2M1NTY3MzhjODBhMjU2NGE3MDM2ODdhYzViNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlNGYyYThkMjg5OWY1N2M4YjMwOGM4NGYzMmY2NmYxYWMxN2MxMmY0MjQ4OTljMzkyOWQ5OGFkN2M5NmZkOTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://README.md#L341-L341",
+          "version": "repo-lines-v1:sha256:4e47e935f827d69c886b64ae2d8af65564e20071b3d43169236a0677566917cb:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU0N2U5MzVmODI3ZDY5Yzg4NmI2NGFlMmQ4YWY2NTU2NGUyMDA3MWIzZDQzMTY5MjM2YTA2Nzc1NjY5MTdjYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNGU0N2U5MzVmODI3ZDY5Yzg4NmI2NGFlMmQ4YWY2NTU2NGUyMDA3MWIzZDQzMTY5MjM2YTA2Nzc1NjY5MTdjYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjgyMjVjNzgwOTJiMDc2NTVjNjQ4NjZkNDU3MDdiZjcyOWJiMTBiMWZkYjkyNzcwNWFmMjAxMWZiN2U4ZDFjOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDAwZThjMGNhZTgwMDkzZTY0NmI4NDc4MDYxMWMwZGMwYzljZWRlOTdjZGFiNDBhMDUwYzFkNGY5MjUzN2QwYyJ9"
+        },
+        {
+          "resource": "repo://README.md#L798-L810",
+          "version": "repo-lines-v1:sha256:556ed88f05a0b8a65ae69f1a465d284ba1ca36ad793a7cf942db0d58aac7e953:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4YmU5NzZjMzIzYmQzN2I5M2U5YTU1ZjBiYTFmZWQ3ZTNkODg1MmE3NTYzOTMzYjcyNWJiZDBjOWVhMDIyNzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxZWFmNTk4NjRhODY2MjRjN2E2YmIyNTAzZjE2ZmFhMWNlMGZjYmMzMGJkODE1Njg5OGIwMDU3YWFlODRmNjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0MjA1MDM3ZGIyMmM0NWNlNzViNzAwNzI5MGQxMDg2MjkyYWU4ODdlMDI3MzAyMzFmNDYzODM5OTZkZTNlZWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmZDQ2ZDllMDNlOWExZDllNjhiZDk0NjdlNWI5YzlhYjY5ODZkNDAzZTY4NzJmZTIyZGI2YWI1OTZmYmE1YWUifQ"
+        },
+        {
+          "resource": "repo://README.md#L855-L856",
+          "version": "repo-lines-v1:sha256:f97fdd363682a6824b172541e2d46b61dddc4217beb67819eeccf3a7391ba999:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTg5YjZjYjI2N2U1M2UxMTJlZWI5ZTYyNTBlODBjMDc2NTQ3ZWVkNGU1M2NmMGJlNmYzMTAxNDY2ODE5YjMwZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDc5ZTEyYzU4MGY1YzE0YTQ0Y2NiMDkwNmYyMGRkNTA4NDIzYzY4YTkyZDU0N2UzODliMzQ1YjBjYzNkM2JmMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzJjYmZlZTg5MjFkZjk5MzMxNTI4ZmYyNzc0NDEzZjM3ZjZhMjBjZWI5ZDU3MWYyOGY4NTcxZGQ4NDA0OGQyMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzlkMjM3NzA4MzkzN2Q1M2Y3OGJkMWVjYjUxNDc0MzRlYWU4MGFiMTg4OGRkMGY3ODIxMTIzOWMxNWViMGU1MCJ9"
+        },
+        {
+          "resource": "repo://dvc.yaml#L74-L89",
+          "version": "repo-lines-v1:sha256:513a80e535592e4bd502b54da32b8053c3cd0a63c7115fcdd9b7da310e0294a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyOTRjNjAzYTlmZjJiNjUzOWYzZmY3ZjhiNmU5NzA0NWY4Nzg0Y2MzNTdhNDk0NjE5OWRlN2JiNTk5Y2I2NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkOTFiOTgwYmZiNzM4ZjEzYjM5NWNiNTBmYjFlMTZiNTQxNWYxZTMzZWE4Y2YzODk3ZWNlZTkyMTIzZjNiZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e151158ab8f944de9a64563ebf7faf6e",
+      "statement": "The README maps Privacy By Design/By Default principles to concrete controls and carries a risk matrix (R1-R14) in which indirect discrimination via proxies (R4/R5), drift and freshness (R6/R7) and transparency/representativeness (R12/R13) keep medium residual risk; a causal DAG documents that excluding gender does not close proxy paths via income, occupation and EXT_SOURCE.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L720-L734",
+          "version": "repo-lines-v1:sha256:4527cd36b9503718e7289bb59acf60efc1190b713cb3b0ade6cb5660b397cb0b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNjdhZjQ4MmM0YTRhYjU5MjhiZTQ3NGEwNTRhNmJhYjUwOWJjNmMxNzhhZDkwMzU5MDVkZTcxMmI4ZWU1ZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2MTZmNWJhY2Q1OWQ5OGMwOGMxMzZkZjZkM2EyNGIyZWE4YThjYjhkMzcyY2M5MzczNWVlMTM4MjkwMWM4NjMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3OTA5MzRlMzI0YTkyZDY4Yzg3Y2Q2OTViZWE1NjIzY2FiM2EwNTI0NmRjZWEzMTlhYzFlMmE3OTdiNTRkZTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIyYzJkZGJlZDQxMDZiNWMyYTI4NWFlYTIzMTljZDIwN2VhOGJkZDIxNjU4MTdjZmNiMjI2ZjVkNzk0NDIxOTYifQ"
+        },
+        {
+          "resource": "repo://README.md#L820-L847",
+          "version": "repo-lines-v1:sha256:51d27542375c3093bb0651f0c516d7d71f2ffc25d5d38cfacd13c7039639d82d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwYjI4YWNlZGJjZDlkM2Y1OWVlMDkyNDMzMGZkNTkyZDhhMjNkNmQzZTY0MTM5NGIyYTBhMzcxMWRmZGM1MGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2YzNjMzE5MGI3NmEyZGIzNTVmNDhiMmJkMjVhZGVmNWI5MTZmYWE0MTZiMzllMmU2YjYzN2FkMjUyOTcwNzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU0ODUyZDAyMDI1ZGQ0YjljNGNjZGI3MTgyZDgxZDg0MTE1NWMzNWFiMGQzZWQ3OGNkNmUwNmMxZDc2ZDcyYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2NDE4OGNlY2E3NTg5OTVmMDg4ZmJhNjYzZDA4Mjc3ZDg1NTRlZWQ4Y2QyZTM0OWU5Y2EwNTRmZTIzODJlMGUifQ"
+        },
+        {
+          "resource": "repo://README.md#L877-L940",
+          "version": "repo-lines-v1:sha256:228e45383a40c3c837f5276a49abf789e0c7fc4095d20d2005f61faf6ddbae23:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ2YTYwZjEwYjcyZjk0OTk3MDhkNjI1MGY2MDczYTY4OTQ4ZTdhZTZlODBlOTY3Mzc0ZjYxNDU2YWU0YjIxN2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjNzc3ZjYyMThkMTI4ZGNlMWMxOTMwMmY2NmJkMGI5ZDg2NjQzYTUzYTFiMjE0MDBlMDhlNmVkMGUxZGM1NjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI2ZGVmZWZlMDE1MjFjZWM3OTZmYWE1YmI0NGQ5MmUzYmI4YWE4NDVjNjdhNTZiMzVmYjdhOTBiNTBhMWUxNzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4YzIwNDRkNDAyM2NhNTRhYzRlMjA2YTA3NmJiYjU1MWI5YzYwYjI4NzIzNzBlZjhhZjkxZGZkMjM3NmQzOWIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-11-16T02:54:12.827Z"
+  }
+}

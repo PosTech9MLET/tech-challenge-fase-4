@@ -40,11 +40,13 @@ def main(args: list[str]) -> int:
             failed = True
             print(f"✗ {path}: células com output -> {cells}")
     if failed:
-        print("\nLimpe antes de subir:  make nb-clean")
+        print("\nLimpe antes de subir:  uv run nbstripout <notebook.ipynb>")
         return 1
     print(f"✓ {len(paths)} notebook(s) limpo(s)")
     return 0
 
 
 if __name__ == "__main__":
+    # No Windows o console usa cp1252, que não tem ✓/✗
+    sys.stdout.reconfigure(encoding="utf-8")
     sys.exit(main(sys.argv[1:]))

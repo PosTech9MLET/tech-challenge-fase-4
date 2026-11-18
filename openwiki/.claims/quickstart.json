@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:b7482d2851a80c22e46ee2dc897fab61d56215fe2178d484cf48625174757904",
+  "claims": [
+    {
+      "id": "claim_06731e76540f49dcafc7f070bcadbbfc",
+      "statement": "The main application entrypoint in src/main.py defines a main() function that executes the primary pipeline.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.py#L4-L10",
+          "version": "repo-lines-v1:sha256:347b2bcd50f719b9d9fd60767f3e2127e843a4c193007012c75579394d8de0ee:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzBiYzUxMjY1ZGEzYzQ5NGJkZDI5NDA4YzBlMTc3NjY1YmZlYWQ2ZmQyNzkzNmYwNTlkMmM1NTdiMTlhM2NlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMThlOTkyMzJjZDNhMzA5ZjUwY2JkNmY2NjIxMjdlZWFhZmNlMWY3MzYyOTJkZWZiMTEzZDk4MWEyMGM3ZDg1MiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzg3MGRmNDRmNTRlY2JkOTQ5ZTQ3YmJlZDJkY2JlNzFiNWJmZWMyNjk3NzA5NjZkNDAzNDRlM2E4ZDQ1NjVkMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_133068c1793b43f8a1b6ed86b039f584",
+      "statement": "Project settings are loaded dynamically from a .env file into a Pydantic BaseSettings class in src/utils/config.py, defaulting key parameters such as environment, random seed, log level, data directory, and MLflow tracking URI.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L10-L23",
+          "version": "repo-lines-v1:sha256:28b21fa97d82277a2898299ae66fe122ecc6fefd77763284bbf7538984a5820e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjODYzMzFjOTBiNzhjZGI5MTdmZDViZDY5ZmMwNzE0ZDVhNWZlODQ2MGQ4NzYyNzllMTVmZjQyZmZjNzIzNWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZjRiZjE4NzYxNjAyZDNiNTkwYjM3ZDM5OGZhOTk3Nzk3MzBhNzdiNjgxMzhmZGQxNDA3MzQ5MmUzNzY2ZWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1OWY0YzlhOTg1ODcwYmVlNjI3MzI5ZDkxODdhM2RjMDU1NmQxODk4ZTVmYmE5YzVlODM2Mjg1ODZhN2Y0MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_07ce3df645644760ac6bcd755c409891",
+      "statement": "Local setup uses uv with Python 3.12 (uv python install 3.12, uv sync --locked), an optional .env copied from .env.example (ENV, LOG_LEVEL, RANDOM_SEED, MLFLOW_TRACKING_URI), and uv run pre-commit install for hooks.",
+      "evidence": [
+        {
+          "resource": "repo://.env.example#L1-L5",
+          "version": "repo-lines-v1:sha256:97b08c8b7dc7fe29ae9b5ddebd5337af1918cb869446d3ef80acbddb42a2d8af:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGM3NzEyYjg2OTMzYTg5ZTViMjhjYzI1ZWE2MTU3Zjk3YTRjYWJhN2ZhNjUyNWU3MTRhZTVmYzFlMzQ2YTk1MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://README.md#L161-L166",
+          "version": "repo-lines-v1:sha256:c94bb80f0d6900f0ab7c480c787ae72d83aa9fed78f70c963c7d0a6253a04551:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDFjNTM4NmEyNDU0Yjg2OGM1YzUxZGFkZjgwNmY4MDI5YWFlYTI4NDJhYTc1MjRlZjIwNDE5YjM2NjdhYmFlZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDdjMDZjNTYxZDVjMzI3MzQzNjg1MjY4YTQ2YjMzOTFmMzk5OGVlZTg5MGQyYmU1MWYwZDIxY2M0YTUzYWU2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODBmNzUwZWJmOGQ0YzhjNDczYWM1MDA3ZmJlMjRkNmU0ODQ3MWZhMmU1OTk1Y2NkNWM0MDJlN2QzMGFhZjZjYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGZhNDllOTYxNTgyYzIzZGJhZWNhNDU5NTM3OTE5NDAwNzc0YmIyMjEyZDk2NDAwZDM1MWNjY2ViYTBiNmVmNiJ9"
+        },
+        {
+          "resource": "repo://README.md#L67-L96",
+          "version": "repo-lines-v1:sha256:b64b0583ea8ccc285887ab57c0f1ad5785691e60c14a275145b4364fd098edb8:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1M2ZiMjQ5MTZhYTk5ZDZkNTdiMTI2NzM1ZDVjZDNlNGJkOWVlNmQwNGU3YTFhYzViYTE5MjNhNGQxMTJhMGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZlMTE2OWMxNzYyNjdiYTZiMjcxMmY2NDM0OTg5MGE0MmE0MTEzNmMwZDY5OGRkNjVkZTY0NmE3OTA3YWM0MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3ZjIwY2ExYzQzYzIyMjVkZjg0Y2I5YmZkMmUzYmYxOTUzODQ3MzBlNjQyYzEwYzUzNTgxNGUyMDZjZmRkYmUifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L1-L6",
+          "version": "repo-lines-v1:sha256:d1765e32407fb9c8aa472e0852e5a20211d998cbb81c884cf852f87d249c5e86:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzAyYTgxYzM4MzZlZGVmMmQwYmExMWQyMzUzZmI2ZGFiYzc3NzE1MGE3Y2E4M2VhMGQ5ZTlhNzAzMTNmZWFiYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMThhMzc3ODVlNzI2ZmY1NjBlNzAwMGFhNzAwYTRlOTJmYjk1OGRmOTNhM2RlNDQ1YzUxMTRhMmQ5NTc3MzBlMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2MxYWYyYjVkOWJmZTM5NTY3MDhjM2EzZDA5MjIzY2ZmNWQzOWU2YjNkMGMzYTNiY2Y0OWU4MjMyOWY2NTJhMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5cb071e8eb1e40d7a5287ee8e95c8e47",
+      "statement": "Quality enforcement uses Ruff (88-char lines, py312, rules E/F/I/N/UP/D/B/SIM, notebooks/ excluded) configured in pyproject.toml; Radon and Xenon gates are not configured in pyproject but run as commands in the CI quality job; pre-commit runs hygiene hooks, Ruff, nbstripout and a local check-notebooks hook; scripts/check_notebooks.py scans given paths or notebooks/**/*.ipynb, flags code cells with outputs or a non-null execution_count, and exits 1 if any are dirty.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L25-L34",
+          "version": "repo-lines-v1:sha256:8fa57cfe893724f3851d5bf1c14efe09d53bd645cb1f7f20213bf6a177f5410e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgyZjY1NTQwYWFhZDhlZDBlODQwMDBmNDhlNjk1ZmZhMGJhMTg0Mjk0Mzc3YzRiYmFmYTE2NmIyYmM3YTZlMDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0YTkwN2Y3MjljMDZlMWNiYzVkNWY1ODAyZGM0MDc0NzgyNjhhMjg1YzM4NWU5NDkxNjc5M2Q4MTU5MmVjYzciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkNjQ4MTFiODNmMDBiMGVlNzlhMmNiMmQ4Yzc1OWYyZjBmODY3ZGRjMTJiY2JjZjQ5NWQwZmY1YzFkM2NhMTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxNzgyYzVhN2I4OTY0ZTBjMGM1OTJjZGY3ZTYwNzcxOGM1YjRlYzI0MTcwODc1ZTM4OWNiYmY4NTI2YjQ2ODkifQ"
+        },
+        {
+          "resource": "repo://.pre-commit-config.yaml#L15-L36",
+          "version": "repo-lines-v1:sha256:1cd4db3032d23b85c863b8fa8d702571ca275169fe598669a1155418d808f88c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkZmVjNzBlMTkyYjk1MjcwN2U4MDFiMjRjZjdkNDg5MzJiNTRmMTBiMTFmMjRjMjM0YjkyZWM0OGJlZDBiYTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiZWQwYTcxMDVkZDBjMDRhYjgzYzkxNjVhM2E3NDE3YjY1ODc1YTIyNjcxZGE1YjdkMmU4MjRhNDY0YWIzZGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3OGM5NTRlMDI3MDBjYTQ4YjhmMmVjMDkxNjRjM2M3MDcyYzBiMDgxOWRhYmFkZmZkMTY3NmFlZmZmMGM3MGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L23-L37",
+          "version": "repo-lines-v1:sha256:1b74dd6d22fc7c7588fc5ebdaedc9aa1372af87dd213c6e8754ef849626ce3f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjZWFiMzNkN2YyYWVlNjJmNzllMjE1OTFmNTJiMzNiNDZmMTQ4NzE5NzY1ZWQ4OTNjMzZjMTgyMTVmODk0MmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOWUxZGQ5ZjQyYzZhZTYwNDhjYTg5NTZmMGFhYzM4MGY4ZmQyMjhlNTBkYTM1ZmQzOTliZWI4MTYzMzU0MTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQzZDE3MWRlNzU0MzFhMDIxYTBkOTRmYTc2ZmFiZjBkNzEzOWM4OThjMWEwYjQ0YjQzY2E2MDkwM2ZhMWI4NDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyYmMxMDM3MjcyYTA5NTZkMjdlZmYyMGY4ZjM1ODhlNDkyN2ZhOTk4YmQ5YTdhMzg0MjY4OTQxMzM1MDdjMGYifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L49-L56",
+          "version": "repo-lines-v1:sha256:45314c479f65f492b389e081ee622e54359d5f407db1dd7e42d261ca16b449aa:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWUzMmZlNzY2ODljNTIwMjQ0MTllOWM3Mjc1NWRmZGY2Yzg4ODY1ZTQ2ZWE1MTgyM2UwYTY1ODM2MzM2YWUxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWRkZGQzZmRmOGU0NzE2YjliM2Q1ZGU5MjMyOTg4YzUzNDMzMTQwMzRkMGM0ZGNmNmRkZGY0ODBlNmY4NTgxZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDJjNTEwZGRiYjg4NWNiOGI1NDNmNzQxYmNhNTkxOGYxMzllYjI4MGMxYWQyNjc2MmJjNzE2MGY5MzY3NjRmYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjg0Yjg2YjYyMTI4YjZiYmQ0YTUyZDRkMzg2NjNhNmY3OTc1YzAwM2Y3YWZlNTc3MTAwNDc1OWY1OWVhYmZkNCJ9"
+        },
+        {
+          "resource": "repo://scripts/check_notebooks.py#L8-L46",
+          "version": "repo-lines-v1:sha256:8e0b9f4e2e3ec82b36cbf3ebd34de0f35704bb87e6bbf5586e88e6bca57cbda2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOTAzYzdkNTcwMWFkODkyZjg5NzUyZjk2N2U4ZTFlODczNTFmODA5ZGU4MzQ1MmQ1ZGJkMmNlMGJmNDg0MGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjMzYjNmZmVhMzJhMjNkZjUzMDY1MzQzNDhmMmRlZTc3NmE1YTZmNzRmYjUzMzE3NWRkYzUzOWE4ZmU0NjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MWJmM2Q5NmYxYjExOTY4OGRlZWE5YTAwNGIyYjNmZWJiMTgwYmI4ZmIyMzQ0NjI1NjE0YWRjODU5NTYzYWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6f7ae7757de34ea18b53d73508bb6386",
+      "statement": "The CI workflow configured in .github/workflows/ci.yml automates quality checks (Ruff linting and formatting, notebook validation, and Radon/Xenon complexity gates) and Pytest execution with coverage artifact uploads on pushes and pull requests to main and development branches, while the Docker build job is currently disabled.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L14-L86",
+          "version": "repo-lines-v1:sha256:0799b53787539e4ab0841b615817239da623cdc34898e90d0316d03cc1045fa8:eyJzZWxlY3RlZExpbmVDb3VudCI6NzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5ZDgwMTU0ZWQ0MmZjNWM3NzliMTMzMTU3OGI1OGI4OWM4MDFlYWNlNzRmMjRjZDQ4ZWI0YTIzNTc5NDBhOTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNkNTJiZTEwNDQyNDU4MjBlOWRkNzg0ZmRiNjk2Yjk2YzZkNDgxYzAwMjY4NGYwNTVhODEyYWUzNzAxMDU0NDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIxNjdkNDFiY2IyOTQ1MmE0ZGUwODI5NTZhNjYyZGQ1ZDMyZWVjNzYwODRmZDAwZjE3MjE0MDg5ZDk1YTUzNDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e3bd0f7424dc4e56ac748918e8c15c59",
+      "statement": "AGENTS.md defines operational principles for AI agents, emphasizing source code as truth, just-in-time OpenWiki context retrieval, quiet minimal validation, and clean notebook pre-commit compliance.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L1-L16",
+          "version": "repo-lines-v1:sha256:8926524de63a1266e7592d9f1256ec367b67e9fa0583f343808e3e51f19d4990:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmMTgwZjljMTI2OTAzYmNjMzMxYWE5NTQ1NmU0OTQ0NGE3ZDRkMDExZThhMmE4M2Y1ZGM4NzAyMzkxODEyZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5Zjc4NzE0ODkzYWE3Nzk0MmNlYTFjNGEyZTAyMzFkYmI3ZmEyYTQxYTcwYzgxNDYwYTNjNjc1NjJkYTNhYWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_073c6d19ed134595be3f6d6ed3e43458",
+      "statement": "The project is a batch credit-scoring reliability pipeline: dvc.yaml declares six stages (validate, prepare_data, train, simulate_drift, detect_drift, score_impact) run via uv, and the monitored run (scripts.run_monitored_drift) is a separate, non-DVC step that writes reports/operational_metrics.prom for the Docker-based Prometheus/Grafana stack.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L123-L150",
+          "version": "repo-lines-v1:sha256:afdcc8aefa9eaaad0c8f5bb5ca3fe97035001c249a41dfb01ff78843d9aaa97e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3ODk1ODA4YzkwMWNhMmUyZTQ1MDgyODk3NGFhNzQwODhmYjEzYzk1NzI1ZDUxMmRmNDQxNGQ0NjA4ZmUyMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhZDBiNDc0NGIwMDcwNDcwMjBiYjg4NDI0MDc4ZDUwNDI5ODA0ODU0NzJkYzliNjlmODE4MTE1ZWQwZjZhZmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiYzZiYWE1MzA0NDBjMGY3MmZmMzExNThhZDAyYTBmNmY4MzIzYTZlYTZlYzRiNTBkMzY5NmIzOTg0NTE2Y2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFhNDAwMzY4NTZkZWFlZmMyODIwNzRmOTA0OGE2ZGFmNTViNjkyNmIyM2JlZTBjN2Q5YTQzNzAzNTc2MzFhODMifQ"
+        },
+        {
+          "resource": "repo://README.md#L443-L443",
+          "version": "repo-lines-v1:sha256:fd37d314026e448b9e859279ea178b9bb7c7ef86244ed32050f7618bab813c88:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmQzN2QzMTQwMjZlNDQ4YjllODU5Mjc5ZWExNzhiOWJiN2M3ZWY4NjI0NGVkMzIwNTBmNzYxOGJhYjgxM2M4OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmQzN2QzMTQwMjZlNDQ4YjllODU5Mjc5ZWExNzhiOWJiN2M3ZWY4NjI0NGVkMzIwNTBmNzYxOGJhYjgxM2M4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWI5ZjRhMzdkMmI5NDNiNjYxYTY4ZmY0NGYzOGQ3NWQ5YmUyYmYwYmIwYjBiYzNhY2M4ODM3ZTNiZWQ0NWQ1OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTU1MzhjYjkwMWYzNWQyMTcyZjcxODNiZDEzMzdmYTdkM2M5MzViNDc1NDRkN2VjNjA0M2Q0N2Q1Y2NlZjZiYiJ9"
+        },
+        {
+          "resource": "repo://dvc.yaml#L1-L72",
+          "version": "repo-lines-v1:sha256:8b116b88e4916576f209b1269418ecc7459978421e99781b45e39e955ddbfdd1:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3NWQ3NjAxZjRjNTE4NGUxNTc5OTUwN2Y4MWNkZDIzYTNiMzUwOGZmMTc2YzliMTQ4ZDdjNzUwZjFjMThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e69474bd2bd648b38015e9d7db79d12f",
+      "statement": "The raw Home Credit CSV is tracked by DVC through a hash-only .dvc file, and no DVC remote is configured (.dvc/config only sets autostage), so contributors download application_train.csv manually from Kaggle.",
+      "evidence": [
+        {
+          "resource": "repo://.dvc/config#L1-L2",
+          "version": "repo-lines-v1:sha256:3f15a8775dbf2ad93c42ac88cf356bbf6f7876801ba90e6cc94ec00149fbbede:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzRkOTJkMmZjODBmYjhhZmNlNzI0NTQxOWE2MTY1OWVkNjRkZjIzMTQzOWYxZDM3ZmUyYzM0NDlkZDJjNDYyNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTJjNjIxZDdkMzZmMmRkYzlkZTUxMDcxYTdiY2MyYzc3MWMzMTI0YTA4MmU5NTRhMjI1MzZhZDIwZmZjMjNjYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://README.md#L98-L108",
+          "version": "repo-lines-v1:sha256:4b0783e7d6c36f7e0f1aa22fc70edccb766c8eeee62c7c2d3e84d1c83cd64455:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyNjQ1NzNjODI5NmRiNzI1YjQ3MWJkMTcyZWUyZDA0ODMyZTY2OWYwNTZiYmRjZTFkZGY5ODIzNzhjYjk0YzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiM2RmYWJhOWZmNDNhNjdlMGI0ODA1NDI4YWE0NDcxNTlhMDZjMmY5NmNlMDFiZmU3NTQzNmQ2OWJmMzNlODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhMjk3Nzg1NzRlYzZjZmFhMTM4OTFlMDAyZmFiYjUwNjBiYjMxYWFhODg0N2JiZjc2MDIxMDJmNWI2N2RmZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjMTAyNTdiOWQxZTVlNDExNTM3ZjNmYzFmODdkZDAxMWEyYWRlYzA5ZjQ5ZmY2YWIzNDI0NmM3ZjdlMWRiYWUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-11-09T02:03:21.311Z"
+  }
+}

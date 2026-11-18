@@ -2,9 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, development]
   pull_request:
-    branches: [main, dev]
+    branches: [main, development]
   workflow_dispatch:
 
 concurrency:
@@ -54,7 +54,9 @@ jobs:
   docker:
     name: Build & push da imagem (GHCR)
     needs: test
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # Desativado até existir um Dockerfile na raiz. Para reativar, restaure:
+    # if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: false
     runs-on: ubuntu-latest
     permissions:
       contents: read

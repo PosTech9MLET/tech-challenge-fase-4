@@ -1,3 +1,25 @@
+[project]
+name = "tech-challenge-fase-4"
+version = "0.1.0"
+description = "Tech Challenge - Fase 4 (FIAP)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "evidently>=0.7.23",
+    "joblib>=1.6.0",
+    "matplotlib>=3.10.0",
+    "mlflow>=3.18.0",
+    "pandas>=2.3,<3",
+    "pandera[pandas]>=0.35.0",
+    "prometheus-client>=0.26.0",
+    "pyarrow>=26.0.1",
+    "pydantic-settings>=2.16.1",
+    "scikit-learn>=1.9.1",
+    "setuptools<81",
+    "xgboost>=3.4.1",
+    "ydata-profiling>=4.18.4",
+]
+
 
 # ---------------- Ruff (lint + format) ----------------
 [tool.ruff]
@@ -36,6 +58,7 @@ fail_under = 0  # suba para 70+ quando houver código de verdade
 
 [dependency-groups]
 dev = [
+    "dvc>=3.67.1",
     "ipykernel>=7.4.0",
     "nbstripout>=0.9.1",
     "pre-commit>=4.6.2",

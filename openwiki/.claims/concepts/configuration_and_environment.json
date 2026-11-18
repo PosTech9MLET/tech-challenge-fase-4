@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:269485d889a4128b61171e7a09a029d713896b0b4eab4a2158cc9d514b56d259",
+  "claims": [
+    {
+      "id": "claim_4166f445ff3242998bc08ad9bc2103c5",
+      "statement": "The configuration module calculates ROOT_DIR as Path(__file__).resolve().parents[2], establishing a cross-platform base path anchored to the repository root directory.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L7-L7",
+          "version": "repo-lines-v1:sha256:6aff8a9d31f36f81f0bb0a60f0e5617e67436e2601a3d9b0840e708d492ac160:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmFmZjhhOWQzMWYzNmY4MWYwYmIwYTYwZjBlNTYxN2U2NzQzNmUyNjAxYTNkOWIwODQwZTcwOGQ0OTJhYzE2MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmFmZjhhOWQzMWYzNmY4MWYwYmIwYTYwZjBlNTYxN2U2NzQzNmUyNjAxYTNkOWIwODQwZTcwOGQ0OTJhYzE2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGU0N2ZhMjhiMjczZTk5MmQ3NWE5MGY5NGZlODcxOWI4ZTY4YzBlZjRlZjc2NGViY2Y1MTk0NTdmMzg3YzI0YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzcyYzc2ZDUyZmU1OTk3YTliZTY5NDM2MjA4NmM3MDFhMWQ1NTEyZjBkYmU4ODFiNDFiOTVlYzg1ZDRkNzhmZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_688ec5786bdd46a2aebe6eb24a791aef",
+      "statement": "The Settings class uses Pydantic Settings configured with SettingsConfigDict to read environment key-value pairs from ROOT_DIR / '.env' while ignoring extra unmapped environment attributes.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L10-L13",
+          "version": "repo-lines-v1:sha256:38c405bdadc55b00207cd0a9a63bb0caf8f8dc3a89d03be5a00eb94c2654900b:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmM4NjMzMWM5MGI3OGNkYjkxN2ZkNWJkNjlmYzA3MTRkNWE1ZmU4NDYwZDg3NjI3OWUxNWZmNDJmZmM3MjM1YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGJiZDc0YzljMWZjMzNjYjA1OWRhY2VjZTYyOWM2NWMzMTc5ZmQ3MTk4OGU3NTMzMTdkNjQ3NjcwOTFmMjVlNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTU5ZjRjOWE5ODU4NzBiZWU2MjczMjlkOTE4N2EzZGMwNTU2ZDE4OThlNWZiYTljNWU4MzYyODU4NmE3ZjQxMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDk0NDYzNDM4MzM5OWY2OTAzZjQ4NTQyY2I0OGY5ODk2ZjJlMDMyMWQzNjc2NzE0MzUyMjI5MmEzZTBkYzVmNCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_65e89c2cbbc54b5780cb56090c9e0f6c",
+      "statement": "The Settings model defines default runtime settings including env='local', log_level='INFO', and random_seed=42.",
+      "evidence": [
+        {
+          "resource": "repo://.env.example#L2-L4",
+          "version": "repo-lines-v1:sha256:44e12fec47ec721817afe09fa62b6c929f611a90f6a4fabd345af055ec9771f9:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODEwMDcxNjdkYzdmODkwNjg3MWI1OTZmOWEwYTY4YTVlZjNiZDRjYmM5Yjc2YzJjNWY2MTkzMzczODI2Njk3YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYyN2I4NzJkYmMzYTYyMDgxZmM4ZGEzNDQxN2VhY2Y0MGRjMjZjZDk2NzdlMWIwOGM0NzgyNzEzYTVjNjkzYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjEsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGM3NzEyYjg2OTMzYTg5ZTViMjhjYzI1ZWE2MTU3Zjk3YTRjYWJhN2ZhNjUyNWU3MTRhZTVmYzFlMzQ2YTk1MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjEsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyJ9"
+        },
+        {
+          "resource": "repo://src/utils/config.py#L15-L17",
+          "version": "repo-lines-v1:sha256:1e86bf960082dba16b102dc72faed3ec18e694ceebad6d6227f4eb026e02cecb:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjQ4ZTVkYjlkODdlYzg1MWIwNjA4OWM5NDlmMDU3OTBjYjI0ODJiNDdhMDlmNDlkYzNmMDA0NTJjNmVmMjkzZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzhmNGIzYTUwYjk2NTYxODE0YmZhZDdiMmNlN2Y0M2ZjYWY3MTUxODU5MDU1ZjY2ZjUwMjI0MDMxYzkxMGE5ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmQ5ZDRiNzgzZWM0NzM4YjQ1ZWZlNDg3YTVmYmIwYjQwNjg4YjdjYTNiYjE0YWQ5Mjc3MThiMjc2ZTVhYTAwZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjJlMDg1OWE3MzA1ZTlkODA3MzZhMzk5YmU2ZjZjNmNiZTM1NGY1YzUyNjZhZTkxMTNkMmUyN2E5YjUyMjk5ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ca9ada6867c14fc0952e1975f624abca",
+      "statement": "Directory paths for data and model artifacts and the MLflow SQLite tracking URI are dynamically resolved relative to ROOT_DIR.",
+      "evidence": [
+        {
+          "resource": "repo://.env.example#L5-L5",
+          "version": "repo-lines-v1:sha256:b2603dd3c93439b5387a01d0a6bbcfc2df0e3b8efbadae5674be8bc955a3af57:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDRlMTJmZWM0N2VjNzIxODE3YWZlMDlmYTYyYjZjOTI5ZjYxMWE5MGY2YTRmYWJkMzQ1YWYwNTVlYzk3NzFmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://src/utils/config.py#L18-L20",
+          "version": "repo-lines-v1:sha256:f2e0859a7305e9d80736a399be6f6c6cbe354f5c5266ae9113d2e27a9b52299f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNkMDdjYTg0YTZiMmQ0ZjY2OTQ4NjY4ZmQ4NjQzYTA5NjIxYTNiNjc0YTZiODQ3M2Q0ZTE4NzkzNjViMDY2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZkZTdmODU1ODhkNWM3Mzk1NmY5OTQzNmU1N2FmZDJkYjljNzc0NjliMTY2Yzk1YWYxZmU0YWZhMDdiZTg4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWU4NmJmOTYwMDgyZGJhMTZiMTAyZGM3MmZhZWQzZWMxOGU2OTRjZWViYWQ2ZDYyMjdmNGViMDI2ZTAyY2VjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2Y3MzZmMmJlZTAwZWRjZTkwZTIyNTczYzdmYjE2ZGU2ZmJmZmZjNDQxOGEwMGM1OGZhN2MxZDUwYThjZTk1MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e68714585399444281f319dbb9f75120",
+      "statement": "src/utils/config.py instantiates and exports a global settings singleton instance at module import time for application-wide configuration access.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L23-L23",
+          "version": "repo-lines-v1:sha256:a8f4bf18761602d3b590b37d398fa99779730a77b68138fdd14073492e3766ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmNGJmMTg3NjE2MDJkM2I1OTBiMzdkMzk4ZmE5OTc3OTczMGE3N2I2ODEzOGZkZDE0MDczNDkyZTM3NjZlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmNGJmMTg3NjE2MDJkM2I1OTBiMzdkMzk4ZmE5OTc3OTczMGE3N2I2ODEzOGZkZDE0MDczNDkyZTM3NjZlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjgxZmE2ZTlhNGM3NGRhODEzM2QxNjA2NWY2MTA5ZWM0ZjVhOTcwZTg0ZTRhYTU1YTZmYTRiMTA0ZmQyZjc4NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6445ee91a97e4eb2a754d8a0582f3d5a",
+      "statement": "The unit test suite verifies configuration loading and path resolution by asserting default random_seed and data_dir attributes in tests/unit/test_smoke.py.",
+      "evidence": [
+        {
+          "resource": "repo://tests/unit/test_smoke.py#L3-L8",
+          "version": "repo-lines-v1:sha256:1172236e448bc91fe8c1d4956a499a148f7c88a5b0acbb584506558349222d30:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGFkMjQwZTM1NzAwOWVmNjgxN2ZlNmYyODQ2MWVlMGFjMzNhYzIwZDIyOGFlYWVhZDAxNGQzMjJmNjA3YmI3MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWJiNDJmN2Q5OThlNjc1ZTZhYTM4OWE4MWZiNzhkYTA3Y2U0YjFjOGJjMDQ3NjQ1YzkxYjVjZGZmMTlmMmEwOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGUxODgyY2QwNGJkNzczYTIxMjBkMmFlNjdkZmFmMWM2YmYyNjFjMzRkOTUwZWY4YTE0Yjk3Y2U0ZTZmZjM4MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5e674c328083475da510101e8aff9960",
+      "statement": "The Python toolchain is pinned to 3.12 (.python-version, requires-python >=3.12, Ruff target py312), and dependencies are managed with uv: local setup uses `uv sync --locked` while CI runs `uv python install` and `uv sync --frozen`, and DVC stages run via `uv run python -m ...`.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L20-L24",
+          "version": "repo-lines-v1:sha256:a52bdf95a383d696c12f7a4a0d57c3f96b9932d0464d94b84215f3eecf6c36d7:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjc5OTZhYzIzMDdmNDRmYTAwM2Q2YzcxNzA1MGFlZTExYjRiYzkxNGRjNGNkMzk1MzdhYjM0ODUxOTRjYmE1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOGYxNzExOThmOGZlNDg1NTYxZjU5MmJlZGVhNDE5ZTI5MzY0Y2EwZmEzODI4ZTM3YmQwMmU3OWY3YzYxOTI2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzU4MmVhYjhhNTk3YTg3MDg0YzY0MTEyMTgxM2IwZGU2ZjYyODdkOGQ1ZWIxNzhmMzM0N2Y4MDBjNDk4NzllZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDljZmM2ZmEyNjZkMWJhYzJjMzg5MWE2YmM0YWIxMDUyZjVjYTMyMWY1NDJhODgwMDAwOWUwZGIxNTY0MmU2YSJ9"
+        },
+        {
+          "resource": "repo://.python-version#L1-L1",
+          "version": "repo-lines-v1:sha256:7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2I1NWY4ZTY3YjU2MjNjNGJlZjNmYTY5MTI4OGRhOTQzN2Q3OWQzYWJhMTU2ZGU0OGQ0ODFkYjMyYWM3ZDE2ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2I1NWY4ZTY3YjU2MjNjNGJlZjNmYTY5MTI4OGRhOTQzN2Q3OWQzYWJhMTU2ZGU0OGQ0ODFkYjMyYWM3ZDE2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://dvc.yaml#L1-L12",
+          "version": "repo-lines-v1:sha256:151bd21ae7a3ffd0d7ff76febc30fe80d87407de161142bf503833d3e9c5656f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3NWQ3NjAxZjRjNTE4NGUxNTc5OTUwN2Y4MWNkZDIzYTNiMzUwOGZmMTc2YzliMTQ4ZDdjNzUwZjFjMThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxMDk2ODRlZjdiYzgxYTVhZjUzYTk4YjQ4OGNkYzNlZTEzYzYxNTZmNTlmZGI1ZWUyNDJmZWQyYjk4NjhhN2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwMTAwNWU1MmFjMGJjODU4N2EyNmQzMzdmOTc0YzhkZmZkYTkwNTBlY2QyNzMyNTA5MDNmYTEwODFiNzRhODAifQ"
+        },
+        {
+          "resource": "repo://pyproject.toml#L6-L6",
+          "version": "repo-lines-v1:sha256:18a37785e726ff560e7000aa700a4e92fb958df93a3de445c5114a2d957730e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMThhMzc3ODVlNzI2ZmY1NjBlNzAwMGFhNzAwYTRlOTJmYjk1OGRmOTNhM2RlNDQ1YzUxMTRhMmQ5NTc3MzBlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMThhMzc3ODVlNzI2ZmY1NjBlNzAwMGFhNzAwYTRlOTJmYjk1OGRmOTNhM2RlNDQ1YzUxMTRhMmQ5NTc3MzBlMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWVlYTA0ZmQzYTE0NzQ0ZmNkODJiNTAxZDc1YTkyYjY3YTg3NGNiNjM0ZWNjYTBjMmY5NzUyMjRhNTg1MjJhOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2MxYWYyYjVkOWJmZTM5NTY3MDhjM2EzZDA5MjIzY2ZmNWQzOWU2YjNkMGMzYTNiY2Y0OWU4MjMyOWY2NTJhMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7f742e12f599416dbfbbfe09835385c9",
+      "statement": "No DVC remote is configured: .dvc/config contains only `core.autostage = true`, so the raw dataset must be downloaded from Kaggle by each contributor and `dvc pull` only becomes usable after a remote is added.",
+      "evidence": [
+        {
+          "resource": "repo://.dvc/config#L1-L2",
+          "version": "repo-lines-v1:sha256:3f15a8775dbf2ad93c42ac88cf356bbf6f7876801ba90e6cc94ec00149fbbede:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzRkOTJkMmZjODBmYjhhZmNlNzI0NTQxOWE2MTY1OWVkNjRkZjIzMTQzOWYxZDM3ZmUyYzM0NDlkZDJjNDYyNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTJjNjIxZDdkMzZmMmRkYzlkZTUxMDcxYTdiY2MyYzc3MWMzMTI0YTA4MmU5NTRhMjI1MzZhZDIwZmZjMjNjYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://README.md#L108-L108",
+          "version": "repo-lines-v1:sha256:ab3dfaba9ff43a67e0b4805428aa447159a06c2f96ce01bfe75436d69bf33e81:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWIzZGZhYmE5ZmY0M2E2N2UwYjQ4MDU0MjhhYTQ0NzE1OWEwNmMyZjk2Y2UwMWJmZTc1NDM2ZDY5YmYzM2U4MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWIzZGZhYmE5ZmY0M2E2N2UwYjQ4MDU0MjhhYTQ0NzE1OWEwNmMyZjk2Y2UwMWJmZTc1NDM2ZDY5YmYzM2U4MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmNjNzY3MzgyMmFkN2MwY2VjNmVlMjA2MzcwZWU0ZTI2ZDEyZWYxNDBmZGIyZTlmNTFmNDhhMmJjYTRmMDBmZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2MxMDI1N2I5ZDFlNWU0MTE1MzdmM2ZjMWY4N2RkMDExYTJhZGVjMDlmNDlmZjZhYjM0MjQ2YzdmN2UxZGJhZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_711669d4a27945c7818d466a33776eb5",
+      "statement": ".dvcignore excludes __pycache__/ and *.pyc so generated bytecode does not change the hashes of DVC stage dependencies, and dvc.yaml stage deps/outs use the same default data/, models/ and reports/ locations as Settings.",
+      "evidence": [
+        {
+          "resource": "repo://.dvcignore#L5-L7",
+          "version": "repo-lines-v1:sha256:e080395b417586f9a047e79539d58990cc2724696bd2f1e04051e1597e1017c3:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmMxNTAzNmFhMTk4NTMzYThhNDE5Y2VhNzdkYTNlYjAyNTc3YWNkOTM4OWU5NWZiMjMyNjQ0YzM5MGU4MjkzMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDk0YzI1MDMxZGNmZTVjMjg4NjY2NjcxYmMyMDEyODY2MjkzYjM3OTdlYTUzYzc5NmFmNzk4YmRhNGMzMmYwMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDRjZDBmOTU5OGE1NWQyZjM3YWE5YzczNTI5YWY2MzFiODJjY2ViMTYyOWJlMmViYzY3MTdmMmQ4MGM5YzBhZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://dvc.yaml#L1-L72",
+          "version": "repo-lines-v1:sha256:8b116b88e4916576f209b1269418ecc7459978421e99781b45e39e955ddbfdd1:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3NWQ3NjAxZjRjNTE4NGUxNTc5OTUwN2Y4MWNkZDIzYTNiMzUwOGZmMTc2YzliMTQ4ZDdjNzUwZjFjMThlNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/utils/config.py#L18-L20",
+          "version": "repo-lines-v1:sha256:f2e0859a7305e9d80736a399be6f6c6cbe354f5c5266ae9113d2e27a9b52299f:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNkMDdjYTg0YTZiMmQ0ZjY2OTQ4NjY4ZmQ4NjQzYTA5NjIxYTNiNjc0YTZiODQ3M2Q0ZTE4NzkzNjViMDY2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZkZTdmODU1ODhkNWM3Mzk1NmY5OTQzNmU1N2FmZDJkYjljNzc0NjliMTY2Yzk1YWYxZmU0YWZhMDdiZTg4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWU4NmJmOTYwMDgyZGJhMTZiMTAyZGM3MmZhZWQzZWMxOGU2OTRjZWViYWQ2ZDYyMjdmNGViMDI2ZTAyY2VjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2Y3MzZmMmJlZTAwZWRjZTkwZTIyNTczYzdmYjE2ZGU2ZmJmZmZjNDQxOGEwMGM1OGZhN2MxZDUwYThjZTk1MCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7871db6c51c84098a0875f6b7690b638",
+      "statement": "The .env.example template sets MLFLOW_TRACKING_URI to the relative path sqlite:///mlflow.db, whereas the Settings default is an absolute SQLite path under ROOT_DIR; `.env` is git-ignored as a secrets file and excluded from Docker contexts.",
+      "evidence": [
+        {
+          "resource": "repo://.dockerignore#L8-L8",
+          "version": "repo-lines-v1:sha256:69aa73cf5bc3377a7d97f2e8d2bb773195815efe225af7f1be6f5b9306bbe14f:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlhYTczY2Y1YmMzMzc3YTdkOTdmMmU4ZDJiYjc3MzE5NTgxNWVmZTIyNWFmN2YxYmU2ZjViOTMwNmJiZTE0ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlhYTczY2Y1YmMzMzc3YTdkOTdmMmU4ZDJiYjc3MzE5NTgxNWVmZTIyNWFmN2YxYmU2ZjViOTMwNmJiZTE0ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDI1ODEzNmFlODY5MTY5ZmQ5NWI1NDMxMDNlZTVhZThjYTlhYTAwNmFhMDVlMzI4YTJkYWUzYTEyODZkZDQ5OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTU4NjIyYzI5MjMxMWRkZWIwYzM1ZmM0MjVlNTliNmY0NzE2MjViNzcxYmZjZGRlZjFhZGU2NTNjNmRmZTIyOCJ9"
+        },
+        {
+          "resource": "repo://.env.example#L5-L5",
+          "version": "repo-lines-v1:sha256:b2603dd3c93439b5387a01d0a6bbcfc2df0e3b8efbadae5674be8bc955a3af57:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDRlMTJmZWM0N2VjNzIxODE3YWZlMDlmYTYyYjZjOTI5ZjYxMWE5MGY2YTRmYWJkMzQ1YWYwNTVlYzk3NzFmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://.gitignore#L17-L18",
+          "version": "repo-lines-v1:sha256:4f37ce509b5e49914207897203087ecf517cd5fa29e54f64486983eb26eac884:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDBhOTQ3MzQ3M2Q3MDRiMDRiZWFkY2ZjYTJhMDQ3YzkzMGVmNzRjN2JiMmYwZTczMTI2MzY2NGJlMTE3OGY2OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjlhYTczY2Y1YmMzMzc3YTdkOTdmMmU4ZDJiYjc3MzE5NTgxNWVmZTIyNWFmN2YxYmU2ZjViOTMwNmJiZTE0ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGU0ZjJhOGQyODk5ZjU3YzhiMzA4Yzg0ZjMyZjY2ZjFhYzE3YzEyZjQyNDg5OWMzOTI5ZDk4YWQ3Yzk2ZmQ5MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmJhOTY2ZDhhZGU0Y2VmMmFlMGYxYmM3YTIxMzQ0MDQxNzA1YjY2NTI3MjFjN2U2YTRlZTA2ODUxNGQwZmZhMiJ9"
+        },
+        {
+          "resource": "repo://src/utils/config.py#L18-L18",
+          "version": "repo-lines-v1:sha256:43d07ca84a6b2d4f66948668fd8643a09621a3b674a6b8473d4e1879365b0663:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNkMDdjYTg0YTZiMmQ0ZjY2OTQ4NjY4ZmQ4NjQzYTA5NjIxYTNiNjc0YTZiODQ3M2Q0ZTE4NzkzNjViMDY2MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDNkMDdjYTg0YTZiMmQ0ZjY2OTQ4NjY4ZmQ4NjQzYTA5NjIxYTNiNjc0YTZiODQ3M2Q0ZTE4NzkzNjViMDY2MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWU4NmJmOTYwMDgyZGJhMTZiMTAyZGM3MmZhZWQzZWMxOGU2OTRjZWViYWQ2ZDYyMjdmNGViMDI2ZTAyY2VjYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWUyM2U2MTczN2JiY2RmZWYzMGFkZDc3MzBmMzVlZjJlODJiNzU0MzQyZmM4NWYwN2I2NDVmYWNjOGQ0MGIzYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f0969eaeef4f4a92931d584fee32a1d7",
+      "statement": "Settings consumers include data loading, data preparation, training (random_seed for split and pipeline, data_dir for reference.parquet, MLflow tracking URI, log_level), model persistence (models_dir), drift/score-impact scripts and the fairness plot script (data_dir/processed, random_seed), while report output directories (REPORT_DIR, FIGURES_DIR) are computed independently from __file__ and not from settings.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/analyze_score_impact.py#L11-L19",
+          "version": "repo-lines-v1:sha256:a3361595496aba20895944d3024d19c2d4d8c604b0714478d66257253d99e20e:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGFkMjQwZTM1NzAwOWVmNjgxN2ZlNmYyODQ2MWVlMGFjMzNhYzIwZDIyOGFlYWVhZDAxNGQzMjJmNjA3YmI3MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjgxMzdmYzExOTY1YjhlY2M5ZGRlODE2MmRhMzcwNDAwYWMxN2RkYmFiZmMzZDkxNzk1ZWM2YjE1YmIxYTg5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTQ0NWQ2YjUwMjE3Y2U4M2U5MmVlNTU3ZjExZTUzMjhkYzczNjkwMThlNGUyNjY2NmVjNTdlZTZlNzQyYmYwMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmJlZmI4MjExZDdkOGNlMmIzOWIyNzhkNGQ4ODZhNTQyMjAxMGFhMjZjMWNmNDgyYzZmOTE0YjZhYjQ1YjM3NCJ9"
+        },
+        {
+          "resource": "repo://scripts/generate_fairness_plots.py#L22-L48",
+          "version": "repo-lines-v1:sha256:9bfbc871285494096035f38019e1a2007c8fc02849da4dff43b56db68bc919c1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhZDI0MGUzNTcwMDllZjY4MTdmZTZmMjg0NjFlZTBhYzMzYWMyMGQyMjhhZWFlYWQwMTRkMzIyZjYwN2JiNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmYjg2ZTAwMWY2YjQ1ODVkMzBhZTM2MGI4Yjk2MThmZWI5NDM3NDExZDlhZjBhMTQyMzQ2NjQwMmU1MTYxZDQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ3ZDkyNTk4MzQyYjIzNGVjMmZkNjI0OWI0ZWVhMTgyOTFjMTE3NzQzODZkYmVjNTYwNWZhOWFhMzAyOThmZGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkYTgwMGE1MjExYjk3YzhhYTQ4MjY5Y2JjODQ0Nzc3MTE4YTkyOTFhYmIzMGU2ZmQxZWFjMjIyOTVmNWFhODYifQ"
+        },
+        {
+          "resource": "repo://scripts/run_drift.py#L16-L24",
+          "version": "repo-lines-v1:sha256:12be39af3702caa433764a2579eec4a0b5059ac3d0d6009036da926212fcdc22:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGFkMjQwZTM1NzAwOWVmNjgxN2ZlNmYyODQ2MWVlMGFjMzNhYzIwZDIyOGFlYWVhZDAxNGQzMjJmNjA3YmI3MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjgxMzdmYzExOTY1YjhlY2M5ZGRlODE2MmRhMzcwNDAwYWMxN2RkYmFiZmMzZDkxNzk1ZWM2YjE1YmIxYTg5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTJhMjg5OWQ4N2ExM2RkMGQyZTNmNTkyMWRlYWNiMGZhZDlmMTQzMDI3MDYwOThjN2Q4Y2EyZTVmZGYzMzYwMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzFmZGZkMmNiY2QwZDU5YWNiNDZiZGVlZGIwMDQ2ZTkxYTcwMWU1NjM2ZjczMjQzMzVlZTRlNGZmMzIwYTc5ZiJ9"
+        },
+        {
+          "resource": "repo://src/data/home_credit.py#L10-L19",
+          "version": "repo-lines-v1:sha256:cb7cf28a9d5c5d49bf7c4d041ebc768e89930d8e2dc183b0303dccd20ba85881:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhZDI0MGUzNTcwMDllZjY4MTdmZTZmMjg0NjFlZTBhYzMzYWMyMGQyMjhhZWFlYWQwMTRkMzIyZjYwN2JiNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkZWRiYTkyZTQyMTdmNjgyZjBkYmQ0NTEyNWNkZWU0YTU0ZmY3MDViMjBlYzIwNmY5MTA4MjBhMDNkNmQxNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY1ZmM4YmYwZGM4Y2ZlMmM0OGU4NWIwOTMzNmM2MDM5N2M2NDk0NjRiNjg0ZGU0OGRjNmY2ZjZjNWEwN2I2MjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2ZTgyNDU1NjMxMmE1MTU3ZjRiNWRmYzE4NWMyOTIzOTAwNDAzZDI0MDVhZWM1YjhkZmM0NWI3OWY0YmVjZGIifQ"
+        },
+        {
+          "resource": "repo://src/models/baseline.py#L68-L84",
+          "version": "repo-lines-v1:sha256:766e73489400f48dd15e8bf129d1cd63294d409c5348d74ffbc48e07a3103cf1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZlYTBjMmY5YjY1ZGQ4MWE1NzRiYzJhYmJjNzMyNzQ4YjRiYzQxMjA2N2IyODUwMTEwZTM4YzI5OWI3ZDExZjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0MWIyOWVmNzk2NzdmYTkzMTBhZTE0ZDZlMWRmZDVhZDAwOWNjOGUwNDY1MThhZDgxMTNiNmVhYzcxZTg5MDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ2M2ViMTU4MTc5OWY4MDdhZDY3NmEyYTFlZmE0YjAyNTdlZGIwNmUzNjg3OTg0ODZmYTk3YzAxNDUwYWYzYzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAxN2U3NTlhYWI2ZWVhNTdiZmM3OGZmZTVkMmM0N2I5ZDEwZWNlYWUyMDkxN2IwNTQ5NjM3MjI2Y2YwYmFkOWQifQ"
+        },
+        {
+          "resource": "repo://src/pipelines/prepare_data.py#L7-L44",
+          "version": "repo-lines-v1:sha256:079b663be916340cfbb3618b54a4f69e0fc82b87413fd419f60b16b11a0b7ebc:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhZDI0MGUzNTcwMDllZjY4MTdmZTZmMjg0NjFlZTBhYzMzYWMyMGQyMjhhZWFlYWQwMTRkMzIyZjYwN2JiNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBkNDE2MTcxMDNiYmU2MDEyODNiMDM0MzUwNTBhNDc5NGEwNzk5Yzg0YTdlOGZlYWI5YjEwOWYzNjMzMjcyMzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjMWUzMTMzN2ZjN2FlMWZkN2Q0MTU3MjJhOWExZTUxOGY0YWI5NTRlZmE3MGYwYzZlMTVjOTMxYzUyMzMwODkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhYTgzNmE3NmMxOTZjNjg2ZmRhMjZjNzIyZGQ0ZDFkMTRjYzA1ZmMyOGRlZjVkZGM5YWE0NWRhMDg1MTcyMDIifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L150-L193",
+          "version": "repo-lines-v1:sha256:f6f011ea840bd99b8d816e83d4d6dbab2b9611a348ee2a93568a1a5fb56f7272:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZmQ5NWMwYzRlOWJkNTgzODBkYzk2NmJkMmNjZDZlYjJiNjA1M2MyMzQ0MGFkY2ZiNzBjMDc5ODU5MjAzNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4ZTk5MjMyY2QzYTMwOWY1MGNiZDZmNjYyMTI3ZWVhYWZjZTFmNzM2MjkyZGVmYjExM2Q5ODFhMjBjN2Q4NTIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dc1793b9671046c58ee86b6c2d506036",
+      "statement": "Tests isolate filesystem state by monkeypatching attributes (models_dir, data_dir) on the shared settings singleton in the consuming modules rather than re-reading the environment.",
+      "evidence": [
+        {
+          "resource": "repo://src/utils/config.py#L23-L23",
+          "version": "repo-lines-v1:sha256:a8f4bf18761602d3b590b37d398fa99779730a77b68138fdd14073492e3766ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmNGJmMTg3NjE2MDJkM2I1OTBiMzdkMzk4ZmE5OTc3OTczMGE3N2I2ODEzOGZkZDE0MDczNDkyZTM3NjZlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYThmNGJmMTg3NjE2MDJkM2I1OTBiMzdkMzk4ZmE5OTc3OTczMGE3N2I2ODEzOGZkZDE0MDczNDkyZTM3NjZlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjgxZmE2ZTlhNGM3NGRhODEzM2QxNjA2NWY2MTA5ZWM0ZjVhOTcwZTg0ZTRhYTU1YTZmYTRiMTA0ZmQyZjc4NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://tests/unit/test_baseline.py#L67-L67",
+          "version": "repo-lines-v1:sha256:f56d6b65a44cb47ceaf2f3f86edeabed33d2ef4002384da4794a811e8313b1a0:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjU2ZDZiNjVhNDRjYjQ3Y2VhZjJmM2Y4NmVkZWFiZWQzM2QyZWY0MDAyMzg0ZGE0Nzk0YTgxMWU4MzEzYjFhMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjU2ZDZiNjVhNDRjYjQ3Y2VhZjJmM2Y4NmVkZWFiZWQzM2QyZWY0MDAyMzg0ZGE0Nzk0YTgxMWU4MzEzYjFhMCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmJiNDQzZGFmNzNkYzdkN2I3YTk1OGRjZjI5ZGJmNDRjMTAwNGU0N2YzMTI4OTRkNTQ0Nzk4YzM3MGYzOGJiZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjIwMTZiOWRkN2U4NzlkNTA4OGFjNjVjZjcyNTQ1MDI5Mzg0MDFjNjlkOGY2NDYyMGUxYzg1NzFjODU0YWNlZiJ9"
+        },
+        {
+          "resource": "repo://tests/unit/test_prepare_data.py#L12-L13",
+          "version": "repo-lines-v1:sha256:62b0c95a275d3109eb67610e1544941d0f73dc40c3337010ace4ead2d620c3c7:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjdkMzhjMDQ5MDczYTAyZDU0NzE3MDY2MjY5MzBkOTk4ZTFiZGY1OTAxZjRlMTAyZWU0NWNlMTcyMzU3ZTgzMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjc3MWI0Y2NkYTg0MmZkMDVmMzY4NjU1MDRlMTFmYjgxNmU3NmY0NGI3YmRiMDQ5MGM3OWUwNjUyZmZlZDdlZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzQzMjQ5ZDdmNmY3ZDZhNDAzZGJjZDM4NDUzMDNhZWE1OGI4MTc1OTJiYzNiNmQxMGVlZTQ5ZTBkNTAyZjkzYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWE2NGQ4Y2U2MWVlNTU2MmYzZmZjZjZjMGY3NzM3ODQxYjE1MDU1YWNiMjM5NmIwM2M2ZDhiZWJkMTVjMzYyMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e5bac85ebe9f4e6b9e0e5fb3a703f90b",
+      "statement": "configure_json_logging sets the credit_scoring logger to a hard-coded INFO level, disables propagation, adds a single JsonFormatter StreamHandler only when none exists, and emits JSON lines with timestamp, level, message and optional event/status/records/pipeline/error_type fields; it does not read settings.log_level.",
+      "evidence": [
+        {
+          "resource": "repo://src/monitoring/logging_config.py#L8-L45",
+          "version": "repo-lines-v1:sha256:b6231c6be0c8a50df968403240a4459049c8610f0c6c5c7fa793c398e5c7691f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5Y2NjYmViN2Y2ZWY3Mzg5ZjBiZjNkYWUyMGYwZTVkNmNiNDMyN2Y1MWIzOWM2Mjc2ODgyNzMwZmNlNjRmZGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ZDlkZDgzYWRhMTVhODAxMjE0ZWJmNTY0YjRkOGZkMzU2YjM5NWNkN2U2OTZjMmQ2N2M0ZDhkM2I5M2E0YzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiNTZmNWQyNDBiZTI0ZDJiNWNiNjM3MWQ0NGFmZjk1MzViMDFkODQ4MjA5ODQ3NThiYjA2ZDZmNWE2M2M2YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/monitoring/validation.py#L9-L24",
+          "version": "repo-lines-v1:sha256:118bf7e362c9ff7290a1c7787e2b3de743d8d6a4e4188323c7799f7744a41f90:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3MjAwMGMwNTMxMjdkN2Y1OGUyZGMwZTkyYmIxZWMzMDFhZWI5MDVhMWIwZmQzNGZhMDM3ZGEwMTQ4NzM2NmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwMDYwYzFmYmY1ZGYyOTAwOTFhNWMxNDQwNTRlN2VjMDE4NjFkMTNkMzBiMGZiYTQzZDVkY2FjYzEzYjlkODEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjYyNWE0ZjJiODYyMzExY2M1MWE2NDQxZDM0YzdhZTk2NmIxMmI5ZWJhMjk4ZTBiZWQyZjNkYTkzYjc1MTdjNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFmYWZmMDk2ODgwMmU4YTlkYTE3YzdiZDNkYWQ4Mjg1YTY4M2UzZDUxYWJkNjU5NDNmY2JhOWFiZWQ3YjMzOWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0ea3dc59787d43db840e5759dafc789f",
+      "statement": "scripts/run_monitored_drift.py writes Prometheus metrics (credit_pipeline_runs_total, credit_pipeline_duration_seconds, credit_data_drift_psi) from an isolated registry to reports/operational_metrics.prom inside a finally block, so the file is written even on failure.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/run_monitored_drift.py#L14-L44",
+          "version": "repo-lines-v1:sha256:36e0e5cd56afd65bdcd0612f2451f77480d9260f85689d374717402fcacf3853:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwYmM1MTI2NWRhM2M0OTRiZGQyOTQwOGMwZTE3NzY2NWJmZWFkNmZkMjc5MzZmMDU5ZDJjNTU3YjE5YTNjZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3NWNiNTgzNzJiMzQ1Yzg2NzJjZmZjZDU3ZWUzYjE2MDkyZDNlMDAxYWEzZTZhMTgwOTI4YTU4NzA1ZTA0ZTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM5ZjJjYzhkYjRlMDA1YWVlNGY1NzkzOTQyOTliZmQxMzQ2YTM4MTJkZjM0OTk4M2NjYTY1NjYxYThlNzRlZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/monitoring/metrics.py#L27-L52",
+          "version": "repo-lines-v1:sha256:d024794b7608ec031226e89246bbd7441c0f18da8fe439f81ec849d4550bf305:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhZjIyNTRmYjU1MjUwZjZiMmEyOGM2ZmQzOWIwNzNhNWI2OTNkODQxOGY4MDE5ZDE0M2IxZTIwMTc0ZGE2ZTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI5OTc2MDFmMGY5MDZlMGIwODI2ZTA5ZmVlMDM0NTczNGIyYTY2Njc3MjM3MGFkY2YxZDZjZWYwNDcyYWZmYmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRhMTU2ODE5MmU4MTUwZGZhMWIwNDQyMzJmMTA5OTM2ZjIxMjNkMzU0ZmU2NDM1NTc4MWRmNDIwMGIwZDhkNGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f1c3d6c106f8432bb41e29cdca0ff152",
+      "statement": "The observability Compose stack mounts ./reports read-only into node-exporter's textfile collector, has Prometheus scrape node-exporter:9100 every 10s with 7-day retention, binds all ports to 127.0.0.1, and requires GRAFANA_ADMIN_PASSWORD from the shell environment (Compose aborts without it); this variable is not part of Settings or .env.example.",
+      "evidence": [
+        {
+          "resource": "repo://.env.example#L1-L5",
+          "version": "repo-lines-v1:sha256:97b08c8b7dc7fe29ae9b5ddebd5337af1918cb869446d3ef80acbddb42a2d8af:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGM3NzEyYjg2OTMzYTg5ZTViMjhjYzI1ZWE2MTU3Zjk3YTRjYWJhN2ZhNjUyNWU3MTRhZTVmYzFlMzQ2YTk1MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjI2MDNkZDNjOTM0MzliNTM4N2EwMWQwYTZiYmNmYzJkZjBlM2I4ZWZiYWRhZTU2NzRiZThiYzk1NWEzYWY1NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://compose.observability.yaml#L5-L48",
+          "version": "repo-lines-v1:sha256:ebf871b05c3b1d76321086ea8890d4aa7fb44561d926554300abfb47b7be3b1d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY0YTgzMjgxMDUwNDY0YzM3YzYwMzhkZWFkNGQ2ZGU3YWM2Mzg1MTkzMmFlNmZiZGE4NzY0MGE4MmU3ZGUwOGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1MzFlMjYwMzk4YWQ2MTA5MTRkZmMyOGYwNDhkMzkyNjRiYTdkNTAzMjc4ZGQyZjhiYjFjNGMxNGI0OTlkOTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFhMDYzY2M4YWM0NDFlMjFhNjIzMzc2NWQ1NDNhMDYxMDdmNzdlODhmNWQxNjQ4ZjFkMmE2NTI1MTUyYTA0MTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU1NzNkMjNmNWExOGNmM2Y4ZTU1ODZiZDNiMDg5MDlkZjA3MzRhYThiYWM3MjQ1MTBmNTBiYWNhNTI3YmQ0ZTMifQ"
+        },
+        {
+          "resource": "repo://infra/observability/prometheus/prometheus.yml#L1-L13",
+          "version": "repo-lines-v1:sha256:bd90bb20d370d576fa212d6ffc363e598c6e669079227a933844105f5a14eb63:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzZDJjMWViNjM0YjM5YjkxYzYyZDE2YzZhYjExMjYxMDQ4YjQyYzExYTJjNjhjZDhlNDY0YWVmOGU4NzQxOWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_161b2a00060d43a69293ca4e495eb3b0",
+      "statement": "Training evaluation parameters in train.py are module constants or literals, not Settings fields: EXPERIMENT 'credit-scoring-baseline', AGE_BINS/AGE_LABELS, MIN_GROUP_POSITIVES=30, a stratified test_size=0.2 hold-out seeded by settings.random_seed, and run name 'baseline-xgboost'; changing them requires a code edit, and generate_fairness_plots.py duplicates the 0.2 split literal.",
+      "evidence": [
+        {
+          "resource": "repo://scripts/generate_fairness_plots.py#L45-L50",
+          "version": "repo-lines-v1:sha256:47bb3bcd86aa542ed90ed646a374d2fbcf7f675d86941035537941c29e6d44f7:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODVlYzlmMzY5ODNhMDMxZTk5Mzk1NjRmNjdhYmY0YWJlZTU4YzNjNmYxNjc1YTQyMTJmNTAzYzk4YzA4OTQ3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTExYzA0MTJjMWY5MjM1Mjk0OGU1NTk0MWZmNDc2NDg0MDAyYjZjOWNmNjYwNjVlZjE2YTY2ZjIwOWRkM2VjNCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTc1NDBjZjg2ZGFlYzVlMTFmMzE3NGFmYTdhYzY2NzhlNmMzZmEzYWI3NjNmNjhjODFmYTcwYjcyZWY0N2M0MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDZjZTM5YjAwMTU5ZDEyNTA4NTllMTY5NWUzOTA1NGMxYTViMWQzNDFkMzljYzQwNDhmOTBhMWZjNTQ3OWNlZSJ9"
+        },
+        {
+          "resource": "repo://src/training/train.py#L150-L188",
+          "version": "repo-lines-v1:sha256:691095c4e457efe21169413cef0d013e4e64319d05bd9d3ec48819a66d0ea97d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE1ZmQ5NWMwYzRlOWJkNTgzODBkYzk2NmJkMmNjZDZlYjJiNjA1M2MyMzQ0MGFkY2ZiNzBjMDc5ODU5MjAzNGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4NTliNGZhZmNkMzk0OGJhMzVmMjVjMGM2ZGI5MjRlOTAwYTZiNDIxNzE2ZjYyOTgzNWFiMmFmNjhhN2NmNzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmYmQwMDkzMTRiYzI3MDg0MTY3MzRhMDJhZTVmZjM5YTFlNDhhMDUwYmU5MWY0M2IyZmFhOTIwMDJjNjJiZmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkNDEzNDBjYzIzOWExNTljZTliNjAyMmU5ZjYzMjI4MzJlMmVhZDc2Y2FlOWU0NzU0ZDIxMGViOGZiNmQ1ZTgifQ"
+        },
+        {
+          "resource": "repo://src/training/train.py#L27-L30",
+          "version": "repo-lines-v1:sha256:a64f2851999806c56b29a9b61b2bc67d4349adb62b7638984ab196a011de61c7:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjkzYmM0ZDAwNjA2N2EwODg5ZWQ3ODZmNTFlYzdiY2UyZTc2NjllMTUyNGIxYWUxYWE3ZjRiNDM1YTMzMTNhYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGRjM2MxOTE2NjczZGI1ZGZkODNiN2QyODc1MWFjOWNjMzc1MWZhNTI4NTlkMjUxZmVjMGMwMzc2NTllOTAyZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTVjMWM0NjJlMmEzOWQ3NDc1OWY1ZTFiMTI2Zjc2ODNhMmI3MzAxMThlMThmNTEyMmIwOGNlZGVlYjY1MGUyMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWY5NWE2NzJhNTJmOTNjZjE5OTJmOGM3NDVlMGE0NzA2ZjEyZDNlNzlmMWNjMmUzYTNmNzI5YWY5OTZkNzYxZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_228fa38774ad49f7b28c87172a37ad2a",
+      "statement": "pyproject.toml's runtime dependency list includes matplotlib (used with the headless Agg backend in src/visualization/fairness_plots.py), pyarrow, joblib, pandas pinned <3, setuptools<81 and ydata-profiling (used only in an exploratory notebook), in addition to pydantic-settings, mlflow, evidently, pandera, prometheus-client, scikit-learn and xgboost.",
+      "evidence": [
+        {
+          "resource": "repo://notebooks/exploratory/01_eda_home_credit.ipynb",
+          "version": "repo-file-v1:sha256:1436c89f425acefc9c4054f890ea3c6d5642b872ad7f869ae12a340f16c7df18"
+        },
+        {
+          "resource": "repo://pyproject.toml#L7-L21",
+          "version": "repo-lines-v1:sha256:59089cfd1a60b4bb9160fcef9d45b5744468c73b9e99639aa7baaac9d834642a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkOTVmNWU5ZWRlMDE4MTYwNDNjMDc5N2FjZThkYTJhYzRlOTlhOGE2YTYxMGZhOTg1NzBlZjM0YjkzNTYxMDkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY5NDE2ZTA5Zjc4YmEzMTZjMDMyNTY4MjEzYjg1NWVlNzU2ZTQxNTY1ZDkxOGYwOTUxOWM4MWZkNjIwZjQwNjAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhMjQzM2UwNjdmMTRiOTQ1Mzk1YTgwOWYxNTc2OWY2MGU4NzdhMWQyZDUzODcyZjhhNTk5NTAyOTg0YWYwMmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjM2MzZDBmMDFiZjc4NjA2NTIzMjc1ZGU2ZGViNWJkYjE2OTQ4ZWUzNzFkOTMwNWI2YTM3MjU1NGRmMWU4NjQifQ"
+        },
+        {
+          "resource": "repo://src/visualization/fairness_plots.py#L5-L8",
+          "version": "repo-lines-v1:sha256:65d1091133cbb6de4eef735ffed6d73ca3f05a854f3d894ea4760f509cb4fb58:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNmMDNjYjQ3Yjg5YjkxZTU5NTU1NGFkOWIyZjcxMDc1NDMxNDczOWY3YmM2Mjc4YWRjNGNlNzFkMGYxZTkwMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTY4NmIzNzUyMTVlYWUyNGYyOGQ1ZTljZDE1ZmQ3MTY3ZWM4MmNmOGVjODViY2RmZWVhYzQyNzY3MWIwZmRlYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTJjY2M1ZjE3ZmMxMzczYWNiNThiMzNhNWJjZjk4MzlkOTA2ZDQ1ZWNiMDJmYzFjYjI3OWI1YzA1Mzg3ZmU4NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDkxMjBkMDgxZDJjMTdiODkwMWUxZjYwZmIzMjA3YjYwM2M4NGZhN2IwOTVmODMwZDdjZmU2MDk5Njc3OWMzMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_17f2d70007f1457ca9f5f0da764ecb7d",
+      "statement": "dvc.yaml includes a fairness_plots stage running scripts.generate_fairness_plots, depending on reference.parquet and training/visualization code and producing four reports/figures PNGs with cache disabled; the current .gitignore has no reports/figures/*.png pattern (only /reports/*.prom and /reports/*.html are ignored under reports), contrary to the README.",
+      "evidence": [
+        {
+          "resource": "repo://.gitignore#L46-L53",
+          "version": "repo-lines-v1:sha256:8297d67718a2bc51e053d9d9d51c096914458c273d538e53d2174ba04b77239f:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWYyOGEyM2E4ZjFmMTlkZDBhYTU2NTgwZmFhMDVlY2MyZWFmMDQwZDk4MzI2Y2ZlNWU0YmU4NzMyMTFlZWJkYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjY5MTlmN2NmYmRmNjE1MjRkODkxMDkzNWVlNDg0NDM3ZjVjYzU1NjczOGM4MGEyNTY0YTcwMzY4N2FjNWI0MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2IxMjViODkzZGMyMjBmNDY5NzRhYmFkNGY5ZmE2ZjBlYTc3YjQzY2YxNjYwYWFlMDNiNTM3NWQ4ZjM5NmQ5OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://dvc.yaml#L74-L89",
+          "version": "repo-lines-v1:sha256:513a80e535592e4bd502b54da32b8053c3cd0a63c7115fcdd9b7da310e0294a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUyOTRjNjAzYTlmZjJiNjUzOWYzZmY3ZjhiNmU5NzA0NWY4Nzg0Y2MzNTdhNDk0NjE5OWRlN2JiNTk5Y2I2NjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlZTE3NTI2NjA0NWRmNTVmMGQxZTFjOWIwNjg5NDc0NWM4NDAzYzRlZTJiNjEzYzJkYjA5N2QzNWEwY2I5MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkOTFiOTgwYmZiNzM4ZjEzYjM5NWNiNTBmYjFlMTZiNTQxNWYxZTMzZWE4Y2YzODk3ZWNlZTkyMTIzZjNiZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.7.2",
+    "at": "2026-11-16T02:54:12.827Z"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "updatedAt": "2026-11-18T01:47:24.960Z",
+  "command": "update",
+  "gitHead": "c2f2f0e46009bff13bf08560328be8a73d49ebf6",
+  "model": "claude-sonnet-5-5",
+  "status": "interrupted",
+  "language": "en"
+}
