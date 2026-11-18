@@ -3,17 +3,23 @@
 import numpy as np
 import pandas as pd
 
+DRIFT_COLUMNS = ("AMT_INCOME_TOTAL", "AMT_CREDIT")
 
-def simulate_income_credit_drift(
+
+def _validate_multipliers(income_multiplier: float, credit_multiplier: float) -> None:
+    """Valida que os multiplicadores de renda e crédito são maiores que 1."""
+    if income_multiplier <= 1 or credit_multiplier <= 1:
+        raise ValueError("Os multiplicadores devem ser maiores que 1.")
+
+
+def _validate_inputs(
     data: pd.DataFrame,
-    fraction: float = 0.60,
-    income_multiplier: float = 1.40,
-    credit_multiplier: float = 1.30,
-    seed: int = 42,
-) -> pd.DataFrame:
-    """Simula mudanças em renda e crédito sem alterar os dados originais."""
-    required = {"AMT_INCOME_TOTAL", "AMT_CREDIT"}
-    missing = required - set(data.columns)
+    fraction: float,
+    income_multiplier: float,
+    credit_multiplier: float,
+) -> None:
+    """Valida colunas, tamanho, fração e multiplicadores da simulação."""
+    missing = set(DRIFT_COLUMNS) - set(data.columns)
 
     if missing:
         raise ValueError(f"Colunas ausentes: {sorted(missing)}")
@@ -24,8 +30,18 @@ def simulate_income_credit_drift(
     if not 0 < fraction <= 1:
         raise ValueError("fraction deve estar entre 0 e 1.")
 
-    if income_multiplier <= 1 or credit_multiplier <= 1:
-        raise ValueError("Os multiplicadores devem ser maiores que 1.")
+    _validate_multipliers(income_multiplier, credit_multiplier)
+
+
+def simulate_income_credit_drift(
+    data: pd.DataFrame,
+    fraction: float = 0.60,
+    income_multiplier: float = 1.40,
+    credit_multiplier: float = 1.30,
+    seed: int = 42,
+) -> pd.DataFrame:
+    """Simula mudanças em renda e crédito sem alterar os dados originais."""
+    _validate_inputs(data, fraction, income_multiplier, credit_multiplier)
 
     drifted = data.copy(deep=True)
 
