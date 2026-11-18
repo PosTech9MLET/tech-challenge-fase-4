@@ -97,6 +97,7 @@ class Settings(BaseSettings):
     data_dir: Path = ROOT_DIR / "data"
     models_dir: Path = ROOT_DIR / "models"
 
+
 settings = Settings()
 ```
 
