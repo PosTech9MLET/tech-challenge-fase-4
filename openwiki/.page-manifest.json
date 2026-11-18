@@ -5,8 +5,8 @@
       "pageVersion": "sha256:bc48d992969895f2b50a92e2ed62810e9f780745b0a216f969dccda4b4439cb9",
       "completedBy": "openwiki/0.7.2",
       "completedRunId": "226a4942-7d01-4db8-9810-b0d5053f913e",
-      "gitHead": "1aeb18f7fd3e9d55a9180b7072ad591695ec87e4",
-      "sourceFingerprint": "sha256:c16693607f26b10b789728087094271e99e9521c8401606a0252abece7b4dcc8"
+      "gitHead": "cd71594ad92a98b1386196d4668b29da7d258304",
+      "sourceFingerprint": "sha256:adf77b95540be27b79c7e366046a88e8a27713d687fef1100d6da0df2e728690"
     },
     "/openwiki/concepts/configuration_and_environment.md": {
       "gitHead": "90daa35b4183b593aca8c330481e4d4d2c78ba9c",
