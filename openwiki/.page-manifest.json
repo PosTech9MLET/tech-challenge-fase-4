@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "pages": {
     "/openwiki/architecture/overview.md": {
-      "gitHead": "90daa35b4183b593aca8c330481e4d4d2c78ba9c",
-      "sourceFingerprint": "sha256:df4185ab208935abf6203d25efdc408932df849a6d9b458f7611a4ebbd65ae8f",
       "pageVersion": "sha256:bc48d992969895f2b50a92e2ed62810e9f780745b0a216f969dccda4b4439cb9",
       "completedBy": "openwiki/0.7.2",
-      "completedRunId": "226a4942-7d01-4db8-9810-b0d5053f913e"
+      "completedRunId": "226a4942-7d01-4db8-9810-b0d5053f913e",
+      "gitHead": "1aeb18f7fd3e9d55a9180b7072ad591695ec87e4",
+      "sourceFingerprint": "sha256:c16693607f26b10b789728087094271e99e9521c8401606a0252abece7b4dcc8"
     },
     "/openwiki/concepts/configuration_and_environment.md": {
       "gitHead": "90daa35b4183b593aca8c330481e4d4d2c78ba9c",
@@ -65,11 +65,11 @@
       "completedRunId": "341eed3b-49fa-40f7-9920-eb7407172e0a"
     },
     "/openwiki/workflows/ml_pipeline_and_tracking.md": {
+      "gitHead": "90daa35b4183b593aca8c330481e4d4d2c78ba9c",
+      "sourceFingerprint": "sha256:df4185ab208935abf6203d25efdc408932df849a6d9b458f7611a4ebbd65ae8f",
       "pageVersion": "sha256:3332effbcf047c625d80d717e5cf4dfa4a7f498431a8cd5ba06821717f80ed6f",
       "completedBy": "openwiki/0.7.2",
-      "completedRunId": "226a4942-7d01-4db8-9810-b0d5053f913e",
-      "gitHead": "90daa35b4183b593aca8c330481e4d4d2c78ba9c",
-      "sourceFingerprint": "sha256:df4185ab208935abf6203d25efdc408932df849a6d9b458f7611a4ebbd65ae8f"
+      "completedRunId": "226a4942-7d01-4db8-9810-b0d5053f913e"
     }
   }
 }
